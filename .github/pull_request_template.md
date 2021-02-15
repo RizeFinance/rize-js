@@ -11,5 +11,5 @@
 - ...
 
 ## Test Plan
-1. Pull down this branch
+1. Pull down this branch.
 2. 
