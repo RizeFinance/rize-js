@@ -7,7 +7,7 @@ declare enum RizeEnvironments {
 export class Rize {
     static Rize: typeof Rize;
 
-    constructor(programUid: string, hmacKey: string, environment?: keyof typeof RizeEnvironments = 'sandbox');
+    constructor(programUid: string, hmacKey: string, environment?: keyof typeof RizeEnvironments);
 }
 
 export default Rize;
