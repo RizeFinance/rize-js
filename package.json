@@ -16,5 +16,9 @@
     "@typescript-eslint/parser": "^4.15.0",
     "eslint": "^7.20.0",
     "typescript": "^4.1.5"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "jws": "^4.0.0"
   }
 }
