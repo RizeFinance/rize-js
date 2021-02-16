@@ -5,20 +5,24 @@
   "main": "lib/rize.js",
   "typings": "types/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .js,.ts",
-    "lint-fix": "eslint . --ext .js,.ts --fix"
+    "lint-fix": "eslint . --ext .js,.ts --fix",
+    "test": "yarn mocha 'test/**/*.js' --recursive --timeout=5000"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.15.0",
     "@typescript-eslint/parser": "^4.15.0",
+    "chai": "^4.3.0",
+    "dotenv": "^8.2.0",
     "eslint": "^7.20.0",
+    "mocha": "^8.3.0",
     "typescript": "^4.1.5"
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "eslint-plugin-chai-friendly": "^0.6.0",
     "jws": "^4.0.0"
   }
 }
