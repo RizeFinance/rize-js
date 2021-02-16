@@ -2,18 +2,21 @@
   "name": "@rize/rize-js",
   "version": "1.0.0",
   "description": "Rize API wrapper",
-  "main": "lib/rize.js",
+  "main": "index.js",
   "typings": "types/index.d.ts",
   "scripts": {
     "lint": "eslint . --ext .js,.ts",
     "lint-fix": "eslint . --ext .js,.ts --fix",
-    "test": "yarn mocha 'test/**/*.js' --recursive --timeout=5000"
+    "typings:build": "npx typescript",
+    "docs:build": "documentation build lib/** -f md -o docs.md",
+    "test": "yarn lint && yarn mocha 'test/**/*.js' --recursive --timeout=5000"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.15.0",
     "@typescript-eslint/parser": "^4.15.0",
+    "documentation": "^13.1.1",
     "chai": "^4.3.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.20.0",
