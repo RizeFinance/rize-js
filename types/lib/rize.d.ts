@@ -1,16 +1,10 @@
 export = Rize;
 /**
  * Represents a Rize API client.
- * @constructor
- * @param  {string} programUid - The Rize Program ID.
- * @param  {string} hmac - The HMAC that will be used to sign the JSON web signature in order to get access to the API.
- * @param  {"sandbox"|"integration"|"production"} [environment="sandbox"] - The Rize environment to be used.
- * @param  {number} [timeout=DEFAULT_TIMEOUT] - The timeout for each requests.
  */
-declare function Rize(programUid: string, hmac: string, environment?: "sandbox" | "integration" | "production", timeout?: number): import("./rize");
 declare class Rize {
     /**
-     * Represents a Rize API client.
+     * Returns a Rize API client.
      * @constructor
      * @param  {string} programUid - The Rize Program ID.
      * @param  {string} hmac - The HMAC that will be used to sign the JSON web signature in order to get access to the API.

@@ -1,11 +1,10 @@
 export = ComplianceWorkflow;
-declare function ComplianceWorkflow(api: any, auth: any): void;
 declare class ComplianceWorkflow {
     constructor(api: any, auth: any);
-    /** @private */
-    private _api;
-    /** @private */
-    private _auth;
+    /** @protected */
+    protected _api: any;
+    /** @protected */
+    protected _auth: any;
     /**
      * Retrieves the most recent Compliance Workflow for a Customer. A Customer UID must be supplied as the path parameter.
      * @returns {Promise<string>}

@@ -1,6 +1,13 @@
 export = Auth;
-declare function Auth(programUid: any, hmac: any, api: any): void;
 declare class Auth {
-    constructor(programUid: any, hmac: any, api: any);
-    getToken: () => Promise<any>;
+    constructor(programUid: any, hmac: any, api: any, tokenMaxAge?: number);
+    /** @protected */
+    protected _programUid: any;
+    /** @protected */
+    protected _hmac: any;
+    /** @protected */
+    protected _api: any;
+    /** @protected */
+    protected _tokenMaxAge: number;
+    getToken(): Promise<any>;
 }

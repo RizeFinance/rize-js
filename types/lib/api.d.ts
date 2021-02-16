@@ -1,5 +1,5 @@
-export = ApiClient;
-declare function ApiClient({ host, basePath, timeout }: {
+export = createApiClient;
+declare function createApiClient({ host, basePath, timeout }: {
     host: any;
     basePath: any;
     timeout: any;
