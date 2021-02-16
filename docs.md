@@ -2,35 +2,22 @@
 
 ### Table of Contents
 
--   [\_programUid][1]
--   [\_hmac][2]
--   [\_api][3]
--   [\_tokenMaxAge][4]
--   [\_api][5]
--   [\_auth][6]
--   [viewLatest][7]
--   [Rize][8]
-    -   [Parameters][9]
-    -   [complianceWorkflow][10]
-    -   [PACKAGE_VERSION][11]
+-   [ComplianceWorkflow][1]
+    -   [viewLatest][2]
+-   [Rize][3]
+    -   [Parameters][4]
+    -   [complianceWorkflow][5]
+    -   [PACKAGE_VERSION][6]
 
-## \_programUid
+## ComplianceWorkflow
 
-## \_hmac
+The Compliance Workflow resource class.
 
-## \_api
-
-## \_tokenMaxAge
-
-## \_api
-
-## \_auth
-
-## viewLatest
+### viewLatest
 
 Retrieves the most recent Compliance Workflow for a Customer. A Customer UID must be supplied as the path parameter.
 
-Returns **[Promise][12]&lt;[string][13]>** 
+Returns **[Promise][7]&lt;[string][8]>** 
 
 ## Rize
 
@@ -38,48 +25,40 @@ Represents a Rize API client.
 
 ### Parameters
 
--   `programUid` **[string][13]** The Rize Program ID.
--   `hmac` **[string][13]** The HMAC that will be used to sign the JSON web signature in order to get access to the API.
+-   `programUid` **[string][8]** The Rize Program ID.
+-   `hmac` **[string][8]** The HMAC that will be used to sign the JSON web signature in order to get access to the API.
 -   `environment` **(`"sandbox"` \| `"integration"` \| `"production"`)** The Rize environment to be used. (optional, default `"sandbox"`)
--   `timeout` **[number][14]** The timeout for each requests. (optional, default `DEFAULT_TIMEOUT`)
+-   `timeout` **[number][9]** The timeout for each requests. (optional, default `DEFAULT_TIMEOUT`)
 
 ### complianceWorkflow
 
 The Compliance Workflow resource is where you begin onboarding Customers to your Program.
 Compliance Workflows are used to group all of the required Compliance Documents together and to ensure they are presented and acknowledged in the correct order.
 
-Type: ComplianceWorkflow
+Type: [ComplianceWorkflow][10]
 
 ### PACKAGE_VERSION
 
 The Rize SDK version
 
-Type: [string][13]
+Type: [string][8]
 
-[1]: #_programuid
+[1]: #complianceworkflow
 
-[2]: #_hmac
+[2]: #viewlatest
 
-[3]: #_api
+[3]: #rize
 
-[4]: #_tokenmaxage
+[4]: #parameters
 
-[5]: #_api-1
+[5]: #complianceworkflow-1
 
-[6]: #_auth
+[6]: #package_version
 
-[7]: #viewlatest
+[7]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
-[8]: #rize
+[8]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[9]: #parameters
+[9]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 
 [10]: #complianceworkflow
-
-[11]: #package_version
-
-[12]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
-
-[13]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
-
-[14]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
