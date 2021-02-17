@@ -44,6 +44,7 @@ describe('Compliance Workflow', () => {
 
             // Store the workflowUid and customerUid for next tests
             mlog.log(`Compliance Workflow UID: ${workflow.uid}`);
+            mlog.log(`New Customer UID: ${workflow.customer.uid}`);
             // workflowUid = workflow.uid;
             // customerUid = workflow.customer.uid;
             // customerEmailAddress = customer.email;
