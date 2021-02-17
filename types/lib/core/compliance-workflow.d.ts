@@ -21,9 +21,10 @@ declare class ComplianceWorkflow {
     renew(customerExternalUid: any, email: any, customerUid: any): void;
     /**
      * Retrieves the most recent Compliance Workflow for a Customer. A Customer UID must be supplied as the path parameter.
-     * @returns {Promise<string>}
+     * @param {string} customerUid - A UID referring to the Customer
+     * @returns {Promise<ComplianceWorkflowEntity>}
      */
-    viewLatest(): Promise<string>;
+    viewLatest(customerUid: string): Promise<ComplianceWorkflowEntity>;
     acknowledgeComplianceDocument(workflowUid: any, documentUid: any): void;
 }
 declare namespace ComplianceWorkflow {
