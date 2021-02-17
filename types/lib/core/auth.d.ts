@@ -5,5 +5,9 @@ declare class Auth {
     /** @ignore @protected */ protected _hmac: any;
     /** @ignore @protected */ protected _api: any;
     /** @ignore @protected */ protected _tokenMaxAge: number;
-    getToken(): Promise<any>;
+    /**
+     * Gets the Rize auth token.
+     * @returns {Promise<string>} A promise that returns the Rize auth token if resolved.
+     */
+    getToken(): Promise<string>;
 }

@@ -3,15 +3,19 @@ export = ComplianceWorkflow;
  * The Compliance Workflow resource class.
  */
 declare class ComplianceWorkflow {
-    /** @hideconstructor */
-    constructor(api: any, auth: any);
-    /** @ignore @protected */ protected _api: any;
-    /** @ignore @protected */ protected _auth: any;
+    /**
+     * @hideconstructor
+     * @param {import('axios').AxiosInstance} api
+     * @param {import('./auth')} auth
+     */
+    constructor(api: import('axios').AxiosInstance, auth: import('./auth'));
+    /** @ignore @protected */ protected _api: import("axios").AxiosInstance;
+    /** @ignore @protected */ protected _auth: import("./auth");
     /**
      * Create a new Compliance Workflow.
-     * @param {string} customerExternalUid
-     * @param {string} email
-     * @returns {Promise<ComplianceWorkflowEntity>}
+     * @param {string} customerExternalUid - A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.
+     * @param {string} email - Email address associated with the Customer.
+     * @returns {Promise<ComplianceWorkflowEntity>} A promise that returns the new Compliance Workflow entity if resolved.
      */
     create(customerExternalUid: string, email: string): Promise<ComplianceWorkflowEntity>;
     renew(customerExternalUid: any, email: any, customerUid: any): void;

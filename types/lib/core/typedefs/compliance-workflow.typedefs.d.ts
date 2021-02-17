@@ -13,7 +13,7 @@ export type ComplianceWorkflowEntitySummary = {
      * - *rejected* - The Compliance Workflow is rejected. If Rize receives an acknowledgment to a document in a Compliance Workflow with an 'accept' value of 'no', the Compliance Workflow moves to a status of rejected. The Customer must restart a new Compliance Workflow to gain access to the Program.
      * - *expired* - The Compliance Workflow is expired. Rize did not receive all acknowledgments for this Compliance Workflow in the time period allotted for your Program. The Customer must restart a new Compliance Workflow to gain access to the Program.
      */
-    status: "accepted" | "in_progress" | "rejected" | "expired";
+    status: 'accepted' | 'in_progress' | 'rejected' | 'expired';
 };
 export type ComplianceWorkflowEntityCustomer = {
     email: string;
@@ -27,7 +27,7 @@ export type ComplianceWorkflowEntityCustomer = {
     uid: string;
 };
 export type ComplianceDocument = {
-    electronic_signature_required: "yes" | "no";
+    electronic_signature_required: 'yes' | 'no';
     /**
      * - Amazon S3 key used to retrieve the contents of a Compliance Document
      */
@@ -45,11 +45,11 @@ export type ComplianceDocument = {
     /**
      * - A UID referring to a Compliance Document; note that this UID will be different for each Customer
      */
-    uid: string | null;
+    uid: string;
     /**
      * - The DateTime at which this Compliance Document was acknowledged
      */
-    accepted_at: string | null;
+    accepted_at: string;
 };
 export type ComplianceWorkflowEntity = {
     /**
@@ -62,9 +62,9 @@ export type ComplianceWorkflowEntity = {
     /**
      * - Compliance Documents that await acknowledgment in the current Step
      */
-    current_step_documents_pending: Array<Omit<ComplianceDocument, "accepted_at">>;
+    current_step_documents_pending: Array<Omit<ComplianceDocument, 'accepted_at'>>;
     /**
      * - The set of all Compliance Documents that would require acknowledgment
      */
-    all_documents: Array<Omit<ComplianceDocument, "accepted_at" | "uid">>;
+    all_documents: Array<Omit<ComplianceDocument, 'accepted_at' | 'uid'>>;
 };
