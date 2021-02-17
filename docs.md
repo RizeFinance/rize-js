@@ -44,7 +44,7 @@ Returns **[Promise][19]&lt;[ComplianceWorkflowEntity][21]>** A promise that retu
 
 ### viewLatest
 
-Retrieves the most recent Compliance Workflow for a Customer. A Customer UID must be supplied as the path parameter.
+Retrieves the most recent Compliance Workflow for a Customer.
 
 #### Parameters
 
