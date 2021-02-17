@@ -18,36 +18,122 @@ const rizeClient = new Rize(
 );
 
 describe('Compliance Workflow', () => {
-    // let workflowUid;
-    // let customerUid;
-    // let customerEmailAddress;
+    /** @type {import('../../lib/core/typedefs/compliance-workflow.typedefs').ComplianceWorkflowEntity} */
+    let workflow;
+
     describe('create', () => {
-        it ('Throws an error if customerExternalUid is empty', () => {
+        it('Throws an error if "customerExternalUid" is empty', () => {
             const promise = rizeClient.complianceWorkflow.create(' ', '');
-            return expect(promise).to.eventually.be.rejectedWith('customerExternalUid is required.');
+            return expect(promise).to.eventually.be.rejectedWith('"customerExternalUid" is required.');
         });
 
-        it ('Throws an error if email is invalid', () => {
+        it('Throws an error if "email" is invalid', () => {
             const promise = rizeClient.complianceWorkflow.create('test', '');
-            return expect(promise).to.eventually.be.rejectedWith('email is invalid.');
+            return expect(promise).to.eventually.be.rejectedWith('"email" is invalid.');
         });
 
-        it ('Creates a new compliance workflow', async () => {
+        it('Creates a new compliance workflow', async () => {
             const externalUid = uuid();
             const fakeEmail = faker.internet.email(undefined, undefined, 'rizetest.com');
 
-            const workflow = await rizeClient.complianceWorkflow.create(externalUid, fakeEmail);
+            const newWorkflow = await rizeClient.complianceWorkflow.create(externalUid, fakeEmail);
 
-            expect(workflow).to.have.property('uid').that.is.not.empty;
-            expect(workflow).to.have.nested.property('customer.uid').that.is.not.empty;
-            expect(workflow).to.have.nested.property('customer.email').that.equals(fakeEmail);
+            expect(newWorkflow).to.have.property('uid').that.is.not.empty;
+            expect(newWorkflow).to.have.nested.property('customer.uid').that.is.not.empty;
+            expect(newWorkflow).to.have.nested.property('customer.email').that.equals(fakeEmail);
 
-            // Store the workflowUid and customerUid for next tests
-            mlog.log(`Compliance Workflow UID: ${workflow.uid}`);
-            mlog.log(`New Customer UID: ${workflow.customer.uid}`);
-            // workflowUid = workflow.uid;
-            // customerUid = workflow.customer.uid;
-            // customerEmailAddress = customer.email;
+            mlog.log(`Compliance Workflow UID: ${newWorkflow.uid}`);
+            mlog.log(`New Customer UID: ${newWorkflow.customer.uid}`);
+
+            // Store the workflow for next tests
+            workflow = newWorkflow;
+        });
+    });
+
+    describe('acknowledgeComplianceDocument', () => {
+        it('Throws an error if "complianceWorkflowUid" is empty', () => {
+            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocument(' ', '', '', '');
+            return expect(promise).to.eventually.be.rejectedWith('"complianceWorkflowUid" is required.');
+        });
+
+        it('Throws an error if "customerUid" is empty', () => {
+            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocument('test', '', '', '');
+            return expect(promise).to.eventually.be.rejectedWith('"customerUid" is required.');
+        });
+
+        it('Throws an error if "documentUid" is empty', () => {
+            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocument('test', 'test', '', '');
+            return expect(promise).to.eventually.be.rejectedWith('"documentUid" is required.');
+        });
+
+        it('Throws an error if "accept" is invalid', () => {
+            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocument('test', 'test', 'test', '');
+            return expect(promise).to.eventually.be.rejectedWith('The value for "accept" is should be either "yes" or "no".');
+        });
+
+        it('Throws an error if electronic signing is required and "userName" is not supplied', function () {
+            const eSignRequiredDoc = workflow
+                .current_step_documents_pending
+                .find(x => x.electronic_signature_required === 'yes');
+
+            if (!eSignRequiredDoc) {
+                // Skip this test if we couldn't find a document that requires electronic signing
+                this.skip();
+            }
+
+            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocument(
+                workflow.uid,
+                workflow.customer.uid,
+                eSignRequiredDoc.uid,
+                'yes',
+                undefined,
+                '152.32.111.61'
+            );
+
+            return expect(promise).to.eventually.be.rejectedWith();
+        });
+
+        it('Throws an error if electronic signing is required and "ipAddress" is not supplied', function () {
+            const eSignRequiredDoc = workflow
+                .current_step_documents_pending
+                .find(x => x.electronic_signature_required === 'yes');
+
+            if (!eSignRequiredDoc) {
+                // Skip this test if we couldn't find a document that requires electronic signing
+                this.skip();
+            }
+
+            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocument(
+                workflow.uid,
+                workflow.customer.uid,
+                eSignRequiredDoc.uid,
+                'yes',
+                'test'
+            );
+
+            return expect(promise).to.eventually.be.rejectedWith();
+        });
+
+        it('Acknowledges a single compliance document', async function() {
+            if (workflow.current_step_documents_pending.length === 0) {
+                this.skip();
+            }
+
+            const document = workflow.current_step_documents_pending[0];
+            const fakeName = faker.name.findName();
+            const fakeIp = faker.internet.ip();
+
+            const updatedWorkflow = await rizeClient.complianceWorkflow.acknowledgeComplianceDocument(
+                workflow.uid,
+                workflow.customer.uid,
+                document.uid,
+                'yes',
+                fakeName,
+                fakeIp
+            );
+
+            const acceptedDocumentUids = updatedWorkflow.accepted_documents.map(x => x.uid);
+            expect(acceptedDocumentUids).to.include.members([document.uid]);
         });
     });
 });
