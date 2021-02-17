@@ -31,14 +31,14 @@ Creates a new Compliance Workflow.
 
 #### Parameters
 
--   `customerExternalUid` **[string][19]** A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.
--   `email` **[string][19]** Email address associated with the Customer.
+-   `customerExternalUid` **[string][20]** A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.
+-   `email` **[string][20]** Email address associated with the Customer.
 
 Returns **[Promise][20]&lt;[ComplianceWorkflowEntity][21]>** A promise that returns the new Compliance Workflow entity if resolved.
 
 ### viewLatest
 
-Retrieves the most recent Compliance Workflow for a Customer. A Customer UID must be supplied as the path parameter.
+Retrieves the most recent Compliance Workflow for a Customer.
 
 Returns **[Promise][20]&lt;[string][19]>** 
 
@@ -74,17 +74,22 @@ Type: [Object][22]
     -   _rejected_ - The Compliance Workflow is rejected. If Rize receives an acknowledgment to a document in a Compliance Workflow with an 'accept' value of 'no', the Compliance Workflow moves to a status of rejected. The Customer must restart a new Compliance Workflow to gain access to the Program.
     -   _expired_ - The Compliance Workflow is expired. Rize did not receive all acknowledgments for this Compliance Workflow in the time period allotted for your Program. The Customer must restart a new Compliance Workflow to gain access to the Program.
 
-## ComplianceWorkflowEntityCustomer
+## ComplianceDocument
 
 Type: [Object][22]
 
 ### Properties
 
--   `email` **[string][19]** 
--   `external_uid` **[string][19]** A Customer identifier supplied by the Client, unique among the collection of all Client Customers
--   `uid` **[string][19]** A UID referring to the Customer
+-   `electronic_signature_required` **(`"yes"` \| `"no"`)** 
+-   `external_storage_name` **[string][20]** Amazon S3 key used to retrieve the contents of a Compliance Document
+-   `compliance_document_url` **[string][20]** Amazon S3 URL used to retrieve the contents of a Compliance Document
+-   `name` **[string][20]** 
+-   `step` **[number][23]** Multiple Compliance Documents are grouped into a Step, and Compliance Documents are presented to a Customer, Step-by-Step
+-   `version` **[number][23]** 
+-   `uid` **[string][20]** A UID referring to a Compliance Document; note that this UID will be different for each Customer
+-   `accepted_at` **[string][20]** The DateTime at which this Compliance Document was acknowledged
 
-## ComplianceDocument
+## ComplianceWorkflowEntityCustomer
 
 Type: [Object][22]
 
@@ -118,8 +123,8 @@ Represents a Rize API client.
 
 ### Parameters
 
--   `programUid` **[string][19]** The Rize Program ID.
--   `hmac` **[string][19]** The HMAC that will be used to sign the JSON web signature in order to get access to the API.
+-   `programUid` **[string][20]** The Rize Program ID.
+-   `hmac` **[string][20]** The HMAC that will be used to sign the JSON web signature in order to get access to the API.
 -   `environment` **(`"sandbox"` \| `"integration"` \| `"production"`)** The Rize environment to be used. (optional, default `"sandbox"`)
 -   `timeout` **[number][23]** The timeout for each requests. (optional, default `DEFAULT_TIMEOUT`)
 
@@ -134,7 +139,7 @@ Type: [ComplianceWorkflow][28]
 
 The Rize SDK version
 
-Type: [string][19]
+Type: [string][20]
 
 [1]: #complianceworkflow
 
@@ -172,7 +177,7 @@ Type: [string][19]
 
 [18]: #package_version
 
-[19]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[20]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
 [20]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
 

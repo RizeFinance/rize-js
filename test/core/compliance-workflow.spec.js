@@ -21,6 +21,15 @@ describe('Compliance Workflow', () => {
     /** @type {import('../../lib/core/typedefs/compliance-workflow.typedefs').ComplianceWorkflowEntity} */
     let workflow;
 
+    const verifyComplianceWorkflowEntity = (workflow, email) => {
+        expect(workflow).to.have.property('uid').that.is.not.empty;
+        expect(workflow).to.have.nested.property('customer.uid').that.is.not.empty;
+        expect(workflow).to.have.nested.property('customer.email').that.equals(email);
+        expect(workflow).to.have.property('accepted_documents').to.be.an('array');
+        expect(workflow).to.have.property('current_step_documents_pending').to.be.an('array');
+        expect(workflow).to.have.property('all_documents').to.be.an('array');
+    };
+
     describe('create', () => {
         it('Throws an error if "customerExternalUid" is empty', () => {
             const promise = rizeClient.complianceWorkflow.create(' ', '');
@@ -38,15 +47,27 @@ describe('Compliance Workflow', () => {
 
             const newWorkflow = await rizeClient.complianceWorkflow.create(externalUid, fakeEmail);
 
-            expect(newWorkflow).to.have.property('uid').that.is.not.empty;
-            expect(newWorkflow).to.have.nested.property('customer.uid').that.is.not.empty;
-            expect(newWorkflow).to.have.nested.property('customer.email').that.equals(fakeEmail);
+            verifyComplianceWorkflowEntity(newWorkflow, fakeEmail);
 
             mlog.log(`Compliance Workflow UID: ${newWorkflow.uid}`);
             mlog.log(`New Customer UID: ${newWorkflow.customer.uid}`);
 
             // Store the workflow for next tests
             workflow = newWorkflow;
+        });
+    });
+
+    describe('viewLatest', () => {
+        it('Throws an error if customerUid is empty', () => {
+            const promise = rizeClient.complianceWorkflow.viewLatest(' ');
+            return expect(promise).to.eventually.be.rejectedWith('customerUid is required.');
+        });
+
+        it('Retrieves the latest compliance workflow', async () => {
+            const latestWorkflow = await rizeClient.complianceWorkflow.viewLatest(workflow.customer.uid);
+
+            verifyComplianceWorkflowEntity(latestWorkflow, workflow.customer.email);
+            expect(latestWorkflow.uid).to.be.equal(workflow.uid);
         });
     });
 
