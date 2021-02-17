@@ -126,7 +126,7 @@ Represents a Rize API client.
 -   `programUid` **[string][20]** The Rize Program ID.
 -   `hmac` **[string][20]** The HMAC that will be used to sign the JSON web signature in order to get access to the API.
 -   `environment` **(`"sandbox"` \| `"integration"` \| `"production"`)** The Rize environment to be used. (optional, default `"sandbox"`)
--   `timeout` **[number][24]** The timeout for each requests. (optional, default `DEFAULT_TIMEOUT`)
+-   `timeout` **[number][24]** Specifies the number of milliseconds before the each request times out. (optional, default `80000`)
 
 ### complianceWorkflow
 
