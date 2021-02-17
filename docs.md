@@ -7,24 +7,25 @@
     -   [create][3]
         -   [Parameters][4]
     -   [viewLatest][5]
--   [ComplianceWorkflowEntitySummary][6]
-    -   [Properties][7]
--   [ComplianceWorkflowEntityCustomer][8]
-    -   [Properties][9]
--   [ComplianceDocument][10]
-    -   [Properties][11]
--   [ComplianceWorkflowEntity][12]
-    -   [Properties][13]
--   [Rize][14]
-    -   [Parameters][15]
-    -   [complianceWorkflow][16]
-    -   [PACKAGE_VERSION][17]
+        -   [Parameters][6]
+-   [ComplianceWorkflowEntitySummary][7]
+    -   [Properties][8]
+-   [ComplianceDocument][9]
+    -   [Properties][10]
+-   [ComplianceWorkflowEntityCustomer][11]
+    -   [Properties][12]
+-   [ComplianceWorkflowEntity][13]
+    -   [Properties][14]
+-   [Rize][15]
+    -   [Parameters][16]
+    -   [complianceWorkflow][17]
+    -   [PACKAGE_VERSION][18]
 
 ## getToken
 
 Gets the Rize auth token.
 
-Returns **[Promise][18]&lt;[string][19]>** A promise that returns the Rize auth token if resolved.
+Returns **[Promise][19]&lt;[string][20]>** A promise that returns the Rize auth token if resolved.
 
 ## ComplianceWorkflow
 
