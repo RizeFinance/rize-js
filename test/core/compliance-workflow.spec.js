@@ -2,12 +2,14 @@
 
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
+
+chai.use(chaiAsPromised);
+const expect = chai.expect;
+
 const uuid = require('uuid').v4;
 const faker = require('faker');
 
-chai.use(chaiAsPromised);
-
-const expect = chai.expect;
+const mlog = require('mocha-logger');
 
 const Rize = require('../../index');
 const rizeClient = new Rize(
@@ -41,6 +43,7 @@ describe('Compliance Workflow', () => {
             expect(workflow).to.have.nested.property('customer.email').that.equals(fakeEmail);
 
             // Store the workflowUid and customerUid for next tests
+            mlog.log(`Compliance Workflow UID: ${workflow.uid}`);
             // workflowUid = workflow.uid;
             // customerUid = workflow.customer.uid;
             // customerEmailAddress = customer.email;
