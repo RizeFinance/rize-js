@@ -19,6 +19,7 @@ const rizeClient = new Rize(
 
 describe('Compliance Workflow', () => {
     let customerUid;
+    let customerExternalUid;
     let customerEmailAddress;
     let workflowUid;
 
@@ -53,6 +54,7 @@ describe('Compliance Workflow', () => {
             mlog.log(`Compliance Workflow UID: ${workflow.uid}`);
             mlog.log(`New Customer UID: ${workflow.customer.uid}`);
             customerUid = workflow.customer.uid;
+            customerExternalUid = workflow.customer.external_uid;
             customerEmailAddress = workflow.customer.email;
             workflowUid = workflow.uid;
         });
@@ -69,6 +71,23 @@ describe('Compliance Workflow', () => {
 
             verifyComplianceWorkflowEntity(latestWorkflow, customerEmailAddress);
             expect(latestWorkflow.uid).to.be.equal(workflowUid);
+        });
+    });
+
+    describe('renew', () => {
+        it('Throws an error if customerExternalUid is empty', () => {
+            const promise = rizeClient.complianceWorkflow.renew(' ', customerEmailAddress, customerUid);
+            return expect(promise).to.eventually.be.rejectedWith('customerExternalUid is required.');
+        });
+        
+        it('Throws an error if customerUid is empty', () => {
+            const promise = rizeClient.complianceWorkflow.renew(customerExternalUid, customerEmailAddress, ' ');
+            return expect(promise).to.eventually.be.rejectedWith('customerUid is required.');
+        });
+
+        it('Throws an error if email is invalid', () => {
+            const promise = rizeClient.complianceWorkflow.renew(customerExternalUid, ' ', customerUid);
+            return expect(promise).to.eventually.be.rejectedWith('email is invalid.');
         });
     });
 });
