@@ -24,7 +24,7 @@ declare class ComplianceWorkflow {
      * @param {string} customerUid - A UID referring to the Customer
      * @returns {Promise<ComplianceWorkflowEntity>}
      */
-    viewLatest(): Promise<string>;
+    viewLatest(customerUid: string): Promise<ComplianceWorkflowEntity>;
     /**
      * Indicate acceptance or rejection of a Compliance Document within a given Compliance Workflow.
      * @param {string} complianceWorkflowUid - A UID referring to the Compliance Workflow.
