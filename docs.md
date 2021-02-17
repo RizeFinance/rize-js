@@ -7,24 +7,25 @@
     -   [create][3]
         -   [Parameters][4]
     -   [viewLatest][5]
--   [ComplianceWorkflowEntitySummary][6]
-    -   [Properties][7]
--   [ComplianceWorkflowEntityCustomer][8]
-    -   [Properties][9]
--   [ComplianceDocument][10]
-    -   [Properties][11]
--   [ComplianceWorkflowEntity][12]
-    -   [Properties][13]
--   [Rize][14]
-    -   [Parameters][15]
-    -   [complianceWorkflow][16]
-    -   [PACKAGE_VERSION][17]
+        -   [Parameters][6]
+-   [ComplianceWorkflowEntitySummary][7]
+    -   [Properties][8]
+-   [ComplianceDocument][9]
+    -   [Properties][10]
+-   [ComplianceWorkflowEntityCustomer][11]
+    -   [Properties][12]
+-   [ComplianceWorkflowEntity][13]
+    -   [Properties][14]
+-   [Rize][15]
+    -   [Parameters][16]
+    -   [complianceWorkflow][17]
+    -   [PACKAGE_VERSION][18]
 
 ## getToken
 
 Gets the Rize auth token.
 
-Returns **[Promise][18]&lt;[string][19]>** A promise that returns the Rize auth token if resolved.
+Returns **[Promise][19]&lt;[string][20]>** A promise that returns the Rize auth token if resolved.
 
 ## ComplianceWorkflow
 
@@ -36,71 +37,75 @@ Create a new Compliance Workflow.
 
 #### Parameters
 
--   `customerExternalUid` **[string][19]** A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.
--   `email` **[string][19]** Email address associated with the Customer.
+-   `customerExternalUid` **[string][20]** A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.
+-   `email` **[string][20]** Email address associated with the Customer.
 
-Returns **[Promise][18]&lt;[ComplianceWorkflowEntity][20]>** A promise that returns the new Compliance Workflow entity if resolved.
+Returns **[Promise][19]&lt;[ComplianceWorkflowEntity][21]>** A promise that returns the new Compliance Workflow entity if resolved.
 
 ### viewLatest
 
-Retrieves the most recent Compliance Workflow for a Customer. A Customer UID must be supplied as the path parameter.
+Retrieves the most recent Compliance Workflow for a Customer.
 
-Returns **[Promise][18]&lt;[string][19]>** 
+#### Parameters
+
+-   `customerUid` **[string][20]** A UID referring to the Customer
+
+Returns **[Promise][19]&lt;[ComplianceWorkflowEntity][21]>** 
 
 ## 
 
 ## ComplianceWorkflowEntitySummary
 
-Type: [Object][21]
+Type: [Object][22]
 
 ### Properties
 
--   `accepted_quantity` **[number][22]** 
--   `begun_at` **[string][19]** The DateTime at which this Compliance Workflow was requested
--   `completed_step` **[number][22]** 
--   `current_step` **[number][22]** 
+-   `accepted_quantity` **[number][23]** 
+-   `begun_at` **[string][20]** The DateTime at which this Compliance Workflow was requested
+-   `completed_step` **[number][23]** 
+-   `current_step` **[number][23]** 
 -   `status` **(`"accepted"` \| `"in_progress"` \| `"rejected"` \| `"expired"`)** A value indicating the current state of this Compliance Workflow:-   _accepted_ - The Compliance Workflow is complete. All documents in this Compliance Workflow have been accepted.
     -   _in_progress_ - The Compliance Workflow is in progress.
     -   _rejected_ - The Compliance Workflow is rejected. If Rize receives an acknowledgment to a document in a Compliance Workflow with an 'accept' value of 'no', the Compliance Workflow moves to a status of rejected. The Customer must restart a new Compliance Workflow to gain access to the Program.
     -   _expired_ - The Compliance Workflow is expired. Rize did not receive all acknowledgments for this Compliance Workflow in the time period allotted for your Program. The Customer must restart a new Compliance Workflow to gain access to the Program.
 
-## ComplianceWorkflowEntityCustomer
-
-Type: [Object][21]
-
-### Properties
-
--   `email` **[string][19]** 
--   `external_uid` **[string][19]** A Customer identifier supplied by the Client, unique among the collection of all Client Customers
--   `uid` **[string][19]** A UID referring to the Customer
-
 ## ComplianceDocument
 
-Type: [Object][21]
+Type: [Object][22]
 
 ### Properties
 
 -   `electronic_signature_required` **(`"yes"` \| `"no"`)** 
--   `external_storage_name` **[string][19]** Amazon S3 key used to retrieve the contents of a Compliance Document
--   `compliance_document_url` **[string][19]** Amazon S3 URL used to retrieve the contents of a Compliance Document
--   `name` **[string][19]** 
--   `step` **[number][22]** Multiple Compliance Documents are grouped into a Step, and Compliance Documents are presented to a Customer, Step-by-Step
--   `version` **[number][22]** 
--   `uid` **[string][19]** A UID referring to a Compliance Document; note that this UID will be different for each Customer
--   `accepted_at` **[string][19]** The DateTime at which this Compliance Document was acknowledged
+-   `external_storage_name` **[string][20]** Amazon S3 key used to retrieve the contents of a Compliance Document
+-   `compliance_document_url` **[string][20]** Amazon S3 URL used to retrieve the contents of a Compliance Document
+-   `name` **[string][20]** 
+-   `step` **[number][23]** Multiple Compliance Documents are grouped into a Step, and Compliance Documents are presented to a Customer, Step-by-Step
+-   `version` **[number][23]** 
+-   `uid` **[string][20]** A UID referring to a Compliance Document; note that this UID will be different for each Customer
+-   `accepted_at` **[string][20]** The DateTime at which this Compliance Document was acknowledged
 
-## ComplianceWorkflowEntity
+## ComplianceWorkflowEntityCustomer
 
-Type: [Object][21]
+Type: [Object][22]
 
 ### Properties
 
--   `uid` **[string][19]** A unique identifier generated by Rize.
--   `summary` **[ComplianceWorkflowEntitySummary][23]** 
--   `customer` **[ComplianceWorkflowEntityCustomer][24]** 
--   `accepted_documents` **[Array][25]&lt;[ComplianceDocument][26]>** 
--   `current_step_documents_pending` **[Array][25]&lt;Omit&lt;[ComplianceDocument][26], `"accepted_at"`>>** Compliance Documents that await acknowledgment in the current Step
--   `all_documents` **[Array][25]&lt;Omit&lt;[ComplianceDocument][26], (`"accepted_at"` \| `"uid"`)>>** The set of all Compliance Documents that would require acknowledgment
+-   `email` **[string][20]** 
+-   `external_uid` **[string][20]** A Customer identifier supplied by the Client, unique among the collection of all Client Customers
+-   `uid` **[string][20]** A UID referring to the Customer
+
+## ComplianceWorkflowEntity
+
+Type: [Object][22]
+
+### Properties
+
+-   `uid` **[string][20]** A unique identifier generated by Rize.
+-   `summary` **[ComplianceWorkflowEntitySummary][24]** 
+-   `customer` **[ComplianceWorkflowEntityCustomer][25]** 
+-   `accepted_documents` **[Array][26]&lt;[ComplianceDocument][27]>** 
+-   `current_step_documents_pending` **[Array][26]&lt;Omit&lt;[ComplianceDocument][27], `"accepted_at"`>>** Compliance Documents that await acknowledgment in the current Step
+-   `all_documents` **[Array][26]&lt;Omit&lt;[ComplianceDocument][27], (`"accepted_at"` \| `"uid"`)>>** The set of all Compliance Documents that would require acknowledgment
 
 ## Rize
 
@@ -108,23 +113,23 @@ Represents a Rize API client.
 
 ### Parameters
 
--   `programUid` **[string][19]** The Rize Program ID.
--   `hmac` **[string][19]** The HMAC that will be used to sign the JSON web signature in order to get access to the API.
+-   `programUid` **[string][20]** The Rize Program ID.
+-   `hmac` **[string][20]** The HMAC that will be used to sign the JSON web signature in order to get access to the API.
 -   `environment` **(`"sandbox"` \| `"integration"` \| `"production"`)** The Rize environment to be used. (optional, default `"sandbox"`)
--   `timeout` **[number][22]** The timeout for each requests. (optional, default `DEFAULT_TIMEOUT`)
+-   `timeout` **[number][23]** The timeout for each requests. (optional, default `DEFAULT_TIMEOUT`)
 
 ### complianceWorkflow
 
 The Compliance Workflow resource is where you begin onboarding Customers to your Program.
 Compliance Workflows are used to group all of the required Compliance Documents together and to ensure they are presented and acknowledged in the correct order.
 
-Type: [ComplianceWorkflow][27]
+Type: [ComplianceWorkflow][28]
 
 ### PACKAGE_VERSION
 
 The Rize SDK version
 
-Type: [string][19]
+Type: [string][20]
 
 [1]: #gettoken
 
@@ -136,46 +141,48 @@ Type: [string][19]
 
 [5]: #viewlatest
 
-[6]: #complianceworkflowentitysummary
+[6]: #parameters-1
 
-[7]: #properties
+[7]: #complianceworkflowentitysummary
 
-[8]: #complianceworkflowentitycustomer
+[8]: #properties
 
-[9]: #properties-1
+[9]: #compliancedocument
 
-[10]: #compliancedocument
+[10]: #properties-1
 
-[11]: #properties-2
+[11]: #complianceworkflowentitycustomer
 
-[12]: #complianceworkflowentity
+[12]: #properties-2
 
-[13]: #properties-3
+[13]: #complianceworkflowentity
 
-[14]: #rize
+[14]: #properties-3
 
-[15]: #parameters-1
+[15]: #rize
 
-[16]: #complianceworkflow-1
+[16]: #parameters-2
 
-[17]: #package_version
+[17]: #complianceworkflow-1
 
-[18]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[18]: #package_version
 
-[19]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[19]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
-[20]: #complianceworkflowentity
+[20]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[21]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[21]: #complianceworkflowentity
 
-[22]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[22]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[23]: #complianceworkflowentitysummary
+[23]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 
-[24]: #complianceworkflowentitycustomer
+[24]: #complianceworkflowentitysummary
 
-[25]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[25]: #complianceworkflowentitycustomer
 
-[26]: #compliancedocument
+[26]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[27]: #complianceworkflow
+[27]: #compliancedocument
+
+[28]: #complianceworkflow
