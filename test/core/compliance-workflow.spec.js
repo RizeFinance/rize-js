@@ -76,18 +76,24 @@ describe('Compliance Workflow', () => {
 
     describe('renew', () => {
         it('Throws an error if customerExternalUid is empty', () => {
-            const promise = rizeClient.complianceWorkflow.renew(' ', customerEmailAddress, customerUid);
+            const promise = rizeClient.complianceWorkflow.renew(' ', customerUid, customerEmailAddress);
             return expect(promise).to.eventually.be.rejectedWith('customerExternalUid is required.');
         });
         
         it('Throws an error if customerUid is empty', () => {
-            const promise = rizeClient.complianceWorkflow.renew(customerExternalUid, customerEmailAddress, ' ');
+            const promise = rizeClient.complianceWorkflow.renew(customerExternalUid, ' ', customerEmailAddress);
             return expect(promise).to.eventually.be.rejectedWith('customerUid is required.');
         });
 
         it('Throws an error if email is invalid', () => {
-            const promise = rizeClient.complianceWorkflow.renew(customerExternalUid, ' ', customerUid);
+            const promise = rizeClient.complianceWorkflow.renew(customerExternalUid, customerUid, ' ');
             return expect(promise).to.eventually.be.rejectedWith('email is invalid.');
+        });
+
+        it('Renew compliance worflow after latest expired', async () => {
+            const workflow = await rizeClient.complianceWorkflow.renew(customerExternalUid, customerUid, customerEmailAddress);
+
+            console.log(workflow);
         });
     });
 });
