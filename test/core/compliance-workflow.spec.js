@@ -58,7 +58,7 @@ describe('Compliance Workflow', () => {
         });
     });
 
-    describe('view latest workflow', () => {
+    describe('viewLatest', () => {
         it('Throws an error if customerUid is empty', () => {
             const promise = rizeClient.complianceWorkflow.viewLatest(' ');
             return expect(promise).to.eventually.be.rejectedWith('customerUid is required.');
@@ -67,7 +67,6 @@ describe('Compliance Workflow', () => {
         it('Retrieves the latest compliance workflow', async () => {
             const latestWorkflow = await rizeClient.complianceWorkflow.viewLatest(customerUid);
 
-            mlog.log(`Latest Compliance Workflow UID: ${latestWorkflow.uid}`);
             verifyComplianceWorkflowEntity(latestWorkflow, customerEmailAddress);
             expect(latestWorkflow.uid).to.be.equal(workflowUid);
         });
