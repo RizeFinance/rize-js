@@ -7,6 +7,7 @@ declare class Auth {
     /** @ignore @protected */ protected _tokenMaxAge: number;
     /**
      * Gets the Rize auth token.
+     * @ignore
      * @returns {Promise<string>} A promise that returns the Rize auth token if resolved.
      */
     getToken(): Promise<string>;
