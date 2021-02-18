@@ -1,8 +1,8 @@
-export = Customer;
+export = CustomerService;
 /**
- * The Customer resource class.
+ * The CustomerService resource class.
  */
-declare class Customer {
+declare class CustomerService {
     /**
      * @hideconstructor
      * @param {import('axios').AxiosInstance} api
@@ -60,7 +60,7 @@ declare class Customer {
      */
     unlock(uid: any, unlockReason?: any): Promise<void>;
 }
-declare namespace Customer {
+declare namespace CustomerService {
     export { CustomerListQuery, CustomerList };
 }
 type CustomerListQuery = {
