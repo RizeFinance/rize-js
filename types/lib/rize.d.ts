@@ -17,10 +17,17 @@ declare class Rize {
      * Compliance Workflows are used to group all of the required Compliance Documents together and to ensure they are presented and acknowledged in the correct order.
      * @type {ComplianceWorkflowService}
      */
-    complianceWorkflow: ComplianceWorkflowService;
+    complianceWorkflow: ComplianceWorkflow;
+    /**
+     * A Customer on the Rize Platform is the end user of your application.
+     * Customers are unique to each Program and the management of all accounts and identifying information is handled on a Program-by-Program basis.
+     * @type {CustomerService}
+     */
+    customer: CustomerService;
 }
 declare namespace Rize {
     export { PACKAGE_VERSION, Rize, Rize as default };
 }
-import ComplianceWorkflowService = require("./core/compliance-workflow");
+import ComplianceWorkflow = require("./core/compliance-workflow");
+import CustomerService = require("./core/customer");
 declare var PACKAGE_VERSION: string;
