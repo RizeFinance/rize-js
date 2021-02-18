@@ -89,7 +89,7 @@ Returns **[Promise][44]&lt;[ComplianceWorkflowEntity][45]>** A promise that retu
 
 ## CustomerService
 
-The CustomerService resource class.
+The Customer service class.
 
 ### getList
 

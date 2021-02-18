@@ -1,6 +1,6 @@
 export = CustomerService;
 /**
- * The CustomerService resource class.
+ * The Customer service class.
  */
 declare class CustomerService {
     /**
