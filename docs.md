@@ -199,7 +199,7 @@ Represents a Rize API client.
 The Compliance Workflow is where you begin onboarding Customers to your Program.
 Compliance Workflows are used to group all of the required Compliance Documents together and to ensure they are presented and acknowledged in the correct order.
 
-Type: [ComplianceWorkflowService][35]
+Type: [ComplianceWorkflowService][38]
 
 ### PACKAGE_VERSION
 
@@ -281,4 +281,4 @@ Type: [string][27]
 
 [37]: #rizeoptions
 
-[35]: #complianceworkflowservice
+[38]: #complianceworkflowservice
