@@ -59,7 +59,7 @@ Retrieves the most recent Compliance Workflow for a Customer.
 #### Examples
 
 ```javascript
-const latestWorkflow = await rize.complianceWorkflow.create('h9MzupcjtA3LPW2e');
+const latestWorkflow = await rize.complianceWorkflow.viewLatest('h9MzupcjtA3LPW2e');
 ```
 
 Returns **[Promise][26]&lt;[ComplianceWorkflowEntity][27]>** A promise that returns the new Compliance Workflow entity if resolved.

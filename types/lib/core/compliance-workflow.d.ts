@@ -39,7 +39,7 @@ declare class ComplianceWorkflow {
      * @param {string} customerUid - A UID referring to the Customer
      * @returns {Promise<ComplianceWorkflowEntity>} - A promise that returns the new Compliance Workflow entity if resolved.
      * @example
-     * const latestWorkflow = await rize.complianceWorkflow.create('h9MzupcjtA3LPW2e');
+     * const latestWorkflow = await rize.complianceWorkflow.viewLatest('h9MzupcjtA3LPW2e');
      */
     viewLatest(customerUid: string): Promise<ComplianceWorkflowEntity>;
     /**
