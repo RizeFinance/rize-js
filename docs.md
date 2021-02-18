@@ -48,11 +48,11 @@
     -   [Properties][44]
 -   [ComplianceWorkflowEntity][45]
     -   [Properties][46]
--   [CustomerList][47]
+-   [CustomerDetails][47]
     -   [Properties][48]
--   [CustomerListQuery][49]
+-   [CustomerList][49]
     -   [Properties][50]
--   [CustomerDetails][51]
+-   [CustomerListQuery][51]
     -   [Properties][52]
 -   [Rize][53]
     -   [Parameters][54]
@@ -229,6 +229,8 @@ Returns **[Promise][58]&lt;[CustomerList][61]>** A promise that returns a Custom
 -   `uid` **any** 
 -   `unlockReason` **any**  (optional, default `null`)
 
+## 
+
 ## ComplianceWorkflowEntitySummary
 
 Type: [Object][62]
@@ -282,6 +284,18 @@ Type: [Object][62]
 -   `current_step_documents_pending` **[Array][63]&lt;Omit&lt;[ComplianceDocument][69], `"accepted_at"`>>** Compliance Documents that await acknowledgment in the current Step
 -   `all_documents` **[Array][63]&lt;Omit&lt;[ComplianceDocument][69], (`"accepted_at"` \| `"uid"`)>>** The set of all Compliance Documents that would require acknowledgment
 
+## CustomerDetails
+
+Type: [Object][62]
+
+### Properties
+
+-   `first_name` **[string][57]** 
+-   `middle_name` **[string][57]** 
+-   `last_name` **[string][57]** 
+-   `suffix` **[string][57]** 
+-   `phone` **[string][57]** 
+
 ## CustomerList
 
 Type: [Object][62]
@@ -301,8 +315,8 @@ Type: [Object][62]
 ### Properties
 
 -   `status` **(`"initiated"` \| `"queued"` \| `"identity_verified"` \| `"active"` \| `"manual_review"` \| `"rejected"` \| `"archived"` \| `"under_review"`)** Filter by onboarding status. Please note that the initiated enum value will not be respected unless the `include_initiated=true` parameter is also provided.
--   `include_initiated` **[boolean][71]** ? - By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
--   `kyc_status` **(`"approved"` \| `"denied"` \| `"documents_provided"` \| `"documents_rejected"` \| `"manual_review"` \| `"pending_documents"` \| `"ready_for_custodial_partner_review"` \| `"under_review"`)** ? - Filter by KYC status.
+-   `include_initiated` **[boolean][71]** By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
+-   `kyc_status` **(`"approved"` \| `"denied"` \| `"documents_provided"` \| `"documents_rejected"` \| `"manual_review"` \| `"pending_documents"` \| `"ready_for_custodial_partner_review"` \| `"under_review"`)** Filter by KYC status.
 -   `first_name` **[string][57]** Only return Customers with a first name matching exactly what is submitted
 -   `last_name` **[string][57]** Only return Customers with a last name matching exactly what is submitted
 -   `email` **[string][57]** Only return Customers with an email address matching exactly what is submitted
@@ -313,18 +327,6 @@ Type: [Object][62]
 -   `limit` **[string][57]**  Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
 -   `offset` **[string][57]** Index of the items to start retrieving from. Default: 0
 -   `sort` **(`"first_name_asc"` \| `"first_name_desc"` \| `"last_name_asc"` \| `"last_name_desc"` \| `"email_asc"` \| `"email_desc"`)** Sort returned items.
-
-## CustomerDetails
-
-Type: [Object][62]
-
-### Properties
-
--   `first_name` **[string][57]** 
--   `middle_name` **[string][57]** 
--   `last_name` **[string][57]** 
--   `suffix` **[string][57]** 
--   `phone` **[string][57]** 
 
 ## Rize
 
@@ -442,15 +444,15 @@ Type: [string][57]
 
 [46]: #properties-4
 
-[47]: #customerlist
+[47]: #customerdetails
 
 [48]: #properties-5
 
-[49]: #customerlistquery
+[49]: #customerlist
 
 [50]: #properties-6
 
-[51]: #customerdetails
+[51]: #customerlistquery
 
 [52]: #properties-7
 
