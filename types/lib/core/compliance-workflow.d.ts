@@ -12,10 +12,10 @@ declare class ComplianceWorkflow {
     /** @ignore @protected */ protected _api: import("axios").AxiosInstance;
     /** @ignore @protected */ protected _auth: import("./auth");
     /**
-     * Create a new Compliance Workflow.
+     * Creates a new Compliance Workflow.
      * @param {string} customerExternalUid - A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.
      * @param {string} email - Email address associated with the Customer.
-     * @returns {Promise<ComplianceWorkflowEntity>} A promise that returns the new Compliance Workflow entity if resolved.
+     * @returns {Promise<ComplianceWorkflowEntity>} - A promise that returns the new Compliance Workflow entity if resolved.
      */
     create(customerExternalUid: string, email: string): Promise<ComplianceWorkflowEntity>;
     /**
@@ -32,7 +32,17 @@ declare class ComplianceWorkflow {
      * @returns {Promise<ComplianceWorkflowEntity>}
      */
     viewLatest(customerUid: string): Promise<ComplianceWorkflowEntity>;
-    acknowledgeComplianceDocument(workflowUid: any, documentUid: any): void;
+    /**
+     * Indicate acceptance or rejection of a Compliance Document within a given Compliance Workflow.
+     * @param {string} complianceWorkflowUid - A UID referring to the Compliance Workflow.
+     * @param {string} customerUid - A UID referring to the Customer.
+     * @param {string} documentUid - A UID referring to the Compliance Document being acknowledged.
+     * @param {'yes'|'no'} accept - An indicaation of acceptance or rejection.
+     * @param {?string} userName - A label associated with the Customer (required for electronic signing).
+     * @param {?string} ipAddress - A numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication (required for electronic signing); in this case, the label associated with the computer used by the Customer.
+     * @returns {Promise<ComplianceWorkflowEntity>} - A promise that returns the new Compliance Workflow entity if resolved.
+     */
+    acknowledgeComplianceDocument(complianceWorkflowUid: string, customerUid: string, documentUid: string, accept: 'yes' | 'no', userName?: string | null, ipAddress?: string | null): Promise<ComplianceWorkflowEntity>;
 }
 declare namespace ComplianceWorkflow {
     export { ComplianceWorkflowEntity };
