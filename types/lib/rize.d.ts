@@ -12,14 +12,14 @@ declare class Rize {
      */
     constructor(programUid: string, hmac: string, { environment, timeout, }?: any);
     /**
-     * The Compliance Workflow resource is where you begin onboarding Customers to your Program.
+     * The Compliance Workflow is where you begin onboarding Customers to your Program.
      * Compliance Workflows are used to group all of the required Compliance Documents together and to ensure they are presented and acknowledged in the correct order.
-     * @type {ComplianceWorkflowResource}
+     * @type {ComplianceWorkflowService}
      */
-    complianceWorkflow: ComplianceWorkflowResource;
+    complianceWorkflow: ComplianceWorkflowService;
 }
 declare namespace Rize {
     export { PACKAGE_VERSION, Rize, Rize as default };
 }
-import ComplianceWorkflowResource = require("./core/compliance-workflow");
+import ComplianceWorkflowService = require("./core/compliance-workflow");
 declare var PACKAGE_VERSION: string;

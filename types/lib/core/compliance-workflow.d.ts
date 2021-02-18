@@ -1,8 +1,8 @@
-export = ComplianceWorkflowResource;
+export = ComplianceWorkflowService;
 /**
- * The Compliance Workflow resource class.
+ * The Compliance Workflow service class.
  */
-declare class ComplianceWorkflowResource {
+declare class ComplianceWorkflowService {
     /**
      * @hideconstructor
      * @param {import('axios').AxiosInstance} api
@@ -76,7 +76,7 @@ declare class ComplianceWorkflowResource {
      */
     acknowledgeComplianceDocuments(complianceWorkflowUid: string, customerUid: string, ...documents: ComplianceDocumentAcknowledgementRequest[]): Promise<ComplianceWorkflow>;
 }
-declare namespace ComplianceWorkflowResource {
+declare namespace ComplianceWorkflowService {
     export { ComplianceWorkflow, ComplianceDocumentAcknowledgementRequest };
 }
 type ComplianceDocumentAcknowledgementRequest = {
