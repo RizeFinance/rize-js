@@ -18,6 +18,9 @@ const rizeClient = new Rize(
 );
 
 describe('Compliance Workflow', () => {
+    const fakeName = faker.name.findName();
+    const fakeIp = faker.internet.ip();
+
     /** @type {import('../../lib/core/typedefs/compliance-workflow.typedefs').ComplianceWorkflowEntity} */
     let workflow;
 
@@ -73,22 +76,27 @@ describe('Compliance Workflow', () => {
 
     describe('acknowledgeComplianceDocument', () => {
         it('Throws an error if "complianceWorkflowUid" is empty', () => {
-            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocument(' ', '', '', '');
+            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocuments(' ', '');
             return expect(promise).to.eventually.be.rejectedWith('"complianceWorkflowUid" is required.');
         });
 
         it('Throws an error if "customerUid" is empty', () => {
-            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocument('test', '', '', '');
+            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocuments('test', '');
             return expect(promise).to.eventually.be.rejectedWith('"customerUid" is required.');
         });
 
+        it ('Throws an error if there are no documents supplied', () => {
+            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocuments('test', 'test');
+            return expect(promise).to.eventually.be.rejectedWith('Please submit at least one document.');
+        });
+
         it('Throws an error if "documentUid" is empty', () => {
-            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocument('test', 'test', '', '');
+            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocuments('test', 'test', { documentUid: '' });
             return expect(promise).to.eventually.be.rejectedWith('"documentUid" is required.');
         });
 
         it('Throws an error if "accept" is invalid', () => {
-            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocument('test', 'test', 'test', '');
+            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocuments('test', 'test', { documentUid: 'test' });
             return expect(promise).to.eventually.be.rejectedWith('The value for "accept" is should be either "yes" or "no".');
         });
 
@@ -102,13 +110,15 @@ describe('Compliance Workflow', () => {
                 this.skip();
             }
 
-            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocument(
+            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocuments(
                 workflow.uid,
                 workflow.customer.uid,
-                eSignRequiredDoc.uid,
-                'yes',
-                undefined,
-                '152.32.111.61'
+                {
+                    documentUid: eSignRequiredDoc.uid,
+                    accept: 'yes',
+                    userName: undefined,
+                    ipAddress: fakeIp
+                }
             );
 
             return expect(promise).to.eventually.be.rejectedWith();
@@ -124,12 +134,15 @@ describe('Compliance Workflow', () => {
                 this.skip();
             }
 
-            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocument(
+            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocuments(
                 workflow.uid,
                 workflow.customer.uid,
-                eSignRequiredDoc.uid,
-                'yes',
-                'test'
+                {
+                    documentUid: eSignRequiredDoc.uid,
+                    accept: 'yes',
+                    userName: fakeName,
+                    ipAddress: ''
+                }
             );
 
             return expect(promise).to.eventually.be.rejectedWith();
@@ -141,20 +154,42 @@ describe('Compliance Workflow', () => {
             }
 
             const document = workflow.current_step_documents_pending[0];
-            const fakeName = faker.name.findName();
-            const fakeIp = faker.internet.ip();
 
-            const updatedWorkflow = await rizeClient.complianceWorkflow.acknowledgeComplianceDocument(
+            workflow = await rizeClient.complianceWorkflow.acknowledgeComplianceDocuments(
                 workflow.uid,
                 workflow.customer.uid,
-                document.uid,
-                'yes',
-                fakeName,
-                fakeIp
+                {
+                    documentUid: document.uid,
+                    accept: 'yes',
+                    userName: fakeName,
+                    ipAddress: fakeIp
+                }
             );
 
-            const acceptedDocumentUids = updatedWorkflow.accepted_documents.map(x => x.uid);
+            const acceptedDocumentUids = workflow.accepted_documents.map(x => x.uid);
             expect(acceptedDocumentUids).to.include.members([document.uid]);
+        });
+
+        it('Acknowledges a multiple compliance documents', async function() {
+            if (workflow.current_step_documents_pending.length < 2) {
+                this.skip();
+            }
+
+            const pendingDocIds = workflow.current_step_documents_pending.map(doc => doc.uid);
+
+            workflow = await rizeClient.complianceWorkflow.acknowledgeComplianceDocuments(
+                workflow.uid,
+                workflow.customer.uid,
+                ...pendingDocIds.map(uid => ({
+                    documentUid: uid,
+                    accept: 'yes',
+                    userName: fakeName,
+                    ipAddress: fakeIp
+                }))
+            );
+
+            const acceptedDocumentUids = workflow.accepted_documents.map(x => x.uid);
+            expect(acceptedDocumentUids).to.include.members(pendingDocIds);
         });
     });
 });
