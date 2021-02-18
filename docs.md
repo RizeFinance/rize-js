@@ -48,7 +48,7 @@ Creates a new Compliance Workflow.
 const newWorkflow = await rize.complianceWorkflow.create('client-generated-42', 'tomas@example.com');
 ```
 
-Returns **[Promise][26]&lt;[ComplianceWorkflow][27]>** A promise that returns the new Compliance Workflow if resolved.
+Returns **[Promise][28]&lt;[ComplianceWorkflow][29]>** A promise that returns the new Compliance Workflow if resolved.
 
 ### viewLatest
 
@@ -64,7 +64,7 @@ Retrieves the most recent Compliance Workflow for a Customer.
 const latestWorkflow = await rize.complianceWorkflow.viewLatest('h9MzupcjtA3LPW2e');
 ```
 
-Returns **[Promise][26]&lt;[ComplianceWorkflow][27]>** A promise that returns the latest Compliance Workflow if resolved.
+Returns **[Promise][28]&lt;[ComplianceWorkflow][29]>** A promise that returns the latest Compliance Workflow if resolved.
 
 ### acknowledgeComplianceDocuments
 
@@ -105,7 +105,7 @@ const updatedWorkflow = await rize.complianceWorkflow.acknowledgeComplianceDocum
 );
 ```
 
-Returns **[Promise][26]&lt;[ComplianceWorkflow][27]>** A promise that returns the updated Compliance Workflow if resolved.
+Returns **[Promise][28]&lt;[ComplianceWorkflow][29]>** A promise that returns the updated Compliance Workflow if resolved.
 
 ## 
 
