@@ -2,7 +2,7 @@
 
 ### Table of Contents
 
--   [ComplianceWorkflowResource][1]
+-   [ComplianceWorkflowService][1]
     -   [create][2]
         -   [Parameters][3]
         -   [Examples][4]
@@ -27,9 +27,9 @@
     -   [complianceWorkflow][23]
     -   [PACKAGE_VERSION][24]
 
-## ComplianceWorkflowResource
+## ComplianceWorkflowService
 
-The Compliance Workflow resource class.
+The Compliance Workflow service class.
 
 ### create
 
@@ -184,10 +184,10 @@ Represents a Rize API client.
 
 ### complianceWorkflow
 
-The Compliance Workflow resource is where you begin onboarding Customers to your Program.
+The Compliance Workflow is where you begin onboarding Customers to your Program.
 Compliance Workflows are used to group all of the required Compliance Documents together and to ensure they are presented and acknowledged in the correct order.
 
-Type: [ComplianceWorkflowResource][35]
+Type: [ComplianceWorkflowService][35]
 
 ### PACKAGE_VERSION
 
@@ -195,7 +195,7 @@ The Rize SDK version
 
 Type: [string][25]
 
-[1]: #complianceworkflowresource
+[1]: #complianceworkflowservice
 
 [2]: #create
 
@@ -263,4 +263,4 @@ Type: [string][25]
 
 [34]: #compliancedocument
 
-[35]: #complianceworkflowresource
+[35]: #complianceworkflowservice
