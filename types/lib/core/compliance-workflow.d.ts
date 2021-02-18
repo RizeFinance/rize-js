@@ -29,13 +29,17 @@ declare class ComplianceWorkflow {
      * @param {string} customerExternalUid - A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.
      * @param {string} email - Email address associated with the Customer.
      * @returns {Promise<ComplianceWorkflowEntity>} - A promise that returns the new Compliance Workflow entity if resolved.
+     * @example
+     * const newWorkflow = await rize.complianceWorkflow.create('client-generated-42', 'tomas@example.com');
      */
     create(customerExternalUid: string, email: string): Promise<ComplianceWorkflowEntity>;
     renew(customerExternalUid: any, email: any, customerUid: any): void;
     /**
      * Retrieves the most recent Compliance Workflow for a Customer.
      * @param {string} customerUid - A UID referring to the Customer
-     * @returns {Promise<ComplianceWorkflowEntity>}
+     * @returns {Promise<ComplianceWorkflowEntity>} - A promise that returns the new Compliance Workflow entity if resolved.
+     * @example
+     * const latestWorkflow = await rize.complianceWorkflow.create('h9MzupcjtA3LPW2e');
      */
     viewLatest(customerUid: string): Promise<ComplianceWorkflowEntity>;
     /**
@@ -44,6 +48,31 @@ declare class ComplianceWorkflow {
      * @param {string} customerUid - A UID referring to the Customer.
      * @param {...ComplianceDocumentAcknowledgementRequest} documents
      * @returns {Promise<ComplianceWorkflowEntity>} - A promise that returns the new Compliance Workflow entity if resolved.
+     * @example
+     * // Acknowledge a single compliance document
+     * const updatedWorkflow = await rize.complianceWorkflow.acknowledgeComplianceDocuments(
+     *     'SPbiwv93C6M5pSWu', //complianceWorkflowUid
+     *     'h9MzupcjtA3LPW2e', //customerUid
+     *     {
+     *         documentUid: 'Yqyjk5b2xgQ9FrxS',
+     *         accept: 'yes',
+     *         userName: 'Olive Oyl',
+     *         ipAddress: '152.32.111.61'
+     *     }
+     * );
+     *
+     * // Acknowledge multiple compliance documents
+     * const documentUidsToAcknowledge = ['Yqyjk5b2xgQ9FrxS', 'dc6PApa2nn9K3jwL'];
+     * const updatedWorkflow = await rize.complianceWorkflow.acknowledgeComplianceDocuments(
+     *     'SPbiwv93C6M5pSWu', //complianceWorkflowUid
+     *     'h9MzupcjtA3LPW2e', //customerUid
+     *     ...documentUidsToAcknowledge.map(uid => ({
+     *         documentUid: uid,
+     *         accept: 'yes',
+     *         userName: 'Olive Oyl',
+     *         ipAddress: '152.32.111.61'
+     *     }))
+     * );
      */
     acknowledgeComplianceDocuments(complianceWorkflowUid: string, customerUid: string, ...documents: ComplianceDocumentAcknowledgementRequest[]): Promise<ComplianceWorkflowEntity>;
 }
