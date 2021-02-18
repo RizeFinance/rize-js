@@ -28,7 +28,7 @@ declare class ComplianceWorkflowResource {
      * Creates a new Compliance Workflow.
      * @param {string} customerExternalUid - A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.
      * @param {string} email - Email address associated with the Customer.
-     * @returns {Promise<ComplianceWorkflow>} - A promise that returns the new Compliance Workflow entity if resolved.
+     * @returns {Promise<ComplianceWorkflow>} - A promise that returns the new Compliance Workflow if resolved.
      * @example
      * const newWorkflow = await rize.complianceWorkflow.create('client-generated-42', 'tomas@example.com');
      */
@@ -37,7 +37,7 @@ declare class ComplianceWorkflowResource {
     /**
      * Retrieves the most recent Compliance Workflow for a Customer.
      * @param {string} customerUid - A UID referring to the Customer
-     * @returns {Promise<ComplianceWorkflow>} - A promise that returns the new Compliance Workflow entity if resolved.
+     * @returns {Promise<ComplianceWorkflow>} - A promise that returns the latest Compliance Workflow if resolved.
      * @example
      * const latestWorkflow = await rize.complianceWorkflow.viewLatest('h9MzupcjtA3LPW2e');
      */
@@ -47,7 +47,7 @@ declare class ComplianceWorkflowResource {
      * @param {string} complianceWorkflowUid - A UID referring to the Compliance Workflow.
      * @param {string} customerUid - A UID referring to the Customer.
      * @param {...ComplianceDocumentAcknowledgementRequest} documents
-     * @returns {Promise<ComplianceWorkflow>} - A promise that returns the new Compliance Workflow entity if resolved.
+     * @returns {Promise<ComplianceWorkflow>} - A promise that returns the updated Compliance Workflow if resolved.
      * @example
      * // Acknowledge a single compliance document
      * const updatedWorkflow = await rize.complianceWorkflow.acknowledgeComplianceDocuments(
