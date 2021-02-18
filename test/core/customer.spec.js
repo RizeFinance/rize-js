@@ -39,17 +39,17 @@ describe('Customer', () => {
         });
 
         it('Throws an error if first_name query parameter is invalid', () => {
-            const promise = rizeClient.customer.getList({first_name: ' '});
+            const promise = rizeClient.customer.getList({first_name: null});
             return expect(promise).to.eventually.be.rejectedWith('"first_name" query is invalid.');
         });
 
         it('Throws an error if last_name query parameter is invalid', () => {
-            const promise = rizeClient.customer.getList({last_name: ' '});
+            const promise = rizeClient.customer.getList({last_name: null});
             return expect(promise).to.eventually.be.rejectedWith('"last_name" query is invalid.');
         });
 
         it('Throws an error if email query parameter is invalid', () => {
-            const promise = rizeClient.customer.getList({email: ' '});
+            const promise = rizeClient.customer.getList({email: null});
             return expect(promise).to.eventually.be.rejectedWith('"email" query is invalid.');
         });
 
@@ -59,7 +59,7 @@ describe('Customer', () => {
         });
 
         it('Throws an error if program_uid query parameter is invalid', () => {
-            const promise = rizeClient.customer.getList({program_uid: ' '});
+            const promise = rizeClient.customer.getList({program_uid: null});
             return expect(promise).to.eventually.be.rejectedWith('"program_uid" query is invalid.');
         });
 
@@ -68,8 +68,8 @@ describe('Customer', () => {
             return expect(promise).to.eventually.be.rejectedWith('"pool_uid" query is invalid.');
         });
 
-        it('Throws an error if pool_uid query parameter is invalid: array with empty string', () => {
-            const promise = rizeClient.customer.getList({pool_uid: ['test', ' ']});
+        it('Throws an error if pool_uid query parameter is invalid: array with not string value', () => {
+            const promise = rizeClient.customer.getList({pool_uid: ['test', null]});
             return expect(promise).to.eventually.be.rejectedWith('"pool_uid" query is invalid.');
         });
 
@@ -107,7 +107,8 @@ describe('Customer', () => {
                 pool_uid: ['pool_uid1', 'pool_uid2'],
                 limit: 50,
                 offset: 0,
-                sort: 'first_name_asc'
+                sort: 'first_name_asc',
+                customer: 'wew'
             };
             const customerList = await rizeClient.customer.getList(query);
             verifyCustomerList(customerList);
