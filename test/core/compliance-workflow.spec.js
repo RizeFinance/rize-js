@@ -58,9 +58,9 @@ describe('Compliance Workflow', () => {
     });
 
     describe('viewLatest', () => {
-        it('Throws an error if customerUid is empty', () => {
+        it('Throws an error if "customerUid" is empty', () => {
             const promise = rizeClient.complianceWorkflow.viewLatest(' ');
-            return expect(promise).to.eventually.be.rejectedWith('customerUid is required.');
+            return expect(promise).to.eventually.be.rejectedWith('"customerUid" is required.');
         });
 
         it('Retrieves the latest compliance workflow', async () => {
