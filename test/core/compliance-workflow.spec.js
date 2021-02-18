@@ -21,10 +21,10 @@ describe('Compliance Workflow', () => {
     const fakeName = faker.name.findName();
     const fakeIp = faker.internet.ip();
 
-    /** @type {import('../../lib/core/typedefs/compliance-workflow.typedefs').ComplianceWorkflowEntity} */
+    /** @type {import('../../lib/core/typedefs/compliance-workflow.typedefs').ComplianceWorkflow} */
     let workflow;
 
-    const verifyComplianceWorkflowEntity = (workflow, email) => {
+    const verifyComplianceWorkflow = (workflow, email) => {
         expect(workflow).to.have.property('uid').that.is.not.empty;
         expect(workflow).to.have.nested.property('customer.uid').that.is.not.empty;
         expect(workflow).to.have.nested.property('customer.email').that.equals(email);
@@ -50,7 +50,7 @@ describe('Compliance Workflow', () => {
 
             const newWorkflow = await rizeClient.complianceWorkflow.create(externalUid, fakeEmail);
 
-            verifyComplianceWorkflowEntity(newWorkflow, fakeEmail);
+            verifyComplianceWorkflow(newWorkflow, fakeEmail);
 
             mlog.log(`Compliance Workflow UID: ${newWorkflow.uid}`);
             mlog.log(`New Customer UID: ${newWorkflow.customer.uid}`);
@@ -69,7 +69,7 @@ describe('Compliance Workflow', () => {
         it('Retrieves the latest compliance workflow', async () => {
             const latestWorkflow = await rizeClient.complianceWorkflow.viewLatest(workflow.customer.uid);
 
-            verifyComplianceWorkflowEntity(latestWorkflow, workflow.customer.email);
+            verifyComplianceWorkflow(latestWorkflow, workflow.customer.email);
             expect(latestWorkflow.uid).to.be.equal(workflow.uid);
         });
     });
