@@ -18,9 +18,11 @@ declare class Rize {
      * @type {ComplianceWorkflow}
      */
     complianceWorkflow: ComplianceWorkflow;
+    customer: Customer;
 }
 declare namespace Rize {
     export { PACKAGE_VERSION, Rize, Rize as default };
 }
 import ComplianceWorkflow = require("./core/compliance-workflow");
+import Customer = require("./core/customer");
 declare var PACKAGE_VERSION: string;
