@@ -314,19 +314,19 @@ Type: [Object][62]
 
 ### Properties
 
--   `status` **(`"initiated"` \| `"queued"` \| `"identity_verified"` \| `"active"` \| `"manual_review"` \| `"rejected"` \| `"archived"` \| `"under_review"`)** Filter by onboarding status. Please note that the initiated enum value will not be respected unless the `include_initiated=true` parameter is also provided.
--   `include_initiated` **[boolean][71]** By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
--   `kyc_status` **(`"approved"` \| `"denied"` \| `"documents_provided"` \| `"documents_rejected"` \| `"manual_review"` \| `"pending_documents"` \| `"ready_for_custodial_partner_review"` \| `"under_review"`)** Filter by KYC status.
--   `first_name` **[string][57]** Only return Customers with a first name matching exactly what is submitted
--   `last_name` **[string][57]** Only return Customers with a last name matching exactly what is submitted
--   `email` **[string][57]** Only return Customers with an email address matching exactly what is submitted
--   `locked` **[boolean][71]** Only return locked Customers if true and only return unlocked Customers if false
--   `program_uid` **[string][57]** Only return Customers belonging to the submitted Program.
--   `external_uid` **[string][57]** A unique, immutable id provided by Client.
--   `pool_uid` **[Array][63]&lt;[string][57]>** Filter by pool. Multiple values are allowed.
--   `limit` **[string][57]**  Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
--   `offset` **[string][57]** Index of the items to start retrieving from. Default: 0
--   `sort` **(`"first_name_asc"` \| `"first_name_desc"` \| `"last_name_asc"` \| `"last_name_desc"` \| `"email_asc"` \| `"email_desc"`)** Sort returned items.
+-   `status` **(`"initiated"` \| `"queued"` \| `"identity_verified"` \| `"active"` \| `"manual_review"` \| `"rejected"` \| `"archived"` \| `"under_review"`)?** Filter by onboarding status. Please note that the initiated enum value will not be respected unless the `include_initiated=true` parameter is also provided.
+-   `include_initiated` **[boolean][71]?** By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
+-   `kyc_status` **(`"approved"` \| `"denied"` \| `"documents_provided"` \| `"documents_rejected"` \| `"manual_review"` \| `"pending_documents"` \| `"ready_for_custodial_partner_review"` \| `"under_review"`)?** Filter by KYC status.
+-   `first_name` **[string][57]?** Only return Customers with a first name matching exactly what is submitted
+-   `last_name` **[string][57]?** Only return Customers with a last name matching exactly what is submitted
+-   `email` **[string][57]?** Only return Customers with an email address matching exactly what is submitted
+-   `locked` **[boolean][71]?** Only return locked Customers if true and only return unlocked Customers if false
+-   `program_uid` **[string][57]?** Only return Customers belonging to the submitted Program.
+-   `external_uid` **[string][57]?** A unique, immutable id provided by Client.
+-   `pool_uid` **[Array][63]&lt;[string][57]>?** Filter by pool. Multiple values are allowed.
+-   `limit` **[string][57]?**  Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
+-   `offset` **[string][57]?** Index of the items to start retrieving from. Default: 0
+-   `sort` **(`"first_name_asc"` \| `"first_name_desc"` \| `"last_name_asc"` \| `"last_name_desc"` \| `"email_asc"` \| `"email_desc"`)?** Sort returned items.
 
 ## Rize
 
