@@ -13,30 +13,104 @@ const rizeClient = new Rize(
 );
 
 describe('Customer', () => {
+    
+    const verifyCustomerList = (list) => {
+        expect(list).to.have.property('total_count').to.be.a('number');
+        expect(list).to.have.property('count').to.be.a('number');
+        expect(list).to.have.property('limit').to.be.a('number');
+        expect(list).to.have.property('offset').to.be.a('number');
+        expect(list).to.have.property('data').to.be.an('array');
+    };
+
     describe('getList', () => {
         it('Throws an error if query is invalid', () => {
             const promise = rizeClient.customer.getList('');
             return expect(promise).to.eventually.be.rejectedWith('query is invalid.');
         });
 
+        it('Throws an error if include_initiated query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({include_initiated: ' '});
+            return expect(promise).to.eventually.be.rejectedWith('"include_initiated" query is invalid.');
+        });
+        
+        it('Throws an error if kyc_status query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({kyc_status: ' '});
+            return expect(promise).to.eventually.be.rejectedWith('"kyc_status" query is invalid.');
+        });
+
+        it('Throws an error if first_name query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({first_name: ' '});
+            return expect(promise).to.eventually.be.rejectedWith('"first_name" query is invalid.');
+        });
+
+        it('Throws an error if last_name query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({last_name: ' '});
+            return expect(promise).to.eventually.be.rejectedWith('"last_name" query is invalid.');
+        });
+
+        it('Throws an error if email query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({email: ' '});
+            return expect(promise).to.eventually.be.rejectedWith('"email" query is invalid.');
+        });
+
+        it('Throws an error if locked query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({locked: ' '});
+            return expect(promise).to.eventually.be.rejectedWith('"locked" query is invalid.');
+        });
+
+        it('Throws an error if program_uid query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({program_uid: ' '});
+            return expect(promise).to.eventually.be.rejectedWith('"program_uid" query is invalid.');
+        });
+
+        it('Throws an error if pool_uid query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({pool_uid: []});
+            return expect(promise).to.eventually.be.rejectedWith('"pool_uid" query is invalid.');
+        });
+
+        it('Throws an error if pool_uid query parameter is invalid: array with empty string', () => {
+            const promise = rizeClient.customer.getList({pool_uid: ['test', ' ']});
+            return expect(promise).to.eventually.be.rejectedWith('"pool_uid" query is invalid.');
+        });
+
+        it('Throws an error if limit query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({limit: ' '});
+            return expect(promise).to.eventually.be.rejectedWith('"limit" query is invalid.');
+        });
+
+        it('Throws an error if offset query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({offset: ' '});
+            return expect(promise).to.eventually.be.rejectedWith('"offset" query is invalid.');
+        });
+
+        it('Throws an error if sort query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({sort: ' '});
+            return expect(promise).to.eventually.be.rejectedWith('"sort" query is invalid.');
+        });
+
         it('Retrieves the customer list', async () => {
             const customerList = await rizeClient.customer.getList();
-
-            expect(customerList).to.have.property('total_count').to.be.a('number');
-            expect(customerList).to.have.property('count').to.be.a('number');
-            expect(customerList).to.have.property('limit').to.be.a('number');
-            expect(customerList).to.have.property('offset').to.be.a('number');
-            expect(customerList).to.have.property('data').to.be.an('array');
+            verifyCustomerList(customerList);
         });
 
         it('Retrieves the customer list with query', async () => {
-            const customerList = await rizeClient.customer.getList({status: 'wewrwer'});
-
-            expect(customerList).to.have.property('total_count').to.be.a('number');
-            expect(customerList).to.have.property('count').to.be.a('number');
-            expect(customerList).to.have.property('limit').to.be.a('number');
-            expect(customerList).to.have.property('offset').to.be.a('number');
-            expect(customerList).to.have.property('data').to.be.an('array');
+            const query = {
+                status: 'initiated',
+                include_initiated: true,
+                kyc_status: 'approved',
+                first_name: 'Rize',
+                last_name: 'Rize',
+                email: 'rize@rizefs.com',
+                locked: false,
+                program_uid: 'program_uid',
+                external_uid: 'external_uid',
+                pool_uid: ['pool_uid1', 'pool_uid2'],
+                limit: 50,
+                offset: 0,
+                sort: 'first_name_asc'
+            };
+            const customerList = await rizeClient.customer.getList(query);
+            verifyCustomerList(customerList);
         });
     });
 });
