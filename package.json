@@ -33,6 +33,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "jws": "^4.0.0",
+    "query-string": "^6.14.0",
     "validator": "^13.5.2"
   }
 }
