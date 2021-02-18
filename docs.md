@@ -9,7 +9,7 @@
         -   [Parameters][5]
     -   [acknowledgeComplianceDocument][6]
         -   [Parameters][7]
--   [Customer][8]
+-   [CustomerService][8]
     -   [getList][9]
         -   [Parameters][10]
     -   [get][11]
@@ -24,40 +24,26 @@
         -   [Parameters][20]
     -   [unlock][21]
         -   [Parameters][22]
--   [Customer][23]
+-   [ComplianceWorkflowEntitySummary][23]
     -   [Properties][24]
-    -   [getList][25]
-        -   [Parameters][26]
-    -   [get][27]
-        -   [Parameters][28]
-    -   [update][29]
-        -   [Parameters][30]
-    -   [archive][31]
-        -   [Parameters][32]
-    -   [verifyIdentity][33]
-        -   [Parameters][34]
-    -   [lock][35]
-        -   [Parameters][36]
-    -   [unlock][37]
-        -   [Parameters][38]
--   [ComplianceWorkflowEntitySummary][39]
-    -   [Properties][40]
--   [ComplianceWorkflowEntityCustomer][41]
-    -   [Properties][42]
--   [ComplianceDocument][43]
-    -   [Properties][44]
--   [ComplianceWorkflowEntity][45]
-    -   [Properties][46]
--   [CustomerDetails][47]
-    -   [Properties][48]
--   [CustomerList][49]
-    -   [Properties][50]
--   [CustomerListQuery][51]
-    -   [Properties][52]
--   [Rize][53]
-    -   [Parameters][54]
-    -   [complianceWorkflow][55]
-    -   [PACKAGE_VERSION][56]
+-   [ComplianceWorkflowEntityCustomer][25]
+    -   [Properties][26]
+-   [ComplianceDocument][27]
+    -   [Properties][28]
+-   [ComplianceWorkflowEntity][29]
+    -   [Properties][30]
+-   [CustomerDetails][31]
+    -   [Properties][32]
+-   [Customer][33]
+    -   [Properties][34]
+-   [CustomerList][35]
+    -   [Properties][36]
+-   [CustomerListQuery][37]
+    -   [Properties][38]
+-   [Rize][39]
+    -   [Parameters][40]
+    -   [complianceWorkflow][41]
+    -   [PACKAGE_VERSION][42]
 
 ## ComplianceWorkflow
 
@@ -69,10 +55,10 @@ Creates a new Compliance Workflow.
 
 #### Parameters
 
--   `customerExternalUid` **[string][57]** A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.
--   `email` **[string][57]** Email address associated with the Customer.
+-   `customerExternalUid` **[string][43]** A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.
+-   `email` **[string][43]** Email address associated with the Customer.
 
-Returns **[Promise][58]&lt;[ComplianceWorkflowEntity][59]>** A promise that returns the new Compliance Workflow entity if resolved.
+Returns **[Promise][44]&lt;[ComplianceWorkflowEntity][45]>** A promise that returns the new Compliance Workflow entity if resolved.
 
 ### viewLatest
 
@@ -80,9 +66,9 @@ Retrieves the most recent Compliance Workflow for a Customer.
 
 #### Parameters
 
--   `customerUid` **[string][57]** A UID referring to the Customer
+-   `customerUid` **[string][43]** A UID referring to the Customer
 
-Returns **[Promise][58]&lt;[ComplianceWorkflowEntity][59]>** 
+Returns **[Promise][44]&lt;[ComplianceWorkflowEntity][45]>** 
 
 ### acknowledgeComplianceDocument
 
@@ -90,92 +76,20 @@ Indicate acceptance or rejection of a Compliance Document within a given Complia
 
 #### Parameters
 
--   `complianceWorkflowUid` **[string][57]** A UID referring to the Compliance Workflow.
--   `customerUid` **[string][57]** A UID referring to the Customer.
--   `documentUid` **[string][57]** A UID referring to the Compliance Document being acknowledged.
+-   `complianceWorkflowUid` **[string][43]** A UID referring to the Compliance Workflow.
+-   `customerUid` **[string][43]** A UID referring to the Customer.
+-   `documentUid` **[string][43]** A UID referring to the Compliance Document being acknowledged.
 -   `accept` **(`"yes"` \| `"no"`)** An indicaation of acceptance or rejection.
--   `userName` **[string][57]?** A label associated with the Customer (required for electronic signing). (optional, default `undefined`)
--   `ipAddress` **[string][57]?** A numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication (required for electronic signing); in this case, the label associated with the computer used by the Customer. (optional, default `undefined`)
+-   `userName` **[string][43]?** A label associated with the Customer (required for electronic signing). (optional, default `undefined`)
+-   `ipAddress` **[string][43]?** A numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication (required for electronic signing); in this case, the label associated with the computer used by the Customer. (optional, default `undefined`)
 
-Returns **[Promise][58]&lt;[ComplianceWorkflowEntity][59]>** A promise that returns the new Compliance Workflow entity if resolved.
+Returns **[Promise][44]&lt;[ComplianceWorkflowEntity][45]>** A promise that returns the new Compliance Workflow entity if resolved.
 
 ## 
 
-## Customer
+## CustomerService
 
-The Customer resource class.
-
-### getList
-
-Retrieves a list of Customers filtered by the given parameters. 
-Filter parameters are not case sensitive, but will only return exact matches. 
-Multiple filter parameters can be provided at once, but a result will not be returned unless there are exact matches for all submitted parameters.
-
-#### Parameters
-
--   `query` **[CustomerListQuery][60]** An object containing key value pair for filtering the results list. (optional, default `{}`)
-
-Returns **[Promise][58]&lt;[CustomerList][61]>** A promise that returns a Customer List if resolved.
-
-### get
-
-#### Parameters
-
--   `uid` **any** 
-
-### update
-
-#### Parameters
-
--   `uid` **any** 
--   `email` **any** 
--   `details` **any** 
-
-### archive
-
-#### Parameters
-
--   `uid` **any** 
-
-### verifyIdentity
-
-#### Parameters
-
--   `uid` **any** 
-
-### lock
-
-#### Parameters
-
--   `uid` **any** 
--   `lockReason` **any** 
-
-### unlock
-
-#### Parameters
-
--   `uid` **any** 
--   `unlockReason` **any**  (optional, default `null`)
-
-## Customer
-
-Type: [Object][62]
-
-### Properties
-
--   `uid` **[string][57]** 
--   `external_uid` **[string][57]** 
--   `program_uid` **[string][57]** 
--   `pool_uids` **[Array][63]&lt;[string][57]>** 
--   `email` **[string][57]** 
--   `status` **[string][57]** 
--   `kyc_status` **[string][57]** 
--   `total_balance` **[string][57]** 
--   `created_at` **[Date][64]** 
--   `locked_at` **([Date][64] | null)** 
--   `lock_reason` **([string][57] | null)** 
--   `total_balance` **[string][57]** 
--   `details` **[CustomerDetails][65]** 
+The CustomerService resource class.
 
 ### getList
 
@@ -185,9 +99,9 @@ Multiple filter parameters can be provided at once, but a result will not be ret
 
 #### Parameters
 
--   `query` **[CustomerListQuery][60]** An object containing key value pair for filtering the results list. (optional, default `{}`)
+-   `query` **[CustomerListQuery][46]** An object containing key value pair for filtering the results list. (optional, default `{}`)
 
-Returns **[Promise][58]&lt;[CustomerList][61]>** A promise that returns a Customer List if resolved.
+Returns **[Promise][44]&lt;[CustomerList][47]>** A promise that returns a Customer List if resolved.
 
 ### get
 
@@ -233,14 +147,14 @@ Returns **[Promise][58]&lt;[CustomerList][61]>** A promise that returns a Custom
 
 ## ComplianceWorkflowEntitySummary
 
-Type: [Object][62]
+Type: [Object][48]
 
 ### Properties
 
--   `accepted_quantity` **[number][66]** 
--   `begun_at` **[string][57]** The DateTime at which this Compliance Workflow was requested
--   `completed_step` **[number][66]** 
--   `current_step` **[number][66]** 
+-   `accepted_quantity` **[number][49]** 
+-   `begun_at` **[string][43]** The DateTime at which this Compliance Workflow was requested
+-   `completed_step` **[number][49]** 
+-   `current_step` **[number][49]** 
 -   `status` **(`"accepted"` \| `"in_progress"` \| `"rejected"` \| `"expired"`)** A value indicating the current state of this Compliance Workflow:-   _accepted_ - The Compliance Workflow is complete. All documents in this Compliance Workflow have been accepted.
     -   _in_progress_ - The Compliance Workflow is in progress.
     -   _rejected_ - The Compliance Workflow is rejected. If Rize receives an acknowledgment to a document in a Compliance Workflow with an 'accept' value of 'no', the Compliance Workflow moves to a status of rejected. The Customer must restart a new Compliance Workflow to gain access to the Program.
@@ -248,84 +162,104 @@ Type: [Object][62]
 
 ## ComplianceWorkflowEntityCustomer
 
-Type: [Object][62]
+Type: [Object][48]
 
 ### Properties
 
--   `email` **[string][57]** 
--   `external_uid` **[string][57]** A Customer identifier supplied by the Client, unique among the collection of all Client Customers
--   `uid` **[string][57]** A UID referring to the Customer
+-   `email` **[string][43]** 
+-   `external_uid` **[string][43]** A Customer identifier supplied by the Client, unique among the collection of all Client Customers
+-   `uid` **[string][43]** A UID referring to the Customer
 
 ## ComplianceDocument
 
-Type: [Object][62]
+Type: [Object][48]
 
 ### Properties
 
 -   `electronic_signature_required` **(`"yes"` \| `"no"`)** 
--   `external_storage_name` **[string][57]** Amazon S3 key used to retrieve the contents of a Compliance Document
--   `compliance_document_url` **[string][57]** Amazon S3 URL used to retrieve the contents of a Compliance Document
--   `name` **[string][57]** 
--   `step` **[number][66]** Multiple Compliance Documents are grouped into a Step, and Compliance Documents are presented to a Customer, Step-by-Step
--   `version` **[number][66]** 
--   `uid` **[string][57]** A UID referring to a Compliance Document; note that this UID will be different for each Customer
--   `accepted_at` **[string][57]** The DateTime at which this Compliance Document was acknowledged
+-   `external_storage_name` **[string][43]** Amazon S3 key used to retrieve the contents of a Compliance Document
+-   `compliance_document_url` **[string][43]** Amazon S3 URL used to retrieve the contents of a Compliance Document
+-   `name` **[string][43]** 
+-   `step` **[number][49]** Multiple Compliance Documents are grouped into a Step, and Compliance Documents are presented to a Customer, Step-by-Step
+-   `version` **[number][49]** 
+-   `uid` **[string][43]** A UID referring to a Compliance Document; note that this UID will be different for each Customer
+-   `accepted_at` **[string][43]** The DateTime at which this Compliance Document was acknowledged
 
 ## ComplianceWorkflowEntity
 
-Type: [Object][62]
+Type: [Object][48]
 
 ### Properties
 
--   `uid` **[string][57]** A unique identifier generated by Rize.
--   `summary` **[ComplianceWorkflowEntitySummary][67]** 
--   `customer` **[ComplianceWorkflowEntityCustomer][68]** 
--   `accepted_documents` **[Array][63]&lt;[ComplianceDocument][69]>** 
--   `current_step_documents_pending` **[Array][63]&lt;Omit&lt;[ComplianceDocument][69], `"accepted_at"`>>** Compliance Documents that await acknowledgment in the current Step
--   `all_documents` **[Array][63]&lt;Omit&lt;[ComplianceDocument][69], (`"accepted_at"` \| `"uid"`)>>** The set of all Compliance Documents that would require acknowledgment
+-   `uid` **[string][43]** A unique identifier generated by Rize.
+-   `summary` **[ComplianceWorkflowEntitySummary][50]** 
+-   `customer` **[ComplianceWorkflowEntityCustomer][51]** 
+-   `accepted_documents` **[Array][52]&lt;[ComplianceDocument][53]>** 
+-   `current_step_documents_pending` **[Array][52]&lt;Omit&lt;[ComplianceDocument][53], `"accepted_at"`>>** Compliance Documents that await acknowledgment in the current Step
+-   `all_documents` **[Array][52]&lt;Omit&lt;[ComplianceDocument][53], (`"accepted_at"` \| `"uid"`)>>** The set of all Compliance Documents that would require acknowledgment
 
 ## CustomerDetails
 
-Type: [Object][62]
+Type: [Object][48]
 
 ### Properties
 
--   `first_name` **[string][57]** 
--   `middle_name` **[string][57]** 
--   `last_name` **[string][57]** 
--   `suffix` **[string][57]** 
--   `phone` **[string][57]** 
+-   `first_name` **[string][43]** 
+-   `middle_name` **[string][43]** 
+-   `last_name` **[string][43]** 
+-   `suffix` **[string][43]** 
+-   `phone` **[string][43]** 
+
+## Customer
+
+Type: [Object][48]
+
+### Properties
+
+-   `uid` **[string][43]** 
+-   `external_uid` **[string][43]** 
+-   `program_uid` **[string][43]** 
+-   `pool_uids` **[Array][52]&lt;[string][43]>** 
+-   `email` **[string][43]** 
+-   `status` **[string][43]** 
+-   `kyc_status` **[string][43]** 
+-   `total_balance` **[string][43]** 
+-   `created_at` **[Date][54]** 
+-   `locked_at` **([Date][54] | null)** 
+-   `lock_reason` **([string][43] | null)** 
+-   `total_balance` **[string][43]** 
+-   `details` **[CustomerDetails][55]** 
 
 ## CustomerList
 
-Type: [Object][62]
+Type: [Object][48]
 
 ### Properties
 
--   `total_count` **[number][66]** 
--   `count` **[number][66]** 
--   `limit` **[number][66]** 
--   `offset` **[number][66]** 
--   `data` **[Array][63]&lt;[Customer][70]>** 
+-   `total_count` **[number][49]** 
+-   `count` **[number][49]** 
+-   `limit` **[number][49]** 
+-   `offset` **[number][49]** 
+-   `data` **[Array][52]&lt;[Customer][56]>** 
 
 ## CustomerListQuery
 
-Type: [Object][62]
+Type: [Object][48]
 
 ### Properties
 
 -   `status` **(`"initiated"` \| `"queued"` \| `"identity_verified"` \| `"active"` \| `"manual_review"` \| `"rejected"` \| `"archived"` \| `"under_review"`)?** Filter by onboarding status. Please note that the initiated enum value will not be respected unless the `include_initiated=true` parameter is also provided.
--   `include_initiated` **[boolean][71]?** By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
+-   `include_initiated` **[boolean][57]?** By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
 -   `kyc_status` **(`"approved"` \| `"denied"` \| `"documents_provided"` \| `"documents_rejected"` \| `"manual_review"` \| `"pending_documents"` \| `"ready_for_custodial_partner_review"` \| `"under_review"`)?** Filter by KYC status.
--   `first_name` **[string][57]?** Only return Customers with a first name matching exactly what is submitted
--   `last_name` **[string][57]?** Only return Customers with a last name matching exactly what is submitted
--   `email` **[string][57]?** Only return Customers with an email address matching exactly what is submitted
--   `locked` **[boolean][71]?** Only return locked Customers if true and only return unlocked Customers if false
--   `program_uid` **[string][57]?** Only return Customers belonging to the submitted Program.
--   `external_uid` **[string][57]?** A unique, immutable id provided by Client.
--   `pool_uid` **[Array][63]&lt;[string][57]>?** Filter by pool. Multiple values are allowed.
--   `limit` **[string][57]?**  Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
--   `offset` **[string][57]?** Index of the items to start retrieving from. Default: 0
+-   `first_name` **[string][43]?** Only return Customers with a first name matching exactly what is submitted
+-   `last_name` **[string][43]?** Only return Customers with a last name matching exactly what is submitted
+-   `email` **[string][43]?** Only return Customers with an email address matching exactly what is submitted
+-   `locked` **[boolean][57]?** Only return locked Customers if true and only return unlocked Customers if false
+-   `program_uid` **[string][43]?** Only return Customers belonging to the submitted Program.
+-   `external_uid` **[string][43]?** A unique, immutable id provided by Client.
+-   `pool_uid` **[Array][52]&lt;[string][43]>?** Filter by pool. Multiple values are allowed.
+-   `limit` **[string][43]?**  Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
+-   `offset` **[string][43]?** Index of the items to start retrieving from. Default: 0
 -   `sort` **(`"first_name_asc"` \| `"first_name_desc"` \| `"last_name_asc"` \| `"last_name_desc"` \| `"email_asc"` \| `"email_desc"`)?** Sort returned items.
 
 ## Rize
@@ -334,23 +268,23 @@ Represents a Rize API client.
 
 ### Parameters
 
--   `programUid` **[string][57]** The Rize Program ID.
--   `hmac` **[string][57]** The HMAC that will be used to sign the JSON web signature in order to get access to the API.
+-   `programUid` **[string][43]** The Rize Program ID.
+-   `hmac` **[string][43]** The HMAC that will be used to sign the JSON web signature in order to get access to the API.
 -   `environment` **(`"sandbox"` \| `"integration"` \| `"production"`)** The Rize environment to be used. (optional, default `"sandbox"`)
--   `timeout` **[number][66]** Specifies the number of milliseconds before the each request times out. (optional, default `80000`)
+-   `timeout` **[number][49]** Specifies the number of milliseconds before the each request times out. (optional, default `80000`)
 
 ### complianceWorkflow
 
 The Compliance Workflow resource is where you begin onboarding Customers to your Program.
 Compliance Workflows are used to group all of the required Compliance Documents together and to ensure they are presented and acknowledged in the correct order.
 
-Type: [ComplianceWorkflow][72]
+Type: [ComplianceWorkflow][58]
 
 ### PACKAGE_VERSION
 
 The Rize SDK version
 
-Type: [string][57]
+Type: [string][43]
 
 [1]: #complianceworkflow
 
@@ -366,7 +300,7 @@ Type: [string][57]
 
 [7]: #parameters-2
 
-[8]: #customer
+[8]: #customerservice
 
 [9]: #getlist
 
@@ -396,102 +330,74 @@ Type: [string][57]
 
 [22]: #parameters-9
 
-[23]: #customer-1
+[23]: #complianceworkflowentitysummary
 
 [24]: #properties
 
-[25]: #getlist-1
+[25]: #complianceworkflowentitycustomer
 
-[26]: #parameters-10
+[26]: #properties-1
 
-[27]: #get-1
+[27]: #compliancedocument
 
-[28]: #parameters-11
+[28]: #properties-2
 
-[29]: #update-1
+[29]: #complianceworkflowentity
 
-[30]: #parameters-12
+[30]: #properties-3
 
-[31]: #archive-1
+[31]: #customerdetails
 
-[32]: #parameters-13
+[32]: #properties-4
 
-[33]: #verifyidentity-1
+[33]: #customer
 
-[34]: #parameters-14
+[34]: #properties-5
 
-[35]: #lock-1
+[35]: #customerlist
 
-[36]: #parameters-15
+[36]: #properties-6
 
-[37]: #unlock-1
+[37]: #customerlistquery
 
-[38]: #parameters-16
+[38]: #properties-7
 
-[39]: #complianceworkflowentitysummary
+[39]: #rize
 
-[40]: #properties-1
+[40]: #parameters-10
 
-[41]: #complianceworkflowentitycustomer
+[41]: #complianceworkflow-1
 
-[42]: #properties-2
+[42]: #package_version
 
-[43]: #compliancedocument
+[43]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[44]: #properties-3
+[44]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
 [45]: #complianceworkflowentity
 
-[46]: #properties-4
+[46]: #customerlistquery
 
-[47]: #customerdetails
+[47]: #customerlist
 
-[48]: #properties-5
+[48]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[49]: #customerlist
+[49]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 
-[50]: #properties-6
+[50]: #complianceworkflowentitysummary
 
-[51]: #customerlistquery
+[51]: #complianceworkflowentitycustomer
 
-[52]: #properties-7
+[52]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[53]: #rize
+[53]: #compliancedocument
 
-[54]: #parameters-17
+[54]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date
 
-[55]: #complianceworkflow-1
+[55]: #customerdetails
 
-[56]: #package_version
+[56]: #customer
 
-[57]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[57]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[58]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
-
-[59]: #complianceworkflowentity
-
-[60]: #customerlistquery
-
-[61]: #customerlist
-
-[62]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
-
-[63]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
-
-[64]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date
-
-[65]: #customerdetails
-
-[66]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
-
-[67]: #complianceworkflowentitysummary
-
-[68]: #complianceworkflowentitycustomer
-
-[69]: #compliancedocument
-
-[70]: #customer
-
-[71]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
-
-[72]: #complianceworkflow
+[58]: #complianceworkflow
