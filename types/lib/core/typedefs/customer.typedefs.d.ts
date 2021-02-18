@@ -32,11 +32,11 @@ export type CustomerListQuery = {
      */
     status: 'initiated' | 'queued' | 'identity_verified' | 'active' | 'manual_review' | 'rejected' | 'archived' | 'under_review';
     /**
-     * ? - By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
+     * - By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
      */
     include_initiated: boolean;
     /**
-     * ? - Filter by KYC status.
+     * - Filter by KYC status.
      */
     kyc_status: 'approved' | 'denied' | 'documents_provided' | 'documents_rejected' | 'manual_review' | 'pending_documents' | 'ready_for_custodial_partner_review' | 'under_review';
     /**

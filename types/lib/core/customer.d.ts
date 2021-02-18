@@ -12,6 +12,12 @@ declare class Customer {
     /** @ignore @protected */ protected _api: import("axios").AxiosInstance;
     /** @ignore @protected */ protected _auth: import("./auth");
     /**
+     * @ignore @protected
+     * Validates query parameter object for getList method.
+     * @param {CustomerListQuery} query - An object containing key value pair for filtering the results list.
+     */
+    protected _validateGetListQuery: (query: CustomerListQuery) => void;
+    /**
      * Retrieves a list of Customers filtered by the given parameters.
      * Filter parameters are not case sensitive, but will only return exact matches.
      * Multiple filter parameters can be provided at once, but a result will not be returned unless there are exact matches for all submitted parameters.
@@ -63,11 +69,11 @@ type CustomerListQuery = {
      */
     status: "active" | "rejected" | "initiated" | "queued" | "identity_verified" | "manual_review" | "archived" | "under_review";
     /**
-     * ? - By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
+     * - By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
      */
     include_initiated: boolean;
     /**
-     * ? - Filter by KYC status.
+     * - Filter by KYC status.
      */
     kyc_status: "denied" | "manual_review" | "under_review" | "approved" | "documents_provided" | "documents_rejected" | "pending_documents" | "ready_for_custodial_partner_review";
     /**
