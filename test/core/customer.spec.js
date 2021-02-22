@@ -155,6 +155,7 @@ describe('Customer', () => {
 
         it('Retrieves customer info successfully', async () => {
             const customer = await rizeClient.customer.get(customerUid);
+            expect(customer).to.have.property('uid').that.equals(customerUid);
             expect(customer).to.have.nested.property('details.first_name');
             expect(customer).to.have.nested.property('details.middle_name');
             expect(customer).to.have.nested.property('details.last_name');
@@ -320,7 +321,8 @@ describe('Customer', () => {
                     postal_code: fakePostalCode,
                 },
             });
-            
+
+            expect(updatedCustomer).to.have.property('uid').that.equals(customerUid);
             expect(updatedCustomer).to.have.nested.property('details.first_name').that.equals(fakeFirstName);
             expect(updatedCustomer).to.have.nested.property('details.middle_name').that.equals(fakeMiddleName);
             expect(updatedCustomer).to.have.nested.property('details.last_name').that.equals(fakeLastName);
