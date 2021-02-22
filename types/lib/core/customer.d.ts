@@ -63,6 +63,8 @@ declare class CustomerService {
      */
     get(uid: string): Promise<Customer>;
     /**
+     * Adjusts Customer Data
+     *
      * This function is used to supply the remaining personally identifiable information (PII) for each Customer after they are created with a new Compliance Workflow.
      * The PII for a Customer must be submitted in full. Rize will not accept your request if any field is incomplete or missing.
      * PII can be edited for a Customer up until a valid request is sent using the verifyIdentity function.
@@ -94,10 +96,16 @@ declare class CustomerService {
      */
     update(uid: string, email: string, details: CustomerDetails): Promise<Customer>;
     /**
+     * Archives a customer.
      *
-     * @param {*} uid
+     * A Customer can not be archived until all associated Synthetic and Custodial Accounts have been closed and retain a zero balance.
+     * An archived Customer's records will still be available for historical purposes, but they will not be able to open any new Synthetic or Custodial Accounts.
+     * @param {string} uid - Rize-generated unique customer id
+     * @returns {Promise<void>} A promise that returns void if resolved.
+     * @example
+     * await rize.customer.archive(customerUid);
      */
-    archive(uid: any): Promise<void>;
+    archive(uid: string): Promise<void>;
     /**
      *
      * @param {*} uid
