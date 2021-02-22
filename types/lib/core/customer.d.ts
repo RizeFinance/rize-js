@@ -16,7 +16,15 @@ declare class CustomerService {
      * Validates query parameter object for getList method.
      * @param {CustomerListQuery} query - An object containing key value pair for filtering the results list.
      */
-    protected _validateGetListQuery: (query: CustomerListQuery) => void;
+    protected _validateGetListQuery(query: CustomerListQuery): void;
+    /**
+     * @ignore @protected
+     * Validates the parameters for the "update" method
+     * @param {string} uid
+     * @param {string} email
+     * @param {CustomerDetails} details
+     */
+    protected _validateUpdateParams(uid: string, email: string, details: CustomerDetails): void;
     /**
      * Retrieves a list of Customers filtered by the given parameters.
      * Filter parameters are not case sensitive, but will only return exact matches.
@@ -149,6 +157,16 @@ type CustomerListQuery = {
      */
     sort?: "first_name_asc" | "first_name_desc" | "last_name_asc" | "last_name_desc" | "email_asc" | "email_desc";
 };
+type CustomerDetails = {
+    first_name: string;
+    middle_name?: string;
+    last_name: string;
+    suffix?: string;
+    phone: string;
+    ssn: string;
+    dob: string;
+    address: import("./typedefs/customer.typedefs").Address;
+};
 type CustomerList = {
     /**
      * - Total count of items available to retrieve
@@ -167,16 +185,6 @@ type CustomerList = {
      */
     offset: number;
     data: import("./typedefs/customer.typedefs").Customer[];
-};
-type CustomerDetails = {
-    first_name: string;
-    middle_name?: string;
-    last_name: string;
-    suffix?: string;
-    phone: string;
-    ssn: string;
-    dob: string;
-    address: import("./typedefs/customer.typedefs").Address;
 };
 type Customer = {
     /**

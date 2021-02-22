@@ -24,7 +24,7 @@ describe('Customer', () => {
     const fakeLastName = faker.name.lastName();
     const fakeSuffix = faker.name.suffix();
     const fakePhone = faker.phone.phoneNumber('#########');
-    const fakeSsn = faker.phone.phoneNumber('###-##-####');
+    const fakeSsn = '111-22-3333';
     const fakeDob = '1990-01-31';
     const fakeStreet1 = faker.address.streetAddress();
     const fakeStreet2 = faker.address.streetAddress();
@@ -190,6 +190,16 @@ describe('Customer', () => {
                 phone: fakePhone,
             });
             return expect(promise).to.eventually.be.rejectedWith('"details.ssn" is required.');
+        });
+
+        it('Throws an error if "details.ssn" has invalid format', () => {
+            const promise = rizeClient.customer.update(customerUid, '', {
+                first_name: fakeFirstName,
+                last_name: fakeLastName,
+                phone: fakePhone,
+                ssn: '111223333'
+            });
+            return expect(promise).to.eventually.be.rejectedWith('"details.ssn" should be formatted as ###-##-####');
         });
 
         it('Throws an error if "details.dob" is empty', () => {
