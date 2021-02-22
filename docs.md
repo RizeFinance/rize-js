@@ -180,9 +180,9 @@ An archived Customer's records will still be available for historical purposes, 
 
 #### Parameters
 
--   `uid` **[string][46]** Rize-generated unique customer id
+-   `uid` **[string][51]** Rize-generated unique customer id
 
-Returns **[Promise][47]&lt;void>** A promise that returns void if resolved.
+Returns **[Promise][52]&lt;void>** A promise that returns void if resolved.
 
 ### verifyIdentity
 
