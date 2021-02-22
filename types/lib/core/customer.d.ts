@@ -19,6 +19,12 @@ declare class CustomerService {
     protected _validateGetListQuery(query: CustomerListQuery): void;
     /**
      * @ignore @protected
+     * Validates the parameters for the "get" method
+     * @param {string} uid
+     */
+    protected _validateGetParams(uid: string): void;
+    /**
+     * @ignore @protected
      * Validates the parameters for the "update" method
      * @param {string} uid
      * @param {string} email
@@ -31,13 +37,31 @@ declare class CustomerService {
      * Multiple filter parameters can be provided at once, but a result will not be returned unless there are exact matches for all submitted parameters.
      * @param {CustomerListQuery} query - An object containing key value pair for filtering the results list.
      * @returns {Promise<CustomerList>} - A promise that returns a Customer List if resolved.
+     * @example
+     * const customerList = await rize.customer.getList({
+     *     status: 'initiated',
+     *     include_initiated: true,
+     *     kyc_status: 'approved'.
+     *     first_name: 'John',
+     *     last_name: 'Cena',
+     *     email: 'test@test.com',
+     *     locked: false,
+     *     program_uid: 'program_uid',
+     *     external_uid: 'external_uid',
+     *     pool_uid: ['pool_uid1', 'pool_uid2'],
+     *     limit: 50,
+     *     offset: 0,
+     *     sort: 'first_name_asc'
+     * });
      */
     getList(query?: CustomerListQuery): Promise<CustomerList>;
     /**
-     *
-     * @param {*} uid
+     * Retrieve overall status about a Customer as well as their total Asset Balances across all accounts.
+     * @param {string} uid - Rize-generated unique customer id
+     * @returns {Promise<Customer>} - A promise that returns a Customer if resolved.
+     * @example const customer = await rize.customer.get(customerUid);
      */
-    get(uid: any): Promise<void>;
+    get(uid: string): Promise<Customer>;
     /**
      * This function is used to supply the remaining personally identifiable information (PII) for each Customer after they are created with a new Compliance Workflow.
      * The PII for a Customer must be submitted in full. Rize will not accept your request if any field is incomplete or missing.
