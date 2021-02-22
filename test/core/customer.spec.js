@@ -147,6 +147,30 @@ describe('Customer', () => {
         });
     });
 
+    describe('get', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.customer.get('');
+            return expect(promise).to.eventually.be.rejectedWith('Customer "uid" is required.');
+        });
+
+        it('Retrieves customer info successfully', async () => {
+            const customer = await rizeClient.customer.get(customerUid);
+            expect(customer).to.have.property('uid').that.equals(customerUid);
+            expect(customer).to.have.nested.property('details.first_name');
+            expect(customer).to.have.nested.property('details.middle_name');
+            expect(customer).to.have.nested.property('details.last_name');
+            expect(customer).to.have.nested.property('details.dob');
+            expect(customer).to.have.nested.property('details.phone');
+            expect(customer).to.have.nested.property('details.ssn_last_four');
+            expect(customer).to.have.nested.property('details.suffix');
+            expect(customer).to.have.nested.property('details.address.street1');
+            expect(customer).to.have.nested.property('details.address.street2');
+            expect(customer).to.have.nested.property('details.address.city');
+            expect(customer).to.have.nested.property('details.address.state');
+            expect(customer).to.have.nested.property('details.address.postal_code');
+        });
+    });
+
     describe('update', () => {
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.customer.update('');
@@ -297,7 +321,8 @@ describe('Customer', () => {
                     postal_code: fakePostalCode,
                 },
             });
-            
+
+            expect(updatedCustomer).to.have.property('uid').that.equals(customerUid);
             expect(updatedCustomer).to.have.nested.property('details.first_name').that.equals(fakeFirstName);
             expect(updatedCustomer).to.have.nested.property('details.middle_name').that.equals(fakeMiddleName);
             expect(updatedCustomer).to.have.nested.property('details.last_name').that.equals(fakeLastName);

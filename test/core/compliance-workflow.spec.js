@@ -87,7 +87,7 @@ describe('Compliance Workflow', () => {
             return expect(promise).to.eventually.be.rejectedWith('"customerUid" is required.');
         });
 
-        it ('Throws an error if there are no documents supplied', () => {
+        it('Throws an error if there are no documents supplied', () => {
             const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocuments('test', 'test');
             return expect(promise).to.eventually.be.rejectedWith('Please submit at least one document.');
         });
@@ -150,7 +150,7 @@ describe('Compliance Workflow', () => {
             return expect(promise).to.eventually.be.rejectedWith();
         });
 
-        it('Acknowledges a single compliance document', async function() {
+        it('Acknowledges a single compliance document', async function () {
             if (workflow.current_step_documents_pending.length === 0) {
                 this.skip();
             }
@@ -172,7 +172,7 @@ describe('Compliance Workflow', () => {
             expect(acceptedDocumentUids).to.include.members([document.uid]);
         });
 
-        it('Acknowledges a multiple compliance documents', async function() {
+        it('Acknowledges a multiple compliance documents', async function () {
             if (workflow.current_step_documents_pending.length < 2) {
                 this.skip();
             }
@@ -195,6 +195,40 @@ describe('Compliance Workflow', () => {
         });
     });
 
+    describe('renew', () => {
+        it('Throws an error if customerExternalUid is empty', () => {
+            const promise = rizeClient.complianceWorkflow.renew(' ', '', '');
+            return expect(promise).to.eventually.be.rejectedWith('"customerExternalUid" is required.');
+        });
+
+        it('Throws an error if customerUid is empty', () => {
+            const promise = rizeClient.complianceWorkflow.renew('test', ' ', '');
+            return expect(promise).to.eventually.be.rejectedWith('"customerUid" is required.');
+        });
+
+        it('Throws an error if email is invalid', () => {
+            const promise = rizeClient.complianceWorkflow.renew('test', 'test', ' ');
+            return expect(promise).to.eventually.be.rejectedWith('"email" is invalid.');
+        });
+
+        it('Renew compliance worflow after latest expired', async function () {
+            const customerUidToTest = '5HPYLUeaHPmy3jHT';
+            const latestWorkflow = await rizeClient.complianceWorkflow.viewLatest(customerUidToTest);
+            if (latestWorkflow.summary.status !== 'expired') {
+                // Skip test if the customer's latest workflow is not yet expired
+                this.skip();
+            } else {
+                const newWorkflow = await rizeClient.complianceWorkflow.renew(
+                    latestWorkflow.customer.external_uid,
+                    latestWorkflow.customer.uid,
+                    latestWorkflow.customer.email);
+
+                verifyComplianceWorkflow(newWorkflow, latestWorkflow.customer.email);
+                expect(newWorkflow.summary.status === 'in_progress');
+            }
+        });
+    });
+    
     after(() => {
         process.env.TEST_CUSTOMER_UID = workflow.customer.uid;
     });
