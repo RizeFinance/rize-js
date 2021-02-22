@@ -31,7 +31,7 @@ const rize = new Rize('your_program_id', 'your_hmac_key');
 ```
 ## Configuration
 ```
-const rize = new Stripe('your_program_id', 'your_hmac_key', {
+const rize = new Rize('your_program_id', 'your_hmac_key', {
     environment: 'sandbox',
     timeout: 50000,
 });
