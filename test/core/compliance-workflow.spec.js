@@ -1,5 +1,7 @@
 'use strict';
 
+require('./auth.spec');
+
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 
@@ -191,5 +193,9 @@ describe('Compliance Workflow', () => {
             const acceptedDocumentUids = workflow.accepted_documents.map(x => x.uid);
             expect(acceptedDocumentUids).to.include.members(pendingDocIds);
         });
+    });
+
+    after(() => {
+        process.env.TEST_CUSTOMER_UID = workflow.customer.uid;
     });
 });
