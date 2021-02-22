@@ -31,12 +31,14 @@ declare class CustomerService {
      */
     get(uid: any): Promise<void>;
     /**
-     *
-     * @param {*} uid
-     * @param {*} email
-     * @param {*} details
+     * This function is used to supply the remaining personally identifiable information (PII) for each Customer after they are created with a new Compliance Workflow.
+     * The PII for a Customer must be submitted in full. Rize will not accept your request if any field is incomplete or missing.
+     * PII can be edited for a Customer up until a valid request is sent using the verifyIdentity function.
+     * @param {string} uid - Rize-generated unique customer id
+     * @param {string} email - Email of the customer
+     * @param {CustomerDetails} details - An object containing the supplied identifying information for the Customer
      */
-    update(uid: any, email: any, details: any): Promise<void>;
+    update(uid: string, email: string, details: CustomerDetails): Promise<any>;
     /**
      *
      * @param {*} uid
@@ -61,7 +63,7 @@ declare class CustomerService {
     unlock(uid: any, unlockReason?: any): Promise<void>;
 }
 declare namespace CustomerService {
-    export { CustomerListQuery, CustomerList };
+    export { CustomerListQuery, CustomerList, CustomerDetails };
 }
 type CustomerListQuery = {
     /**
@@ -118,9 +120,31 @@ type CustomerListQuery = {
     sort?: "first_name_asc" | "first_name_desc" | "last_name_asc" | "last_name_desc" | "email_asc" | "email_desc";
 };
 type CustomerList = {
+    /**
+     * - Total count of items available to retrieve
+     */
     total_count: number;
+    /**
+     * - Number of items retrieved
+     */
     count: number;
+    /**
+     * - Maximum number of items to retrieve
+     */
     limit: number;
+    /**
+     * - Index of the first item to retrieve
+     */
     offset: number;
     data: import("./typedefs/customer.typedefs").Customer[];
+};
+type CustomerDetails = {
+    first_name: string;
+    middle_name?: string;
+    last_name: string;
+    suffix?: string;
+    phone: string;
+    ssn: string;
+    dob: string;
+    address: import("./typedefs/customer.typedefs").Address;
 };
