@@ -114,6 +114,8 @@ Returns **[Promise][47]&lt;[CustomerList][50]>** A promise that returns a Custom
 
 ### update
 
+Adjusts Customer Data
+
 This function is used to supply the remaining personally identifiable information (PII) for each Customer after they are created with a new Compliance Workflow.
 The PII for a Customer must be submitted in full. Rize will not accept your request if any field is incomplete or missing.
 PII can be edited for a Customer up until a valid request is sent using the verifyIdentity function.
@@ -128,9 +130,16 @@ Returns **[Promise][47]&lt;[Customer][52]>** A promise that returns the updated 
 
 ### archive
 
+Archives a customer.
+
+A Customer can not be archived until all associated Synthetic and Custodial Accounts have been closed and retain a zero balance.
+An archived Customer's records will still be available for historical purposes, but they will not be able to open any new Synthetic or Custodial Accounts.
+
 #### Parameters
 
--   `uid` **any** 
+-   `uid` **[string][46]** Rize-generated unique customer id
+
+Returns **[Promise][47]&lt;void>** A promise that returns void if resolved.
 
 ### verifyIdentity
 

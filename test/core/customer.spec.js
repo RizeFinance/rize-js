@@ -302,4 +302,18 @@ describe('Customer', () => {
             expect(updatedCustomer).to.have.nested.property('details.address.postal_code').that.equals(fakePostalCode);
         });
     });
+
+    describe('archive', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.customer.archive(' ');
+            return expect(promise).to.eventually.be.rejectedWith('Customer "uid" is required.');
+        });
+
+        it('Archives the customer', async () => {
+            await rizeClient.customer.archive(customerUid);
+            const updatedCustomer = await rizeClient.customer.get(customerUid);
+
+            expect(updatedCustomer.status).equals('archived');
+        });
+    });
 });
