@@ -70,6 +70,8 @@ declare class CustomerService {
      * An archived Customer's records will still be available for historical purposes, but they will not be able to open any new Synthetic or Custodial Accounts.
      * @param {string} uid - Rize-generated unique customer id
      * @returns {Promise<void>} A promise that returns void if resolved.
+     * @example
+     * await rize.customer.archive(customerUid);
      */
     archive(uid: string): Promise<void>;
     /**
