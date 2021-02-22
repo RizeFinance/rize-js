@@ -34,23 +34,23 @@
         -   [Parameters][30]
 -   [ComplianceWorkflow][31]
     -   [Properties][32]
--   [ComplianceWorkflowSummary][33]
+-   [ComplianceDocument][33]
     -   [Properties][34]
 -   [ComplianceWorkflowCustomer][35]
     -   [Properties][36]
--   [ComplianceDocument][37]
+-   [ComplianceWorkflowSummary][37]
     -   [Properties][38]
 -   [ComplianceDocumentAcknowledgementRequest][39]
     -   [Properties][40]
 -   [CustomerListQuery][41]
     -   [Properties][42]
--   [CustomerList][43]
+-   [Address][43]
     -   [Properties][44]
--   [Customer][45]
+-   [CustomerDetails][45]
     -   [Properties][46]
--   [CustomerDetails][47]
+-   [Customer][47]
     -   [Properties][48]
--   [Address][49]
+-   [CustomerList][49]
     -   [Properties][50]
 -   [RizeOptions][51]
     -   [Properties][52]
@@ -284,31 +284,6 @@ Type: [Object][66]
 -   `current_step_documents_pending` **[Array][69]&lt;Omit&lt;[ComplianceDocument][70], `"accepted_at"`>>** Compliance Documents that await acknowledgment in the current Step
 -   `all_documents` **[Array][69]&lt;Omit&lt;[ComplianceDocument][70], (`"accepted_at"` \| `"uid"`)>>** The set of all Compliance Documents that would require acknowledgment
 
-## ComplianceWorkflowSummary
-
-Type: [Object][66]
-
-### Properties
-
--   `accepted_quantity` **[number][71]** 
--   `begun_at` **[string][58]** The DateTime at which this Compliance Workflow was requested
--   `completed_step` **[number][71]** 
--   `current_step` **[number][71]** 
--   `status` **(`"accepted"` \| `"in_progress"` \| `"rejected"` \| `"expired"`)** A value indicating the current state of this Compliance Workflow:-   _accepted_ - The Compliance Workflow is complete. All documents in this Compliance Workflow have been accepted.
-    -   _in_progress_ - The Compliance Workflow is in progress.
-    -   _rejected_ - The Compliance Workflow is rejected. If Rize receives an acknowledgment to a document in a Compliance Workflow with an 'accept' value of 'no', the Compliance Workflow moves to a status of rejected. The Customer must restart a new Compliance Workflow to gain access to the Program.
-    -   _expired_ - The Compliance Workflow is expired. Rize did not receive all acknowledgments for this Compliance Workflow in the time period allotted for your Program. The Customer must restart a new Compliance Workflow to gain access to the Program.
-
-## ComplianceWorkflowCustomer
-
-Type: [Object][66]
-
-### Properties
-
--   `email` **[string][58]** 
--   `external_uid` **[string][58]** A Customer identifier supplied by the Client, unique among the collection of all Client Customers
--   `uid` **[string][58]** A UID referring to the Customer
-
 ## ComplianceDocument
 
 Type: [Object][66]
@@ -323,6 +298,31 @@ Type: [Object][66]
 -   `version` **[number][71]** 
 -   `uid` **[string][58]** A UID referring to a Compliance Document; note that this UID will be different for each Customer
 -   `accepted_at` **[string][58]** The DateTime at which this Compliance Document was acknowledged
+
+## ComplianceWorkflowCustomer
+
+Type: [Object][66]
+
+### Properties
+
+-   `email` **[string][58]** 
+-   `external_uid` **[string][58]** A Customer identifier supplied by the Client, unique among the collection of all Client Customers
+-   `uid` **[string][58]** A UID referring to the Customer
+
+## ComplianceWorkflowSummary
+
+Type: [Object][66]
+
+### Properties
+
+-   `accepted_quantity` **[number][71]** 
+-   `begun_at` **[string][58]** The DateTime at which this Compliance Workflow was requested
+-   `completed_step` **[number][71]** 
+-   `current_step` **[number][71]** 
+-   `status` **(`"accepted"` \| `"in_progress"` \| `"rejected"` \| `"expired"`)** A value indicating the current state of this Compliance Workflow:-   _accepted_ - The Compliance Workflow is complete. All documents in this Compliance Workflow have been accepted.
+    -   _in_progress_ - The Compliance Workflow is in progress.
+    -   _rejected_ - The Compliance Workflow is rejected. If Rize receives an acknowledgment to a document in a Compliance Workflow with an 'accept' value of 'no', the Compliance Workflow moves to a status of rejected. The Customer must restart a new Compliance Workflow to gain access to the Program.
+    -   _expired_ - The Compliance Workflow is expired. Rize did not receive all acknowledgments for this Compliance Workflow in the time period allotted for your Program. The Customer must restart a new Compliance Workflow to gain access to the Program.
 
 ## ComplianceDocumentAcknowledgementRequest
 
@@ -355,17 +355,32 @@ Type: [Object][66]
 -   `offset` **[string][58]?** Index of the items to start retrieving from. Default: 0
 -   `sort` **(`"first_name_asc"` \| `"first_name_desc"` \| `"last_name_asc"` \| `"last_name_desc"` \| `"email_asc"` \| `"email_desc"`)?** Sort returned items.
 
-## CustomerList
+## Address
 
 Type: [Object][66]
 
 ### Properties
 
--   `total_count` **[number][71]** Total count of items available to retrieve
--   `count` **[number][71]** Number of items retrieved
--   `limit` **[number][71]** Maximum number of items to retrieve
--   `offset` **[number][71]** Index of the first item to retrieve
--   `data` **[Array][69]&lt;[Customer][64]>** 
+-   `street1` **[string][58]** 
+-   `street2` **[string][58]** 
+-   `city` **[string][58]** 
+-   `state` **[string][58]** 
+-   `postal_code` **[string][58]** 
+
+## CustomerDetails
+
+Type: [Object][66]
+
+### Properties
+
+-   `first_name` **[string][58]** 
+-   `middle_name` **([string][58] | null)?** 
+-   `last_name` **[string][58]** 
+-   `suffix` **([string][58] | null)?** 
+-   `phone` **[string][58]** 
+-   `ssn` **[string][58]** 
+-   `dob` **[string][58]** 
+-   `address` **[Address][73]** 
 
 ## Customer
 
@@ -395,37 +410,22 @@ Type: [Object][66]
     -   **_under_review_** - The Customer is being reviewed.
     -   **_ready_for_custodial_partner_review_** - The Customer is being reviewed by the Custodial Partner participating in the Program. Not all Customers that are reviewed will enter this state but some records will require Custodial Partner inputs.
 -   `total_balance` **[string][58]** Total asset owned by the customer in US dollars.
--   `created_at` **[Date][73]** 
--   `locked_at` **([Date][73] | null)?** The date and time when the Customer was locked. This field will be null if and only if the lock_reason is null.
+-   `created_at` **[Date][74]** 
+-   `locked_at` **([Date][74] | null)?** The date and time when the Customer was locked. This field will be null if and only if the lock_reason is null.
 -   `lock_reason` **([string][58] | null)?** The lock reason provided by the Client, an admin User, or the system at the time the Customer was locked. This field will be null if and only if the locked_at is null.
 -   `details` **[CustomerDetails][65]** An object containing the supplied identifying information for the Customer.
 
-## CustomerDetails
+## CustomerList
 
 Type: [Object][66]
 
 ### Properties
 
--   `first_name` **[string][58]** 
--   `middle_name` **([string][58] | null)?** 
--   `last_name` **[string][58]** 
--   `suffix` **([string][58] | null)?** 
--   `phone` **[string][58]** 
--   `ssn` **[string][58]** 
--   `dob` **[string][58]** 
--   `address` **[Address][74]** 
-
-## Address
-
-Type: [Object][66]
-
-### Properties
-
--   `street1` **[string][58]** 
--   `street2` **[string][58]** 
--   `city` **[string][58]** 
--   `state` **[string][58]** 
--   `postal_code` **[string][58]** 
+-   `total_count` **[number][71]** Total count of items available to retrieve
+-   `count` **[number][71]** Number of items retrieved
+-   `limit` **[number][71]** Maximum number of items to retrieve
+-   `offset` **[number][71]** Index of the first item to retrieve
+-   `data` **[Array][69]&lt;[Customer][64]>** 
 
 ## RizeOptions
 
@@ -532,7 +532,7 @@ Type: [string][58]
 
 [32]: #properties
 
-[33]: #complianceworkflowsummary
+[33]: #compliancedocument
 
 [34]: #properties-1
 
@@ -540,7 +540,7 @@ Type: [string][58]
 
 [36]: #properties-2
 
-[37]: #compliancedocument
+[37]: #complianceworkflowsummary
 
 [38]: #properties-3
 
@@ -552,19 +552,19 @@ Type: [string][58]
 
 [42]: #properties-5
 
-[43]: #customerlist
+[43]: #address
 
 [44]: #properties-6
 
-[45]: #customer
+[45]: #customerdetails
 
 [46]: #properties-7
 
-[47]: #customerdetails
+[47]: #customer
 
 [48]: #properties-8
 
-[49]: #address
+[49]: #customerlist
 
 [50]: #properties-9
 
@@ -612,9 +612,9 @@ Type: [string][58]
 
 [72]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[73]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date
+[73]: #address
 
-[74]: #address
+[74]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date
 
 [75]: #rizeoptions
 
