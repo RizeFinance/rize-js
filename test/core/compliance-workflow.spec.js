@@ -1,5 +1,7 @@
 'use strict';
 
+require('./auth.spec');
+
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 
@@ -225,5 +227,9 @@ describe('Compliance Workflow', () => {
                 expect(newWorkflow.summary.status === 'in_progress');
             }
         });
+    });
+    
+    after(() => {
+        process.env.TEST_CUSTOMER_UID = workflow.customer.uid;
     });
 });
