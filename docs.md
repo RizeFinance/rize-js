@@ -2,7 +2,7 @@
 
 ### Table of Contents
 
--   [ComplianceWorkflow][1]
+-   [ComplianceWorkflowService][1]
     -   [create][2]
         -   [Parameters][3]
     -   [renew][4]
@@ -61,9 +61,9 @@ Retrieves the most recent Compliance Workflow for a Customer.
 
 Returns **[Promise][23]&lt;[ComplianceWorkflowEntity][24]>** 
 
-### acknowledgeComplianceDocument
+### acknowledgeComplianceDocuments
 
-Indicate acceptance or rejection of a Compliance Document within a given Compliance Workflow.
+Indicate acceptance or rejection of Compliance Documents within a given Compliance Workflow.
 
 #### Parameters
 
@@ -91,7 +91,7 @@ Type: [Object][25]
 -   `current_step_documents_pending` **[Array][28]&lt;Omit&lt;[ComplianceDocument][29], `"accepted_at"`>>** Compliance Documents that await acknowledgment in the current Step
 -   `all_documents` **[Array][28]&lt;Omit&lt;[ComplianceDocument][29], (`"accepted_at"` \| `"uid"`)>>** The set of all Compliance Documents that would require acknowledgment
 
-## ComplianceWorkflowEntityCustomer
+## ComplianceWorkflowCustomer
 
 Type: [Object][25]
 
@@ -144,7 +144,7 @@ Represents a Rize API client.
 
 ### complianceWorkflow
 
-The Compliance Workflow resource is where you begin onboarding Customers to your Program.
+The Compliance Workflow is where you begin onboarding Customers to your Program.
 Compliance Workflows are used to group all of the required Compliance Documents together and to ensure they are presented and acknowledged in the correct order.
 
 Type: [ComplianceWorkflow][31]
@@ -155,7 +155,7 @@ The Rize SDK version
 
 Type: [string][22]
 
-[1]: #complianceworkflow
+[1]: #complianceworkflowservice
 
 [2]: #create
 
@@ -163,11 +163,11 @@ Type: [string][22]
 
 [4]: #renew
 
-[5]: #parameters-1
+[42]: #customerlistquery
 
 [6]: #viewlatest
 
-[7]: #parameters-2
+[44]: #rize
 
 [8]: #acknowledgecompliancedocument
 
