@@ -192,6 +192,16 @@ describe('Customer', () => {
             return expect(promise).to.eventually.be.rejectedWith('"details.ssn" is required.');
         });
 
+        it('Throws an error if "details.ssn" has invalid format', () => {
+            const promise = rizeClient.customer.update(customerUid, '', {
+                first_name: fakeFirstName,
+                last_name: fakeLastName,
+                phone: fakePhone,
+                ssn: '111223333'
+            });
+            return expect(promise).to.eventually.be.rejectedWith('"details.ssn" should be formatted as ###-##-####');
+        });
+
         it('Throws an error if "details.dob" is empty', () => {
             const promise = rizeClient.customer.update(customerUid, '', {
                 first_name: fakeFirstName,
