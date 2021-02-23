@@ -383,6 +383,42 @@ describe('Customer', () => {
             expect(unlockedCustomer.locked_at).equals(null);
         });
     });
+    
+    describe('verifyIdentity', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.customer.verifyIdentity(' ');
+            return expect(promise).to.eventually.be.rejectedWith('Customer "uid" is required.');
+        });
+
+        it('Submits an identity verification request successfully', async function () {
+            let currentWorkflow = await rizeClient.complianceWorkflow.viewLatest(customerUid);
+
+            if (currentWorkflow.summary.status !== 'in_progress' && currentWorkflow.summary.status !== 'accepted') {
+                this.skip();
+            }
+
+            const fakeIp = faker.internet.ip();
+
+            // acknowledge all pending compliance documents
+            while (currentWorkflow.summary.status === 'in_progress') {
+                const pendingDocIds = currentWorkflow.current_step_documents_pending.map(doc => doc.uid);
+
+                currentWorkflow = await rizeClient.complianceWorkflow.acknowledgeComplianceDocuments(
+                    currentWorkflow.uid,
+                    currentWorkflow.customer.uid,
+                    ...pendingDocIds.map(uid => ({
+                        documentUid: uid,
+                        accept: 'yes',
+                        userName: `${fakeFirstName} ${fakeLastName}`,
+                        ipAddress: fakeIp
+                    }))
+                );
+            }
+
+            const updatedCustomer = await rizeClient.customer.verifyIdentity(customerUid);
+            expect(updatedCustomer.status).equals('queued');
+        });
+    });
 
     describe('archive', () => {
         it('Throws an error if "uid" is empty', () => {
