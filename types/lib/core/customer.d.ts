@@ -136,6 +136,7 @@ declare class CustomerService {
      * @param {string} uid - Rize-generated unique customer id
      * @param {string} lockReason - The reason that the Customer is being locked must be submitted with the request body.
      * @returns {Promise<Customer>} A promise that returns the locked Customer if resolved.
+     * @example const customer = await rize.customer.lock(customerUid, lockReason);
      */
     lock(uid: string, lockReason: string): Promise<Customer>;
     /**
@@ -150,6 +151,7 @@ declare class CustomerService {
      * @param {string} uid - Rize-generated unique customer id
      * @param {string} unlockReason - The reason that the Customer is being unlocked.
      * @returns {Promise<Customer>} A promise that returns the unlocked Customer if resolved.
+     * @example const customer = await rize.customer.unlock(customerUid, unlockReason);
      */
     unlock(uid: string, unlockReason?: string): Promise<Customer>;
 }
