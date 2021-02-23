@@ -38,13 +38,13 @@
         -   [Examples][34]
 -   [ComplianceWorkflowCustomer][35]
     -   [Properties][36]
--   [ComplianceDocumentAcknowledgementRequest][37]
+-   [ComplianceDocument][37]
     -   [Properties][38]
--   [ComplianceWorkflowSummary][39]
+-   [ComplianceDocumentAcknowledgementRequest][39]
     -   [Properties][40]
--   [ComplianceDocument][41]
+-   [ComplianceWorkflow][41]
     -   [Properties][42]
--   [ComplianceWorkflow][43]
+-   [ComplianceWorkflowSummary][43]
     -   [Properties][44]
 -   [CustomerListQuery][45]
     -   [Properties][46]
@@ -375,32 +375,6 @@ Type: [Object][70]
 -   `external_uid` **[string][62]** A Customer identifier supplied by the Client, unique among the collection of all Client Customers
 -   `uid` **[string][62]** A UID referring to the Customer
 
-## ComplianceDocumentAcknowledgementRequest
-
-Type: [Object][70]
-
-### Properties
-
--   `documentUid` **[string][62]** A UID referring to the Compliance Document being acknowledged.
--   `accept` **(`"yes"` \| `"no"`)** An indication of acceptance or rejection.
--   `userName` **[string][62]?** A label associated with the Customer (required for electronic signing).
--   `ipAddress` **[string][62]?** A numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication (required for electronic signing); in this case, the label associated with the computer used by the Customer.
-
-## ComplianceWorkflowSummary
-
-Type: [Object][70]
-
-### Properties
-
--   `accepted_quantity` **[number][71]** 
--   `begun_at` **[string][62]** The DateTime at which this Compliance Workflow was requested
--   `completed_step` **[number][71]** 
--   `current_step` **[number][71]** 
--   `status` **(`"accepted"` \| `"in_progress"` \| `"rejected"` \| `"expired"`)** A value indicating the current state of this Compliance Workflow:-   _accepted_ - The Compliance Workflow is complete. All documents in this Compliance Workflow have been accepted.
-    -   _in_progress_ - The Compliance Workflow is in progress.
-    -   _rejected_ - The Compliance Workflow is rejected. If Rize receives an acknowledgment to a document in a Compliance Workflow with an 'accept' value of 'no', the Compliance Workflow moves to a status of rejected. The Customer must restart a new Compliance Workflow to gain access to the Program.
-    -   _expired_ - The Compliance Workflow is expired. Rize did not receive all acknowledgments for this Compliance Workflow in the time period allotted for your Program. The Customer must restart a new Compliance Workflow to gain access to the Program.
-
 ## ComplianceDocument
 
 Type: [Object][70]
@@ -416,6 +390,17 @@ Type: [Object][70]
 -   `uid` **[string][62]** A UID referring to a Compliance Document; note that this UID will be different for each Customer
 -   `accepted_at` **[string][62]** The DateTime at which this Compliance Document was acknowledged
 
+## ComplianceDocumentAcknowledgementRequest
+
+Type: [Object][70]
+
+### Properties
+
+-   `documentUid` **[string][62]** A UID referring to the Compliance Document being acknowledged.
+-   `accept` **(`"yes"` \| `"no"`)** An indication of acceptance or rejection.
+-   `userName` **[string][62]?** A label associated with the Customer (required for electronic signing).
+-   `ipAddress` **[string][62]?** A numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication (required for electronic signing); in this case, the label associated with the computer used by the Customer.
+
 ## ComplianceWorkflow
 
 Type: [Object][70]
@@ -428,6 +413,21 @@ Type: [Object][70]
 -   `accepted_documents` **[Array][74]&lt;[ComplianceDocument][75]>** 
 -   `current_step_documents_pending` **[Array][74]&lt;Omit&lt;[ComplianceDocument][75], `"accepted_at"`>>** Compliance Documents that await acknowledgment in the current Step
 -   `all_documents` **[Array][74]&lt;Omit&lt;[ComplianceDocument][75], (`"accepted_at"` \| `"uid"`)>>** The set of all Compliance Documents that would require acknowledgment
+
+## ComplianceWorkflowSummary
+
+Type: [Object][70]
+
+### Properties
+
+-   `accepted_quantity` **[number][71]** 
+-   `begun_at` **[string][62]** The DateTime at which this Compliance Workflow was requested
+-   `completed_step` **[number][71]** 
+-   `current_step` **[number][71]** 
+-   `status` **(`"accepted"` \| `"in_progress"` \| `"rejected"` \| `"expired"`)** A value indicating the current state of this Compliance Workflow:-   _accepted_ - The Compliance Workflow is complete. All documents in this Compliance Workflow have been accepted.
+    -   _in_progress_ - The Compliance Workflow is in progress.
+    -   _rejected_ - The Compliance Workflow is rejected. If Rize receives an acknowledgment to a document in a Compliance Workflow with an 'accept' value of 'no', the Compliance Workflow moves to a status of rejected. The Customer must restart a new Compliance Workflow to gain access to the Program.
+    -   _expired_ - The Compliance Workflow is expired. Rize did not receive all acknowledgments for this Compliance Workflow in the time period allotted for your Program. The Customer must restart a new Compliance Workflow to gain access to the Program.
 
 ## CustomerListQuery
 
@@ -634,19 +634,19 @@ Type: [string][62]
 
 [36]: #properties
 
-[37]: #compliancedocumentacknowledgementrequest
+[37]: #compliancedocument
 
 [38]: #properties-1
 
-[39]: #complianceworkflowsummary
+[39]: #compliancedocumentacknowledgementrequest
 
 [40]: #properties-2
 
-[41]: #compliancedocument
+[41]: #complianceworkflow
 
 [42]: #properties-3
 
-[43]: #complianceworkflow
+[43]: #complianceworkflowsummary
 
 [44]: #properties-4
 

@@ -347,7 +347,7 @@ describe('Customer', () => {
 
         it('Throws an error if "lockReason" is invalid', () => {
             const promise = rizeClient.customer.lock(customerUid, ' ');
-            return expect(promise).to.eventually.be.rejectedWith('"lockReason" must be a string.');
+            return expect(promise).to.eventually.be.rejectedWith('"lockReason" is required.');
         });
 
         it('Locks the customer account', async () => {
