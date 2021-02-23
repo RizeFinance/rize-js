@@ -32,6 +32,18 @@ declare class CustomerService {
      */
     protected _validateUpdateParams(uid: string, email: string, details: CustomerDetails): void;
     /**
+     * @ignore @protected
+     * Validates the parameters for the "archive" method
+     * @param {string} uid
+     */
+    protected _validateArchiveParams(uid: string): void;
+    /**
+     * @ignore @protected
+     * Validates the parameters for the "verifyIdentity" method
+     * @param {string} uid
+     */
+    protected _validateVerifyIdentityParams(uid: string): void;
+    /**
      * Retrieves a list of Customers filtered by the given parameters.
      * Filter parameters are not case sensitive, but will only return exact matches.
      * Multiple filter parameters can be provided at once, but a result will not be returned unless there are exact matches for all submitted parameters.
@@ -107,10 +119,38 @@ declare class CustomerService {
      */
     archive(uid: string): Promise<void>;
     /**
+     * Submit a request for Identity Verification
      *
-     * @param {*} uid
+     * The Identity Verification of a customer serves as explicit confirmation from you that the Customer is ready for account opening.
+     * This event initiates the KYC/AML verification process and account opening at the Custodian(s) in your Program.
+     * This is a billable event and is isolated intentionally for you to confirm that the Customer record is complete.
+     *
+     * Identity Verification is the event that locks the customer PII from further edits.
+     *
+     * Identity Verification is designed to work as follows:
+     *
+     * - The Customer completes the Compliance Workflow initiated from the Compliance Workflows endpoint and all documents are acknowledged.
+     * - The Customer provides complete PII as defined by the Customers endpoint
+     * - You submit a request to Identity Verification
+     * - Rize performs a validation on the PII provided and the Compliance Workflow to confirm both are valid.
+     * - If the Customer passes these validations and meets the duration requirements described below, the Customer record is submitted to the KYC process.
+     *
+     * Duration Requirements:
+     *
+     * You have a set duration to submit to Identity Verification for a Customer.
+     * Rize measures the duration from the begun_at timestamp of the current Compliance Workflow returned from the Compliance Workflows endpoint to the time Rize receives the Identity Verification request.
+     *
+     * If the Identity Verification request falls outside of the set duration, your request will fail.
+     * If your request fails, a new Compliance Workflow must be started for this Customer.
+     * This will restart the duration available for a valid submission to Identity Verification.
+     *
+     * The previously submitted Customer PII remains editable for this customer after a failed submission to Identity Verification.
+     * @param {string} uid - Rize-generated unique customer id.
+     * @returns {Promise<Customer>} A promise that returns the updated Customer if resolved.
+     * @example
+     * const updatedCustomer = await rize.customer.verifyIdentity(customerUid);
      */
-    verifyIdentity(uid: any): Promise<void>;
+    verifyIdentity(uid: string): Promise<Customer>;
     /**
      *
      * @param {*} uid
