@@ -47,77 +47,77 @@ describe('Customer', () => {
     describe('getList', () => {
         it('Throws an error if "query" is invalid', () => {
             const promise = rizeClient.customer.getList('');
-            return expect(promise).to.eventually.be.rejectedWith('"query" should be a CustomerListQuery object.');
+            return expect(promise).to.eventually.be.rejectedWith('"query" must be a CustomerListQuery object.');
         });
 
         it('Throws an error if "status" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({status: ' '});
-            return expect(promise).to.eventually.be.rejectedWith('"status" query should be a string. Accepted values are: initiated | queued | identity_verified | active | manual_review | rejected | archived | under_review');
+            return expect(promise).to.eventually.be.rejectedWith('"status" query must be a string. Accepted values are: initiated | queued | identity_verified | active | manual_review | rejected | archived | under_review');
         });
 
         it('Throws an error if "include_initiated" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({include_initiated: ' '});
-            return expect(promise).to.eventually.be.rejectedWith('"include_initiated" query should be boolean.');
+            return expect(promise).to.eventually.be.rejectedWith('"include_initiated" query must be boolean.');
         });
         
         it('Throws an error if "kyc_status" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({kyc_status: ' '});
-            return expect(promise).to.eventually.be.rejectedWith('"kyc_status" query should be a string. Accepted values are: approved | denied | documents_provided | documents_rejected | manual_review | pending_documents | ready_for_custodial_partner_review | under_review');
+            return expect(promise).to.eventually.be.rejectedWith('"kyc_status" query must be a string. Accepted values are: approved | denied | documents_provided | documents_rejected | manual_review | pending_documents | ready_for_custodial_partner_review | under_review');
         });
 
         it('Throws an error if "first_name" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({first_name: null});
-            return expect(promise).to.eventually.be.rejectedWith('"first_name" query should be a string.');
+            return expect(promise).to.eventually.be.rejectedWith('"first_name" query must be a string.');
         });
 
         it('Throws an error if "last_name" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({last_name: null});
-            return expect(promise).to.eventually.be.rejectedWith('"last_name" query should be a string.');
+            return expect(promise).to.eventually.be.rejectedWith('"last_name" query must be a string.');
         });
 
         it('Throws an error if "email" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({email: null});
-            return expect(promise).to.eventually.be.rejectedWith('"email" query should be a string.');
+            return expect(promise).to.eventually.be.rejectedWith('"email" query must be a string.');
         });
 
         it('Throws an error if "locked" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({locked: ' '});
-            return expect(promise).to.eventually.be.rejectedWith('"locked" query should be boolean.');
+            return expect(promise).to.eventually.be.rejectedWith('"locked" query must be boolean.');
         });
 
         it('Throws an error if "program_uid" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({program_uid: null});
-            return expect(promise).to.eventually.be.rejectedWith('"program_uid" query should be a string.');
+            return expect(promise).to.eventually.be.rejectedWith('"program_uid" query must be a string.');
         });
 
         it('Throws an error if "external_uid" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({external_uid: null});
-            return expect(promise).to.eventually.be.rejectedWith('"external_uid" query should be a string.');
+            return expect(promise).to.eventually.be.rejectedWith('"external_uid" query must be a string.');
         });
 
         it('Throws an error if "pool_uid" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({pool_uid: []});
-            return expect(promise).to.eventually.be.rejectedWith('"pool_uid" query should be an array of strings.');
+            return expect(promise).to.eventually.be.rejectedWith('"pool_uid" query must be an array of strings.');
         });
 
         it('Throws an error if "pool_uid" query parameter is invalid: array with not string value', () => {
             const promise = rizeClient.customer.getList({pool_uid: ['test', null]});
-            return expect(promise).to.eventually.be.rejectedWith('"pool_uid" query should be an array of strings.');
+            return expect(promise).to.eventually.be.rejectedWith('"pool_uid" query must be an array of strings.');
         });
 
         it('Throws an error if "limit" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({limit: ' '});
-            return expect(promise).to.eventually.be.rejectedWith('"limit" query should be an integer.');
+            return expect(promise).to.eventually.be.rejectedWith('"limit" query must be an integer.');
         });
 
         it('Throws an error if "offset" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({offset: ' '});
-            return expect(promise).to.eventually.be.rejectedWith('"offset" query should be an integer.');
+            return expect(promise).to.eventually.be.rejectedWith('"offset" query must be an integer.');
         });
 
         it('Throws an error if "sort" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({sort: ' '});
-            return expect(promise).to.eventually.be.rejectedWith('"sort" query should be a string. Accepted values are: first_name_asc | first_name_desc | last_name_asc | last_name_desc | email_asc | email_desc');
+            return expect(promise).to.eventually.be.rejectedWith('"sort" query must be a string. Accepted values are: first_name_asc | first_name_desc | last_name_asc | last_name_desc | email_asc | email_desc');
         });
 
         it('Retrieves the customer list', async () => {
@@ -338,6 +338,52 @@ describe('Customer', () => {
         });
     });
 
+    describe('lock', () => {
+        const lockReason = 'Account must be locked.';
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.customer.lock(' ', lockReason);
+            return expect(promise).to.eventually.be.rejectedWith('Customer "uid" is required.');
+        });
+
+        it('Throws an error if "lockReason" is invalid', () => {
+            const promise = rizeClient.customer.lock(customerUid, ' ');
+            return expect(promise).to.eventually.be.rejectedWith('"lockReason" is required.');
+        });
+
+        it('Locks the customer account', async () => {
+            const lockedCustomer = await rizeClient.customer.lock(customerUid, lockReason);
+            expect(lockedCustomer.lock_reason).equals(lockReason);
+            expect(lockedCustomer.locked_at).to.not.equal(null);
+        });
+    });
+
+    describe('unlock', () => {
+        const unlockReason = 'Account must be unlocked.';
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.customer.unlock(' ', unlockReason);
+            return expect(promise).to.eventually.be.rejectedWith('Customer "uid" is required.');
+        });
+
+        it('Throws an error if "unlockReason" is invalid', () => {
+            const promise = rizeClient.customer.unlock(customerUid, true);
+            return expect(promise).to.eventually.be.rejectedWith('"unlockReason" must be a string.');
+        });
+
+        it('Unlocks the customer account without unlock_reason', async () => {
+            await rizeClient.customer.lock(customerUid, unlockReason);
+            const unlockedCustomer = await rizeClient.customer.unlock(customerUid);
+            expect(unlockedCustomer.lock_reason).equals(null);
+            expect(unlockedCustomer.locked_at).equals(null);
+        });
+
+        it('Unlocks the customer account with unlock_reason', async () => {
+            await rizeClient.customer.lock(customerUid, unlockReason);
+            const unlockedCustomer = await rizeClient.customer.unlock(customerUid, unlockReason);
+            expect(unlockedCustomer.lock_reason).equals(null);
+            expect(unlockedCustomer.locked_at).equals(null);
+        });
+    });
+    
     describe('verifyIdentity', () => {
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.customer.verifyIdentity(' ');

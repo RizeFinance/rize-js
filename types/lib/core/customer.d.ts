@@ -68,6 +68,8 @@ declare class CustomerService {
      */
     getList(query?: CustomerListQuery): Promise<CustomerList>;
     /**
+     * Get a single Customer
+     *
      * Retrieve overall status about a Customer as well as their total Asset Balances across all accounts.
      * @param {string} uid - Rize-generated unique customer id
      * @returns {Promise<Customer>} - A promise that returns a Customer if resolved.
@@ -152,17 +154,38 @@ declare class CustomerService {
      */
     verifyIdentity(uid: string): Promise<Customer>;
     /**
+     * Lock a Customer
      *
-     * @param {*} uid
-     * @param {*} lockReason
+     * This will freeze all activities relating to the Customer. This means, until the customer is unlocked:
+     * - No personal information can be edited
+     * - The Customer cannot be archived
+     * - Any pending enrollment requests are paused or withdrawn
+     * - Any transfers requested after the lock is in place will be rejected
+     * - (not implemented) Any transfers already in progress when the lock is put in place will be stopped and reversed
+     * - (not implemented) Any debit card transactions requested after the lock is in place will be rejected
+     * - (not implemented) Any Pool in which this Customer is a member will similarly be locked
+     * - The Customer's transfers, transactions, account details, or any other information are still readable
+     * @param {string} uid - Rize-generated unique customer id
+     * @param {string} lockReason - The reason that the Customer is being locked must be submitted with the request body.
+     * @returns {Promise<Customer>} A promise that returns the locked Customer if resolved.
+     * @example const customer = await rize.customer.lock(customerUid, lockReason);
      */
-    lock(uid: any, lockReason: any): Promise<void>;
+    lock(uid: string, lockReason: string): Promise<Customer>;
     /**
+     * Unlock a Customer
      *
-     * @param {*} uid
-     * @param {*} unlockReason
+     * This will remove the Customer lock, returning their state to normal.
+     * Note that if the Customer was locked by a Custodial Partner or Rize admin
+     * or by an automated system such as fraud transaction monitoring,
+     * the Client cannot unlock the Customer from either the API or the Admin UI.
+     * If the Customer was locked by the Client either via API or Admin UI,
+     * the unlock can be performed by the Custodial Partner, the Client, or Rize.
+     * @param {string} uid - Rize-generated unique customer id
+     * @param {string} unlockReason - The reason that the Customer is being unlocked.
+     * @returns {Promise<Customer>} A promise that returns the unlocked Customer if resolved.
+     * @example const customer = await rize.customer.unlock(customerUid, unlockReason);
      */
-    unlock(uid: any, unlockReason?: any): Promise<void>;
+    unlock(uid: string, unlockReason?: string): Promise<Customer>;
 }
 declare namespace CustomerService {
     export { CustomerListQuery, CustomerList, CustomerDetails, Customer };
