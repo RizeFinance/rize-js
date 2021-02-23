@@ -43,13 +43,13 @@
     -   [Properties][39]
 -   [ComplianceWorkflow][40]
     -   [Properties][41]
--   [Address][42]
+-   [CustomerDetails][42]
     -   [Properties][43]
--   [CustomerDetails][44]
+-   [CustomerList][44]
     -   [Properties][45]
 -   [Customer][46]
     -   [Properties][47]
--   [CustomerList][48]
+-   [Address][48]
     -   [Properties][49]
 -   [CustomerListQuery][50]
     -   [Properties][51]
@@ -159,6 +159,8 @@ The Customer service class.
 
 ### getList
 
+Get a list of Customers 
+
 Retrieves a list of Customers filtered by the given parameters. 
 Filter parameters are not case sensitive, but will only return exact matches. 
 Multiple filter parameters can be provided at once, but a result will not be returned unless there are exact matches for all submitted parameters.
@@ -190,6 +192,8 @@ const customerList = await rize.customer.getList({
 Returns **[Promise][60]&lt;[CustomerList][64]>** A promise that returns a Customer List if resolved.
 
 ### get
+
+Get a single Customer 
 
 Retrieve overall status about a Customer as well as their total Asset Balances across all accounts.
 
@@ -273,17 +277,42 @@ Returns **[Promise][60]&lt;void>** A promise that returns void if resolved.
 
 ### lock
 
+Lock a Customer 
+
+This will freeze all activities relating to the Customer. This means, until the customer is unlocked:
+    \- No personal information can be edited
+    \- The Customer cannot be archived
+    \- Any pending enrollment requests are paused or withdrawn
+    \- Any transfers requested after the lock is in place will be rejected
+    \- (not implemented) Any transfers already in progress when the lock is put in place will be stopped and reversed
+    \- (not implemented) Any debit card transactions requested after the lock is in place will be rejected
+    \- (not implemented) Any Pool in which this Customer is a member will similarly be locked
+    \- The Customer's transfers, transactions, account details, or any other information are still readable
+
 #### Parameters
 
--   `uid` **any** 
--   `lockReason` **any** 
+-   `uid` **[string][59]** Rize-generated unique customer id
+-   `lockReason` **[string][59]** The reason that the Customer is being locked must be submitted with the request body.
+
+Returns **[Promise][60]&lt;[Customer][65]>** A promise that returns the locked Customer if resolved.
 
 ### unlock
 
+Unlock a Customer 
+
+This will remove the Customer lock, returning their state to normal.
+Note that if the Customer was locked by a Custodial Partner or Rize admin
+or by an automated system such as fraud transaction monitoring, 
+the Client cannot unlock the Customer from either the API or the Admin UI.
+If the Customer was locked by the Client either via API or Admin UI,
+the unlock can be performed by the Custodial Partner, the Client, or Rize.
+
 #### Parameters
 
--   `uid` **any** 
--   `unlockReason` **any**  (optional, default `null`)
+-   `uid` **[string][59]** Rize-generated unique customer id
+-   `unlockReason` **[string][59]** The reason that the Customer is being unlocked. (optional, default `null`)
+
+Returns **[Promise][60]&lt;[Customer][65]>** A promise that returns the unlocked Customer if resolved.
 
 ## 
 
@@ -351,18 +380,6 @@ Type: [Object][67]
 -   `current_step_documents_pending` **[Array][71]&lt;Omit&lt;[ComplianceDocument][72], `"accepted_at"`>>** Compliance Documents that await acknowledgment in the current Step
 -   `all_documents` **[Array][71]&lt;Omit&lt;[ComplianceDocument][72], (`"accepted_at"` \| `"uid"`)>>** The set of all Compliance Documents that would require acknowledgment
 
-## Address
-
-Type: [Object][67]
-
-### Properties
-
--   `street1` **[string][59]** 
--   `street2` **[string][59]** 
--   `city` **[string][59]** 
--   `state` **[string][59]** 
--   `postal_code` **[string][59]** 
-
 ## CustomerDetails
 
 Type: [Object][67]
@@ -377,6 +394,18 @@ Type: [Object][67]
 -   `ssn` **[string][59]** 
 -   `dob` **[string][59]** 
 -   `address` **[Address][73]** 
+
+## CustomerList
+
+Type: [Object][67]
+
+### Properties
+
+-   `total_count` **[number][68]** Total count of items available to retrieve
+-   `count` **[number][68]** Number of items retrieved
+-   `limit` **[number][68]** Maximum number of items to retrieve
+-   `offset` **[number][68]** Index of the first item to retrieve
+-   `data` **[Array][71]&lt;[Customer][65]>** 
 
 ## Customer
 
@@ -411,17 +440,17 @@ Type: [Object][67]
 -   `lock_reason` **([string][59] | null)?** The lock reason provided by the Client, an admin User, or the system at the time the Customer was locked. This field will be null if and only if the locked_at is null.
 -   `details` **[CustomerDetails][66]** An object containing the supplied identifying information for the Customer.
 
-## CustomerList
+## Address
 
 Type: [Object][67]
 
 ### Properties
 
--   `total_count` **[number][68]** Total count of items available to retrieve
--   `count` **[number][68]** Number of items retrieved
--   `limit` **[number][68]** Maximum number of items to retrieve
--   `offset` **[number][68]** Index of the first item to retrieve
--   `data` **[Array][71]&lt;[Customer][65]>** 
+-   `street1` **[string][59]** 
+-   `street2` **[string][59]** 
+-   `city` **[string][59]** 
+-   `state` **[string][59]** 
+-   `postal_code` **[string][59]** 
 
 ## CustomerListQuery
 
@@ -566,11 +595,11 @@ Type: [string][59]
 
 [41]: #properties-4
 
-[42]: #address
+[42]: #customerdetails
 
 [43]: #properties-5
 
-[44]: #customerdetails
+[44]: #customerlist
 
 [45]: #properties-6
 
@@ -578,7 +607,7 @@ Type: [string][59]
 
 [47]: #properties-7
 
-[48]: #customerlist
+[48]: #address
 
 [49]: #properties-8
 
