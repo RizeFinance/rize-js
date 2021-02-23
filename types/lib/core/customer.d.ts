@@ -147,6 +147,8 @@ declare class CustomerService {
      * The previously submitted Customer PII remains editable for this customer after a failed submission to Identity Verification.
      * @param {string} uid - Rize-generated unique customer id.
      * @returns {Promise<Customer>} A promise that returns the updated Customer if resolved.
+     * @example
+     * const updatedCustomer = await rize.customer.verifyIdentity(customerUid);
      */
     verifyIdentity(uid: string): Promise<Customer>;
     /**
