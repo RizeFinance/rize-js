@@ -32,6 +32,14 @@ declare class CustomerService {
      */
     protected _validateUpdateParams(uid: string, email: string, details: CustomerDetails): void;
     /**
+     * @ignore @protected
+     * Validates the parameters for the "archive" method
+     * @param {string} uid
+     */
+    protected _validateArchiveParams(uid: string): void;
+    /**
+     * Get a list of Customers
+     *
      * Retrieves a list of Customers filtered by the given parameters.
      * Filter parameters are not case sensitive, but will only return exact matches.
      * Multiple filter parameters can be provided at once, but a result will not be returned unless there are exact matches for all submitted parameters.
@@ -56,6 +64,8 @@ declare class CustomerService {
      */
     getList(query?: CustomerListQuery): Promise<CustomerList>;
     /**
+     * Get a single Customer
+     *
      * Retrieve overall status about a Customer as well as their total Asset Balances across all accounts.
      * @param {string} uid - Rize-generated unique customer id
      * @returns {Promise<Customer>} - A promise that returns a Customer if resolved.
@@ -112,17 +122,36 @@ declare class CustomerService {
      */
     verifyIdentity(uid: any): Promise<void>;
     /**
+     * Lock a Customer
      *
-     * @param {*} uid
-     * @param {*} lockReason
+     * This will freeze all activities relating to the Customer. This means, until the customer is unlocked:
+     *     - No personal information can be edited
+     *     - The Customer cannot be archived
+     *     - Any pending enrollment requests are paused or withdrawn
+     *     - Any transfers requested after the lock is in place will be rejected
+     *     - (not implemented) Any transfers already in progress when the lock is put in place will be stopped and reversed
+     *     - (not implemented) Any debit card transactions requested after the lock is in place will be rejected
+     *     - (not implemented) Any Pool in which this Customer is a member will similarly be locked
+     *     - The Customer's transfers, transactions, account details, or any other information are still readable
+     * @param {string} uid - Rize-generated unique customer id
+     * @param {string} lockReason - The reason that the Customer is being locked must be submitted with the request body.
+     * @returns {Promise<Customer>} A promise that returns the locked Customer if resolved.
      */
-    lock(uid: any, lockReason: any): Promise<void>;
+    lock(uid: string, lockReason: string): Promise<Customer>;
     /**
+     * Unlock a Customer
      *
-     * @param {*} uid
-     * @param {*} unlockReason
+     * This will remove the Customer lock, returning their state to normal.
+     * Note that if the Customer was locked by a Custodial Partner or Rize admin
+     * or by an automated system such as fraud transaction monitoring,
+     * the Client cannot unlock the Customer from either the API or the Admin UI.
+     * If the Customer was locked by the Client either via API or Admin UI,
+     * the unlock can be performed by the Custodial Partner, the Client, or Rize.
+     * @param {string} uid - Rize-generated unique customer id
+     * @param {string} unlockReason - The reason that the Customer is being unlocked.
+     * @returns {Promise<Customer>} A promise that returns the unlocked Customer if resolved.
      */
-    unlock(uid: any, unlockReason?: any): Promise<void>;
+    unlock(uid: string, unlockReason?: string): Promise<Customer>;
 }
 declare namespace CustomerService {
     export { CustomerListQuery, CustomerList, CustomerDetails, Customer };
