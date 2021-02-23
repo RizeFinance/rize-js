@@ -84,7 +84,7 @@ console.log(latestWorkflow.all_documents);
 ```
 Your application can display or allow users to download the compliance document using the 
 `"compliance_document_url"` value returned with each document in the Compliance Workflows 
-endpoint response. (see [ComplianceDocument](docs.md##compliancedocument))
+endpoint response. (see [ComplianceDocument](docs.md#compliancedocument))
 
 ### 3. Acknowledge the Compliance Documents
 Rize supplies Compliance Documents in Steps. All documents in a Step must be acknowledged
