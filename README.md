@@ -55,7 +55,10 @@ The Customer UID returned in the response is how Rize identifies this customer o
 
 To create a new Compliance Workflow ([more info](docs.md#create)):
 ```
-const complianceWorkflow = await rize.complianceWorkflow.create('client-generated-external-uid-42', 'tomas@example.com');
+const complianceWorkflow = await rize.complianceWorkflow.create(
+    'client-generated-external-uid-42',
+    'tomas@example.com'
+);
 
 console.log(complianceWorkflow.uid); // Workflow UID
 console.log(complianceWorkflow.customer.uid); // Customer UID
