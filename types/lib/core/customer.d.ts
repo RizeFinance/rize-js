@@ -48,7 +48,7 @@ declare class CustomerService {
      * Filter parameters are not case sensitive, but will only return exact matches.
      * Multiple filter parameters can be provided at once, but a result will not be returned unless there are exact matches for all submitted parameters.
      * @param {CustomerListQuery} query - An object containing key value pair for filtering the results list.
-     * @returns {Promise<CustomerList>} - A promise that returns a Customer List if resolved.
+     * @returns {Promise<RizeList<Customer>>} - A promise that returns a Customer List if resolved.
      * @example
      * const customerList = await rize.customer.getList({
      *     status: 'initiated',
@@ -66,7 +66,7 @@ declare class CustomerService {
      *     sort: 'first_name_asc'
      * });
      */
-    getList(query?: CustomerListQuery): Promise<CustomerList>;
+    getList(query?: CustomerListQuery): Promise<RizeList<Customer>>;
     /**
      * Get a single Customer
      *
@@ -188,9 +188,9 @@ declare class CustomerService {
     unlock(uid: string, unlockReason?: string): Promise<Customer>;
 }
 declare namespace CustomerService {
-    export { CustomerListQuery, CustomerList, CustomerDetails, Customer };
+    export { CustomerListQuery, CustomerDetails, Customer, RizeList };
 }
 type CustomerListQuery = import('./typedefs/customer.typedefs').CustomerListQuery;
 type CustomerDetails = import('./typedefs/customer.typedefs').CustomerDetails;
-type CustomerList = import('./typedefs/customer.typedefs').CustomerList;
+type RizeList<T> = import('./typedefs/common.typedefs').RizeList<T>;
 type Customer = import('./typedefs/customer.typedefs').Customer;
