@@ -23,10 +23,17 @@ declare class Rize {
      * @type {CustomerService}
      */
     customer: CustomerService;
+    /**
+     * Synthetic Accounts are what your application will build around and your Customers will interact with.
+     * Synthetic Accounts are designed to track any asset types, for any Customers, at any Custodian.
+     * @type {SyntheticAccount}
+     */
+    syntheticAccount: SyntheticAccount;
 }
 declare namespace Rize {
     export { PACKAGE_VERSION, Rize, Rize as default };
 }
 import ComplianceWorkflowService = require("./core/compliance-workflow");
 import CustomerService = require("./core/customer");
+import SyntheticAccount = require("./core/synthetic-account");
 declare var PACKAGE_VERSION: string;
