@@ -38,23 +38,23 @@
         -   [Examples][34]
 -   [RizeList][35]
     -   [Properties][36]
--   [ComplianceWorkflowCustomer][37]
+-   [ComplianceWorkflowSummary][37]
     -   [Properties][38]
--   [ComplianceDocumentAcknowledgementRequest][39]
+-   [ComplianceWorkflowCustomer][39]
     -   [Properties][40]
--   [ComplianceWorkflowSummary][41]
+-   [ComplianceDocument][41]
     -   [Properties][42]
--   [ComplianceDocument][43]
+-   [ComplianceDocumentAcknowledgementRequest][43]
     -   [Properties][44]
 -   [ComplianceWorkflow][45]
     -   [Properties][46]
--   [CustomerListQuery][47]
+-   [Address][47]
     -   [Properties][48]
--   [Customer][49]
+-   [CustomerDetails][49]
     -   [Properties][50]
--   [CustomerDetails][51]
+-   [Customer][51]
     -   [Properties][52]
--   [Address][53]
+-   [CustomerListQuery][53]
     -   [Properties][54]
 -   [RizeOptions][55]
     -   [Properties][56]
@@ -379,27 +379,6 @@ Type: [Object][70]
 -   `offset` **[number][71]** Index of the first item to retrieve
 -   `data` **[Array][72]&lt;T>** 
 
-## ComplianceWorkflowCustomer
-
-Type: [Object][70]
-
-### Properties
-
--   `email` **[string][62]** 
--   `external_uid` **[string][62]** A Customer identifier supplied by the Client, unique among the collection of all Client Customers
--   `uid` **[string][62]** A UID referring to the Customer
-
-## ComplianceDocumentAcknowledgementRequest
-
-Type: [Object][70]
-
-### Properties
-
--   `documentUid` **[string][62]** A UID referring to the Compliance Document being acknowledged.
--   `accept` **(`"yes"` \| `"no"`)** An indication of acceptance or rejection.
--   `userName` **[string][62]?** A label associated with the Customer (required for electronic signing).
--   `ipAddress` **[string][62]?** A numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication (required for electronic signing); in this case, the label associated with the computer used by the Customer.
-
 ## ComplianceWorkflowSummary
 
 Type: [Object][70]
@@ -414,6 +393,16 @@ Type: [Object][70]
     -   _in_progress_ - The Compliance Workflow is in progress.
     -   _rejected_ - The Compliance Workflow is rejected. If Rize receives an acknowledgment to a document in a Compliance Workflow with an 'accept' value of 'no', the Compliance Workflow moves to a status of rejected. The Customer must restart a new Compliance Workflow to gain access to the Program.
     -   _expired_ - The Compliance Workflow is expired. Rize did not receive all acknowledgments for this Compliance Workflow in the time period allotted for your Program. The Customer must restart a new Compliance Workflow to gain access to the Program.
+
+## ComplianceWorkflowCustomer
+
+Type: [Object][70]
+
+### Properties
+
+-   `email` **[string][62]** 
+-   `external_uid` **[string][62]** A Customer identifier supplied by the Client, unique among the collection of all Client Customers
+-   `uid` **[string][62]** A UID referring to the Customer
 
 ## ComplianceDocument
 
@@ -430,6 +419,17 @@ Type: [Object][70]
 -   `uid` **[string][62]** A UID referring to a Compliance Document; note that this UID will be different for each Customer
 -   `accepted_at` **[string][62]** The DateTime at which this Compliance Document was acknowledged
 
+## ComplianceDocumentAcknowledgementRequest
+
+Type: [Object][70]
+
+### Properties
+
+-   `documentUid` **[string][62]** A UID referring to the Compliance Document being acknowledged.
+-   `accept` **(`"yes"` \| `"no"`)** An indication of acceptance or rejection.
+-   `userName` **[string][62]?** A label associated with the Customer (required for electronic signing).
+-   `ipAddress` **[string][62]?** A numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication (required for electronic signing); in this case, the label associated with the computer used by the Customer.
+
 ## ComplianceWorkflow
 
 Type: [Object][70]
@@ -443,25 +443,32 @@ Type: [Object][70]
 -   `current_step_documents_pending` **[Array][72]&lt;Omit&lt;[ComplianceDocument][75], `"accepted_at"`>>** Compliance Documents that await acknowledgment in the current Step
 -   `all_documents` **[Array][72]&lt;Omit&lt;[ComplianceDocument][75], (`"accepted_at"` \| `"uid"`)>>** The set of all Compliance Documents that would require acknowledgment
 
-## CustomerListQuery
+## Address
 
 Type: [Object][70]
 
 ### Properties
 
--   `status` **(`"initiated"` \| `"queued"` \| `"identity_verified"` \| `"active"` \| `"manual_review"` \| `"rejected"` \| `"archived"` \| `"under_review"`)?** Filter by onboarding status. Please note that the initiated enum value will not be respected unless the `include_initiated=true` parameter is also provided.
--   `include_initiated` **[boolean][76]?** By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
--   `kyc_status` **(`"approved"` \| `"denied"` \| `"documents_provided"` \| `"documents_rejected"` \| `"manual_review"` \| `"pending_documents"` \| `"ready_for_custodial_partner_review"` \| `"under_review"`)?** Filter by KYC status.
--   `first_name` **[string][62]?** Only return Customers with a first name matching exactly what is submitted
--   `last_name` **[string][62]?** Only return Customers with a last name matching exactly what is submitted
--   `email` **[string][62]?** Only return Customers with an email address matching exactly what is submitted
--   `locked` **[boolean][76]?** Only return locked Customers if true and only return unlocked Customers if false
--   `program_uid` **[string][62]?** Only return Customers belonging to the submitted Program.
--   `external_uid` **[string][62]?** A unique, immutable id provided by Client.
--   `pool_uid` **[Array][72]&lt;[string][62]>?** Filter by pool. Multiple values are allowed.
--   `limit` **[string][62]?**  Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
--   `offset` **[string][62]?** Index of the items to start retrieving from. Default: 0
--   `sort` **(`"first_name_asc"` \| `"first_name_desc"` \| `"last_name_asc"` \| `"last_name_desc"` \| `"email_asc"` \| `"email_desc"`)?** Sort returned items.
+-   `street1` **[string][62]** 
+-   `street2` **[string][62]** 
+-   `city` **[string][62]** 
+-   `state` **[string][62]** 
+-   `postal_code` **[string][62]** 
+
+## CustomerDetails
+
+Type: [Object][70]
+
+### Properties
+
+-   `first_name` **[string][62]** 
+-   `middle_name` **([string][62] | null)?** 
+-   `last_name` **[string][62]** 
+-   `suffix` **([string][62] | null)?** 
+-   `phone` **[string][62]** 
+-   `ssn` **[string][62]** 
+-   `dob` **[string][62]** 
+-   `address` **[Address][76]** 
 
 ## Customer
 
@@ -496,32 +503,25 @@ Type: [Object][70]
 -   `lock_reason` **([string][62] | null)?** The lock reason provided by the Client, an admin User, or the system at the time the Customer was locked. This field will be null if and only if the locked_at is null.
 -   `details` **[CustomerDetails][69]** An object containing the supplied identifying information for the Customer.
 
-## CustomerDetails
+## CustomerListQuery
 
 Type: [Object][70]
 
 ### Properties
 
--   `first_name` **[string][62]** 
--   `middle_name` **([string][62] | null)?** 
--   `last_name` **[string][62]** 
--   `suffix` **([string][62] | null)?** 
--   `phone` **[string][62]** 
--   `ssn` **[string][62]** 
--   `dob` **[string][62]** 
--   `address` **[Address][78]** 
-
-## Address
-
-Type: [Object][70]
-
-### Properties
-
--   `street1` **[string][62]** 
--   `street2` **[string][62]** 
--   `city` **[string][62]** 
--   `state` **[string][62]** 
--   `postal_code` **[string][62]** 
+-   `status` **(`"initiated"` \| `"queued"` \| `"identity_verified"` \| `"active"` \| `"manual_review"` \| `"rejected"` \| `"archived"` \| `"under_review"`)?** Filter by onboarding status. Please note that the initiated enum value will not be respected unless the `include_initiated=true` parameter is also provided.
+-   `include_initiated` **[boolean][78]?** By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
+-   `kyc_status` **(`"approved"` \| `"denied"` \| `"documents_provided"` \| `"documents_rejected"` \| `"manual_review"` \| `"pending_documents"` \| `"ready_for_custodial_partner_review"` \| `"under_review"`)?** Filter by KYC status.
+-   `first_name` **[string][62]?** Only return Customers with a first name matching exactly what is submitted
+-   `last_name` **[string][62]?** Only return Customers with a last name matching exactly what is submitted
+-   `email` **[string][62]?** Only return Customers with an email address matching exactly what is submitted
+-   `locked` **[boolean][78]?** Only return locked Customers if true and only return unlocked Customers if false
+-   `program_uid` **[string][62]?** Only return Customers belonging to the submitted Program.
+-   `external_uid` **[string][62]?** A unique, immutable id provided by Client.
+-   `pool_uid` **[Array][72]&lt;[string][62]>?** Filter by pool. Multiple values are allowed.
+-   `limit` **[string][62]?**  Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
+-   `offset` **[string][62]?** Index of the items to start retrieving from. Default: 0
+-   `sort` **(`"first_name_asc"` \| `"first_name_desc"` \| `"last_name_asc"` \| `"last_name_desc"` \| `"email_asc"` \| `"email_desc"`)?** Sort returned items.
 
 ## RizeOptions
 
@@ -636,19 +636,19 @@ Type: [string][62]
 
 [36]: #properties
 
-[37]: #complianceworkflowcustomer
+[37]: #complianceworkflowsummary
 
 [38]: #properties-1
 
-[39]: #compliancedocumentacknowledgementrequest
+[39]: #complianceworkflowcustomer
 
 [40]: #properties-2
 
-[41]: #complianceworkflowsummary
+[41]: #compliancedocument
 
 [42]: #properties-3
 
-[43]: #compliancedocument
+[43]: #compliancedocumentacknowledgementrequest
 
 [44]: #properties-4
 
@@ -656,19 +656,19 @@ Type: [string][62]
 
 [46]: #properties-5
 
-[47]: #customerlistquery
+[47]: #address
 
 [48]: #properties-6
 
-[49]: #customer
+[49]: #customerdetails
 
 [50]: #properties-7
 
-[51]: #customerdetails
+[51]: #customer
 
 [52]: #properties-8
 
-[53]: #address
+[53]: #customerlistquery
 
 [54]: #properties-9
 
@@ -714,11 +714,11 @@ Type: [string][62]
 
 [75]: #compliancedocument
 
-[76]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[76]: #address
 
 [77]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date
 
-[78]: #address
+[78]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
 [79]: #rizeoptions
 
