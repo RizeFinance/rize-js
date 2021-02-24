@@ -36,59 +36,33 @@
     -   [unlock][32]
         -   [Parameters][33]
         -   [Examples][34]
--   [SyntheticAccountService][35]
-    -   [getList][36]
-        -   [Parameters][37]
-    -   [get][38]
-        -   [Parameters][39]
-    -   [create][40]
-        -   [Parameters][41]
-    -   [update][42]
-        -   [Parameters][43]
-    -   [archive][44]
-        -   [Parameters][45]
-    -   [getTypesList][46]
-        -   [Parameters][47]
-    -   [getType][48]
-        -   [Parameters][49]
--   [RizeList][50]
-    -   [Properties][51]
--   [ComplianceDocumentAcknowledgementRequest][52]
-    -   [Properties][53]
--   [ComplianceWorkflow][54]
-    -   [Properties][55]
--   [ComplianceDocument][56]
-    -   [Properties][57]
--   [ComplianceWorkflowCustomer][58]
-    -   [Properties][59]
--   [ComplianceWorkflowSummary][60]
-    -   [Properties][61]
--   [CustomerDetails][62]
-    -   [Properties][63]
--   [CustomerListQuery][64]
-    -   [Properties][65]
--   [Customer][66]
-    -   [Properties][67]
--   [Address][68]
-    -   [Properties][69]
--   [SyntheticAccountCreateOptions][70]
-    -   [Properties][71]
--   [SyntheticAccountType][72]
-    -   [Properties][73]
--   [SyntheticAccountTypeListQuery][74]
-    -   [Properties][75]
--   [SyntheticAccountTypeListQuery][76]
-    -   [Properties][77]
--   [SyntheticAccount][78]
-    -   [Properties][79]
--   [RizeOptions][80]
-    -   [Properties][81]
--   [Rize][82]
-    -   [Parameters][83]
-    -   [complianceWorkflow][84]
-    -   [customer][85]
-    -   [syntheticAccount][86]
-    -   [PACKAGE_VERSION][87]
+-   [RizeList][35]
+    -   [Properties][36]
+-   [ComplianceWorkflowSummary][37]
+    -   [Properties][38]
+-   [ComplianceWorkflowCustomer][39]
+    -   [Properties][40]
+-   [ComplianceDocument][41]
+    -   [Properties][42]
+-   [ComplianceDocumentAcknowledgementRequest][43]
+    -   [Properties][44]
+-   [ComplianceWorkflow][45]
+    -   [Properties][46]
+-   [Address][47]
+    -   [Properties][48]
+-   [CustomerDetails][49]
+    -   [Properties][50]
+-   [Customer][51]
+    -   [Properties][52]
+-   [CustomerListQuery][53]
+    -   [Properties][54]
+-   [RizeOptions][55]
+    -   [Properties][56]
+-   [Rize][57]
+    -   [Parameters][58]
+    -   [complianceWorkflow][59]
+    -   [customer][60]
+    -   [PACKAGE_VERSION][61]
 
 ## ComplianceWorkflowService
 
@@ -401,73 +375,7 @@ The Synthetic Account service class.
 
 #### Parameters
 
--   `query` **any**  (optional, default `{}`)
-
-### get
-
-#### Parameters
-
--   `uid` **any** 
-
-### create
-
-#### Parameters
-
--   `name` **any** 
--   `poolUid` **any** 
--   `syntheticAccountTypeUid` **any** 
--   `options` **any**  (optional, default `{}`)
-
-### update
-
-#### Parameters
-
--   `uid` **any** 
--   `name` **any** 
--   `note` **any** 
-
-### archive
-
-#### Parameters
-
--   `uid` **any** 
-
-### getTypesList
-
-#### Parameters
-
--   `query` **any**  (optional, default `{}`)
-
-### getType
-
-#### Parameters
-
--   `uid` **any** 
-
-## RizeList
-
-Type: [Object][96]
-
-### Properties
-
--   `total_count` **[number][97]** Total count of items available to retrieve
--   `count` **[number][97]** Number of items retrieved
--   `limit` **[number][97]** Maximum number of items to retrieve
--   `offset` **[number][97]** Index of the first item to retrieve
--   `data` **[Array][98]&lt;T>** 
-
-## ComplianceDocumentAcknowledgementRequest
-
-Type: [Object][96]
-
-### Properties
-
--   `documentUid` **[string][88]** A UID referring to the Compliance Document being acknowledged.
--   `accept` **(`"yes"` \| `"no"`)** An indication of acceptance or rejection.
--   `userName` **[string][88]?** A label associated with the Customer (required for electronic signing).
--   `ipAddress` **[string][88]?** A numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication (required for electronic signing); in this case, the label associated with the computer used by the Customer.
-
-## ComplianceWorkflow
+## ComplianceWorkflowSummary
 
 Type: [Object][96]
 
@@ -479,6 +387,16 @@ Type: [Object][96]
 -   `accepted_documents` **[Array][98]&lt;[ComplianceDocument][101]>** 
 -   `current_step_documents_pending` **[Array][98]&lt;Omit&lt;[ComplianceDocument][101], `"accepted_at"`>>** Compliance Documents that await acknowledgment in the current Step
 -   `all_documents` **[Array][98]&lt;Omit&lt;[ComplianceDocument][101], (`"accepted_at"` \| `"uid"`)>>** The set of all Compliance Documents that would require acknowledgment
+
+## ComplianceWorkflowCustomer
+
+Type: [Object][70]
+
+### Properties
+
+-   `email` **[string][62]** 
+-   `external_uid` **[string][62]** A Customer identifier supplied by the Client, unique among the collection of all Client Customers
+-   `uid` **[string][62]** A UID referring to the Customer
 
 ## ComplianceDocument
 
@@ -495,32 +413,18 @@ Type: [Object][96]
 -   `uid` **[string][88]** A UID referring to a Compliance Document; note that this UID will be different for each Customer
 -   `accepted_at` **[string][88]** The DateTime at which this Compliance Document was acknowledged
 
-## ComplianceWorkflowCustomer
+## ComplianceDocumentAcknowledgementRequest
 
-Type: [Object][96]
-
-### Properties
-
--   `email` **[string][88]** 
--   `external_uid` **[string][88]** A Customer identifier supplied by the Client, unique among the collection of all Client Customers
--   `uid` **[string][88]** A UID referring to the Customer
-
-## ComplianceWorkflowSummary
-
-Type: [Object][96]
+Type: [Object][70]
 
 ### Properties
 
--   `accepted_quantity` **[number][97]** 
--   `begun_at` **[string][88]** The DateTime at which this Compliance Workflow was requested
--   `completed_step` **[number][97]** 
--   `current_step` **[number][97]** 
--   `status` **(`"accepted"` \| `"in_progress"` \| `"rejected"` \| `"expired"`)** A value indicating the current state of this Compliance Workflow:-   _accepted_ - The Compliance Workflow is complete. All documents in this Compliance Workflow have been accepted.
-    -   _in_progress_ - The Compliance Workflow is in progress.
-    -   _rejected_ - The Compliance Workflow is rejected. If Rize receives an acknowledgment to a document in a Compliance Workflow with an 'accept' value of 'no', the Compliance Workflow moves to a status of rejected. The Customer must restart a new Compliance Workflow to gain access to the Program.
-    -   _expired_ - The Compliance Workflow is expired. Rize did not receive all acknowledgments for this Compliance Workflow in the time period allotted for your Program. The Customer must restart a new Compliance Workflow to gain access to the Program.
+-   `documentUid` **[string][62]** A UID referring to the Compliance Document being acknowledged.
+-   `accept` **(`"yes"` \| `"no"`)** An indication of acceptance or rejection.
+-   `userName` **[string][62]?** A label associated with the Customer (required for electronic signing).
+-   `ipAddress` **[string][62]?** A numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication (required for electronic signing); in this case, the label associated with the computer used by the Customer.
 
-## CustomerDetails
+## ComplianceWorkflow
 
 Type: [Object][96]
 
@@ -535,25 +439,32 @@ Type: [Object][96]
 -   `dob` **[string][88]** 
 -   `address` **[Address][102]** 
 
-## CustomerListQuery
+## Address
 
 Type: [Object][96]
 
 ### Properties
 
--   `status` **(`"initiated"` \| `"queued"` \| `"identity_verified"` \| `"active"` \| `"manual_review"` \| `"rejected"` \| `"archived"` \| `"under_review"`)?** Filter by onboarding status. Please note that the initiated enum value will not be respected unless the `include_initiated=true` parameter is also provided.
--   `include_initiated` **[boolean][103]?** By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
--   `kyc_status` **(`"approved"` \| `"denied"` \| `"documents_provided"` \| `"documents_rejected"` \| `"manual_review"` \| `"pending_documents"` \| `"ready_for_custodial_partner_review"` \| `"under_review"`)?** Filter by KYC status.
--   `first_name` **[string][88]?** Only return Customers with a first name matching exactly what is submitted
--   `last_name` **[string][88]?** Only return Customers with a last name matching exactly what is submitted
--   `email` **[string][88]?** Only return Customers with an email address matching exactly what is submitted
--   `locked` **[boolean][103]?** Only return locked Customers if true and only return unlocked Customers if false
--   `program_uid` **[string][88]?** Only return Customers belonging to the submitted Program.
--   `external_uid` **[string][88]?** A unique, immutable id provided by Client.
--   `pool_uid` **[Array][98]&lt;[string][88]>?** Filter by pool. Multiple values are allowed.
--   `limit` **[string][88]?**  Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
--   `offset` **[string][88]?** Index of the items to start retrieving from. Default: 0
--   `sort` **(`"first_name_asc"` \| `"first_name_desc"` \| `"last_name_asc"` \| `"last_name_desc"` \| `"email_asc"` \| `"email_desc"`)?** Sort returned items.
+-   `street1` **[string][62]** 
+-   `street2` **[string][62]** 
+-   `city` **[string][62]** 
+-   `state` **[string][62]** 
+-   `postal_code` **[string][62]** 
+
+## CustomerDetails
+
+Type: [Object][70]
+
+### Properties
+
+-   `first_name` **[string][62]** 
+-   `middle_name` **([string][62] | null)?** 
+-   `last_name` **[string][62]** 
+-   `suffix` **([string][62] | null)?** 
+-   `phone` **[string][62]** 
+-   `ssn` **[string][62]** 
+-   `dob` **[string][62]** 
+-   `address` **[Address][76]** 
 
 ## Customer
 
@@ -588,33 +499,7 @@ Type: [Object][96]
 -   `lock_reason` **([string][88] | null)?** The lock reason provided by the Client, an admin User, or the system at the time the Customer was locked. This field will be null if and only if the locked_at is null.
 -   `details` **[CustomerDetails][95]** An object containing the supplied identifying information for the Customer.
 
-## Address
-
-Type: [Object][96]
-
-### Properties
-
--   `street1` **[string][88]** 
--   `street2` **[string][88]** 
--   `city` **[string][88]** 
--   `state` **[string][88]** 
--   `postal_code` **[string][88]** 
-
-## SyntheticAccountCreateOptions
-
-Type: [Object][96]
-
-### Properties
-
--   `account_number` **([string][88] | null)?** The ACH account number (if any) associated with this account.
--   `routing_number` **([string][88] | null)?** The ABA routing number (if any) associated with this account.
--   `plaid_processor_token` **([string][88] | null)?** The Rize processor token from Plaid. If a Synthetic Account Type from the category plaid_external is provided, plaid_processor_token must also be provided.
-
-## SyntheticAccountType
-
-Type: [Object][96]
-
-### Properties
+## CustomerListQuery
 
 -   `uid` **[string][88]** 
 -   `name` **[string][88]** 
@@ -638,40 +523,19 @@ Type: [Object][96]
 
 ### Properties
 
--   `customer_uid` **[Array][98]&lt;[string][88]>?** Filter by Customer. Multiple string values are allowed.
--   `external_uid` **[string][88]?** A unique, immutable id provided Client
--   `pool_uid` **[Array][98]&lt;[string][88]>?** Filter by pool. Multiple string values are allowed.
--   `limit` **[number][97]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
--   `offset` **[number][97]?** Index of the items to start retrieving from. Default: 0
--   `synthetic_account_type_uid` **[string][88]?** Filter by Synthetic Account Type
--   `synthetic_account_category` **(`"general"` \| `"external"` \| `"plaid_external"`)?** Filter by Synthetic Account Category
--   `liability` **[boolean][103]?** Filter by liability or asset
--   `sort` **(`"name_asc"` \| `"name_desc"` \| `"net_usd_balance_asc"` \| `"net_usd_balance_desc"` \| `"net_usd_pending_balance_asc"` \| `"net_usd_pending_balance_desc"` \| `"net_usd_available_balance_asc"` \| `"net_usd_available_balance_desc"`)?** 
-
-## SyntheticAccount
-
-Type: [Object][96]
-
-### Properties
-
--   `uid` **[string][88]** 
--   `external_uid` **[string][88]** A unique, immutable id provided by Client
--   `name` **[string][88]** 
--   `pool_uid` **[string][88]** 
--   `synthetic_account_type_uid` **[string][88]** 
--   `synthetic_account_category` **[string][88]** 
--   `status` **[string][88]** 
--   `liability` **[boolean][103]** 
--   `net_usd_balance` **[string][88]** 
--   `net_usd_pending_balance` **[string][88]** 
--   `net_usd_available_balance` **[string][88]** 
--   `master_account` **[boolean][103]** 
--   `account_number` **([string][88] | null)** 
--   `account_number_last_four` **([string][88] | null)** 
--   `routing_number` **([string][88] | null)** 
--   `opened_at` **[string][88]** 
--   `closed_at` **([string][88] | null)** 
--   `closed_to_synthetic_account_uid` **([string][88] | null)** 
+-   `status` **(`"initiated"` \| `"queued"` \| `"identity_verified"` \| `"active"` \| `"manual_review"` \| `"rejected"` \| `"archived"` \| `"under_review"`)?** Filter by onboarding status. Please note that the initiated enum value will not be respected unless the `include_initiated=true` parameter is also provided.
+-   `include_initiated` **[boolean][78]?** By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
+-   `kyc_status` **(`"approved"` \| `"denied"` \| `"documents_provided"` \| `"documents_rejected"` \| `"manual_review"` \| `"pending_documents"` \| `"ready_for_custodial_partner_review"` \| `"under_review"`)?** Filter by KYC status.
+-   `first_name` **[string][62]?** Only return Customers with a first name matching exactly what is submitted
+-   `last_name` **[string][62]?** Only return Customers with a last name matching exactly what is submitted
+-   `email` **[string][62]?** Only return Customers with an email address matching exactly what is submitted
+-   `locked` **[boolean][78]?** Only return locked Customers if true and only return unlocked Customers if false
+-   `program_uid` **[string][62]?** Only return Customers belonging to the submitted Program.
+-   `external_uid` **[string][62]?** A unique, immutable id provided by Client.
+-   `pool_uid` **[Array][72]&lt;[string][62]>?** Filter by pool. Multiple values are allowed.
+-   `limit` **[string][62]?**  Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
+-   `offset` **[string][62]?** Index of the items to start retrieving from. Default: 0
+-   `sort` **(`"first_name_asc"` \| `"first_name_desc"` \| `"last_name_asc"` \| `"last_name_desc"` \| `"email_asc"` \| `"email_desc"`)?** Sort returned items.
 
 ## RizeOptions
 
@@ -847,19 +711,19 @@ Type: [string][88]
 
 [63]: #properties-6
 
-[64]: #customerlistquery
+[37]: #complianceworkflowsummary
 
 [65]: #properties-7
 
-[66]: #customer
+[39]: #complianceworkflowcustomer
 
 [67]: #properties-8
 
-[68]: #address
+[41]: #compliancedocument
 
 [69]: #properties-9
 
-[70]: #syntheticaccountcreateoptions
+[43]: #compliancedocumentacknowledgementrequest
 
 [71]: #properties-10
 
@@ -867,19 +731,19 @@ Type: [string][88]
 
 [73]: #properties-11
 
-[74]: #syntheticaccounttypelistquery
+[47]: #address
 
 [75]: #properties-12
 
-[76]: #syntheticaccounttypelistquery-1
+[49]: #customerdetails
 
 [77]: #properties-13
 
-[78]: #syntheticaccount
+[51]: #customer
 
 [79]: #properties-14
 
-[80]: #rizeoptions
+[53]: #customerlistquery
 
 [81]: #properties-15
 
@@ -925,11 +789,11 @@ Type: [string][88]
 
 [102]: #address
 
-[103]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[76]: #address
 
 [104]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date
 
-[105]: #rizeoptions
+[78]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
 [106]: #complianceworkflowservice
 
