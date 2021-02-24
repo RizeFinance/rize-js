@@ -36,25 +36,25 @@
     -   [unlock][32]
         -   [Parameters][33]
         -   [Examples][34]
--   [ComplianceWorkflowCustomer][35]
+-   [ComplianceWorkflowSummary][35]
     -   [Properties][36]
--   [ComplianceDocument][37]
+-   [ComplianceWorkflowCustomer][37]
     -   [Properties][38]
--   [ComplianceDocumentAcknowledgementRequest][39]
+-   [ComplianceDocument][39]
     -   [Properties][40]
--   [ComplianceWorkflow][41]
+-   [ComplianceDocumentAcknowledgementRequest][41]
     -   [Properties][42]
--   [ComplianceWorkflowSummary][43]
+-   [ComplianceWorkflow][43]
     -   [Properties][44]
--   [CustomerListQuery][45]
+-   [Address][45]
     -   [Properties][46]
--   [CustomerList][47]
+-   [CustomerDetails][47]
     -   [Properties][48]
 -   [Customer][49]
     -   [Properties][50]
--   [CustomerDetails][51]
+-   [CustomerList][51]
     -   [Properties][52]
--   [Address][53]
+-   [CustomerListQuery][53]
     -   [Properties][54]
 -   [RizeOptions][55]
     -   [Properties][56]
@@ -365,6 +365,21 @@ Returns **[Promise][63]&lt;[Customer][68]>** A promise that returns the unlocked
 
 ## 
 
+## ComplianceWorkflowSummary
+
+Type: [Object][70]
+
+### Properties
+
+-   `accepted_quantity` **[number][71]** 
+-   `begun_at` **[string][62]** The DateTime at which this Compliance Workflow was requested
+-   `completed_step` **[number][71]** 
+-   `current_step` **[number][71]** 
+-   `status` **(`"accepted"` \| `"in_progress"` \| `"rejected"` \| `"expired"`)** A value indicating the current state of this Compliance Workflow:-   _accepted_ - The Compliance Workflow is complete. All documents in this Compliance Workflow have been accepted.
+    -   _in_progress_ - The Compliance Workflow is in progress.
+    -   _rejected_ - The Compliance Workflow is rejected. If Rize receives an acknowledgment to a document in a Compliance Workflow with an 'accept' value of 'no', the Compliance Workflow moves to a status of rejected. The Customer must restart a new Compliance Workflow to gain access to the Program.
+    -   _expired_ - The Compliance Workflow is expired. Rize did not receive all acknowledgments for this Compliance Workflow in the time period allotted for your Program. The Customer must restart a new Compliance Workflow to gain access to the Program.
+
 ## ComplianceWorkflowCustomer
 
 Type: [Object][70]
@@ -414,52 +429,32 @@ Type: [Object][70]
 -   `current_step_documents_pending` **[Array][74]&lt;Omit&lt;[ComplianceDocument][75], `"accepted_at"`>>** Compliance Documents that await acknowledgment in the current Step
 -   `all_documents` **[Array][74]&lt;Omit&lt;[ComplianceDocument][75], (`"accepted_at"` \| `"uid"`)>>** The set of all Compliance Documents that would require acknowledgment
 
-## ComplianceWorkflowSummary
+## Address
 
 Type: [Object][70]
 
 ### Properties
 
--   `accepted_quantity` **[number][71]** 
--   `begun_at` **[string][62]** The DateTime at which this Compliance Workflow was requested
--   `completed_step` **[number][71]** 
--   `current_step` **[number][71]** 
--   `status` **(`"accepted"` \| `"in_progress"` \| `"rejected"` \| `"expired"`)** A value indicating the current state of this Compliance Workflow:-   _accepted_ - The Compliance Workflow is complete. All documents in this Compliance Workflow have been accepted.
-    -   _in_progress_ - The Compliance Workflow is in progress.
-    -   _rejected_ - The Compliance Workflow is rejected. If Rize receives an acknowledgment to a document in a Compliance Workflow with an 'accept' value of 'no', the Compliance Workflow moves to a status of rejected. The Customer must restart a new Compliance Workflow to gain access to the Program.
-    -   _expired_ - The Compliance Workflow is expired. Rize did not receive all acknowledgments for this Compliance Workflow in the time period allotted for your Program. The Customer must restart a new Compliance Workflow to gain access to the Program.
+-   `street1` **[string][62]** 
+-   `street2` **[string][62]** 
+-   `city` **[string][62]** 
+-   `state` **[string][62]** 
+-   `postal_code` **[string][62]** 
 
-## CustomerListQuery
+## CustomerDetails
 
 Type: [Object][70]
 
 ### Properties
 
--   `status` **(`"initiated"` \| `"queued"` \| `"identity_verified"` \| `"active"` \| `"manual_review"` \| `"rejected"` \| `"archived"` \| `"under_review"`)?** Filter by onboarding status. Please note that the initiated enum value will not be respected unless the `include_initiated=true` parameter is also provided.
--   `include_initiated` **[boolean][76]?** By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
--   `kyc_status` **(`"approved"` \| `"denied"` \| `"documents_provided"` \| `"documents_rejected"` \| `"manual_review"` \| `"pending_documents"` \| `"ready_for_custodial_partner_review"` \| `"under_review"`)?** Filter by KYC status.
--   `first_name` **[string][62]?** Only return Customers with a first name matching exactly what is submitted
--   `last_name` **[string][62]?** Only return Customers with a last name matching exactly what is submitted
--   `email` **[string][62]?** Only return Customers with an email address matching exactly what is submitted
--   `locked` **[boolean][76]?** Only return locked Customers if true and only return unlocked Customers if false
--   `program_uid` **[string][62]?** Only return Customers belonging to the submitted Program.
--   `external_uid` **[string][62]?** A unique, immutable id provided by Client.
--   `pool_uid` **[Array][74]&lt;[string][62]>?** Filter by pool. Multiple values are allowed.
--   `limit` **[string][62]?**  Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
--   `offset` **[string][62]?** Index of the items to start retrieving from. Default: 0
--   `sort` **(`"first_name_asc"` \| `"first_name_desc"` \| `"last_name_asc"` \| `"last_name_desc"` \| `"email_asc"` \| `"email_desc"`)?** Sort returned items.
-
-## CustomerList
-
-Type: [Object][70]
-
-### Properties
-
--   `total_count` **[number][71]** Total count of items available to retrieve
--   `count` **[number][71]** Number of items retrieved
--   `limit` **[number][71]** Maximum number of items to retrieve
--   `offset` **[number][71]** Index of the first item to retrieve
--   `data` **[Array][74]&lt;[Customer][68]>** 
+-   `first_name` **[string][62]** 
+-   `middle_name` **([string][62] | null)?** 
+-   `last_name` **[string][62]** 
+-   `suffix` **([string][62] | null)?** 
+-   `phone` **[string][62]** 
+-   `ssn` **[string][62]** 
+-   `dob` **[string][62]** 
+-   `address` **[Address][76]** 
 
 ## Customer
 
@@ -494,32 +489,37 @@ Type: [Object][70]
 -   `lock_reason` **([string][62] | null)?** The lock reason provided by the Client, an admin User, or the system at the time the Customer was locked. This field will be null if and only if the locked_at is null.
 -   `details` **[CustomerDetails][69]** An object containing the supplied identifying information for the Customer.
 
-## CustomerDetails
+## CustomerList
 
 Type: [Object][70]
 
 ### Properties
 
--   `first_name` **[string][62]** 
--   `middle_name` **([string][62] | null)?** 
--   `last_name` **[string][62]** 
--   `suffix` **([string][62] | null)?** 
--   `phone` **[string][62]** 
--   `ssn` **[string][62]** 
--   `dob` **[string][62]** 
--   `address` **[Address][78]** 
+-   `total_count` **[number][71]** Total count of items available to retrieve
+-   `count` **[number][71]** Number of items retrieved
+-   `limit` **[number][71]** Maximum number of items to retrieve
+-   `offset` **[number][71]** Index of the first item to retrieve
+-   `data` **[Array][74]&lt;[Customer][68]>** 
 
-## Address
+## CustomerListQuery
 
 Type: [Object][70]
 
 ### Properties
 
--   `street1` **[string][62]** 
--   `street2` **[string][62]** 
--   `city` **[string][62]** 
--   `state` **[string][62]** 
--   `postal_code` **[string][62]** 
+-   `status` **(`"initiated"` \| `"queued"` \| `"identity_verified"` \| `"active"` \| `"manual_review"` \| `"rejected"` \| `"archived"` \| `"under_review"`)?** Filter by onboarding status. Please note that the initiated enum value will not be respected unless the `include_initiated=true` parameter is also provided.
+-   `include_initiated` **[boolean][78]?** By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
+-   `kyc_status` **(`"approved"` \| `"denied"` \| `"documents_provided"` \| `"documents_rejected"` \| `"manual_review"` \| `"pending_documents"` \| `"ready_for_custodial_partner_review"` \| `"under_review"`)?** Filter by KYC status.
+-   `first_name` **[string][62]?** Only return Customers with a first name matching exactly what is submitted
+-   `last_name` **[string][62]?** Only return Customers with a last name matching exactly what is submitted
+-   `email` **[string][62]?** Only return Customers with an email address matching exactly what is submitted
+-   `locked` **[boolean][78]?** Only return locked Customers if true and only return unlocked Customers if false
+-   `program_uid` **[string][62]?** Only return Customers belonging to the submitted Program.
+-   `external_uid` **[string][62]?** A unique, immutable id provided by Client.
+-   `pool_uid` **[Array][74]&lt;[string][62]>?** Filter by pool. Multiple values are allowed.
+-   `limit` **[string][62]?**  Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
+-   `offset` **[string][62]?** Index of the items to start retrieving from. Default: 0
+-   `sort` **(`"first_name_asc"` \| `"first_name_desc"` \| `"last_name_asc"` \| `"last_name_desc"` \| `"email_asc"` \| `"email_desc"`)?** Sort returned items.
 
 ## RizeOptions
 
@@ -630,31 +630,31 @@ Type: [string][62]
 
 [34]: #examples-9
 
-[35]: #complianceworkflowcustomer
+[35]: #complianceworkflowsummary
 
 [36]: #properties
 
-[37]: #compliancedocument
+[37]: #complianceworkflowcustomer
 
 [38]: #properties-1
 
-[39]: #compliancedocumentacknowledgementrequest
+[39]: #compliancedocument
 
 [40]: #properties-2
 
-[41]: #complianceworkflow
+[41]: #compliancedocumentacknowledgementrequest
 
 [42]: #properties-3
 
-[43]: #complianceworkflowsummary
+[43]: #complianceworkflow
 
 [44]: #properties-4
 
-[45]: #customerlistquery
+[45]: #address
 
 [46]: #properties-5
 
-[47]: #customerlist
+[47]: #customerdetails
 
 [48]: #properties-6
 
@@ -662,11 +662,11 @@ Type: [string][62]
 
 [50]: #properties-7
 
-[51]: #customerdetails
+[51]: #customerlist
 
 [52]: #properties-8
 
-[53]: #address
+[53]: #customerlistquery
 
 [54]: #properties-9
 
@@ -712,11 +712,11 @@ Type: [string][62]
 
 [75]: #compliancedocument
 
-[76]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[76]: #address
 
 [77]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date
 
-[78]: #address
+[78]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
 [79]: #rizeoptions
 
