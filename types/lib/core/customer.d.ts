@@ -192,5 +192,5 @@ declare namespace CustomerService {
 }
 type CustomerListQuery = import('./typedefs/customer.typedefs').CustomerListQuery;
 type CustomerDetails = import('./typedefs/customer.typedefs').CustomerDetails;
-type RizeList = any;
+type RizeList<T> = import('./typedefs/common.typedefs').RizeList<T>;
 type Customer = import('./typedefs/customer.typedefs').Customer;
