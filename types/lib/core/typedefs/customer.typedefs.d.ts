@@ -78,25 +78,6 @@ export type Customer = {
      */
     details: CustomerDetails;
 };
-export type CustomerList = {
-    /**
-     * - Total count of items available to retrieve
-     */
-    total_count: number;
-    /**
-     * - Number of items retrieved
-     */
-    count: number;
-    /**
-     * - Maximum number of items to retrieve
-     */
-    limit: number;
-    /**
-     * - Index of the first item to retrieve
-     */
-    offset: number;
-    data: Array<Customer>;
-};
 export type CustomerListQuery = {
     /**
      * - Filter by onboarding status. Please note that the initiated enum value will not be respected unless the `include_initiated=true` parameter is also provided.
