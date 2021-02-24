@@ -60,10 +60,15 @@ declare class SyntheticAccountService {
      */
     getTypesList(query?: SyntheticAccountTypeListQuery): Promise<RizeList<SyntheticAccountType>>;
     /**
+     * Get a single Synthetic Account Type
      *
-     * @param {*} uid
+     * Returns a single Synthetic Account Type resource along with supporting details
+     * @param {string} uid - Rize-generated unique Synthetic Account Type id
+     * @returns {Promise<SyntheticAccountType>} A promise that returns a Synthetic Account Type if resolved.
+     * @exampls
+     * const syntheticAccountType = await rize.syntheticAccount.getType('EhrQZJNjCd79LLYq');
      */
-    getType(uid: any): Promise<void>;
+    getType(uid: string): Promise<SyntheticAccountType>;
 }
 declare namespace SyntheticAccountService {
     export { SyntheticAccountType, SyntheticAccountTypeListQuery, RizeList };
