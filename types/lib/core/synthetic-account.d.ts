@@ -25,7 +25,7 @@ declare class SyntheticAccountService {
     /**
      * List Synthetic Accounts
      * @param {SyntheticAccountListQuery} query
-     * @returns {Promise<RizeList<SyntheticAccount>>} A promise that returns the unlocked Synthetic Account if resolved.
+     * @returns {Promise<RizeList<SyntheticAccount>>} A promise that returns the Synthetic Account list if resolved.
      * @example
      * const customer = await rize.syntheticAccount.getList({
      *     customer_uid: ['customer_uid1', 'customer_uid2'],
