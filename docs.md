@@ -41,46 +41,46 @@
         -   [Parameters][37]
     -   [get][38]
         -   [Parameters][39]
-        -   [Examples][40]
-    -   [create][41]
-        -   [Parameters][42]
-    -   [update][43]
-        -   [Parameters][44]
-    -   [archive][45]
-        -   [Parameters][46]
-    -   [getTypesList][47]
-        -   [Parameters][48]
+    -   [create][40]
+        -   [Parameters][41]
+    -   [update][42]
+        -   [Parameters][43]
+    -   [archive][44]
+        -   [Parameters][45]
+    -   [getTypesList][46]
+        -   [Parameters][47]
+        -   [Examples][48]
     -   [getType][49]
         -   [Parameters][50]
 -   [RizeList][51]
     -   [Properties][52]
--   [ComplianceDocumentAcknowledgementRequest][53]
+-   [ComplianceWorkflowSummary][53]
     -   [Properties][54]
--   [ComplianceWorkflow][55]
+-   [ComplianceWorkflowCustomer][55]
     -   [Properties][56]
--   [ComplianceWorkflowSummary][57]
+-   [ComplianceDocument][57]
     -   [Properties][58]
--   [ComplianceWorkflowCustomer][59]
+-   [ComplianceDocumentAcknowledgementRequest][59]
     -   [Properties][60]
--   [ComplianceDocument][61]
+-   [ComplianceWorkflow][61]
     -   [Properties][62]
--   [CustomerDetails][63]
+-   [Address][63]
     -   [Properties][64]
--   [CustomerListQuery][65]
+-   [CustomerDetails][65]
     -   [Properties][66]
 -   [Customer][67]
     -   [Properties][68]
--   [Address][69]
+-   [CustomerListQuery][69]
     -   [Properties][70]
 -   [SyntheticAccountType][71]
     -   [Properties][72]
--   [SyntheticAccountCreateOptions][73]
+-   [SyntheticAccountTypeListQuery][73]
     -   [Properties][74]
 -   [SyntheticAccount][75]
     -   [Properties][76]
 -   [SyntheticAccountListQuery][77]
     -   [Properties][78]
--   [SyntheticAccountTypeListQuery][79]
+-   [SyntheticAccountCreateOptions][79]
     -   [Properties][80]
 -   [RizeOptions][81]
     -   [Properties][82]
@@ -447,15 +447,35 @@ Returns **[Promise][90]&lt;[SyntheticAccount][97]>** A promise that returns a Sy
 
 ### getTypesList
 
+Retrieves a list of Synthetic Account Types filtered by the given parameters.
+
 #### Parameters
 
--   `query` **any**  (optional, default `{}`)
+-   `query` **[SyntheticAccountTypeListQuery][97]** An object containing key value paris for filtering the result. (optional, default `{}`)
+
+#### Examples
+
+```javascript
+const syntheticAccountTypes = await rize.syntheticAccount.getTypesList({
+    program_uid: 'EhrQZJNjCd79LLYq',
+    limit: 10,
+    offset: 10
+});
+```
+
+Returns **[Promise][90]&lt;[RizeList][94]&lt;[SyntheticAccountType][98]>>** A promise that returns a Synthetic Account Type List if resolved.
 
 ### getType
 
+Get a single Synthetic Account Type
+
+Returns a single Synthetic Account Type resource along with supporting details
+
 #### Parameters
 
--   `uid` **any** 
+-   `uid` **[string][89]** Rize-generated unique Synthetic Account Type id
+
+Returns **[Promise][90]&lt;[SyntheticAccountType][98]>** A promise that returns a Synthetic Account Type if resolved.
 
 ## 
 
@@ -463,19 +483,59 @@ Returns **[Promise][90]&lt;[SyntheticAccount][97]>** A promise that returns a Sy
 
 ## RizeList
 
-Type: [Object][98]
+Type: [Object][99]
 
 ### Properties
 
--   `total_count` **[number][99]** Total count of items available to retrieve
--   `count` **[number][99]** Number of items retrieved
--   `limit` **[number][99]** Maximum number of items to retrieve
--   `offset` **[number][99]** Index of the first item to retrieve
--   `data` **[Array][100]&lt;T>** 
+-   `total_count` **[number][100]** Total count of items available to retrieve
+-   `count` **[number][100]** Number of items retrieved
+-   `limit` **[number][100]** Maximum number of items to retrieve
+-   `offset` **[number][100]** Index of the first item to retrieve
+-   `data` **[Array][101]&lt;T>** 
 
-## ComplianceDocumentAcknowledgementRequest
+## ComplianceWorkflowSummary
 
-Type: [Object][98]
+Type: [Object][99]
+
+### Properties
+
+-   `accepted_quantity` **[number][100]** 
+-   `begun_at` **[string][89]** The DateTime at which this Compliance Workflow was requested
+-   `completed_step` **[number][100]** 
+-   `current_step` **[number][100]** 
+-   `status` **(`"accepted"` \| `"in_progress"` \| `"rejected"` \| `"expired"`)** A value indicating the current state of this Compliance Workflow:-   _accepted_ - The Compliance Workflow is complete. All documents in this Compliance Workflow have been accepted.
+    -   _in_progress_ - The Compliance Workflow is in progress.
+    -   _rejected_ - The Compliance Workflow is rejected. If Rize receives an acknowledgment to a document in a Compliance Workflow with an 'accept' value of 'no', the Compliance Workflow moves to a status of rejected. The Customer must restart a new Compliance Workflow to gain access to the Program.
+    -   _expired_ - The Compliance Workflow is expired. Rize did not receive all acknowledgments for this Compliance Workflow in the time period allotted for your Program. The Customer must restart a new Compliance Workflow to gain access to the Program.
+
+## ComplianceWorkflowCustomer
+
+Type: [Object][99]
+
+### Properties
+
+-   `email` **[string][89]** 
+-   `external_uid` **[string][89]** A Customer identifier supplied by the Client, unique among the collection of all Client Customers
+-   `uid` **[string][89]** A UID referring to the Customer
+
+## ComplianceDocument
+
+Type: [Object][99]
+
+### Properties
+
+-   `electronic_signature_required` **(`"yes"` \| `"no"`)** 
+-   `external_storage_name` **[string][89]** Amazon S3 key used to retrieve the contents of a Compliance Document
+-   `compliance_document_url` **[string][89]** Amazon S3 URL used to retrieve the contents of a Compliance Document
+-   `name` **[string][89]** 
+-   `step` **[number][100]** Multiple Compliance Documents are grouped into a Step, and Compliance Documents are presented to a Customer, Step-by-Step
+-   `version` **[number][100]** 
+-   `uid` **[string][89]** A UID referring to a Compliance Document; note that this UID will be different for each Customer
+-   `accepted_at` **[string][89]** The DateTime at which this Compliance Document was acknowledged
+
+## CustomerDetails
+
+Type: [Object][99]
 
 ### Properties
 
@@ -486,60 +546,32 @@ Type: [Object][98]
 
 ## ComplianceWorkflow
 
-Type: [Object][98]
+Type: [Object][99]
 
 ### Properties
 
 -   `uid` **[string][89]** A unique identifier generated by Rize.
--   `summary` **[ComplianceWorkflowSummary][101]** 
--   `customer` **[ComplianceWorkflowCustomer][102]** 
--   `accepted_documents` **[Array][100]&lt;[ComplianceDocument][103]>** 
--   `current_step_documents_pending` **[Array][100]&lt;Omit&lt;[ComplianceDocument][103], `"accepted_at"`>>** Compliance Documents that await acknowledgment in the current Step
--   `all_documents` **[Array][100]&lt;Omit&lt;[ComplianceDocument][103], (`"accepted_at"` \| `"uid"`)>>** The set of all Compliance Documents that would require acknowledgment
+-   `summary` **[ComplianceWorkflowSummary][102]** 
+-   `customer` **[ComplianceWorkflowCustomer][103]** 
+-   `accepted_documents` **[Array][101]&lt;[ComplianceDocument][104]>** 
+-   `current_step_documents_pending` **[Array][101]&lt;Omit&lt;[ComplianceDocument][104], `"accepted_at"`>>** Compliance Documents that await acknowledgment in the current Step
+-   `all_documents` **[Array][101]&lt;Omit&lt;[ComplianceDocument][104], (`"accepted_at"` \| `"uid"`)>>** The set of all Compliance Documents that would require acknowledgment
 
-## ComplianceWorkflowSummary
+## Address
 
-Type: [Object][98]
-
-### Properties
-
--   `accepted_quantity` **[number][99]** 
--   `begun_at` **[string][89]** The DateTime at which this Compliance Workflow was requested
--   `completed_step` **[number][99]** 
--   `current_step` **[number][99]** 
--   `status` **(`"accepted"` \| `"in_progress"` \| `"rejected"` \| `"expired"`)** A value indicating the current state of this Compliance Workflow:-   _accepted_ - The Compliance Workflow is complete. All documents in this Compliance Workflow have been accepted.
-    -   _in_progress_ - The Compliance Workflow is in progress.
-    -   _rejected_ - The Compliance Workflow is rejected. If Rize receives an acknowledgment to a document in a Compliance Workflow with an 'accept' value of 'no', the Compliance Workflow moves to a status of rejected. The Customer must restart a new Compliance Workflow to gain access to the Program.
-    -   _expired_ - The Compliance Workflow is expired. Rize did not receive all acknowledgments for this Compliance Workflow in the time period allotted for your Program. The Customer must restart a new Compliance Workflow to gain access to the Program.
-
-## ComplianceWorkflowCustomer
-
-Type: [Object][98]
+Type: [Object][99]
 
 ### Properties
 
--   `email` **[string][89]** 
--   `external_uid` **[string][89]** A Customer identifier supplied by the Client, unique among the collection of all Client Customers
--   `uid` **[string][89]** A UID referring to the Customer
-
-## ComplianceDocument
-
-Type: [Object][98]
-
-### Properties
-
--   `electronic_signature_required` **(`"yes"` \| `"no"`)** 
--   `external_storage_name` **[string][89]** Amazon S3 key used to retrieve the contents of a Compliance Document
--   `compliance_document_url` **[string][89]** Amazon S3 URL used to retrieve the contents of a Compliance Document
--   `name` **[string][89]** 
--   `step` **[number][99]** Multiple Compliance Documents are grouped into a Step, and Compliance Documents are presented to a Customer, Step-by-Step
--   `version` **[number][99]** 
--   `uid` **[string][89]** A UID referring to a Compliance Document; note that this UID will be different for each Customer
--   `accepted_at` **[string][89]** The DateTime at which this Compliance Document was acknowledged
+-   `street1` **[string][89]** 
+-   `street2` **[string][89]** 
+-   `city` **[string][89]** 
+-   `state` **[string][89]** 
+-   `postal_code` **[string][89]** 
 
 ## CustomerDetails
 
-Type: [Object][98]
+Type: [Object][99]
 
 ### Properties
 
@@ -550,38 +582,18 @@ Type: [Object][98]
 -   `phone` **[string][89]** 
 -   `ssn` **[string][89]** 
 -   `dob` **[string][89]** 
--   `address` **[Address][104]** 
-
-## CustomerListQuery
-
-Type: [Object][98]
-
-### Properties
-
--   `status` **(`"initiated"` \| `"queued"` \| `"identity_verified"` \| `"active"` \| `"manual_review"` \| `"rejected"` \| `"archived"` \| `"under_review"`)?** Filter by onboarding status. Please note that the initiated enum value will not be respected unless the `include_initiated=true` parameter is also provided.
--   `include_initiated` **[boolean][105]?** By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
--   `kyc_status` **(`"approved"` \| `"denied"` \| `"documents_provided"` \| `"documents_rejected"` \| `"manual_review"` \| `"pending_documents"` \| `"ready_for_custodial_partner_review"` \| `"under_review"`)?** Filter by KYC status.
--   `first_name` **[string][89]?** Only return Customers with a first name matching exactly what is submitted
--   `last_name` **[string][89]?** Only return Customers with a last name matching exactly what is submitted
--   `email` **[string][89]?** Only return Customers with an email address matching exactly what is submitted
--   `locked` **[boolean][105]?** Only return locked Customers if true and only return unlocked Customers if false
--   `program_uid` **[string][89]?** Only return Customers belonging to the submitted Program.
--   `external_uid` **[string][89]?** A unique, immutable id provided by Client.
--   `pool_uid` **[Array][100]&lt;[string][89]>?** Filter by pool. Multiple values are allowed.
--   `limit` **[string][89]?**  Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
--   `offset` **[string][89]?** Index of the items to start retrieving from. Default: 0
--   `sort` **(`"first_name_asc"` \| `"first_name_desc"` \| `"last_name_asc"` \| `"last_name_desc"` \| `"email_asc"` \| `"email_desc"`)?** Sort returned items.
+-   `address` **[Address][105]** 
 
 ## Customer
 
-Type: [Object][98]
+Type: [Object][99]
 
 ### Properties
 
 -   `uid` **[string][89]** A unique identifier generated by Rize
 -   `external_uid` **[string][89]** A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
 -   `program_uid` **[string][89]** A uid referring to the program this customer belongs to.
--   `pool_uids` **[Array][100]&lt;[string][89]>** A list of uids referring to Pools belonging to this Customer.
+-   `pool_uids` **[Array][101]&lt;[string][89]>** A list of uids referring to Pools belonging to this Customer.
 -   `email` **[string][89]** Email of the customer
 -   `status` **(`"initiated"` \| `"queued"` \| `"identity_verified"` \| `"active"` \| `"manual_review"` \| `"rejected"` \| `"archived"` \| `"under_review"`)** A value indicating the overall state of this Customer:-   **_initiated_** - Rize has created the Customer as a result of a post to the Compliance Workflows endpoint. This status will persist until Rize receives a successful request to perform Identity Verification. The Customer status will move to 'queued' after a successful request to perform Identity Verification.
     -   **_queued_** - Rize has determined that the required Customer PII has been provided and the Compliance Workflow is complete. The Customer record has been sent for KYC/AML partner verification. If the KYC/AML verification returns 'approved' the Customer status will move to 'identity_verified'. If the KYC/AML verification returns 'denied' the Customer status will move to 'rejected'. If the KYC/AML verification status returns 'manual_review' the Customer status will move to 'manual_review'.
@@ -605,21 +617,29 @@ Type: [Object][98]
 -   `lock_reason` **([string][89] | null)?** The lock reason provided by the Client, an admin User, or the system at the time the Customer was locked. This field will be null if and only if the locked_at is null.
 -   `details` **[CustomerDetails][96]** An object containing the supplied identifying information for the Customer.
 
-## Address
+## CustomerListQuery
 
-Type: [Object][98]
+Type: [Object][99]
 
 ### Properties
 
--   `street1` **[string][89]** 
--   `street2` **[string][89]** 
--   `city` **[string][89]** 
--   `state` **[string][89]** 
--   `postal_code` **[string][89]** 
+-   `status` **(`"initiated"` \| `"queued"` \| `"identity_verified"` \| `"active"` \| `"manual_review"` \| `"rejected"` \| `"archived"` \| `"under_review"`)?** Filter by onboarding status. Please note that the initiated enum value will not be respected unless the `include_initiated=true` parameter is also provided.
+-   `include_initiated` **[boolean][107]?** By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
+-   `kyc_status` **(`"approved"` \| `"denied"` \| `"documents_provided"` \| `"documents_rejected"` \| `"manual_review"` \| `"pending_documents"` \| `"ready_for_custodial_partner_review"` \| `"under_review"`)?** Filter by KYC status.
+-   `first_name` **[string][89]?** Only return Customers with a first name matching exactly what is submitted
+-   `last_name` **[string][89]?** Only return Customers with a last name matching exactly what is submitted
+-   `email` **[string][89]?** Only return Customers with an email address matching exactly what is submitted
+-   `locked` **[boolean][107]?** Only return locked Customers if true and only return unlocked Customers if false
+-   `program_uid` **[string][89]?** Only return Customers belonging to the submitted Program.
+-   `external_uid` **[string][89]?** A unique, immutable id provided by Client.
+-   `pool_uid` **[Array][101]&lt;[string][89]>?** Filter by pool. Multiple values are allowed.
+-   `limit` **[string][89]?**  Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
+-   `offset` **[string][89]?** Index of the items to start retrieving from. Default: 0
+-   `sort` **(`"first_name_asc"` \| `"first_name_desc"` \| `"last_name_asc"` \| `"last_name_desc"` \| `"email_asc"` \| `"email_desc"`)?** Sort returned items.
 
 ## SyntheticAccountType
 
-Type: [Object][98]
+Type: [Object][99]
 
 ### Properties
 
@@ -631,17 +651,17 @@ Type: [Object][98]
 
 ## SyntheticAccountCreateOptions
 
-Type: [Object][98]
+Type: [Object][99]
 
 ### Properties
 
--   `account_number` **([string][89] | null)?** The ACH account number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require an `account_number`. Submitting an `account_number` with a Synthetic Account Type that does not require one will result in the account number being ignored.
--   `routing_number` **([string][89] | null)?** The ABA routing number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require a `routing_number`. Submitting a `routing_number` with a Synthetic Account Type that does not require one will result in the routing number being ignored.
--   `plaid_processor_token` **([string][89] | null)?** The Rize processor token from Plaid. If a Synthetic Account Type from the category `plaid_external` is provided, `plaid_processor_token` must also be provided. Submitting a `plaid_processor_token` with any other Synthetic Account Type will result in the token being ignored.
+-   `program_uid` **[string][89]?** Only list Synthetic Account Types that are available to be used by the given Program
+-   `limit` **[number][100]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
+-   `offset` **[number][100]?** Index of the items to start retrieving from. Default: 0
 
 ## SyntheticAccount
 
-Type: [Object][98]
+Type: [Object][99]
 
 ### Properties
 
@@ -655,11 +675,11 @@ Type: [Object][98]
     -   **_active_** - The Synthetic Account is available for Customers to interact with. The Synthetic Account can be used in Transfers and transaction and balance inquiries.
     -   **_archived_** - The Synthetic Account is no longer available. Archived Synthetic Accounts will have a balance of $0.00.
     -   **_failed_** - The Synthetic Account setup has failed. Currently the `failed` status is only applicable to the `plaid_external` Synthetic Account category. Synthetic Accounts will start in the `initiated` status before transitioning to the `failed` status. Rize will not retry setting up Synthetic Accounts in the `failed` status and will treat them as inactive.
--   `liability` **[boolean][105]** Liability or asset. Any Synthetic Account created via POST /synthetic_accounts is a liability account, except for external accounts. Some asset Synthetic Accounts are automatically created by Rize during Customer onboarding for accounting purposes.
+-   `liability` **[boolean][107]** Liability or asset. Any Synthetic Account created via POST /synthetic_accounts is a liability account, except for external accounts. Some asset Synthetic Accounts are automatically created by Rize during Customer onboarding for accounting purposes.
 -   `net_usd_balance` **[string][89]** The current settled balance of this account in US Dollars. This field will be null for synthetic_account_types in the external category.
 -   `net_usd_pending_balance` **[string][89]** The sum of all pending transactions for this account in US Dollars. This field will be null for Synthetic Account Types in the external category.
 -   `net_usd_available_balance` **[string][89]** The balance available to spend calculated as the settled balance less any pending withdrawals Pending deposits are not included. This field will be null for Synthetic Account Types in the external category.
--   `master_account` **[boolean][105]** Used to identify the Master Synthetic Accounts that exist for every Program Customer. Master Synthetic Accounts are the default accounts where any unknown custodial transactions will settle and cannot be archived while a Program Customer is still active.
+-   `master_account` **[boolean][107]** Used to identify the Master Synthetic Accounts that exist for every Program Customer. Master Synthetic Accounts are the default accounts where any unknown custodial transactions will settle and cannot be archived while a Program Customer is still active.
 -   `account_number` **([string][89] | null)** The ACH account number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require an `account_number`. Submitting an `account_number` with a Synthetic Account Type that does not require one will result in the account number being ignored.
 -   `account_number_last_four` **([string][89] | null)** Last 4 digits of the ACH account number.
 -   `routing_number` **([string][89] | null)** The ABA routing number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require a `routing_number`. Submitting a `routing_number` with a Synthetic Account Type that does not require one will result in the routing number being ignored.
@@ -669,38 +689,38 @@ Type: [Object][98]
 
 ## SyntheticAccountListQuery
 
-Type: [Object][98]
+Type: [Object][99]
 
 ### Properties
 
--   `customer_uid` **[Array][100]&lt;[string][89]>?** Filter by Customer. Multiple string values are allowed.
+-   `customer_uid` **[Array][101]&lt;[string][89]>?** Filter by Customer. Multiple string values are allowed.
 -   `external_uid` **[string][89]?** A unique, immutable id provided Client
--   `pool_uid` **[Array][100]&lt;[string][89]>?** Filter by pool. Multiple string values are allowed.
--   `limit` **[number][99]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
--   `offset` **[number][99]?** Index of the items to start retrieving from. Default: 0
+-   `pool_uid` **[Array][101]&lt;[string][89]>?** Filter by pool. Multiple string values are allowed.
+-   `limit` **[number][100]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
+-   `offset` **[number][100]?** Index of the items to start retrieving from. Default: 0
 -   `synthetic_account_type_uid` **[string][89]?** Filter by Synthetic Account Type
 -   `synthetic_account_category` **(`"general"` \| `"external"` \| `"plaid_external"`)?** Filter by Synthetic Account Category
--   `liability` **[boolean][105]?** Filter by liability or asset
+-   `liability` **[boolean][107]?** Filter by liability or asset
 -   `sort` **(`"name_asc"` \| `"name_desc"` \| `"net_usd_balance_asc"` \| `"net_usd_balance_desc"` \| `"net_usd_pending_balance_asc"` \| `"net_usd_pending_balance_desc"` \| `"net_usd_available_balance_asc"` \| `"net_usd_available_balance_desc"`)?** 
 
-## SyntheticAccountTypeListQuery
+## SyntheticAccountCreateOptions
 
-Type: [Object][98]
+Type: [Object][99]
 
 ### Properties
 
--   `program_uid` **[string][89]?** Only list Synthetic Account Types that are available to be used by the given Program
--   `limit` **[number][99]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
--   `offset` **[number][99]?** Index of the items to start retrieving from. Default: 0
+-   `account_number` **([string][89] | null)?** The ACH account number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require an `account_number`. Submitting an `account_number` with a Synthetic Account Type that does not require one will result in the account number being ignored.
+-   `routing_number` **([string][89] | null)?** The ABA routing number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require a `routing_number`. Submitting a `routing_number` with a Synthetic Account Type that does not require one will result in the routing number being ignored.
+-   `plaid_processor_token` **([string][89] | null)?** The Rize processor token from Plaid. If a Synthetic Account Type from the category `plaid_external` is provided, `plaid_processor_token` must also be provided. Submitting a `plaid_processor_token` with any other Synthetic Account Type will result in the token being ignored.
 
 ## RizeOptions
 
-Type: [Object][98]
+Type: [Object][99]
 
 ### Properties
 
 -   `environment` **(`"sandbox"` \| `"integration"` \| `"production"`)?** The Rize environment to be used. (Default: 'sandbox')
--   `timeout` **[number][99]?** Specifies the number of milliseconds before the each request times out. (Default: 80000)
+-   `timeout` **[number][100]?** Specifies the number of milliseconds before the each request times out. (Default: 80000)
 
 ## Rize
 
@@ -710,7 +730,7 @@ Represents a Rize API client.
 
 -   `programUid` **[string][89]** The Rize Program ID.
 -   `hmac` **[string][89]** The HMAC that will be used to sign the JSON web signature in order to get access to the API.
--   `options` **[RizeOptions][107]?** Configuration options (optional, default `RizeOptions`)
+-   `options` **[RizeOptions][108]?** Configuration options (optional, default `RizeOptions`)
     -   `options.environment`   (optional, default `RizeOptions.environment`)
     -   `options.timeout`   (optional, default `RizeOptions.timeout`)
 
@@ -719,21 +739,21 @@ Represents a Rize API client.
 The Compliance Workflow is where you begin onboarding Customers to your Program.
 Compliance Workflows are used to group all of the required Compliance Documents together and to ensure they are presented and acknowledged in the correct order.
 
-Type: [ComplianceWorkflowService][108]
+Type: [ComplianceWorkflowService][109]
 
 ### customer
 
 A Customer on the Rize Platform is the end user of your application.
 Customers are unique to each Program and the management of all accounts and identifying information is handled on a Program-by-Program basis.
 
-Type: [CustomerService][109]
+Type: [CustomerService][110]
 
 ### syntheticAccount
 
 Synthetic Accounts are what your application will build around and your Customers will interact with.
 Synthetic Accounts are designed to track any asset types, for any Customers, at any Custodian.
 
-Type: [SyntheticAccount][97]
+Type: [SyntheticAccount][111]
 
 ### PACKAGE_VERSION
 
@@ -835,7 +855,7 @@ Type: [string][89]
 
 [47]: #gettypeslist
 
-[48]: #parameters-16
+[48]: #examples-10
 
 [49]: #gettype
 
@@ -845,31 +865,31 @@ Type: [string][89]
 
 [52]: #properties
 
-[53]: #compliancedocumentacknowledgementrequest
+[53]: #complianceworkflowsummary
 
 [54]: #properties-1
 
-[55]: #complianceworkflow
+[55]: #complianceworkflowcustomer
 
 [56]: #properties-2
 
-[57]: #complianceworkflowsummary
+[57]: #compliancedocument
 
 [58]: #properties-3
 
-[59]: #complianceworkflowcustomer
+[59]: #compliancedocumentacknowledgementrequest
 
 [60]: #properties-4
 
-[61]: #compliancedocument
+[61]: #complianceworkflow
 
 [62]: #properties-5
 
-[63]: #customerdetails
+[63]: #address
 
 [64]: #properties-6
 
-[65]: #customerlistquery
+[65]: #customerdetails
 
 [66]: #properties-7
 
@@ -877,7 +897,7 @@ Type: [string][89]
 
 [68]: #properties-8
 
-[69]: #address
+[69]: #customerlistquery
 
 [70]: #properties-9
 
@@ -885,7 +905,7 @@ Type: [string][89]
 
 [72]: #properties-10
 
-[73]: #syntheticaccountcreateoptions
+[73]: #syntheticaccounttypelistquery
 
 [74]: #properties-11
 
@@ -897,7 +917,7 @@ Type: [string][89]
 
 [78]: #properties-13
 
-[79]: #syntheticaccounttypelistquery
+[79]: #syntheticaccountcreateoptions
 
 [80]: #properties-14
 
@@ -933,28 +953,32 @@ Type: [string][89]
 
 [96]: #customerdetails
 
-[97]: #syntheticaccount
+[97]: #syntheticaccounttypelistquery
 
-[98]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[98]: #syntheticaccounttype
 
-[99]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[99]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[100]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[100]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 
-[101]: #complianceworkflowsummary
+[101]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[102]: #complianceworkflowcustomer
+[102]: #complianceworkflowsummary
 
-[103]: #compliancedocument
+[103]: #complianceworkflowcustomer
 
-[104]: #address
+[104]: #compliancedocument
 
-[105]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[105]: #address
 
 [106]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date
 
-[107]: #rizeoptions
+[107]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[108]: #complianceworkflowservice
+[108]: #rizeoptions
 
-[109]: #customerservice
+[109]: #complianceworkflowservice
+
+[110]: #customerservice
+
+[111]: #syntheticaccount
