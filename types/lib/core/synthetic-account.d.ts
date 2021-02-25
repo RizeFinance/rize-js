@@ -18,10 +18,11 @@ declare class SyntheticAccountService {
      */
     protected _validateGetListQuery(query: SyntheticAccountListQuery): void;
     /**
+     * @ignore @protected
      * Validates query parameter object for the "getTypesList" method
      * @param {SyntheticAccountTypeListQuery} query
      */
-    _validateGetTypesListQuery(query: SyntheticAccountTypeListQuery): void;
+    protected _validateGetTypesListQuery(query: SyntheticAccountTypeListQuery): void;
     /**
      * List Synthetic Accounts
      * @param {SyntheticAccountListQuery} query
