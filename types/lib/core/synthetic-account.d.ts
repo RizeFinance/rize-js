@@ -13,15 +13,15 @@ declare class SyntheticAccountService {
     /** @ignore @protected */ protected _auth: import("./auth");
     /**
      * @ignore @protected
+     * Validates the parameters for the "getList" method
+     * @param {SyntheticAccountListQuery} query
+     */
+    protected _validateGetListQuery(query: SyntheticAccountListQuery): void;
+    /**
      * Validates query parameter object for the "getTypesList" method
      * @param {SyntheticAccountTypeListQuery} query
      */
-    protected _validateGetTypesListQuery(query: SyntheticAccountTypeListQuery): void;
-    /**
-     *
-     * @param {*} query
-     */
-    protected _validateGetListQuery(query: SyntheticAccountListQuery): void;
+    _validateGetTypesListQuery(query: SyntheticAccountTypeListQuery): void;
     /**
      * List Synthetic Accounts
      * @param {SyntheticAccountListQuery} query
@@ -90,8 +90,10 @@ declare class SyntheticAccountService {
     getType(uid: string): Promise<SyntheticAccountType>;
 }
 declare namespace SyntheticAccountService {
-    export { SyntheticAccountType, SyntheticAccountTypeListQuery, RizeList };
+    export { SyntheticAccount, SyntheticAccountListQuery, SyntheticAccountType, SyntheticAccountTypeListQuery, RizeList };
 }
+type SyntheticAccountListQuery = import('./typedefs/synthetic-account.typedefs').SyntheticAccountListQuery;
 type SyntheticAccountTypeListQuery = import('./typedefs/synthetic-account.typedefs').SyntheticAccountTypeListQuery;
 type RizeList<T> = import('./typedefs/common.typedefs').RizeList<T>;
+type SyntheticAccount = import('./typedefs/synthetic-account.typedefs').SyntheticAccount;
 type SyntheticAccountType = import('./typedefs/synthetic-account.typedefs').SyntheticAccountType;
