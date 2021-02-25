@@ -12,10 +12,30 @@ declare class SyntheticAccountService {
     /** @ignore @protected */ protected _api: import("axios").AxiosInstance;
     /** @ignore @protected */ protected _auth: import("./auth");
     /**
-     *
-     * @param {*} query
+     * @ignore @protected
+     * Validates the parameters for the "getList" method
+     * @param {SyntheticAccountListQuery} query
      */
-    getList(query?: any): Promise<string>;
+    protected _validateGetListQuery(query: SyntheticAccountListQuery): void;
+    /**
+     * List Synthetic Accounts
+     * @param {SyntheticAccountListQuery} query
+     * @returns {Promise<RizeList<SyntheticAccount>>} A promise that returns the unlocked Customer if resolved.
+     * @example
+     * const customer = await rize.customer.getList({
+     *     customer_uid: ['customer_uid1', 'customer_uid2'],
+     *     external_uid: 'external_uid',
+     *     pool_uid: ['pool_uid1', 'pool_uid2'],
+     *     limit: 50,
+     *     offset: 0,
+     *     synthetic_account_type_uid: 'synthetic_account_type_uid',
+     *     synthetic_account_category: 'general',
+     *     program_uid: 'program_uid',
+     *     liability: true,
+     *     sort: 'name_asc'
+     * });
+     */
+    getList(query?: SyntheticAccountListQuery): Promise<RizeList<SyntheticAccount>>;
     /**
      *
      * @param {*} uid
@@ -52,3 +72,9 @@ declare class SyntheticAccountService {
      */
     getType(uid: any): Promise<void>;
 }
+declare namespace SyntheticAccountService {
+    export { SyntheticAccount, SyntheticAccountListQuery, RizeList };
+}
+type SyntheticAccountListQuery = import('./typedefs/synthetic-account.typedefs').SyntheticAccountListQuery;
+type RizeList<T> = import('./typedefs/common.typedefs').RizeList<T>;
+type SyntheticAccount = import('./typedefs/synthetic-account.typedefs').SyntheticAccount;
