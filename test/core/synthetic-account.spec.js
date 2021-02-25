@@ -1,6 +1,6 @@
 'use strict';
 
-const utils = require('../../lib/utils');
+const utils = require('../../lib/test-utils');
 
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
@@ -24,7 +24,7 @@ describe('Synthetic Account', () => {
         expect(list).to.have.property('offset').to.be.a('number').that.equals(offset);
         expect(list).to.have.property('data').to.be.an('array');
     };
-    
+
     describe('getList', async () => {
         it('Throws an error if "query" is invalid', () => {
             const promise = rizeClient.syntheticAccount.getList('');
@@ -105,7 +105,7 @@ describe('Synthetic Account', () => {
 
         it('Retrieves the synthetic account list without query', async () => {
             const syntheticAccountList = await rizeClient.syntheticAccount.getList();
-            utils.test.expectRizeList(syntheticAccountList);
+            utils.expectRizeList(syntheticAccountList);
         });
 
         it('Retrieves the synthetic account list with query', async () => {
@@ -122,7 +122,7 @@ describe('Synthetic Account', () => {
                 sort: 'name_asc'
             };
             const syntheticAccountList = await rizeClient.syntheticAccount.getList(query);
-            utils.test.expectRizeList(syntheticAccountList);
+            utils.expectRizeList(syntheticAccountList);
         });
     });
 

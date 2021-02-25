@@ -2,7 +2,7 @@
 
 require('./compliance-workflow.spec');
 
-const utils = require('../../lib/utils');
+const utils = require('../../lib/test-utils');
 
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
@@ -116,7 +116,7 @@ describe('Customer', () => {
 
         it('Retrieves the customer list', async () => {
             const customerList = await rizeClient.customer.getList();
-            utils.test.expectRizeList(customerList);
+            utils.expectRizeList(customerList);
         });
 
         it('Retrieves the customer list with query', async () => {
@@ -137,7 +137,7 @@ describe('Customer', () => {
                 customer: 'wew'
             };
             const customerList = await rizeClient.customer.getList(query);
-            utils.test.expectRizeList(customerList);
+            utils.expectRizeList(customerList);
         });
     });
 
