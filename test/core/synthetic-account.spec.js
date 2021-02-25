@@ -82,9 +82,10 @@ describe('Synthetic Account', () => {
             return expect(promise).to.eventually.be.rejectedWith('Note is required.');
         });
 
-        // it('Update a synthetic account type', async () => {
-        //     const syntheticAccountType = await rizeClient.syntheticAccount.update(syntheticAccountUid,'name','note');
-        //     expect(syntheticAccountType).to.have.property('uid').that.equals(syntheticAccountUid);
-        // });
+        it('Update a synthetic account type', async () => {
+            const syntheticAccountType = await rizeClient.syntheticAccount.update(syntheticAccountUid,'new name','note');
+            expect(syntheticAccountType).to.have.property('uid').that.equals(syntheticAccountUid);
+            expect(syntheticAccountType).to.have.property('name').that.equals('new name');
+        });
     });
 });
