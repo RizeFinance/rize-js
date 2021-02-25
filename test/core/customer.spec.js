@@ -2,6 +2,8 @@
 
 require('./compliance-workflow.spec');
 
+const utils = require('../../lib/utils');
+
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 
@@ -35,14 +37,6 @@ describe('Customer', () => {
     before(() => {
         customerUid = process.env.TEST_CUSTOMER_UID;
     });
-
-    const verifyCustomerList = (list) => {
-        expect(list).to.have.property('total_count').to.be.a('number');
-        expect(list).to.have.property('count').to.be.a('number');
-        expect(list).to.have.property('limit').to.be.a('number');
-        expect(list).to.have.property('offset').to.be.a('number');
-        expect(list).to.have.property('data').to.be.an('array');
-    };
 
     describe('getList', () => {
         it('Throws an error if "query" is invalid', () => {
@@ -122,7 +116,7 @@ describe('Customer', () => {
 
         it('Retrieves the customer list', async () => {
             const customerList = await rizeClient.customer.getList();
-            verifyCustomerList(customerList);
+            utils.test.expectRizeList(customerList);
         });
 
         it('Retrieves the customer list with query', async () => {
@@ -143,7 +137,7 @@ describe('Customer', () => {
                 customer: 'wew'
             };
             const customerList = await rizeClient.customer.getList(query);
-            verifyCustomerList(customerList);
+            utils.test.expectRizeList(customerList);
         });
     });
 
