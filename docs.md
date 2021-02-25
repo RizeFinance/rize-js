@@ -455,9 +455,15 @@ Returns **[Promise][90]&lt;[RizeList][94]&lt;[SyntheticAccountType][98]>>** A pr
 
 ### getType
 
+Get a single Synthetic Account Type
+
+Returns a single Synthetic Account Type resource along with supporting details
+
 #### Parameters
 
--   `uid` **any** 
+-   `uid` **[string][89]** Rize-generated unique Synthetic Account Type id
+
+Returns **[Promise][90]&lt;[SyntheticAccountType][98]>** A promise that returns a Synthetic Account Type if resolved.
 
 ## 
 
