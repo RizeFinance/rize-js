@@ -94,7 +94,7 @@ describe('Custodial Accounts', () => {
     describe('get', () => {
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.custodialAccount.get('');
-            return expect(promise).to.eventually.be.rejectedWith('Customer "uid" is required.');
+            return expect(promise).to.eventually.be.rejectedWith('Custodial Account "uid" is required.');
         });
 
         it('Retrieves custodial account info successfully', async () => {
