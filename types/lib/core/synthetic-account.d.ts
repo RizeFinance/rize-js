@@ -13,10 +13,15 @@ declare class SyntheticAccountService {
     /** @ignore @protected */ protected _auth: import("./auth");
     /**
      * @ignore @protected
+     * Validates the parameters for the "get" method
+     * @param {string} uid
+     */
+    protected _validateGetParams(uid: string): void;
+    /**
      * Validates the parameters for the "getList" method
      * @param {SyntheticAccountListQuery} query
      */
-    protected _validateGetListQuery(query: SyntheticAccountListQuery): void;
+    _validateGetListQuery(query: SyntheticAccountListQuery): void;
     /**
      * @ignore @protected
      * Validates query parameter object for the "getTypesList" method
@@ -43,10 +48,14 @@ declare class SyntheticAccountService {
      */
     getList(query?: SyntheticAccountListQuery): Promise<RizeList<SyntheticAccount>>;
     /**
+     * Get a single Synthetic account
      *
-     * @param {*} uid
+     * Retrieve a single Synthetic Account resource along with supporting details and account balances
+     * @param {string} uid - Rize-generated unique synthetic account id
+     * @returns {Promise<SyntheticAccount>} - A promise that returns a SyntheticAccount if resolved.
+     * @example const syntheticAccount = await rize.syntheticAccount.get(customerUid);
      */
-    get(uid: any): Promise<void>;
+    get(uid: string): Promise<SyntheticAccount>;
     /**
      *
      * @param {*} name
