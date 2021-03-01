@@ -2,6 +2,7 @@
 
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
+const faker = require('faker');
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
@@ -60,6 +61,22 @@ describe('Synthetic Account', () => {
         it('Retrieves a synthetic account type', async () => {
             const syntheticAccountType = await rizeClient.syntheticAccount.getType(testSyntheticAccountTypeUid);
             expect(syntheticAccountType).to.have.property('uid').that.equals(testSyntheticAccountTypeUid);
+        });
+    });
+
+    describe('create', () => {
+        it('Create a new synthetic account', async () => {
+            const request = {
+                name: faker.random.words(),
+                poolUid: faker.random.uuid(),
+                syntheticAccountTypeUid: testSyntheticAccountTypeUid,
+                accountNumber: '123456789012',
+                routingNumber: '123456789',
+                plaidProcessorToken: faker.random.alphaNumeric(115)
+            };
+
+            const syntheticAccount = await rizeClient.syntheticAccount.create(request);
+            expect(syntheticAccount).to.have.property('uid').that.equals(testSyntheticAccountTypeUid);
         });
     });
 });
