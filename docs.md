@@ -526,11 +526,26 @@ Returns **[Promise][107]&lt;[SyntheticAccount][117]>** A promise that returns a 
 
 ### update
 
+Enables Synthetic Account name changes for all Synthetic Accounts, including the Master Synthetic Account. 
+The Master Synthetic Account remains identifiable by the master_account flag stored with the Synthetic Account record.
+
 #### Parameters
 
--   `uid` **any** 
--   `name` **any** 
--   `note` **any** 
+-   `uid` **any** {string} uid - Rize-generated unique Synthetic Account id
+-   `name` **any** {string} A unique name to identify the resource
+-   `note` **any** {string} A reason for the Synthetic Account name change
+
+#### Examples
+
+```javascript
+const syntheticAccountTypes = await rize.syntheticAccount.update({
+    uid: 'EhrQZJNjCd79LLYq',
+    name: 'New Resource Name',
+    note: 'new note'
+});
+```
+
+Returns **[Promise][91]&lt;[SyntheticAccount][98]>** A promise that returns a Synthetic Account if resolved.
 
 ### archive
 
@@ -635,7 +650,7 @@ Type: [Object][120]
 -   `external_uid` **[string][106]** A Customer identifier supplied by the Client, unique among the collection of all Client Customers
 -   `uid` **[string][106]** A UID referring to the Customer
 
-## ComplianceWorkflowSummary
+## ComplianceDocument
 
 Type: [Object][120]
 
@@ -782,7 +797,7 @@ Type: [Object][120]
 -   `lock_reason` **([string][106] | null)?** The lock reason provided by the Client, an admin User, or the system at the time the Customer was locked. This field will be null if and only if the locked_at is null.
 -   `details` **[CustomerDetails][115]** An object containing the supplied identifying information for the Customer.
 
-## SyntheticAccountTypeListQuery
+## SyntheticAccountCreateOptions
 
 Type: [Object][120]
 
@@ -792,7 +807,7 @@ Type: [Object][120]
 -   `limit` **[number][121]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
 -   `offset` **[number][121]?** Index of the items to start retrieving from. Default: 0
 
-## SyntheticAccount
+## SyntheticAccountListQuery
 
 Type: [Object][120]
 
@@ -820,7 +835,7 @@ Type: [Object][120]
 -   `closed_at` **([string][106] | null)** The DateTime at which this account was closed. This value will be present if the status is `archived` or `failed`.
 -   `closed_to_synthetic_account_uid` **([string][106] | null)** A UID referring to the Synthetic Account where the funds in this account were transferred when closed. Any transactions issued against this account after it is closed will instead go to the `closed_to` account
 
-## SyntheticAccountListQuery
+## SyntheticAccountType
 
 Type: [Object][120]
 
