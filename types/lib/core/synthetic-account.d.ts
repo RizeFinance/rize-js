@@ -21,13 +21,13 @@ declare class SyntheticAccountService {
      * Validates the parameters for the "getList" method
      * @param {SyntheticAccountListQuery} query
      */
-    protected _validateGetListQuery(query: SyntheticAccountListQuery): void;
+    _validateGetListQuery(query: SyntheticAccountListQuery): void;
     /**
      * @ignore @protected
      * Validates query parameter object for the "getTypesList" method
      * @param {SyntheticAccountTypeListQuery} query
      */
-    _validateGetTypesListQuery(query: SyntheticAccountTypeListQuery): void;
+    protected _validateGetTypesListQuery(query: SyntheticAccountTypeListQuery): void;
     /**
      * List Synthetic Accounts
      * @param {SyntheticAccountListQuery} query
@@ -48,10 +48,10 @@ declare class SyntheticAccountService {
      */
     getList(query?: SyntheticAccountListQuery): Promise<RizeList<SyntheticAccount>>;
     /**
-     * Get a single Synthetic accoutn
+     * Get a single Synthetic account
      *
      * Retrieve a single Synthetic Account resource along with supporting details and account balances
-     * @param {string} uid - Rize-generated unique id
+     * @param {string} uid - Rize-generated unique synthetic account id
      * @returns {Promise<SyntheticAccount>} - A promise that returns a SyntheticAccount if resolved.
      * @example const syntheticAccount = await rize.syntheticAccount.get(customerUid);
      */
@@ -104,7 +104,6 @@ declare namespace SyntheticAccountService {
 }
 type SyntheticAccountListQuery = import('./typedefs/synthetic-account.typedefs').SyntheticAccountListQuery;
 type SyntheticAccountTypeListQuery = import('./typedefs/synthetic-account.typedefs').SyntheticAccountTypeListQuery;
-type SyntheticAccount = import('./typedefs/synthetic-account.typedefs').SyntheticAccount;
 type RizeList<T> = import('./typedefs/common.typedefs').RizeList<T>;
 type SyntheticAccount = import('./typedefs/synthetic-account.typedefs').SyntheticAccount;
 type SyntheticAccountType = import('./typedefs/synthetic-account.typedefs').SyntheticAccountType;

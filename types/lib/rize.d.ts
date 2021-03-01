@@ -29,6 +29,12 @@ declare class Rize {
      * @type {SyntheticAccount}
      */
     syntheticAccount: SyntheticAccount;
+    /**
+     * Custodial Account is the account held by the Custodian participating in your Program. Custodial Accounts in a Program can only be created for the Service Offerings that have been configured for that Program.
+     * A Customer must successfully complete onboarding and pass all KYC/AML checks before their Custodial Accounts can be opened.
+     * @type {CustodialAccount}
+     */
+    custodialAccount: CustodialAccount;
 }
 declare namespace Rize {
     export { PACKAGE_VERSION, Rize, Rize as default };
@@ -36,4 +42,5 @@ declare namespace Rize {
 import ComplianceWorkflowService = require("./core/compliance-workflow");
 import CustomerService = require("./core/customer");
 import SyntheticAccount = require("./core/synthetic-account");
+import CustodialAccount = require("./core/custodial-account");
 declare var PACKAGE_VERSION: string;
