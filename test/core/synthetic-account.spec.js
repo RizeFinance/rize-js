@@ -18,7 +18,7 @@ const rizeClient = new Rize(
 describe('Synthetic Account', () => {
     let testSyntheticAccountTypeUid = '';
     let testSyntheticAccountUid = '';
-    let testPoolUid = '';
+    let testCreateAccount = '';
     const verifySyntheticAccountTypesList = (list, limit, offset) => {
         expect(list).to.have.property('total_count').to.be.a('number');
         expect(list).to.have.property('count').to.be.a('number');
@@ -207,7 +207,7 @@ describe('Synthetic Account', () => {
         it('Retrieves synthetic account info successfully', async () => {
             const syntheticAccountUid = testSyntheticAccountUid;
             const syntheticAccount = await rizeClient.syntheticAccount.get(syntheticAccountUid);
-            testPoolUid = syntheticAccount.pool_uid;
+            testCreateAccount = syntheticAccount;
             expect(syntheticAccount).to.have.property('uid').that.equals(syntheticAccountUid);
         });
     });
@@ -216,9 +216,9 @@ describe('Synthetic Account', () => {
         it('Create a new synthetic account', async () => {
             const request = {
                 externalUid: faker.random.uuid(),
-                poolUid: testPoolUid,
+                poolUid: testCreateAccount.pool_uid,
                 name: faker.random.word(),
-                syntheticAccountTypeUid: testSyntheticAccountTypeUid,
+                syntheticAccountTypeUid: testCreateAccount.synthetic_account_type_uid,
                 accountNumber: faker.random.number(12).toString(),
                 routingNumber: faker.random.number(9).toString()
             };
