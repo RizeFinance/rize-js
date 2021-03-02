@@ -217,27 +217,63 @@ describe('Synthetic Account', () => {
         const fakeName = faker.random.word();
         const fakeUid = faker.random.uuid();
 
-        it('Throws an error if "externalUid" is empty', async () => {
-            const request = { externalUid: '' };
-            const promise = await rizeClient.syntheticAccount.create(request);
+        it('Throws an error if "externalUid" is empty', () => {
+
+            const request = {
+                externalUid: '',
+                poolUid: testSyntheticAccount.pool_uid,
+                name: fakeName,
+                syntheticAccountTypeUid: testSyntheticAccount.synthetic_account_type_uid,
+                accountNumber: faker.random.number(12).toString(),
+                routingNumber: faker.random.number(9).toString()
+            };
+
+            const promise = rizeClient.syntheticAccount.create(request);
             return expect(promise).to.eventually.be.rejectedWith('Create Synthetic Account "externalUid" is required.');
         });
 
-        it('Throws an error if "poolUid" is empty', async () => {
-            const request = { poolUid: '' };
-            const promise = await rizeClient.syntheticAccount.create(request);
+        it('Throws an error if "poolUid" is empty', () => {
+
+            const request = {
+                externalUid: fakeUid,
+                poolUid: '',
+                name: fakeName,
+                syntheticAccountTypeUid: testSyntheticAccount.synthetic_account_type_uid,
+                accountNumber: faker.random.number(12).toString(),
+                routingNumber: faker.random.number(9).toString()
+            };
+
+            const promise = rizeClient.syntheticAccount.create(request);
             return expect(promise).to.eventually.be.rejectedWith('Create Synthetic Account "poolUid" is required.');
         });
 
-        it('Throws an error if "name" is empty', async () => {
-            const request = { name: '' };
-            const promise = await rizeClient.syntheticAccount.create(request);
+        it('Throws an error if "name" is empty', () => {
+
+            const request = {
+                externalUid: fakeUid,
+                poolUid: testSyntheticAccount.pool_uid,
+                name: '',
+                syntheticAccountTypeUid: testSyntheticAccount.synthetic_account_type_uid,
+                accountNumber: faker.random.number(12).toString(),
+                routingNumber: faker.random.number(9).toString()
+            };
+
+            const promise = rizeClient.syntheticAccount.create(request);
             return expect(promise).to.eventually.be.rejectedWith('Create Synthetic Account "name" is required.');
         });
 
-        it('Throws an error if "syntheticAccountTypeUid" is empty', async () => {
-            const request = { syntheticAccountTypeUid: '' };
-            const promise = await rizeClient.syntheticAccount.create(request);
+        it('Throws an error if "syntheticAccountTypeUid" is empty', () => {
+
+            const request = {
+                externalUid: fakeUid,
+                poolUid: testSyntheticAccount.pool_uid,
+                name: fakeName,
+                syntheticAccountTypeUid: '',
+                accountNumber: faker.random.number(12).toString(),
+                routingNumber: faker.random.number(9).toString()
+            };
+
+            const promise = rizeClient.syntheticAccount.create(request);
             return expect(promise).to.eventually.be.rejectedWith('Create Synthetic Account "syntheticAccountTypeUid" is required.');
         });
 
