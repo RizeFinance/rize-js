@@ -147,17 +147,29 @@ export type SyntheticAccountListQuery = {
     liability?: boolean;
     sort?: 'name_asc' | 'name_desc' | 'net_usd_balance_asc' | 'net_usd_balance_desc' | 'net_usd_pending_balance_asc' | 'net_usd_pending_balance_desc' | 'net_usd_available_balance_asc' | 'net_usd_available_balance_desc';
 };
-export type SyntheticAccountCreateOptions = {
+export type SyntheticAccountCreateRequest = {
+    /**
+     * - A unique identifier Client supplies
+     */
+    externalUid?: string | null;
+    /**
+     * - A unique name to identify the resource
+     */
+    name?: string | null;
+    /**
+     * - A UID referring to the pool this Synthetic Account belongs to
+     */
+    poolUid?: string | null;
+    /**
+     * - A UID referring to the Synthetic Account Type this Synthetic Account should be created as
+     */
+    syntheticAccountTypeUid?: string | null;
     /**
      * - The ACH account number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require an `account_number`. Submitting an `account_number` with a Synthetic Account Type that does not require one will result in the account number being ignored.
      */
-    account_number?: string | null;
+    accountNumber?: string | null;
     /**
      * - The ABA routing number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require a `routing_number`. Submitting a `routing_number` with a Synthetic Account Type that does not require one will result in the routing number being ignored.
      */
-    routing_number?: string | null;
-    /**
-     * - The Rize processor token from Plaid. If a Synthetic Account Type from the category `plaid_external` is provided, `plaid_processor_token` must also be provided. Submitting a `plaid_processor_token` with any other Synthetic Account Type will result in the token being ignored.
-     */
-    plaid_processor_token?: string | null;
+    routingNumber?: string | null;
 };

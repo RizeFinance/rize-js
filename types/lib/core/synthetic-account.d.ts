@@ -18,6 +18,12 @@ declare class SyntheticAccountService {
      */
     protected _validateGetParams(uid: string): void;
     /**
+     * @ignore @protected
+     * Validates the parameters for the "archive" method
+     * @param {string} uid
+     */
+    protected _validateArchiveParams(uid: string): void;
+    /**
      * Validates the parameters for the "getList" method
      * @param {SyntheticAccountListQuery} query
      */
@@ -54,7 +60,7 @@ declare class SyntheticAccountService {
      *     sort: 'name_asc'
      * });
      */
-    getList(query?: SyntheticAccountListQuery): Promise<RizeList<SyntheticAccount>>;
+    getList(query?: any): Promise<RizeList<SyntheticAccount>>;
     /**
      * Get a single Synthetic account
      *
@@ -65,13 +71,22 @@ declare class SyntheticAccountService {
      */
     get(uid: string): Promise<SyntheticAccount>;
     /**
-     *
-     * @param {*} name
-     * @param {*} poolUid
-     * @param {*} syntheticAccountTypeUid
-     * @param {*} options
+     * @ignore @protected
+     * Validates payload parameter object for the "create" method
+     * @param {SyntheticAccountCreateRequest} request
      */
-    create(name: any, poolUid: any, syntheticAccountTypeUid: any, options?: any): Promise<void>;
+    protected _validateCreateParams(request: SyntheticAccountCreateRequest): void;
+    /**
+     * @param {SyntheticAccountCreateRequest} payload - is an JSON object needs to send as body parameters in order to create new synthetic accounts.
+     * @returns {Promise<RizeList<SyntheticAccount>>}
+     * @example
+     * const syntheticAccountTypes = await rize.syntheticAccount.getTypesList({
+     *     name: 'Spinach Fund',
+     *     poolUid: 'wTSMX1GubP21ev2h',
+     *     syntheticAccountTypeUid: 'fRMwt6H14ovFUz1s'
+     * });
+     */
+    create(payload: SyntheticAccountCreateRequest): Promise<RizeList<SyntheticAccount>>;
     /**
      * Enables Synthetic Account name changes for all Synthetic Accounts, including the Master Synthetic Account.
      * The Master Synthetic Account remains identifiable by the master_account flag stored with the Synthetic Account record.
@@ -86,10 +101,20 @@ declare class SyntheticAccountService {
      *     note: 'new note'
      * });
      */
-    update(uid: any, name: any, note: any): Promise<any>;
+    update(uid: any, name: any, note: any): Promise<SyntheticAccount>;
     /**
-     *
-     * @param {*} uid
+     * In order to archive a Synthetic Account, the account must:
+     * - belong to a general Synthetic Account Type
+     * - not be a Master Synthetic Account i.e. master_account must be false
+     * - have zero balance
+     * - have no pending Transfers
+     * Master Synthetic Accounts are archived when the Program Customer is archived (DELETE /customers/:uid).
+     * External Synthetic Accounts cannot be archived through DELETE /synthetic_accounts/:uid.
+     * For on overview of how to archive an external Synthetic Account, please contact your Rize account manager.
+     * @param {*} uid {string} uid - Rize-generated unique Synthetic Account id
+     * @returns {Promise<void>} A promise that returns void if resolved.
+     * @example
+     * await rize.syntheticAccount.archive(syntheticAccountUid);
      */
     archive(uid: any): Promise<void>;
     /**
@@ -116,10 +141,11 @@ declare class SyntheticAccountService {
     getType(uid: string): Promise<SyntheticAccountType>;
 }
 declare namespace SyntheticAccountService {
-    export { SyntheticAccount, SyntheticAccountListQuery, SyntheticAccountType, SyntheticAccountTypeListQuery, RizeList };
+    export { SyntheticAccount, SyntheticAccountListQuery, SyntheticAccountType, SyntheticAccountTypeListQuery, SyntheticAccountCreateRequest, RizeList };
 }
 type SyntheticAccountListQuery = import('./typedefs/synthetic-account.typedefs').SyntheticAccountListQuery;
 type SyntheticAccountTypeListQuery = import('./typedefs/synthetic-account.typedefs').SyntheticAccountTypeListQuery;
 type RizeList<T> = import('./typedefs/common.typedefs').RizeList<T>;
 type SyntheticAccount = import('./typedefs/synthetic-account.typedefs').SyntheticAccount;
+type SyntheticAccountCreateRequest = import('./typedefs/synthetic-account.typedefs').SyntheticAccountCreateRequest;
 type SyntheticAccountType = import('./typedefs/synthetic-account.typedefs').SyntheticAccountType;
