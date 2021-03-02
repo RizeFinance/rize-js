@@ -17,6 +17,7 @@ const rizeClient = new Rize(
 describe('Synthetic Account', () => {
     let testSyntheticAccountTypeUid = '';
     let testSyntheticAccountUid = '';
+    let testSyntheticAccountList = [];
 
     const verifySyntheticAccountTypesList = (list, limit, offset) => {
         expect(list).to.have.property('total_count').to.be.a('number');
@@ -108,7 +109,7 @@ describe('Synthetic Account', () => {
             const syntheticAccountList = await rizeClient.syntheticAccount.getList();
             
             utils.expectRizeList(syntheticAccountList);
-            
+            testSyntheticAccountList = syntheticAccountList.data;
             testSyntheticAccountUid = syntheticAccountList.data[0].uid;
         });
 
@@ -171,9 +172,6 @@ describe('Synthetic Account', () => {
     });
 
     describe('update', () => {
-
-        
-
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.syntheticAccount.update(' ','name','note');
             return expect(promise).to.eventually.be.rejectedWith('Synthetic Account "uid" is required.');
@@ -209,6 +207,27 @@ describe('Synthetic Account', () => {
             const syntheticAccountUid = testSyntheticAccountUid;
             const syntheticAccount = await rizeClient.syntheticAccount.get(syntheticAccountUid);
             expect(syntheticAccount).to.have.property('uid').that.equals(syntheticAccountUid);
+        });
+    });
+
+    describe('archive', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.syntheticAccount.archive('');
+            return expect(promise).to.eventually.be.rejectedWith('Synthetic Account "uid" is required.');
+        });
+    
+        it('Archive synthetic account successfully', async () => {
+            testSyntheticAccountList.map(sa => {
+                if(!sa.master_account) {
+                    console.log('ohello!',sa);
+                } else {
+                    console.log('nyak!');
+                }
+                    
+            });
+            // const syntheticAccountUid = testSyntheticAccountUid;
+            // const syntheticAccount = await rizeClient.syntheticAccount.archive(syntheticAccountUid);
+            // expect(syntheticAccount.status).equals('archived');
         });
     });
 
