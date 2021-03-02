@@ -13,10 +13,15 @@ declare class SyntheticAccountService {
     /** @ignore @protected */ protected _auth: import("./auth");
     /**
      * @ignore @protected
+     * Validates the parameters for the "get" method
+     * @param {string} uid
+     */
+    protected _validateGetParams(uid: string): void;
+    /**
      * Validates the parameters for the "getList" method
      * @param {SyntheticAccountListQuery} query
      */
-    protected _validateGetListQuery(query: SyntheticAccountListQuery): void;
+    _validateGetListQuery(query: SyntheticAccountListQuery): void;
     /**
      * @ignore @protected
      * Validates query parameter object for the "getTypesList" method
@@ -24,6 +29,14 @@ declare class SyntheticAccountService {
      */
     protected _validateGetTypesListQuery(query: SyntheticAccountTypeListQuery): void;
     /**
+     * @ignore @protected
+     * Validates query parameter object for the "getTypesList" method
+     * @param {SyntheticAccountTypeListQuery} query
+     */
+    protected _validateUpdateParams(uid: any, name: any, note: any): void;
+    /**
+     *
+     * @param {*} query
      * List Synthetic Accounts
      * @param {SyntheticAccountListQuery} query
      * @returns {Promise<RizeList<SyntheticAccount>>} A promise that returns the Synthetic Account list if resolved.
@@ -43,10 +56,14 @@ declare class SyntheticAccountService {
      */
     getList(query?: SyntheticAccountListQuery): Promise<RizeList<SyntheticAccount>>;
     /**
+     * Get a single Synthetic account
      *
-     * @param {*} uid
+     * Retrieve a single Synthetic Account resource along with supporting details and account balances
+     * @param {string} uid - Rize-generated unique synthetic account id
+     * @returns {Promise<SyntheticAccount>} - A promise that returns a SyntheticAccount if resolved.
+     * @example const syntheticAccount = await rize.syntheticAccount.get(customerUid);
      */
-    get(uid: any): Promise<void>;
+    get(uid: string): Promise<SyntheticAccount>;
     /**
      *
      * @param {*} name
@@ -56,12 +73,20 @@ declare class SyntheticAccountService {
      */
     create(name: any, poolUid: any, syntheticAccountTypeUid: any, options?: any): Promise<void>;
     /**
-     *
-     * @param {*} uid
-     * @param {*} name
-     * @param {*} note
+     * Enables Synthetic Account name changes for all Synthetic Accounts, including the Master Synthetic Account.
+     * The Master Synthetic Account remains identifiable by the master_account flag stored with the Synthetic Account record.
+     * @param {*} uid {string} uid - Rize-generated unique Synthetic Account id
+     * @param {*} name {string} A unique name to identify the resource
+     * @param {*} note {string} A reason for the Synthetic Account name change
+     * @returns {Promise<SyntheticAccount>} A promise that returns a Synthetic Account if resolved.
+     * @example
+     * const syntheticAccountTypes = await rize.syntheticAccount.update({
+     *     uid: 'EhrQZJNjCd79LLYq',
+     *     name: 'New Resource Name',
+     *     note: 'new note'
+     * });
      */
-    update(uid: any, name: any, note: any): Promise<void>;
+    update(uid: any, name: any, note: any): Promise<any>;
     /**
      *
      * @param {*} uid

@@ -17,7 +17,8 @@ const rizeClient = new Rize(
 
 describe('Synthetic Account', () => {
     let testSyntheticAccountTypeUid = '';
-
+    let testSyntheticAccountUid = '';
+    let testPoolUid = '';
     const verifySyntheticAccountTypesList = (list, limit, offset) => {
         expect(list).to.have.property('total_count').to.be.a('number');
         expect(list).to.have.property('count').to.be.a('number');
@@ -106,7 +107,10 @@ describe('Synthetic Account', () => {
 
         it('Retrieves the synthetic account list without query', async () => {
             const syntheticAccountList = await rizeClient.syntheticAccount.getList();
+            
             utils.expectRizeList(syntheticAccountList);
+            
+            testSyntheticAccountUid = syntheticAccountList.data[0].uid;
         });
 
         it('Retrieves the synthetic account list with query', async () => {
@@ -167,14 +171,55 @@ describe('Synthetic Account', () => {
         });
     });
 
+    describe('update', () => {
+
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.syntheticAccount.update(' ','name','note');
+            return expect(promise).to.eventually.be.rejectedWith('Synthetic Account "uid" is required.');
+        });
+
+        it('Throws an error if "name" is empty', () => {
+            const syntheticAccountUid = testSyntheticAccountUid;
+            const promise = rizeClient.syntheticAccount.update(syntheticAccountUid,' ','note');
+            return expect(promise).to.eventually.be.rejectedWith('Name is required.');
+        });
+
+        it('Throws an error if "note" is empty', () => {
+            const syntheticAccountUid = testSyntheticAccountUid;
+            const promise = rizeClient.syntheticAccount.update(syntheticAccountUid,'name',' ');
+            return expect(promise).to.eventually.be.rejectedWith('Note is required.');
+        });
+
+        it('Update a synthetic account type', async () => {
+            const syntheticAccountUid = testSyntheticAccountUid;
+            const syntheticAccountType = await rizeClient.syntheticAccount.update(syntheticAccountUid,'new name','note');
+            expect(syntheticAccountType).to.have.property('uid').that.equals(syntheticAccountUid);
+            expect(syntheticAccountType).to.have.property('name').that.equals('new name');
+        });
+    });
+    
+    describe('get', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.syntheticAccount.get('');
+            return expect(promise).to.eventually.be.rejectedWith('Synthetic Account "uid" is required.');
+        });
+    
+        it('Retrieves synthetic account info successfully', async () => {
+            const syntheticAccountUid = testSyntheticAccountUid;
+            const syntheticAccount = await rizeClient.syntheticAccount.get(syntheticAccountUid);
+            testPoolUid = syntheticAccount.pool_uid;
+            expect(syntheticAccount).to.have.property('uid').that.equals(syntheticAccountUid);
+        });
+    });
+
     describe('create', () => {
         it('Create a new synthetic account', async () => {
             const request = {
-                name: faker.random.words(),
-                poolUid: faker.random.uuid(),
+                name: faker.random.word(),
+                poolUid: testPoolUid,
                 syntheticAccountTypeUid: testSyntheticAccountTypeUid,
-                accountNumber: '123456789012',
-                routingNumber: '123456789',
+                accountNumber: faker.random.number(12),
+                routingNumber: faker.random.number(9),
                 plaidProcessorToken: faker.random.alphaNumeric(115)
             };
 
