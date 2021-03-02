@@ -217,17 +217,15 @@ describe('Synthetic Account', () => {
         });
     
         it('Archive synthetic account successfully', async () => {
+            let accountToBeArchived;
             testSyntheticAccountList.map(sa => {
                 if(!sa.master_account) {
-                    console.log('ohello!',sa);
-                } else {
-                    console.log('nyak!');
-                }
-                    
+                    accountToBeArchived = sa;
+                } 
             });
-            // const syntheticAccountUid = testSyntheticAccountUid;
-            // const syntheticAccount = await rizeClient.syntheticAccount.archive(syntheticAccountUid);
-            // expect(syntheticAccount.status).equals('archived');
+            const syntheticAccount = await rizeClient.syntheticAccount.archive(accountToBeArchived.uid);
+            
+            expect(syntheticAccount.data.status).equals('archived');
         });
     });
 
