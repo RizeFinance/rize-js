@@ -4,6 +4,7 @@ const utils = require('../../lib/test-utils');
 
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
+const faker = require('faker');
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
@@ -17,7 +18,11 @@ const rizeClient = new Rize(
 describe('Synthetic Account', () => {
     let testSyntheticAccountTypeUid = '';
     let testSyntheticAccountUid = '';
+<<<<<<< HEAD
     let testSyntheticAccountList = [];
+=======
+    let testSyntheticAccount = '';
+>>>>>>> develop
 
     const verifySyntheticAccountTypesList = (list, limit, offset) => {
         expect(list).to.have.property('total_count').to.be.a('number');
@@ -172,6 +177,10 @@ describe('Synthetic Account', () => {
     });
 
     describe('update', () => {
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.syntheticAccount.update(' ','name','note');
             return expect(promise).to.eventually.be.rejectedWith('Synthetic Account "uid" is required.');
@@ -206,6 +215,7 @@ describe('Synthetic Account', () => {
         it('Retrieves synthetic account info successfully', async () => {
             const syntheticAccountUid = testSyntheticAccountUid;
             const syntheticAccount = await rizeClient.syntheticAccount.get(syntheticAccountUid);
+            testSyntheticAccount = syntheticAccount;
             expect(syntheticAccount).to.have.property('uid').that.equals(syntheticAccountUid);
         });
     });
@@ -229,4 +239,99 @@ describe('Synthetic Account', () => {
         });
     });
 
+    describe('create', () => {
+        const fakeName = faker.random.word();
+        const fakeUid = faker.random.uuid();
+
+        it('Throws an error if "externalUid" is empty', () => {
+
+            const request = {
+                externalUid: '',
+                poolUid: testSyntheticAccount.pool_uid,
+                name: fakeName,
+                syntheticAccountTypeUid: testSyntheticAccount.synthetic_account_type_uid,
+                accountNumber: faker.random.number(12).toString(),
+                routingNumber: faker.random.number(9).toString()
+            };
+
+            const promise = rizeClient.syntheticAccount.create(request);
+            return expect(promise).to.eventually.be.rejectedWith('Create Synthetic Account "externalUid" is required.');
+        });
+
+        it('Throws an error if "poolUid" is empty', () => {
+
+            const request = {
+                externalUid: fakeUid,
+                poolUid: '',
+                name: fakeName,
+                syntheticAccountTypeUid: testSyntheticAccount.synthetic_account_type_uid,
+                accountNumber: faker.random.number(12).toString(),
+                routingNumber: faker.random.number(9).toString()
+            };
+
+            const promise = rizeClient.syntheticAccount.create(request);
+            return expect(promise).to.eventually.be.rejectedWith('Create Synthetic Account "poolUid" is required.');
+        });
+
+        it('Throws an error if "name" is empty', () => {
+
+            const request = {
+                externalUid: fakeUid,
+                poolUid: testSyntheticAccount.pool_uid,
+                name: '',
+                syntheticAccountTypeUid: testSyntheticAccount.synthetic_account_type_uid,
+                accountNumber: faker.random.number(12).toString(),
+                routingNumber: faker.random.number(9).toString()
+            };
+
+            const promise = rizeClient.syntheticAccount.create(request);
+            return expect(promise).to.eventually.be.rejectedWith('Create Synthetic Account "name" is required.');
+        });
+
+        it('Throws an error if "syntheticAccountTypeUid" is empty', () => {
+
+            const request = {
+                externalUid: fakeUid,
+                poolUid: testSyntheticAccount.pool_uid,
+                name: fakeName,
+                syntheticAccountTypeUid: '',
+                accountNumber: faker.random.number(12).toString(),
+                routingNumber: faker.random.number(9).toString()
+            };
+
+            const promise = rizeClient.syntheticAccount.create(request);
+            return expect(promise).to.eventually.be.rejectedWith('Create Synthetic Account "syntheticAccountTypeUid" is required.');
+        });
+
+        it('Create a new synthetic account', async () => {
+
+            const request = {
+                externalUid: fakeUid,
+                poolUid: testSyntheticAccount.pool_uid,
+                name: fakeName,
+                syntheticAccountTypeUid: testSyntheticAccount.synthetic_account_type_uid,
+                accountNumber: faker.random.number(12).toString(),
+                routingNumber: faker.random.number(9).toString()
+            };
+
+            const syntheticAccount = await rizeClient.syntheticAccount.create(request);
+
+            expect(syntheticAccount).to.have.property('uid');
+            expect(syntheticAccount).to.have.property('name').that.equals(fakeName);
+            expect(syntheticAccount).to.have.property('external_uid').that.equals(fakeUid);
+            expect(syntheticAccount).to.have.property('pool_uid').that.equals(testSyntheticAccount.pool_uid);
+            expect(syntheticAccount).to.have.property('synthetic_account_type_uid').that.equals(testSyntheticAccount.synthetic_account_type_uid);
+            expect(syntheticAccount).to.have.property('synthetic_account_category').that.equals('general');
+            expect(syntheticAccount).to.have.property('status').that.equals('active');
+            expect(syntheticAccount).to.have.property('liability').that.equals(true);
+            expect(syntheticAccount).to.have.property('net_usd_balance').that.equals(0);
+            expect(syntheticAccount).to.have.property('net_usd_pending_balance').that.equals(0);
+            expect(syntheticAccount).to.have.property('net_usd_available_balance').that.equals(0);
+            expect(syntheticAccount).to.have.property('master_account');
+            expect(syntheticAccount).to.have.property('account_number');
+            expect(syntheticAccount).to.have.property('account_number_last_four');
+            expect(syntheticAccount).to.have.property('routing_number');
+            expect(syntheticAccount).to.have.property('closed_to_synthetic_account_uid').that.equals('Not Implemented');
+        });
+    });
 });
