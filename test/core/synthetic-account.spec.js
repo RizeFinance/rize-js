@@ -314,9 +314,8 @@ describe('Synthetic Account', () => {
             return expect(promise).to.eventually.be.rejectedWith('Synthetic Account "uid" is required.');
         });
     
-        it('Archive synthetic account successfully', async () => {
-            const syntheticAccount = await rizeClient.syntheticAccount.archive(testArchiveSyntheticAccountUid);
-            expect(syntheticAccount).equals('');
+        it('Archive synthetic account successfully', () => {
+            return expect(rizeClient.syntheticAccount.archive(testArchiveSyntheticAccountUid)).to.be.fulfilled;
         });
     });
 });
