@@ -224,8 +224,8 @@ describe('Synthetic Account', () => {
                 poolUid: testSyntheticAccount.pool_uid,
                 name: fakeName,
                 syntheticAccountTypeUid: testSyntheticAccount.synthetic_account_type_uid,
-                accountNumber: faker.random.number(12).toString(),
-                routingNumber: faker.random.number(9).toString()
+                accountNumber: Math.random().toString().slice(2,14),
+                routingNumber: Math.random().toString().slice(2,11)
             };
 
             const promise = rizeClient.syntheticAccount.create(request);
@@ -239,8 +239,8 @@ describe('Synthetic Account', () => {
                 poolUid: '',
                 name: fakeName,
                 syntheticAccountTypeUid: testSyntheticAccount.synthetic_account_type_uid,
-                accountNumber: faker.random.number(12).toString(),
-                routingNumber: faker.random.number(9).toString()
+                accountNumber: Math.random().toString().slice(2,14),
+                routingNumber: Math.random().toString().slice(2,11)
             };
 
             const promise = rizeClient.syntheticAccount.create(request);
@@ -254,8 +254,8 @@ describe('Synthetic Account', () => {
                 poolUid: testSyntheticAccount.pool_uid,
                 name: '',
                 syntheticAccountTypeUid: testSyntheticAccount.synthetic_account_type_uid,
-                accountNumber: faker.random.number(12).toString(),
-                routingNumber: faker.random.number(9).toString()
+                accountNumber: Math.random().toString().slice(2,14),
+                routingNumber: Math.random().toString().slice(2,11)
             };
 
             const promise = rizeClient.syntheticAccount.create(request);
@@ -269,8 +269,8 @@ describe('Synthetic Account', () => {
                 poolUid: testSyntheticAccount.pool_uid,
                 name: fakeName,
                 syntheticAccountTypeUid: '',
-                accountNumber: faker.random.number(12).toString(),
-                routingNumber: faker.random.number(9).toString()
+                accountNumber: Math.random().toString().slice(2,14),
+                routingNumber: Math.random().toString().slice(2,11)
             };
 
             const promise = rizeClient.syntheticAccount.create(request);
@@ -284,8 +284,8 @@ describe('Synthetic Account', () => {
                 poolUid: testSyntheticAccount.pool_uid,
                 name: fakeName,
                 syntheticAccountTypeUid: testSyntheticAccount.synthetic_account_type_uid,
-                accountNumber: faker.random.number(12).toString(),
-                routingNumber: faker.random.number(9).toString()
+                accountNumber: Math.random().toString().slice(2,14),
+                routingNumber: Math.random().toString().slice(2,11)
             };
 
             const syntheticAccount = await rizeClient.syntheticAccount.create(request);
@@ -308,6 +308,7 @@ describe('Synthetic Account', () => {
             expect(syntheticAccount).to.have.property('closed_to_synthetic_account_uid').that.equals('Not Implemented');
         });
     });
+
     describe('archive', () => {
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.syntheticAccount.archive('');
