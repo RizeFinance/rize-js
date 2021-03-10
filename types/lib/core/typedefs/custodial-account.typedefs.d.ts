@@ -1,4 +1,4 @@
-export type AccountErrors = {
+export type AccountError = {
     error_code: string;
     error_name: string;
     error_description: string;
@@ -52,7 +52,7 @@ export type CustodialAccount = {
     /**
      * - A list of errors related to this account. These are passed through during interactions with the underlying Custodial Partner and can help with resolving customer issues. Only provided for accounts that are in an error or manual_review status.
      */
-    AccountErrors: AccountErrors;
+    account_errors: Array<AccountError>;
     /**
      * - The current settled balance of this Custodial Account in US Dollars
      */

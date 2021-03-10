@@ -24,10 +24,11 @@ declare class SyntheticAccountService {
      */
     protected _validateArchiveParams(uid: string): void;
     /**
+     * @ignore @protected
      * Validates the parameters for the "getList" method
      * @param {SyntheticAccountListQuery} query
      */
-    _validateGetListQuery(query: SyntheticAccountListQuery): void;
+    protected _validateGetListQuery(query: SyntheticAccountListQuery): void;
     /**
      * @ignore @protected
      * Validates query parameter object for the "getTypesList" method
@@ -77,7 +78,7 @@ declare class SyntheticAccountService {
      */
     protected _validateCreateParams(request: SyntheticAccountCreateRequest): void;
     /**
-     * @param {SyntheticAccountCreateRequest} payload - is an JSON object needs to send as body parameters in order to create new synthetic accounts.
+     * @param {SyntheticAccountCreateRequest} payload - is a JSON object needs to send as body parameters in order to create new synthetic accounts.
      * @returns {Promise<RizeList<SyntheticAccount>>}
      * @example
      * const syntheticAccountTypes = await rize.syntheticAccount.getTypesList({
