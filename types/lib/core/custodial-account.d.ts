@@ -1,4 +1,7 @@
 export = CustodialAccountService;
+/**
+ * The Custodial Account service class.
+ */
 declare class CustodialAccountService {
     /**
      * @hideconstructor

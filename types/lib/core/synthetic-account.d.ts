@@ -24,10 +24,11 @@ declare class SyntheticAccountService {
      */
     protected _validateArchiveParams(uid: string): void;
     /**
+     * @ignore @protected
      * Validates the parameters for the "getList" method
      * @param {SyntheticAccountListQuery} query
      */
-    _validateGetListQuery(query: SyntheticAccountListQuery): void;
+    protected _validateGetListQuery(query: SyntheticAccountListQuery): void;
     /**
      * @ignore @protected
      * Validates query parameter object for the "getTypesList" method
@@ -77,7 +78,7 @@ declare class SyntheticAccountService {
      */
     protected _validateCreateParams(request: SyntheticAccountCreateRequest): void;
     /**
-     * @param {SyntheticAccountCreateRequest} payload - is an JSON object needs to send as body parameters in order to create new synthetic accounts.
+     * @param {SyntheticAccountCreateRequest} payload - is a JSON object needs to send as body parameters in order to create new synthetic accounts.
      * @returns {Promise<RizeList<SyntheticAccount>>}
      * @example
      * const syntheticAccountTypes = await rize.syntheticAccount.getTypesList({
@@ -135,7 +136,7 @@ declare class SyntheticAccountService {
      * Returns a single Synthetic Account Type resource along with supporting details
      * @param {string} uid - Rize-generated unique Synthetic Account Type id
      * @returns {Promise<SyntheticAccountType>} A promise that returns a Synthetic Account Type if resolved.
-     * @exampls
+     * @example
      * const syntheticAccountType = await rize.syntheticAccount.getType('EhrQZJNjCd79LLYq');
      */
     getType(uid: string): Promise<SyntheticAccountType>;
