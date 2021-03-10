@@ -136,7 +136,7 @@ declare class SyntheticAccountService {
      * Returns a single Synthetic Account Type resource along with supporting details
      * @param {string} uid - Rize-generated unique Synthetic Account Type id
      * @returns {Promise<SyntheticAccountType>} A promise that returns a Synthetic Account Type if resolved.
-     * @exampls
+     * @example
      * const syntheticAccountType = await rize.syntheticAccount.getType('EhrQZJNjCd79LLYq');
      */
     getType(uid: string): Promise<SyntheticAccountType>;
