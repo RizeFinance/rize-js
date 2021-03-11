@@ -92,4 +92,76 @@ describe('Transaction', () => {
             utils.expectRizeList(transactionList);
         });
     });
+
+    describe('getTransactionEventList', async () => {
+        it('Throws an error if "query" is invalid', () => {
+            const promise = rizeClient.transaction.getTransactionEventList('');
+            return expect(promise).to.eventually.be.rejectedWith('"query" must be a TransactionEventListQuery object.');
+        });
+
+        it('Throws an error if "source_custodial_account_uid" query is not an array', () => {
+            const query = { source_custodial_account_uid: '' };
+            const promise = rizeClient.transaction.getTransactionEventList(query);
+            return expect(promise).to.eventually.be.rejectedWith('"source_custodial_account_uid" query must be an array.');
+        });
+
+        it('Throws an error if "destination_custodial_account_uid" query is not an array', () => {
+            const query = { destination_custodial_account_uid: '' };
+            const promise = rizeClient.transaction.getTransactionEventList(query);
+            return expect(promise).to.eventually.be.rejectedWith('"destination_custodial_account_uid" query must be an array.');
+        });
+
+        it('Throws an error if "custodial_account_uid" query is not an array', () => {
+            const query = { custodial_account_uid: '' };
+            const promise = rizeClient.transaction.getTransactionEventList(query);
+            return expect(promise).to.eventually.be.rejectedWith('"custodial_account_uid" query must be an array.');
+        });
+
+        it('Throws an error if "type" query is not an array', () => {
+            const query = { type: '' };
+            const promise = rizeClient.transaction.getTransactionEventList(query);
+            return expect(promise).to.eventually.be.rejectedWith('"type" query must be an array. Accepted values inside the array are: odfi_ach_deposit | odfi_ach_withdrawal | rdfi_ach_deposit | rdfi_ach_withdrawal');
+        });
+
+        it('Throws an error if "type" query is not an array of valid values', () => {
+            const query = { type: [''] };
+            const promise = rizeClient.transaction.getTransactionEventList(query);
+            return expect(promise).to.eventually.be.rejectedWith('Accepted values in the "type" query are: odfi_ach_deposit | odfi_ach_withdrawal | rdfi_ach_deposit | rdfi_ach_withdrawal');
+        });
+
+        it('Throws an error if "limit" query is not an integer', () => {
+            const query = { limit: 1.5 };
+            const promise = rizeClient.transaction.getTransactionEventList(query);
+            return expect(promise).to.eventually.be.rejectedWith('"limit" query must be an integer.');
+        });
+
+        it('Throws an error if "offset" query is not an integer', () => {
+            const query = { offset: 1.5 };
+            const promise = rizeClient.transaction.getTransactionEventList(query);
+            return expect(promise).to.eventually.be.rejectedWith('"offset" query must be an integer.');
+        });
+
+        it('Throws an error if "sort" query is not on the sort options', () => {
+            const query = { sort: null };
+            const promise = rizeClient.transaction.getTransactionEventList(query);
+            return expect(promise).to.eventually.be.rejectedWith('"sort" query must be a string. Accepted values are: created_at_asc | created_at_desc | description_asc | description_desc | settled_index_asc | settled_index_desc | us_dollar_amount_asc | us_dollar_amount_desc');
+        });
+
+        it('Retrieves the transaction event list without query', async () => {
+            const transactionList = await rizeClient.transaction.getTransactionEventList();
+
+            utils.expectRizeList(transactionList);
+        });
+
+        it('Retrieves the transaction event list with query', async () => {
+            const query = {
+                customer_uid: ['customer_uid1', 'customer_uid2'],
+                limit: 50,
+                offset: 0,
+                sort: 'created_at_asc'
+            };
+            const transactionList = await rizeClient.transaction.getTransactionEventList(query);
+            utils.expectRizeList(transactionList);
+        });
+    });
 });
