@@ -23,6 +23,20 @@ declare class TransactionService {
      * @returns {Promise<RizeList<Transaction>>} A promise that returns a Transaction List if resolved.
      */
     getList(query?: TransactionListQuery): Promise<RizeList<Transaction>>;
+    /**
+     * @ignore @protected
+     * Validates the parameters for the "get" method
+     * @param {string} uid
+     */
+    protected _validateGetParams(uid: string): void;
+    /**
+     * Get a single Transaction
+     *
+     * @param {string} uid - Rize-generated unique transaction id
+     * @returns {Promise<Transaction>} - A promise that returns a Transaction if resolved.
+     * @example const transaction = await rize.Transaction.get(transactionUid);
+     */
+    get(uid: string): Promise<Transaction>;
 }
 declare namespace TransactionService {
     export { TransactionListQuery, Transaction, RizeList };
