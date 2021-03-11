@@ -499,7 +499,7 @@ The Synthetic Account service class.
 #### Examples
 
 ```javascript
-const customer = await rize.syntheticAccount.getList({
+const syntheticAccounts = await rize.syntheticAccount.getList({
     customer_uid: ['customer_uid1', 'customer_uid2'],
     external_uid: 'external_uid',
     pool_uid: ['pool_uid1', 'pool_uid2'],
@@ -528,7 +528,7 @@ Retrieve a single Synthetic Account resource along with supporting details and a
 #### Examples
 
 ```javascript
-const syntheticAccount = await rize.syntheticAccount.get(customerUid);
+const syntheticAccount = await rize.syntheticAccount.get(syntheticAccountUid);
 ```
 
 Returns **[Promise][131]&lt;[SyntheticAccount][141]>** A promise that returns a SyntheticAccount if resolved.
@@ -582,8 +582,8 @@ In order to archive a Synthetic Account, the account must:
 -   not be a Master Synthetic Account i.e. master_account must be false
 -   have zero balance
 -   have no pending Transfers
-    Master Synthetic Accounts are archived when the Program Customer is archived (DELETE /customers/:uid). 
-    External Synthetic Accounts cannot be archived through DELETE /synthetic_accounts/:uid. 
+    Master Synthetic Accounts are archived when the Program Customer is archived (customer.archive()). 
+    External Synthetic Accounts cannot be archived through syntheticAccount.archive(). 
     For on overview of how to archive an external Synthetic Account, please contact your Rize account manager.
 
 #### Parameters
