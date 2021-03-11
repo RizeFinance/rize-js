@@ -25,6 +25,12 @@ declare class TransactionService {
     protected _validateGetParams(uid: string): void;
     /**
      * @ignore @protected
+     * Validates the parameters for the "getSyntheticLineItem" method
+     * @param {string} uid
+     */
+    protected _validateGetSyntheticLineItemParams(uid: string): void;
+    /**
+     * @ignore @protected
      * Validates query parameter object for getSyntheticLineItemList method.
      * @param {} query - An object containing key value pair for filtering the results list.
      */
@@ -39,8 +45,8 @@ declare class TransactionService {
      * Get a single Transaction
      *
      * @param {string} uid - Rize-generated unique transaction id
-     * @returns {Promise<Transaction>} - A promise that returns a Transaction if resolved.
-     * @example const transaction = await rize.Transaction.get(transactionUid);
+     * @returns {Promise<Transaction>} A promise that returns a Transaction if resolved.
+     * @example const transaction = await rize.transaction.get(transactionUid);
      */
     get(uid: string): Promise<Transaction>;
     /**
@@ -48,7 +54,7 @@ declare class TransactionService {
      * @param {SyntheticLineItemListQuery} query - An object containing key value pair for filtering the results list.
      * @returns {Promise<RizeList<SyntheticLineItem>>} A promise that returns a Synthetic Line Item List if resolved.
      * @example
-     * const customer = await rize.transaction.getSyntheticLineItemList({
+     * const syntheticLineItems = await rize.transaction.getSyntheticLineItemList({
      *     customer_uid: ['customer_uid1', 'customer_uid2'],
      *     pool_uid: ['pool_uid1', 'pool_uid2'],
      *     synthetic_account_uid: ['synthetic_account_uid1', 'synthetic_account_uid2']
@@ -60,6 +66,14 @@ declare class TransactionService {
      * });
      */
     getSyntheticLineItemList(query?: SyntheticLineItemListQuery): Promise<RizeList<SyntheticLineItem>>;
+    /**
+     * Get a single Synthetic Line Item
+     *
+     * @param {string} uid - Rize-generated unique Synthetic Line Item id
+     * @returns {Promise<SyntheticLineItem>} A promise that returns a Synthetic Line Item if resolved.
+     * @example const syntheticLineItem = await rize.transaction.getSyntheticLineItem(transactionUid);
+     */
+    getSyntheticLineItem(uid: string): Promise<SyntheticLineItem>;
 }
 declare namespace TransactionService {
     export { TransactionListQuery, Transaction, SyntheticLineItemListQuery, SyntheticLineItem, RizeList };
