@@ -79,7 +79,7 @@ describe('Transaction', () => {
 
         it('Retrieves the transaction list without query', async () => {
             const transactionList = await rizeClient.transaction.getList();
-
+            testTransaction = transactionList.data[0];
             utils.expectRizeList(transactionList);
         });
 
@@ -102,8 +102,6 @@ describe('Transaction', () => {
         });
     
         it('Retrieves transaction data successfully', async () => {
-            const transactionList = await rizeClient.transaction.getList();
-            testTransaction = transactionList.data[0];
             const transaction = await rizeClient.transaction.get(testTransaction.uid);
             expect(transaction).to.have.property('uid').that.equals(testTransaction.uid);
         });
