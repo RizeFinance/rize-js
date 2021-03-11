@@ -9,7 +9,7 @@
     "lint-fix": "eslint . --ext .js,.ts --fix",
     "typings:build": "npx typescript",
     "docs:build": "documentation build lib/** -f md -o docs.md",
-    "test": "yarn lint && yarn mocha",
+    "test": "yarn lint && yarn mocha $1",
     "local:publish": "yarn typings:build && yarn docs:build && npm unpublish --force --registry http://localhost @rize/rize-js && npm publish --registry http://localhost"
   },
   "author": "",
