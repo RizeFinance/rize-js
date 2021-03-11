@@ -957,7 +957,7 @@ Type: [Object][134]
     -   **_pending_** - The Transaction is being processed. This state will persist until all related Transaction Events have settled or could not be completed.
     -   **_settled_** - The Transaction is complete. All of the related Transaction Events are settled.
     -   **_failed_** - The Transaction has failed. This state indicates that one of the related Transaction Events could not be settled. A failed Transaction may require the reversal of a related Synthetic Line Item and/or Custodial Line Item.
--   `amount` **[string][117]** The amount will never be negative
+-   `us_dollar_amount` **[string][117]** The amount will never be negative
 -   `type` **(`"atm_withdrawal"` \| `"card_purchase"` \| `"card_refund"` \| `"dispute"` \| `"external_transfer"` \| `"fee"` \| `"internal_transfer"` \| `"other"` \| `"reversed_transfer"` \| `"third_party_transfer"`)** **_atm_withdrawal_** - Cash is withdrawn at an ATM using a Debit Card.-   **_card_purchase_** - A purchase is made using a Debit Card.
     -   **_card_refund_** - A previous Debit Card Transaction is refunded.
     -   **_dispute_** - If a Customer claims that a Transaction was created in error, one or more Transactions will be created with this type to credit or debit based on the dispute outcome.
