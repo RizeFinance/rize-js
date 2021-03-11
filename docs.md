@@ -661,11 +661,11 @@ const transactions = await rize.transaction.getList({
     source_synthetic_account_uid: ['synthetic_account_uid1', 'synthetic_account_uid2'],
     destination_synthetic_account_uid: ['synthetic_account_uid1', 'synthetic_account_uid2'],
     synthetic_account_uid: ['synthetic_account_uid1', 'synthetic_account_uid2'],
-    type: 'internal_transfer',
+    type: ['internal_transfer'],
     limit: 50,
     offset: 0,
     search_description: 'Transfer*',
-    status: 'settled',
+    status: ['settled'],
     sort: 'created_at_asc'
 });
 ```
@@ -702,11 +702,11 @@ Retrieves a list of Synthetic Line Items filtered by the given parameters.
 const syntheticLineItems = await rize.transaction.getSyntheticLineItemList({
     customer_uid: ['customer_uid1', 'customer_uid2'],
     pool_uid: ['pool_uid1', 'pool_uid2'],
-    synthetic_account_uid: ['synthetic_account_uid1', 'synthetic_account_uid2']
+    synthetic_account_uid: ['synthetic_account_uid1', 'synthetic_account_uid2'],
     limit: 50,
     offset: 0,
-    transaction_uid: 'transaction_uid1',
-    status: 'settled',
+    transaction_uid: ['transaction_uid1', 'transaction_uid2'],
+    status: ['settled'],
     sort: 'created_at_asc'
 });
 ```
@@ -724,7 +724,7 @@ Get a single Synthetic Line Item
 #### Examples
 
 ```javascript
-const syntheticLineItem = await rize.transaction.getSyntheticLineItem(transactionUid);
+const syntheticLineItem = await rize.transaction.getSyntheticLineItem(syntheticLineItemUid);
 ```
 
 Returns **[Promise][132]&lt;[SyntheticLineItem][149]>** A promise that returns a Synthetic Line Item if resolved.

@@ -45,11 +45,11 @@ declare class TransactionService {
      *     source_synthetic_account_uid: ['synthetic_account_uid1', 'synthetic_account_uid2'],
      *     destination_synthetic_account_uid: ['synthetic_account_uid1', 'synthetic_account_uid2'],
      *     synthetic_account_uid: ['synthetic_account_uid1', 'synthetic_account_uid2'],
-     *     type: 'internal_transfer',
+     *     type: ['internal_transfer'],
      *     limit: 50,
      *     offset: 0,
      *     search_description: 'Transfer*',
-     *     status: 'settled',
+     *     status: ['settled'],
      *     sort: 'created_at_asc'
      * });
      */
@@ -70,11 +70,11 @@ declare class TransactionService {
      * const syntheticLineItems = await rize.transaction.getSyntheticLineItemList({
      *     customer_uid: ['customer_uid1', 'customer_uid2'],
      *     pool_uid: ['pool_uid1', 'pool_uid2'],
-     *     synthetic_account_uid: ['synthetic_account_uid1', 'synthetic_account_uid2']
+     *     synthetic_account_uid: ['synthetic_account_uid1', 'synthetic_account_uid2'],
      *     limit: 50,
      *     offset: 0,
-     *     transaction_uid: 'transaction_uid1',
-     *     status: 'settled',
+     *     transaction_uid: ['transaction_uid1', 'transaction_uid2'],
+     *     status: ['settled'],
      *     sort: 'created_at_asc'
      * });
      */
@@ -84,7 +84,7 @@ declare class TransactionService {
      *
      * @param {string} uid - Rize-generated unique Synthetic Line Item id
      * @returns {Promise<SyntheticLineItem>} A promise that returns a Synthetic Line Item if resolved.
-     * @example const syntheticLineItem = await rize.transaction.getSyntheticLineItem(transactionUid);
+     * @example const syntheticLineItem = await rize.transaction.getSyntheticLineItem(syntheticLineItemUid);
      */
     getSyntheticLineItem(uid: string): Promise<SyntheticLineItem>;
 }
