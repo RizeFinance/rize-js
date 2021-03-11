@@ -83,17 +83,17 @@
     -   [Properties][79]
 -   [ComplianceWorkflow][80]
     -   [Properties][81]
--   [AccountError][82]
+-   [CustodialAccountListQuery][82]
     -   [Properties][83]
--   [CustodialAccountListQuery][84]
+-   [CustodialAccount][84]
     -   [Properties][85]
--   [CustodialAccount][86]
+-   [AccountError][86]
     -   [Properties][87]
 -   [CustomerListQuery][88]
     -   [Properties][89]
--   [Customer][90]
+-   [CustomerDetails][90]
     -   [Properties][91]
--   [CustomerDetails][92]
+-   [Customer][92]
     -   [Properties][93]
 -   [Address][94]
     -   [Properties][95]
@@ -740,16 +740,6 @@ Type: [Object][137]
 -   `current_step_documents_pending` **[Array][139]&lt;Omit&lt;[ComplianceDocument][142], `"accepted_at"`>>** Compliance Documents that await acknowledgment in the current Step
 -   `all_documents` **[Array][139]&lt;Omit&lt;[ComplianceDocument][142], (`"accepted_at"` \| `"uid"`)>>** The set of all Compliance Documents that would require acknowledgment
 
-## AccountError
-
-Type: [Object][137]
-
-### Properties
-
--   `error_code` **[string][120]** 
--   `error_name` **[string][120]** 
--   `error_description` **[string][120]** 
-
 ## CustodialAccountListQuery
 
 Type: [Object][137]
@@ -792,6 +782,16 @@ Type: [Object][137]
 -   `opened_at` **[Date][145]** The DateTime at which this account was created
 -   `closed_at` **[Date][145]** The DateTime at which this account was closed
 
+## AccountError
+
+Type: [Object][137]
+
+### Properties
+
+-   `error_code` **[string][120]** 
+-   `error_name` **[string][120]** 
+-   `error_description` **[string][120]** 
+
 ## CustomerListQuery
 
 Type: [Object][137]
@@ -811,6 +811,21 @@ Type: [Object][137]
 -   `limit` **[string][120]?**  Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
 -   `offset` **[string][120]?** Index of the items to start retrieving from. Default: 0
 -   `sort` **(`"first_name_asc"` \| `"first_name_desc"` \| `"last_name_asc"` \| `"last_name_desc"` \| `"email_asc"` \| `"email_desc"`)?** Sort returned items.
+
+## CustomerDetails
+
+Type: [Object][137]
+
+### Properties
+
+-   `first_name` **[string][120]** 
+-   `middle_name` **([string][120] | null)?** 
+-   `last_name` **[string][120]** 
+-   `suffix` **([string][120] | null)?** 
+-   `phone` **[string][120]** 
+-   `ssn` **[string][120]** 
+-   `dob` **[string][120]** 
+-   `address` **[Address][146]** 
 
 ## Customer
 
@@ -844,21 +859,6 @@ Type: [Object][137]
 -   `locked_at` **([Date][145] | null)?** The date and time when the Customer was locked. This field will be null if and only if the lock_reason is null.
 -   `lock_reason` **([string][120] | null)?** The lock reason provided by the Client, an admin User, or the system at the time the Customer was locked. This field will be null if and only if the locked_at is null.
 -   `details` **[CustomerDetails][129]** An object containing the supplied identifying information for the Customer.
-
-## CustomerDetails
-
-Type: [Object][137]
-
-### Properties
-
--   `first_name` **[string][120]** 
--   `middle_name` **([string][120] | null)?** 
--   `last_name` **[string][120]** 
--   `suffix` **([string][120] | null)?** 
--   `phone` **[string][120]** 
--   `ssn` **[string][120]** 
--   `dob` **[string][120]** 
--   `address` **[Address][146]** 
 
 ## Address
 
@@ -976,7 +976,7 @@ Type: [Object][137]
     -   **_pending_** - The Transaction is being processed. This state will persist until all related Transaction Events have settled or could not be completed.
     -   **_settled_** - The Transaction is complete. All of the related Transaction Events are settled.
     -   **_failed_** - The Transaction has failed. This state indicates that one of the related Transaction Events could not be settled. A failed Transaction may require the reversal of a related Synthetic Line Item and/or Custodial Line Item.
--   `amount` **[string][120]** The amount will never be negative
+-   `us_dollar_amount` **[string][120]** The amount will never be negative
 -   `type` **(`"atm_withdrawal"` \| `"card_purchase"` \| `"card_refund"` \| `"dispute"` \| `"external_transfer"` \| `"fee"` \| `"internal_transfer"` \| `"other"` \| `"reversed_transfer"` \| `"third_party_transfer"`)** **_atm_withdrawal_** - Cash is withdrawn at an ATM using a Debit Card.-   **_card_purchase_** - A purchase is made using a Debit Card.
     -   **_card_refund_** - A previous Debit Card Transaction is refunded.
     -   **_dispute_** - If a Customer claims that a Transaction was created in error, one or more Transactions will be created with this type to credit or debit based on the dispute outcome.
@@ -1241,15 +1241,15 @@ Type: [string][120]
 
 [81]: #properties-5
 
-[82]: #accounterror
+[82]: #custodialaccountlistquery
 
 [83]: #properties-6
 
-[84]: #custodialaccountlistquery
+[84]: #custodialaccount
 
 [85]: #properties-7
 
-[86]: #custodialaccount
+[86]: #accounterror
 
 [87]: #properties-8
 
@@ -1257,11 +1257,11 @@ Type: [string][120]
 
 [89]: #properties-9
 
-[90]: #customer
+[90]: #customerdetails
 
 [91]: #properties-10
 
-[92]: #customerdetails
+[92]: #customer
 
 [93]: #properties-11
 

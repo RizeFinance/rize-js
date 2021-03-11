@@ -52,7 +52,7 @@ export type Transaction = {
     /**
      * - The amount will never be negative
      */
-    amount: string;
+    us_dollar_amount: string;
     /**
      * - ***atm_withdrawal*** - Cash is withdrawn at an ATM using a Debit Card.
      * - ***card_purchase*** - A purchase is made using a Debit Card.
