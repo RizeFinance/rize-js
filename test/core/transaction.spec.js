@@ -15,6 +15,8 @@ const rizeClient = new Rize(
 );
 
 describe('Transaction', () => {
+    let testTransaction;
+
     describe('getList', async () => {
         it('Throws an error if "query" is invalid', () => {
             const promise = rizeClient.transaction.getList('');
@@ -77,7 +79,7 @@ describe('Transaction', () => {
 
         it('Retrieves the transaction list without query', async () => {
             const transactionList = await rizeClient.transaction.getList();
-
+            testTransaction = transactionList.data[0];
             utils.expectRizeList(transactionList);
         });
 
@@ -90,6 +92,18 @@ describe('Transaction', () => {
             };
             const transactionList = await rizeClient.transaction.getList(query);
             utils.expectRizeList(transactionList);
+        });
+    });
+
+    describe('get', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.transaction.get('');
+            return expect(promise).to.eventually.be.rejectedWith('Transaction "uid" is required.');
+        });
+    
+        it('Retrieves transaction data successfully', async () => {
+            const transaction = await rizeClient.transaction.get(testTransaction.uid);
+            expect(transaction).to.have.property('uid').that.equals(testTransaction.uid);
         });
     });
 });
