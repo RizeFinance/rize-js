@@ -201,4 +201,80 @@ describe('Transaction', () => {
             expect(syntheticLineItem).to.have.property('uid').that.equals(testSyntheticLineItem.uid);
         });
     });
+
+    describe('getCustodialLineItemList', async () => {
+        it('Throws an error if "query" is invalid', () => {
+            const promise = rizeClient.transaction.getCustodialLineItemList('');
+            return expect(promise).to.eventually.be.rejectedWith('"query" must be a CustodialLineItemListQuery object.');
+        });
+
+        it('Throws an error if "customer_uid" query is not an array', () => {
+            const query = { customer_uid: '' };
+            const promise = rizeClient.transaction.getCustodialLineItemList(query);
+            return expect(promise).to.eventually.be.rejectedWith('"customer_uid" query must be an array.');
+        });
+
+        it('Throws an error if "custodial_account_uid" query is not an array', () => {
+            const query = { custodial_account_uid: '' };
+            const promise = rizeClient.transaction.getCustodialLineItemList(query);
+            return expect(promise).to.eventually.be.rejectedWith('"custodial_account_uid" query must be an array.');
+        });
+
+        it('Throws an error if "status" query is not an array of valid values', () => {
+            const query = { status: null };
+            const promise = rizeClient.transaction.getCustodialLineItemList(query);
+            return expect(promise).to.eventually.be.rejectedWith('"status" query must be an array. Accepted values inside the array are: settled | voided');
+        });
+
+        it('Throws an error if "transaction_event_uid" query is not an array', () => {
+            const query = { transaction_event_uid: '' };
+            const promise = rizeClient.transaction.getCustodialLineItemList(query);
+            return expect(promise).to.eventually.be.rejectedWith('"transaction_event_uid" query must be an array.');
+        });
+
+        it('Throws an error if "transaction_uid" query is not an array', () => {
+            const query = { transaction_uid: '' };
+            const promise = rizeClient.transaction.getCustodialLineItemList(query);
+            return expect(promise).to.eventually.be.rejectedWith('"transaction_uid" query must be an array.');
+        });
+
+        it('Throws an error if "limit" query is not an integer', () => {
+            const query = { limit: 1.5 };
+            const promise = rizeClient.transaction.getCustodialLineItemList(query);
+            return expect(promise).to.eventually.be.rejectedWith('"limit" query must be an integer.');
+        });
+
+        it('Throws an error if "offset" query is not an integer', () => {
+            const query = { offset: 1.5 };
+            const promise = rizeClient.transaction.getCustodialLineItemList(query);
+            return expect(promise).to.eventually.be.rejectedWith('"offset" query must be an integer.');
+        });
+
+        it('Throws an error if "sort" query is not on the sort options', () => {
+            const query = { sort: null };
+            const promise = rizeClient.transaction.getCustodialLineItemList(query);
+            return expect(promise).to.eventually.be.rejectedWith('"sort" query must be a string. Accepted values are: created_at_asc | created_at_desc | description_asc | description_desc | settled_index_asc | settled_index_desc | us_dollar_amount_asc | us_dollar_amount_desc');
+        });
+
+        it('Retrieves the custodial line item list without query', async () => {
+            const custodialLineItemList = await rizeClient.transaction.getCustodialLineItemList();
+            // testCustodialLineItem = custodialLineItemList.data[0];
+            utils.expectRizeList(custodialLineItemList);
+        });
+
+        it('Retrieves the custodial line item list with query', async () => {
+            const query = {
+                customer_uid: ['customer_uid1', 'customer_uid2'],
+                pool_uid: ['pool_uid1', 'pool_uid2'],
+                custodial_account_uid: ['custodial_account_uid1', 'custodial_account_uid2'],
+                limit: 50,
+                offset: 0,
+                transaction_uid: ['transaction_uid1', 'transaction_uid2'],
+                status: ['settled'],
+                sort: 'created_at_asc'
+            };
+            const custodialLineItemList = await rizeClient.transaction.getCustodialLineItemList(query);
+            utils.expectRizeList(custodialLineItemList);
+        });
+    });
 });
