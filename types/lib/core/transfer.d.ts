@@ -1,4 +1,7 @@
 export = TransferService;
+/**
+ * The Transfer service class
+ */
 declare class TransferService {
     /**
      * @hideconstructor
