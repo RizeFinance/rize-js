@@ -205,3 +205,37 @@ export type TransactionEventListQuery = {
     offset?: number;
     sort?: 'created_at_asc' | 'created_at_desc' | 'description_asc' | 'description_desc' | 'settled_index_asc' | 'settled_index_desc' | 'us_dollar_amount_asc' | 'us_dollar_amount_desc';
 };
+export type SyntheticLineItemListQuery = {
+    /**
+     * - Filter by Customer.
+     */
+    customer_uid?: Array<string>;
+    /**
+     * - Filter by pool.
+     */
+    pool_uid?: Array<string>;
+    /**
+     * - Filter by Synthetic Account.
+     */
+    synthetic_account_uid?: Array<string>;
+    /**
+     * - Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default = 100.
+     */
+    limit?: number;
+    /**
+     * - Index of the items to start retrieving from. Default = 0.
+     */
+    offset?: number;
+    /**
+     * - Filter by Transaction.
+     */
+    transaction_uid?: Array<string>;
+    /**
+     * - Filter by status.
+     */
+    status?: Array<'begun' | 'failed' | 'in_progress' | 'settled'>;
+    /**
+     * '|'created_at_desc'|'description_asc'|'description_desc'|'settled_index_asc'|'settled_index_desc'|'us_dollar_amount_asc'|'us_dollar_amount_desc} [sort]
+     */
+    "": any;
+};
