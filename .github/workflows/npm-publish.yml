@@ -1,6 +1,8 @@
 name: Rize SDK Package
 
-on: [push]
+on:
+  release:
+    types: [published]
 
 jobs:
   publish-gpr:
