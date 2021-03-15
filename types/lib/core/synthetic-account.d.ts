@@ -31,6 +31,12 @@ declare class SyntheticAccountService {
     protected _validateGetListQuery(query: SyntheticAccountListQuery): void;
     /**
      * @ignore @protected
+     * Validates payload parameter object for the "create" method
+     * @param {SyntheticAccountCreateRequest} request
+     */
+    protected _validateCreateParams(request: SyntheticAccountCreateRequest): void;
+    /**
+     * @ignore @protected
      * Validates query parameter object for the "getTypesList" method
      * @param {SyntheticAccountTypeListQuery} query
      */
@@ -42,10 +48,8 @@ declare class SyntheticAccountService {
      */
     protected _validateUpdateParams(uid: any, name: any, note: any): void;
     /**
-     *
-     * @param {*} query
      * List Synthetic Accounts
-     * @param {SyntheticAccountListQuery} query
+     * @param {SyntheticAccountListQuery} query - An object containing key value paris for filtering the result.
      * @returns {Promise<RizeList<SyntheticAccount>>} A promise that returns the Synthetic Account list if resolved.
      * @example
      * const syntheticAccounts = await rize.syntheticAccount.getList({
@@ -61,7 +65,7 @@ declare class SyntheticAccountService {
      *     sort: 'name_asc'
      * });
      */
-    getList(query?: any): Promise<RizeList<SyntheticAccount>>;
+    getList(query?: SyntheticAccountListQuery): Promise<RizeList<SyntheticAccount>>;
     /**
      * Get a single Synthetic account
      *
@@ -71,12 +75,6 @@ declare class SyntheticAccountService {
      * @example const syntheticAccount = await rize.syntheticAccount.get(syntheticAccountUid);
      */
     get(uid: string): Promise<SyntheticAccount>;
-    /**
-     * @ignore @protected
-     * Validates payload parameter object for the "create" method
-     * @param {SyntheticAccountCreateRequest} request
-     */
-    protected _validateCreateParams(request: SyntheticAccountCreateRequest): void;
     /**
      * @param {SyntheticAccountCreateRequest} payload - is a JSON object needs to send as body parameters in order to create new synthetic accounts.
      * @returns {Promise<RizeList<SyntheticAccount>>}
@@ -145,8 +143,8 @@ declare namespace SyntheticAccountService {
     export { SyntheticAccount, SyntheticAccountListQuery, SyntheticAccountType, SyntheticAccountTypeListQuery, SyntheticAccountCreateRequest, RizeList };
 }
 type SyntheticAccountListQuery = import('./typedefs/synthetic-account.typedefs').SyntheticAccountListQuery;
+type SyntheticAccountCreateRequest = import('./typedefs/synthetic-account.typedefs').SyntheticAccountCreateRequest;
 type SyntheticAccountTypeListQuery = import('./typedefs/synthetic-account.typedefs').SyntheticAccountTypeListQuery;
 type RizeList<T> = import('./typedefs/common.typedefs').RizeList<T>;
 type SyntheticAccount = import('./typedefs/synthetic-account.typedefs').SyntheticAccount;
-type SyntheticAccountCreateRequest = import('./typedefs/synthetic-account.typedefs').SyntheticAccountCreateRequest;
 type SyntheticAccountType = import('./typedefs/synthetic-account.typedefs').SyntheticAccountType;

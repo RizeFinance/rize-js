@@ -524,9 +524,11 @@ The Synthetic Account service class.
 
 ### getList
 
+List Synthetic Accounts
+
 #### Parameters
 
--   `query` **[SyntheticAccountListQuery][172]**  (optional, default `{}`)
+-   `query` **[SyntheticAccountListQuery][172]** An object containing key value paris for filtering the result. (optional, default `{}`)
 
 #### Examples
 

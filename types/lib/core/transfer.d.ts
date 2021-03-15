@@ -23,7 +23,16 @@ declare class TransferService {
      * @param {string} uid
      */
     protected _validateGetParams(uid: string): void;
-    _validateInitParams(externalUid: any, sourceSyntheticAccountUid: any, destinationSyntheticAccountUid: any, initiatingCustomerUid: any, usTransferAmount: any): void;
+    /**
+     * @ignore @protected
+     * Validates the parameters for the "init" method
+     * @param {*} externalUid
+     * @param {*} sourceSyntheticAccountUid
+     * @param {*} destinationSyntheticAccountUid
+     * @param {*} initiatingCustomerUid
+     * @param {*} usTransferAmount
+     */
+    protected _validateInitParams(externalUid: any, sourceSyntheticAccountUid: any, destinationSyntheticAccountUid: any, initiatingCustomerUid: any, usTransferAmount: any): void;
     /**
      * Retrieves a list of Tranfers filtered by the given parameters.
      * @param {TransferListQuery} query - An object containing key value pair for filtering the results list.

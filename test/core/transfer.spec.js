@@ -1,9 +1,12 @@
 'use strict';
 
+require('./synthetic-account.spec');
+
 const utils = require('../../lib/test-utils');
 
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
+const faker = require('faker');
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
@@ -15,7 +18,15 @@ const rizeClient = new Rize(
 );
 
 describe('Transfer', () => {
+    let customerUid;
     let testTransfer;
+    let testExternalSyntheticAccountUid;
+    let primarySyntheticAccount;
+
+    before(() => {
+        customerUid = process.env.TEST_CUSTOMER_UID;
+        testExternalSyntheticAccountUid = process.env.TEST_EXTERNAL_SYNTHETIC_ACCOUNT_UID;
+    });
 
     describe('getList', async () => {
         it('Throws an error if "query" is invalid', () => {
@@ -83,5 +94,98 @@ describe('Transfer', () => {
             const transfer = await rizeClient.transfer.get(testTransfer.uid);
             expect(transfer).to.have.property('uid').that.equals(testTransfer.uid);
         });
+    });
+
+    describe('init', () => {
+        it('Throws an error if "externalUid" is empty', () => {
+            const promise = rizeClient.transfer.init('');
+            return expect(promise).to.eventually.be.rejectedWith('"externalUid" is required.');
+        });
+
+        it('Throws an error if "sourceSyntheticAccountUid" is empty', () => {
+            const promise = rizeClient.transfer.init('test', '');
+            return expect(promise).to.eventually.be.rejectedWith('"sourceSyntheticAccountUid" is required.');
+        });
+
+        it('Throws an error if "destinationSyntheticAccountUid" is empty', () => {
+            const promise = rizeClient.transfer.init('test', 'test', '');
+            return expect(promise).to.eventually.be.rejectedWith('"destinationSyntheticAccountUid" is required.');
+        });
+        
+        it('Throws an error if "initiatingCustomerUid" is empty', () => {
+            const promise = rizeClient.transfer.init('test', 'test', 'test', '');
+            return expect(promise).to.eventually.be.rejectedWith('"initiatingCustomerUid" is required.');
+        });
+
+        it('Throws an error if "usTransferAmount" is empty', () => {
+            const promise = rizeClient.transfer.init('test', 'test', 'test', 'test', '');
+            return expect(promise).to.eventually.be.rejectedWith('"usTransferAmount" is required.');
+        });
+
+        it('Initializes an External-to-PrimaryAccount Transfer successfully', async () => {
+            const customerAccounts = await rizeClient.syntheticAccount.getList({
+                customer_uid: [customerUid]
+            });
+
+            primarySyntheticAccount = customerAccounts.data.find(x => x.master_account && x.liability);
+
+            const newTransferExternalUid = faker.random.uuid();
+
+            const transfer = await rizeClient.transfer.init(
+                newTransferExternalUid,
+                testExternalSyntheticAccountUid,
+                primarySyntheticAccount.uid,
+                customerUid,
+                '100'
+            );
+
+            expect(transfer).to.have.property('uid');
+            expect(transfer).to.have.property('external_uid').that.equals(newTransferExternalUid);
+            expect(transfer).to.have.property('source_synthetic_account_uid').that.equals(testExternalSyntheticAccountUid);
+            expect(transfer).to.have.property('destination_synthetic_account_uid').that.equals(primarySyntheticAccount.uid);
+            expect(transfer).to.have.property('initiating_customer_uid').that.equals(customerUid);
+            expect(transfer).to.have.property('usd_transfer_amount').that.equals('100.0');
+            expect(transfer).to.have.property('status').that.equals('queued');
+
+            await new Promise(resolve => {
+                setTimeout(() => {
+                    resolve(); // Wait for about 1 min 5 sec for the transfer to be settled
+                }, 65000);
+            });
+
+            const updatedTransfer = await rizeClient.transfer.get(transfer.uid);
+
+            expect(updatedTransfer).to.have.property('status').that.equals('settled');
+        }).timeout(100000);
+
+        it('Initializes a PrimaryAccount-to-External Transfer successfully', async () => {
+            const newTransferExternalUid = faker.random.uuid();
+
+            const transfer = await rizeClient.transfer.init(
+                newTransferExternalUid,
+                primarySyntheticAccount.uid,
+                testExternalSyntheticAccountUid,
+                customerUid,
+                '100'
+            );
+
+            expect(transfer).to.have.property('uid');
+            expect(transfer).to.have.property('external_uid').that.equals(newTransferExternalUid);
+            expect(transfer).to.have.property('source_synthetic_account_uid').that.equals(primarySyntheticAccount.uid);
+            expect(transfer).to.have.property('destination_synthetic_account_uid').that.equals(testExternalSyntheticAccountUid);
+            expect(transfer).to.have.property('initiating_customer_uid').that.equals(customerUid);
+            expect(transfer).to.have.property('usd_transfer_amount').that.equals('100.0');
+            expect(transfer).to.have.property('status').that.equals('queued');
+
+            await new Promise(resolve => {
+                setTimeout(() => {
+                    resolve(); // Wait for about 1 min 5 sec for the transfer to be settled
+                }, 65000);
+            });
+
+            const updatedTransfer = await rizeClient.transfer.get(transfer.uid);
+
+            expect(updatedTransfer).to.have.property('status').that.equals('settled');
+        }).timeout(100000);
     });
 });
