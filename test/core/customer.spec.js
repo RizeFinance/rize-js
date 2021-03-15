@@ -25,7 +25,7 @@ describe('Customer', () => {
     const fakeMiddleName = faker.name.middleName();
     const fakeLastName = faker.name.lastName();
     const fakeSuffix = faker.name.suffix();
-    const fakePhone = faker.phone.phoneNumber('#########');
+    const fakePhone = faker.phone.phoneNumber('##########');
     const fakeSsn = '111-22-3333';
     const fakeDob = '1990-01-31';
     const fakeStreet1 = faker.address.streetAddress();
@@ -411,20 +411,6 @@ describe('Customer', () => {
 
             const updatedCustomer = await rizeClient.customer.verifyIdentity(customerUid);
             expect(updatedCustomer.status).equals('queued');
-        });
-    });
-
-    describe('archive', () => {
-        it('Throws an error if "uid" is empty', () => {
-            const promise = rizeClient.customer.archive(' ');
-            return expect(promise).to.eventually.be.rejectedWith('Customer "uid" is required.');
-        });
-
-        it('Archives the customer', async () => {
-            await rizeClient.customer.archive(customerUid);
-            const updatedCustomer = await rizeClient.customer.get(customerUid);
-
-            expect(updatedCustomer.status).equals('archived');
         });
     });
 });
