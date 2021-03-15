@@ -17,6 +17,7 @@ const rizeClient = new Rize(
 describe('Transaction', () => {
     let testTransaction;
     let testSyntheticLineItem;
+    let testCustodialLineItem;
 
     describe('getList', async () => {
         it('Throws an error if "query" is invalid', () => {
@@ -258,7 +259,7 @@ describe('Transaction', () => {
 
         it('Retrieves the custodial line item list without query', async () => {
             const custodialLineItemList = await rizeClient.transaction.getCustodialLineItemList();
-            // testCustodialLineItem = custodialLineItemList.data[0];
+            testCustodialLineItem = custodialLineItemList.data[0];
             utils.expectRizeList(custodialLineItemList);
         });
 
@@ -275,6 +276,18 @@ describe('Transaction', () => {
             };
             const custodialLineItemList = await rizeClient.transaction.getCustodialLineItemList(query);
             utils.expectRizeList(custodialLineItemList);
+        });
+    });
+
+    describe('getCustodialLineItem', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.transaction.getCustodialLineItem('');
+            return expect(promise).to.eventually.be.rejectedWith('Custodial Line Item "uid" is required.');
+        });
+    
+        it('Retrieves custodial line item data successfully', async () => {
+            const custodialLineItem = await rizeClient.transaction.getCustodialLineItem(testCustodialLineItem.uid);
+            expect(custodialLineItem).to.have.property('uid').that.equals(testCustodialLineItem.uid);
         });
     });
 });
