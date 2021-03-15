@@ -25,18 +25,6 @@ declare class TransactionService {
     protected _validateGetParams(uid: string): void;
     /**
      * @ignore @protected
-     * Validates the parameters for the "getSyntheticLineItem" method
-     * @param {string} uid
-     */
-    protected _validateGetSyntheticLineItemParams(uid: string): void;
-    /**
-     * @ignore @protected
-     * Validates query parameter object for getSyntheticLineItemList method.
-     * @param {} query - An object containing key value pair for filtering the results list.
-     */
-    protected _validateGetSyntheticLineItemListQuery(query: any): void;
-    /**
-     * @ignore @protected
      * Validates query parameter object for getTransactionEventList method.
      * @param {} query - An object containing key value pair for filtering the results list.
      */
@@ -47,6 +35,30 @@ declare class TransactionService {
      * @param {string} uid
      */
     protected _validateGetTransactionEventParams(uid: string): void;
+    /**
+     * @ignore @protected
+     * Validates query parameter object for getSyntheticLineItemList method.
+     * @param {} query - An object containing key value pair for filtering the results list.
+     */
+    protected _validateGetSyntheticLineItemListQuery(query: any): void;
+    /**
+     * @ignore @protected
+     * Validates the parameters for the "getSyntheticLineItem" method
+     * @param {string} uid
+     */
+    protected _validateGetSyntheticLineItemParams(uid: string): void;
+    /**
+     * @ignore @protected
+     * Validates query parameter object for getCustodialLineItemList method.
+     * @param {} query - An object containing key value pair for filtering the results list.
+     */
+    protected _validateGetCustodialLineItemListQuery(query: any): void;
+    /**
+     * @ignore @protected
+     * Validates the parameters for the "getCustodialLineItem" method
+     * @param {string} uid
+     */
+    protected _validateGetCustodialLineItemParams(uid: string): void;
     /**
      * Retrieves a list of Transactions filtered by the given parameters.
      * @param {TransactionListQuery} [query] - An object containing key value pair for filtering the results list.
@@ -153,7 +165,7 @@ declare class TransactionService {
     getCustodialLineItem(uid: string): Promise<CustodialLineItem>;
 }
 declare namespace TransactionService {
-    export { TransactionListQuery, Transaction, TransactionEvent, TransactionEventListQuery, SyntheticLineItemListQuery, SyntheticLineItem, RizeList };
+    export { TransactionListQuery, Transaction, TransactionEvent, TransactionEventListQuery, SyntheticLineItemListQuery, SyntheticLineItem, CustodialLineItemListQuery, CustodialLineItem, RizeList };
 }
 type TransactionListQuery = import('./typedefs/transaction.typedefs').TransactionListQuery;
 type RizeList<T> = import('./typedefs/common.typedefs').RizeList<T>;
