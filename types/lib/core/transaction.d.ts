@@ -25,18 +25,6 @@ declare class TransactionService {
     protected _validateGetParams(uid: string): void;
     /**
      * @ignore @protected
-     * Validates the parameters for the "getSyntheticLineItem" method
-     * @param {string} uid
-     */
-    protected _validateGetSyntheticLineItemParams(uid: string): void;
-    /**
-     * @ignore @protected
-     * Validates query parameter object for getSyntheticLineItemList method.
-     * @param {} query - An object containing key value pair for filtering the results list.
-     */
-    protected _validateGetSyntheticLineItemListQuery(query: any): void;
-    /**
-     * @ignore @protected
      * Validates query parameter object for getTransactionEventList method.
      * @param {} query - An object containing key value pair for filtering the results list.
      */
@@ -47,6 +35,30 @@ declare class TransactionService {
      * @param {string} uid
      */
     protected _validateGetTransactionEventParams(uid: string): void;
+    /**
+     * @ignore @protected
+     * Validates query parameter object for getSyntheticLineItemList method.
+     * @param {} query - An object containing key value pair for filtering the results list.
+     */
+    protected _validateGetSyntheticLineItemListQuery(query: any): void;
+    /**
+     * @ignore @protected
+     * Validates the parameters for the "getSyntheticLineItem" method
+     * @param {string} uid
+     */
+    protected _validateGetSyntheticLineItemParams(uid: string): void;
+    /**
+     * @ignore @protected
+     * Validates query parameter object for getCustodialLineItemList method.
+     * @param {} query - An object containing key value pair for filtering the results list.
+     */
+    protected _validateGetCustodialLineItemListQuery(query: any): void;
+    /**
+     * @ignore @protected
+     * Validates the parameters for the "getCustodialLineItem" method
+     * @param {string} uid
+     */
+    protected _validateGetCustodialLineItemParams(uid: string): void;
     /**
      * Retrieves a list of Transactions filtered by the given parameters.
      * @param {TransactionListQuery} [query] - An object containing key value pair for filtering the results list.
@@ -124,9 +136,36 @@ declare class TransactionService {
      * @example const syntheticLineItem = await rize.transaction.getSyntheticLineItem(syntheticLineItemUid);
      */
     getSyntheticLineItem(uid: string): Promise<SyntheticLineItem>;
+    /**
+     *
+     * @param {CustodialLineItemListQuery} query - An object containing key value pair for filtering the results list.
+     * @returns {Promise<RizeList<CustodialLineItem>>} A promise that returns a Custodial Line Item List if resolved.
+     * @example
+     * const custodialLineItems = await rize.transaction.getCustodialLineItemList({
+     *     customer_uid: ['customer_uid1', 'customer_uid2'],
+     *     custodial_account_uid: ['custodial_account_uid1', 'custodial_account_uid2'],
+     *     status: ['settled'],
+     *     us_dollar_amount_max: 100,
+     *     us_dollar_amount_min: 10,
+     *     transaction_event_uid: ['transaction_event_uid1', 'transaction_event_uid2'],
+     *     transaction_uid: ['transaction_uid1', 'transaction_uid2'],
+     *     limit: 50,
+     *     offset: 0,
+     *     sort: 'created_at_asc'
+     * });
+     */
+    getCustodialLineItemList(query?: CustodialLineItemListQuery): Promise<RizeList<CustodialLineItem>>;
+    /**
+     * Get a single Custodial Line Item
+     *
+     * @param {string} uid - Rize-generated unique Custodial Line Item id
+     * @returns {Promise<CustodialLineItem>} A promise that returns a Custodial Line Item if resolved.
+     * @example const custodialLineItem = await rize.transaction.getCustodialLineItem(custodialLineItemUid);
+     */
+    getCustodialLineItem(uid: string): Promise<CustodialLineItem>;
 }
 declare namespace TransactionService {
-    export { TransactionListQuery, Transaction, TransactionEvent, TransactionEventListQuery, SyntheticLineItemListQuery, SyntheticLineItem, RizeList };
+    export { TransactionListQuery, Transaction, TransactionEvent, TransactionEventListQuery, SyntheticLineItemListQuery, SyntheticLineItem, CustodialLineItemListQuery, CustodialLineItem, RizeList };
 }
 type TransactionListQuery = import('./typedefs/transaction.typedefs').TransactionListQuery;
 type RizeList<T> = import('./typedefs/common.typedefs').RizeList<T>;
@@ -135,3 +174,5 @@ type TransactionEventListQuery = import('./typedefs/transaction.typedefs').Trans
 type TransactionEvent = import('./typedefs/transaction.typedefs').TransactionEvent;
 type SyntheticLineItemListQuery = import('./typedefs/transaction.typedefs').SyntheticLineItemListQuery;
 type SyntheticLineItem = import('./typedefs/transaction.typedefs').SyntheticLineItem;
+type CustodialLineItemListQuery = import('./typedefs/transaction.typedefs').CustodialLineItemListQuery;
+type CustodialLineItem = import('./typedefs/transaction.typedefs').CustodialLineItem;
