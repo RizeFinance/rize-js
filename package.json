@@ -1,5 +1,5 @@
 {
-  "name": "@rize/rize-js",
+  "name": "@rizefinance/rize-js",
   "version": "1.0.0",
   "description": "Rize API wrapper",
   "main": "index.js",
