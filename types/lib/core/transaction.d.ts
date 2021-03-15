@@ -42,6 +42,12 @@ declare class TransactionService {
      */
     protected _validateGetCustodialLineItemListQuery(query: any): void;
     /**
+     * @ignore @protected
+     * Validates the parameters for the "getCustodialLineItem" method
+     * @param {string} uid
+     */
+    protected _validateGetCustodialLineItemParams(uid: string): void;
+    /**
      * Retrieves a list of Transactions filtered by the given parameters.
      * @param {TransactionListQuery} [query] - An object containing key value pair for filtering the results list.
      * @returns {Promise<RizeList<Transaction>>} A promise that returns a Transaction List if resolved.
@@ -112,6 +118,14 @@ declare class TransactionService {
      * });
      */
     getCustodialLineItemList(query?: CustodialLineItemListQuery): Promise<RizeList<CustodialLineItem>>;
+    /**
+     * Get a single Custodial Line Item
+     *
+     * @param {string} uid - Rize-generated unique Custodial Line Item id
+     * @returns {Promise<CustodialLineItem>} A promise that returns a Custodial Line Item if resolved.
+     * @example const custodialLineItem = await rize.transaction.getCustodialLineItem(custodialLineItemUid);
+     */
+    getCustodialLineItem(uid: string): Promise<CustodialLineItem>;
 }
 declare namespace TransactionService {
     export { TransactionListQuery, Transaction, SyntheticLineItemListQuery, SyntheticLineItem, CustodialLineItemListQuery, CustodialLineItem, RizeList };
