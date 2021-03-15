@@ -67,6 +67,14 @@ declare class TransactionService {
      */
     getList(query?: TransactionListQuery): Promise<RizeList<Transaction>>;
     /**
+     * Get a single Transaction
+     *
+     * @param {string} uid - Rize-generated unique transaction id
+     * @returns {Promise<Transaction>} A promise that returns a Transaction if resolved.
+     * @example const transaction = await rize.transaction.get(transactionUid);
+     */
+    get(uid: string): Promise<Transaction>;
+    /**
      * Retrieves a list of TransactionEvents filtered by the given parameters.
      * @param {TransactionEventListQuery} [query] - An object containing key value pair for filtering the results list.
      * @returns {Promise<RizeList<TransactionEvent>>} A promise that returns a TransactionEvent List if resolved.
@@ -84,17 +92,9 @@ declare class TransactionService {
      */
     getTransactionEventList(query?: TransactionEventListQuery): Promise<RizeList<TransactionEvent>>;
     /**
-     * Get a single Transaction
-     *
-     * @param {string} uid - Rize-generated unique transaction id
-     * @returns {Promise<Transaction>} A promise that returns a Transaction if resolved.
-     * @example const transaction = await rize.transaction.get(transactionUid);
-     */
-    get(uid: string): Promise<Transaction>;
-    /**
      * Get a single Transaction Event
      *
-     * @param {string} uid - Rize-generated unique transaction id
+     * @param {string} uid - Rize-generated unique transaction event id
      * @returns {Promise<TransactionEvent>} - A promise that returns a Transaction Event if resolved.
      * @example const transactionEvent = await rize.transaction.getTransactionEvent(transactionEventUid);
      */

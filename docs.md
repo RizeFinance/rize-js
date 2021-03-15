@@ -69,10 +69,10 @@
     -   [getList][65]
         -   [Parameters][66]
         -   [Examples][67]
-    -   [getTransactionEventList][68]
+    -   [get][68]
         -   [Parameters][69]
         -   [Examples][70]
-    -   [get][71]
+    -   [getTransactionEventList][71]
         -   [Parameters][72]
         -   [Examples][73]
     -   [getTransactionEvent][74]
@@ -678,6 +678,22 @@ const transactions = await rize.transaction.getList({
 
 Returns **[Promise][138]&lt;[RizeList][143]&lt;[Transaction][153]>>** A promise that returns a Transaction List if resolved.
 
+### get
+
+Get a single Transaction
+
+#### Parameters
+
+-   `uid` **[string][137]** Rize-generated unique transaction id
+
+#### Examples
+
+```javascript
+const transaction = await rize.transaction.get(transactionUid);
+```
+
+Returns **[Promise][138]&lt;[Transaction][153]>** A promise that returns a Transaction if resolved.
+
 ### getTransactionEventList
 
 Retrieves a list of TransactionEvents filtered by the given parameters.
@@ -703,29 +719,13 @@ const transactionEventList = await rize.transaction.getTransactionEventList({
 
 Returns **[Promise][138]&lt;[RizeList][143]&lt;TransactionEvent>>** A promise that returns a TransactionEvent List if resolved.
 
-### get
-
-Get a single Transaction
-
-#### Parameters
-
--   `uid` **[string][137]** Rize-generated unique transaction id
-
-#### Examples
-
-```javascript
-const transaction = await rize.transaction.get(transactionUid);
-```
-
-Returns **[Promise][138]&lt;[Transaction][153]>** A promise that returns a Transaction if resolved.
-
 ### getTransactionEvent
 
 Get a single Transaction Event
 
 #### Parameters
 
--   `uid` **[string][137]** Rize-generated unique transaction id
+-   `uid` **[string][137]** Rize-generated unique transaction event id
 
 #### Examples
 
@@ -1383,13 +1383,13 @@ Type: [string][137]
 
 [67]: #examples-19
 
-[68]: #gettransactioneventlist
+[68]: #get-3
 
 [69]: #parameters-21
 
 [70]: #examples-20
 
-[71]: #get-3
+[71]: #gettransactioneventlist
 
 [72]: #parameters-22
 
