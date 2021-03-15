@@ -209,6 +209,12 @@ describe('Transaction', () => {
             return expect(promise).to.eventually.be.rejectedWith('"query" must be a TransactionEventListQuery object.');
         });
 
+        it('Throws an error if "transaction_uid" query is not an array', () => {
+            const query = { transaction_uid: '' };
+            const promise = rizeClient.transaction.getTransactionEventList(query);
+            return expect(promise).to.eventually.be.rejectedWith('"transaction_uid" query must be an array.');
+        });
+
         it('Throws an error if "source_custodial_account_uid" query is not an array', () => {
             const query = { source_custodial_account_uid: '' };
             const promise = rizeClient.transaction.getTransactionEventList(query);
@@ -265,7 +271,11 @@ describe('Transaction', () => {
 
         it('Retrieves the transaction event list with query', async () => {
             const query = {
-                customer_uid: ['customer_uid1', 'customer_uid2'],
+                source_custodial_account_uid: ['custodial_account_uid1', 'custodial_account_uid2'],
+                destination_custodial_account_uid: ['custodial_account_uid1', 'custodial_account_uid2'],
+                custodial_account_uid: ['custodial_account_uid1', 'custodial_account_uid2'],
+                type: ['odfi_ach_deposit'],
+                transaction_uid: ['transaction_uid1'],
                 limit: 50,
                 offset: 0,
                 sort: 'created_at_asc'
