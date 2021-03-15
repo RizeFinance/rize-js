@@ -117,7 +117,7 @@ describe('Transaction', () => {
     describe('getSyntheticLineItemList', async () => {
         it('Throws an error if "query" is invalid', () => {
             const promise = rizeClient.transaction.getSyntheticLineItemList('');
-            return expect(promise).to.eventually.be.rejectedWith('"query" must be a TransactionListQuery object.');
+            return expect(promise).to.eventually.be.rejectedWith('"query" must be a SyntheticLineItemListQuery object.');
         });
 
         it('Throws an error if "customer_uid" query is not an array', () => {
