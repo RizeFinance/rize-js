@@ -108,7 +108,7 @@ describe('Transaction', () => {
             const promise = rizeClient.transaction.get('');
             return expect(promise).to.eventually.be.rejectedWith('Transaction "uid" is required.');
         });
-    
+
         it('Retrieves transaction data successfully', async () => {
             const transaction = await rizeClient.transaction.get(testTransaction.uid);
             expect(transaction).to.have.property('uid').that.equals(testTransaction.uid);
@@ -196,7 +196,7 @@ describe('Transaction', () => {
             const promise = rizeClient.transaction.getSyntheticLineItem('');
             return expect(promise).to.eventually.be.rejectedWith('Synthetic Line Item "uid" is required.');
         });
-    
+
         it('Retrieves synthetic line item data successfully', async () => {
             const syntheticLineItem = await rizeClient.transaction.getSyntheticLineItem(testSyntheticLineItem.uid);
             expect(syntheticLineItem).to.have.property('uid').that.equals(testSyntheticLineItem.uid);
@@ -266,12 +266,14 @@ describe('Transaction', () => {
         it('Retrieves the custodial line item list with query', async () => {
             const query = {
                 customer_uid: ['customer_uid1', 'customer_uid2'],
-                pool_uid: ['pool_uid1', 'pool_uid2'],
                 custodial_account_uid: ['custodial_account_uid1', 'custodial_account_uid2'],
+                status: ['settled'],
+                us_dollar_amount_max: 100,
+                us_dollar_amount_min: 10,
+                transaction_event_uid: ['transaction_event_uid1', 'transaction_event_uid2'],
+                transaction_uid: ['transaction_uid1', 'transaction_uid2'],
                 limit: 50,
                 offset: 0,
-                transaction_uid: ['transaction_uid1', 'transaction_uid2'],
-                status: ['settled'],
                 sort: 'created_at_asc'
             };
             const custodialLineItemList = await rizeClient.transaction.getCustodialLineItemList(query);
@@ -284,7 +286,7 @@ describe('Transaction', () => {
             const promise = rizeClient.transaction.getCustodialLineItem('');
             return expect(promise).to.eventually.be.rejectedWith('Custodial Line Item "uid" is required.');
         });
-    
+
         it('Retrieves custodial line item data successfully', async () => {
             const custodialLineItem = await rizeClient.transaction.getCustodialLineItem(testCustodialLineItem.uid);
             expect(custodialLineItem).to.have.property('uid').that.equals(testCustodialLineItem.uid);
