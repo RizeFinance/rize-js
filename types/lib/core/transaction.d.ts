@@ -96,7 +96,7 @@ declare class TransactionService {
      *
      * @param {string} uid - Rize-generated unique transaction id
      * @returns {Promise<TransactionEvent>} - A promise that returns a Transaction Event if resolved.
-     * @example const transaction = await rize.transaction.getTransactionEvent(transactionUid);
+     * @example const transactionEvent = await rize.transaction.getTransactionEvent(transactionEventUid);
      */
     getTransactionEvent(uid: string): Promise<TransactionEvent>;
     /**

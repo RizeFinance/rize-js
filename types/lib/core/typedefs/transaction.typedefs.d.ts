@@ -133,9 +133,9 @@ export type TransactionEvent = {
      */
     transaction_uid: string;
     /**
-     * - Some Transfer types will trigger multiple transfers at the custodial level. Some of these custodial transfers must wait for all dependent custodial transfers to complete before initiating.
+     * - Some Transfer types will trigger multiple transfers at the custodial level. Some of these custodial transfers must wait for all dependent custodial transfers to complete before initiating. Transaction Events with `phase` value 1 are recorded for the first set of custodial transfers that get initiated after the (Synthetic) Transfer starts. Custodial transfers in later phases cannot initiate before all events from previous phases are settled.
      */
-    phase: any;
+    phase: number;
     /**
      * - Custodial Account from which the asset is pulled
      */
@@ -145,12 +145,9 @@ export type TransactionEvent = {
      */
     destination_custodial_account_uid: string;
     /**
-     * - A list of UIDS referring to Custodial Line Items belonging to this event. There are always at least two line items if the status is settled.
+     * - A list of UIDS referring to Custodial Line Items belonging to this event. There are always at least two line items if the status is `settled`.
      */
     custodial_line_item_uids: Array<string>;
-    /**
-     * - Other statuses such as pending will be available later
-     */
     status: string;
     /**
      * - The amount will never be negative
@@ -158,7 +155,7 @@ export type TransactionEvent = {
     us_dollar_amount: string;
     type: 'odfi_ach_deposit' | 'odfi_ach_withdrawal' | 'rdfi_ach_deposit' | 'rdfi_ach_withdrawal';
     /**
-     * - Indicates whether the Customer's asset has gone up (positive), gone down (negative) or stayed the same (neutral) as a result of this Transaction Event. This value is determined by type.
+     * ` - Indicates whether the Customer's asset has gone up (`positive`), gone down (`negative`) or stayed the same (`neutral`) as a result of this Transaction Event. This value is determined by `type`.
      */
     net_asset: 'positive' | 'negative' | 'neutral';
     description: string;
@@ -194,7 +191,7 @@ export type TransactionEventListQuery = {
     /**
      * - Filter by Transaction. Multiple values are allowed
      */
-    transaction_uid?: string;
+    transaction_uid?: Array<string>;
     /**
      * - Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default = 100.
      */
