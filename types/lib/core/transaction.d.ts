@@ -37,16 +37,16 @@ declare class TransactionService {
     protected _validateGetSyntheticLineItemListQuery(query: any): void;
     /**
      * @ignore @protected
-     * Validates query parameter object for getCustodialLineItemList method.
+     * Validates query parameter object for getTransactionEventList method.
      * @param {} query - An object containing key value pair for filtering the results list.
      */
-    protected _validateGetCustodialLineItemListQuery(query: any): void;
+    protected _validateGetTransactionEventListQuery(query: any): void;
     /**
      * @ignore @protected
-     * Validates the parameters for the "getCustodialLineItem" method
+     * Validates the parameters for the "getTransactionEvent" method
      * @param {string} uid
      */
-    protected _validateGetCustodialLineItemParams(uid: string): void;
+    protected _validateGetTransactionEventParams(uid: string): void;
     /**
      * Retrieves a list of Transactions filtered by the given parameters.
      * @param {TransactionListQuery} [query] - An object containing key value pair for filtering the results list.
@@ -74,6 +74,31 @@ declare class TransactionService {
      * @example const transaction = await rize.transaction.get(transactionUid);
      */
     get(uid: string): Promise<Transaction>;
+    /**
+     * Retrieves a list of TransactionEvents filtered by the given parameters.
+     * @param {TransactionEventListQuery} [query] - An object containing key value pair for filtering the results list.
+     * @returns {Promise<RizeList<TransactionEvent>>} A promise that returns a TransactionEvent List if resolved.
+     * @example
+     * const transactionEventList = await rize.transaction.getTransactionEventList({
+     *     source_custodial_account_uid: ['custodial_account_uid1', 'custodial_account_uid2'],
+     *     destination_custodial_account_uid: ['custodial_account_uid1', 'custodial_account_uid2'],
+     *     custodial_account_uid: ['custodial_account_uid1', 'custodial_account_uid2'],
+     *     type: ['odfi_ach_deposit'],
+     *     transaction_uid: ['transaction_uid1'],
+     *     limit: 50,
+     *     offset: 0,
+     *     sort: 'created_at_asc'
+     * });
+     */
+    getTransactionEventList(query?: TransactionEventListQuery): Promise<RizeList<TransactionEvent>>;
+    /**
+     * Get a single Transaction Event
+     *
+     * @param {string} uid - Rize-generated unique transaction event id
+     * @returns {Promise<TransactionEvent>} - A promise that returns a Transaction Event if resolved.
+     * @example const transactionEvent = await rize.transaction.getTransactionEvent(transactionEventUid);
+     */
+    getTransactionEvent(uid: string): Promise<TransactionEvent>;
     /**
      * Retrieves a list of Synthetic Line Items filtered by the given parameters.
      * @param {SyntheticLineItemListQuery} query - An object containing key value pair for filtering the results list.
@@ -128,11 +153,13 @@ declare class TransactionService {
     getCustodialLineItem(uid: string): Promise<CustodialLineItem>;
 }
 declare namespace TransactionService {
-    export { TransactionListQuery, Transaction, SyntheticLineItemListQuery, SyntheticLineItem, CustodialLineItemListQuery, CustodialLineItem, RizeList };
+    export { TransactionListQuery, Transaction, TransactionEvent, TransactionEventListQuery, SyntheticLineItemListQuery, SyntheticLineItem, RizeList };
 }
 type TransactionListQuery = import('./typedefs/transaction.typedefs').TransactionListQuery;
 type RizeList<T> = import('./typedefs/common.typedefs').RizeList<T>;
 type Transaction = import('./typedefs/transaction.typedefs').Transaction;
+type TransactionEventListQuery = import('./typedefs/transaction.typedefs').TransactionEventListQuery;
+type TransactionEvent = import('./typedefs/transaction.typedefs').TransactionEvent;
 type SyntheticLineItemListQuery = import('./typedefs/transaction.typedefs').SyntheticLineItemListQuery;
 type SyntheticLineItem = import('./typedefs/transaction.typedefs').SyntheticLineItem;
 type CustodialLineItemListQuery = import('./typedefs/transaction.typedefs').CustodialLineItemListQuery;
