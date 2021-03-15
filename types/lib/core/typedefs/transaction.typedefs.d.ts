@@ -155,7 +155,7 @@ export type TransactionEvent = {
     us_dollar_amount: string;
     type: 'odfi_ach_deposit' | 'odfi_ach_withdrawal' | 'rdfi_ach_deposit' | 'rdfi_ach_withdrawal';
     /**
-     * ` - Indicates whether the Customer's asset has gone up (`positive`), gone down (`negative`) or stayed the same (`neutral`) as a result of this Transaction Event. This value is determined by `type`.
+     * - Indicates whether the Customer's asset has gone up (`positive`), gone down (`negative`) or stayed the same (`neutral`) as a result of this Transaction Event. This value is determined by `type`.
      */
     net_asset: 'positive' | 'negative' | 'neutral';
     description: string;

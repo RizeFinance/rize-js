@@ -1140,7 +1140,7 @@ Type: [Object][156]
 -   `status` **[string][137]** 
 -   `us_dollar_amount` **[string][137]** The amount will never be negative
 -   `type` **(`"odfi_ach_deposit"` \| `"odfi_ach_withdrawal"` \| `"rdfi_ach_deposit"` \| `"rdfi_ach_withdrawal"`)** 
--   `net_asset` **(`"positive"` \| `"negative"` \| `"neutral"`)** `- Indicates whether the Customer's asset has gone up (`positive`), gone down (`negative`) or stayed the same (`neutral`) as a result of this Transaction Event. This value is determined by`type\`.
+-   `net_asset` **(`"positive"` \| `"negative"` \| `"neutral"`)** Indicates whether the Customer's asset has gone up (`positive`), gone down (`negative`) or stayed the same (`neutral`) as a result of this Transaction Event. This value is determined by `type`.
 -   `description` **[string][137]** 
 -   `created_at` **[string][137]** The date and time when the event is first recognized by Rize. This may be when the Transfer is initiated if the event is associated with one.
 -   `settled_at` **[string][137]** The date and time when the event is settled.
