@@ -20,3 +20,10 @@ export type RizeList<T> = {
     offset: number;
     data: Array<T>;
 };
+export type Address = {
+    street1: string;
+    street2?: string | null;
+    city: string;
+    state: string;
+    postal_code: string;
+};
