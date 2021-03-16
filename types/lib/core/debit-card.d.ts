@@ -18,6 +18,12 @@ declare class DebitCardService {
      */
     protected _validateGetListQuery(query: any): void;
     /**
+     * @ignore @protected
+     * Validates the parameters for the "get" method
+     * @param {string} uid
+     */
+    protected _validateGetParams(uid: string): void;
+    /**
      * Retrieves a list of Debit Cards filtered by the given parameters.
      * @param {DebitCardListQuery} [query] - An object containing key value pair for filtering the results list.
      * @returns {Promise<RizeList<DebitCard>>} A promise that returns a Debit Card List if resolved.
@@ -33,6 +39,14 @@ declare class DebitCardService {
      * });
      */
     getList(query?: DebitCardListQuery): Promise<RizeList<DebitCard>>;
+    /**
+     * Get a single Debit Card
+     *
+     * @param {string} uid - Rize-generated unique debitCard id
+     * @returns {Promise<DebitCard>} A promise that returns a Debit Card if resolved.
+     * @example const debitCard = await rize.debitCard.get(debitCardUid);
+     */
+    get(uid: string): Promise<DebitCard>;
 }
 declare namespace DebitCardService {
     export { DebitCardListQuery, DebitCard, RizeList };
