@@ -16,15 +16,14 @@ const rizeClient = new Rize(
 );
 
 describe('Synthetic Account', () => {
-    let customer;
+    let customerPoolUid;
     let testGeneralSyntheticAccountTypeUid;
     let testExternalSyntheticAccountTypeUid;
     let testGeneralSyntheticAccount;
     let testExternalSyntheticAccount;
 
     before(async () => {
-        const customerUid = process.env.TEST_CUSTOMER_UID;
-        customer = await rizeClient.customer.get(customerUid);
+        customerPoolUid = process.env.TEST_CUSTOMER_POOL_UID;
     });
 
     const verifySyntheticAccountTypesList = (list, limit, offset) => {
@@ -285,7 +284,7 @@ describe('Synthetic Account', () => {
         it('Creates a new general synthetic account', async () => {
             const request = {
                 externalUid: fakeGeneralSyntheticAccountExternalUid,
-                poolUid: customer.pool_uids[0],
+                poolUid: customerPoolUid,
                 name: fakeGeneralSyntheticAccountName,
                 syntheticAccountTypeUid: testGeneralSyntheticAccountTypeUid
             };
@@ -296,7 +295,7 @@ describe('Synthetic Account', () => {
                 syntheticAccount,
                 fakeGeneralSyntheticAccountName,
                 fakeGeneralSyntheticAccountExternalUid,
-                customer.pool_uids[0],
+                customerPoolUid,
                 testGeneralSyntheticAccountTypeUid,
                 'general'
             );
@@ -310,7 +309,7 @@ describe('Synthetic Account', () => {
 
             const request = {
                 externalUid: fakeExternalSyntheticAccountExternalUid,
-                poolUid: customer.pool_uids[0],
+                poolUid: customerPoolUid,
                 name: fakeExternalSyntheticAccountName,
                 syntheticAccountTypeUid: testExternalSyntheticAccountTypeUid,
                 accountNumber,
@@ -323,7 +322,7 @@ describe('Synthetic Account', () => {
                 syntheticAccount,
                 fakeExternalSyntheticAccountName,
                 fakeExternalSyntheticAccountExternalUid,
-                customer.pool_uids[0],
+                customerPoolUid,
                 testExternalSyntheticAccountTypeUid,
                 'external',
                 accountNumber,

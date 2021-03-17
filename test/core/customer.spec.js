@@ -33,6 +33,7 @@ describe('Customer', () => {
     const fakeCity = faker.address.city();
     const fakeState = faker.address.stateAbbr();
     const fakePostalCode = faker.address.zipCodeByState(fakeState);
+    let approvedCustomer;
 
     before(() => {
         customerUid = process.env.TEST_CUSTOMER_UID;
@@ -409,8 +410,24 @@ describe('Customer', () => {
                 );
             }
 
-            const updatedCustomer = await rizeClient.customer.verifyIdentity(customerUid);
+            let updatedCustomer = await rizeClient.customer.verifyIdentity(customerUid);
             expect(updatedCustomer.status).equals('queued');
-        });
+
+            // Wait for 10 sec
+            await new Promise(resolve => {
+                setTimeout(() => {
+                    resolve();
+                }, 10000);
+            });
+
+            updatedCustomer = await rizeClient.customer.get(customerUid);
+            expect(updatedCustomer.status).equals('active');
+
+            approvedCustomer = updatedCustomer;
+        }).timeout(20000);
+    });
+
+    after(() => {
+        process.env.TEST_CUSTOMER_POOL_UID = approvedCustomer.pool_uids[0];
     });
 });
