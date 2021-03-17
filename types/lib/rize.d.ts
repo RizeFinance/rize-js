@@ -51,6 +51,22 @@ declare class Rize {
      * They catalogue the individual credits and debits associated with the accounts involved in the Transaction.
      */
     transaction: TransactionService;
+    /**
+     * Debit Cards allow a Customer direct access to their funds via Point of Sale and ATM transactions. Each Debit Card is tied
+     * to a single Custodial Account and a single Synthetic Account which determines where transactions associated with the Debit
+     * Card will be settled.
+     *
+     * This endpoint supports debit card management, such as requesting a card, activating a card, reporting a card lost or stolen,
+     * and locking and unlocking a debit card. The Custodian participating in your Program will define some characteristics of the
+     * card (maximum transaction limits, international usage, etc.) and these will be configured and communicated to you as part of
+     * the Program configuration.
+     *
+     * Certain information about a Debit Card (such as the PAN, PIN, and CVV) are considered highly sensitive and are subject to
+     * strict PCI compliance requirements. As such, the process for issuing and verifying a card is a multi-step process that can
+     * only be completed by the Customer. At no time will the PCI restricted data be made available to either you or Rize. The last
+     * 4 digits of the Debit Card PAN and/or a unique card nickname can be used to identify the card to the Customer.
+     */
+    debitCard: DebitCardService;
 }
 declare namespace Rize {
     export { PACKAGE_VERSION, Rize, Rize as default };
@@ -60,4 +76,5 @@ import CustomerService = require("./core/customer");
 import SyntheticAccountService = require("./core/synthetic-account");
 import CustodialAccountService = require("./core/custodial-account");
 import TransactionService = require("./core/transaction");
+import DebitCardService = require("./core/debit-card");
 declare var PACKAGE_VERSION: string;
