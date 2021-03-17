@@ -67,6 +67,19 @@ declare class Rize {
      * 4 digits of the Debit Card PAN and/or a unique card nickname can be used to identify the card to the Customer.
      */
     debitCard: DebitCardService;
+    /**
+     * All Customers will be able to access their monthly account statements and their yearly tax documents as they become available
+     * at the end of the respective periods. The document resource returned in `GET /documents` and `GET /documents/:uid` will describe
+     * the metadata of the document, such as its document type and the document period. `GET /documents/:uid/view` can be used to
+     * receive the document in PDF by default. The document can also be returned in JSON or HTML format using `GET /documents/:uid/view.json`
+     * or `GET /documents/:uid/view.html`, respectively.
+     *
+     * The document type specifies whether the document is a statement or tax document.
+     * Please note that only the settled transactions will appear in the statement i.e. if a transaction is initiated before a settlement
+     * period ends and settles after the new period starts, it will appear in the statement for the latter period.
+     * @type {DocumentService}
+     */
+    document: DocumentService;
 }
 declare namespace Rize {
     export { PACKAGE_VERSION, Rize, Rize as default };
@@ -77,4 +90,5 @@ import SyntheticAccountService = require("./core/synthetic-account");
 import CustodialAccountService = require("./core/custodial-account");
 import TransactionService = require("./core/transaction");
 import DebitCardService = require("./core/debit-card");
+import DocumentService = require("./core/document");
 declare var PACKAGE_VERSION: string;
