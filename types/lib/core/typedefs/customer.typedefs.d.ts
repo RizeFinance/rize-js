@@ -1,10 +1,3 @@
-export type Address = {
-    street1: string;
-    street2: string;
-    city: string;
-    state: string;
-    postal_code: string;
-};
 export type CustomerDetails = {
     first_name: string;
     middle_name?: string | null;
@@ -13,7 +6,7 @@ export type CustomerDetails = {
     phone: string;
     ssn: string;
     dob: string;
-    address: Address;
+    address: any;
 };
 export type Customer = {
     /**
