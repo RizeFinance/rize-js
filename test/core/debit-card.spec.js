@@ -15,7 +15,7 @@ const rizeClient = new Rize(
 );
 
 describe('DebitCard', () => {
-    // let testDebitCard;
+    let testDebitCard;
 
     describe('getList', async () => {
         it('Throws an error if "query" is invalid', () => {
@@ -67,7 +67,7 @@ describe('DebitCard', () => {
 
         it('Retrieves the debitCard list without query', async () => {
             const debitCardList = await rizeClient.debitCard.getList();
-            // testDebitCard = debitCardList.data[0];
+            testDebitCard = debitCardList.data[0];
             utils.expectRizeList(debitCardList);
         });
 
@@ -83,6 +83,18 @@ describe('DebitCard', () => {
             };
             const debitCardList = await rizeClient.debitCard.getList(query);
             utils.expectRizeList(debitCardList);
+        });
+    });
+
+    describe('get', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.debitCard.get('');
+            return expect(promise).to.eventually.be.rejectedWith('Debit Card "uid" is required.');
+        });
+
+        it('Retrieves debit card data successfully', async () => {
+            const debitCard = await rizeClient.debitCard.get(testDebitCard.uid);
+            expect(debitCard).to.have.property('uid').that.equals(testDebitCard.uid);
         });
     });
 });
