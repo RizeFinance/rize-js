@@ -15,7 +15,7 @@ const rizeClient = new Rize(
 );
 
 describe('Transfer', () => {
-    // let testTransfer;
+    let testTransfer;
 
     describe('getList', async () => {
         it('Throws an error if "query" is invalid', () => {
@@ -55,7 +55,7 @@ describe('Transfer', () => {
 
         it('Retrieves the transfer list without query', async () => {
             const transferList = await rizeClient.transfer.getList();
-            // testTransfer = transferList.data[0];
+            testTransfer = transferList.data[0];
             utils.expectRizeList(transferList);
         });
 
@@ -70,6 +70,18 @@ describe('Transfer', () => {
             };
             const transferList = await rizeClient.transfer.getList(query);
             utils.expectRizeList(transferList);
+        });
+    });
+
+    describe('get', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.transfer.get('');
+            return expect(promise).to.eventually.be.rejectedWith('Transfer "uid" is required.');
+        });
+    
+        it('Retrieves transfer data successfully', async () => {
+            const transfer = await rizeClient.transfer.get(testTransfer.uid);
+            expect(transfer).to.have.property('uid').that.equals(testTransfer.uid);
         });
     });
 });

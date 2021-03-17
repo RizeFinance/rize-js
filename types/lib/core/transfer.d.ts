@@ -18,6 +18,12 @@ declare class TransferService {
      */
     protected _validateGetListQuery(query: any): void;
     /**
+     * @ignore @protected
+     * Validates the parameters for the "get" method
+     * @param {string} uid
+     */
+    protected _validateGetParams(uid: string): void;
+    /**
      * Retrieves a list of Tranfers filtered by the given parameters.
      * @param {TransferListQuery} query - An object containing key value pair for filtering the results list.
      * @returns {Promise<RizeList<Transfer>>} A promise that returns a Transfer List if resolved.
@@ -32,6 +38,14 @@ declare class TransferService {
      * });
      */
     getList(query?: TransferListQuery): Promise<RizeList<Transfer>>;
+    /**
+     * Get a single Transfer
+     *
+     * @param {string} uid - Rize-generated unique Transfer id
+     * @returns {Promise<Transfer>} A promise that returns a Transfer if resolved.
+     * @example const transfer = await rize.transfer.get(transferUid);
+     */
+    get(uid: string): Promise<Transfer>;
 }
 declare namespace TransferService {
     export { TransferListQuery, Transfer, RizeList };
