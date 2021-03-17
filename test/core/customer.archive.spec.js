@@ -3,6 +3,7 @@
 require('./compliance-workflow.spec');
 require('./synthetic-account.spec');
 require('./transfer.spec');
+require('./debit-card.spec');
 
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
