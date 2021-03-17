@@ -4,6 +4,7 @@ const utils = require('../../lib/test-utils');
 
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
+const faker = require('faker');
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
@@ -16,6 +17,13 @@ const rizeClient = new Rize(
 
 describe('DebitCard', () => {
     let testDebitCard;
+    let customerUid;
+    let customerPoolUid;
+
+    before(() => {
+        customerUid = process.env.TEST_CUSTOMER_UID;
+        customerPoolUid = process.env.TEST_CUSTOMER_POOL_UID;
+    });
 
     describe('getList', async () => {
         it('Throws an error if "query" is invalid', () => {
@@ -95,6 +103,70 @@ describe('DebitCard', () => {
         it('Retrieves debit card data successfully', async () => {
             const debitCard = await rizeClient.debitCard.get(testDebitCard.uid);
             expect(debitCard).to.have.property('uid').that.equals(testDebitCard.uid);
+        });
+    });
+
+    describe('create', () => {
+        it('Throws an error if "externalUid" is empty', () => {
+            const promise = rizeClient.debitCard.create('');
+            return expect(promise).to.eventually.be.rejectedWith('"externalUid" is required.');
+        });
+
+        it('Throws an error if "customerUid" is empty', () => {
+            const promise = rizeClient.debitCard.create('test', '');
+            return expect(promise).to.eventually.be.rejectedWith('"customerUid" is required.');
+        });
+
+        it('Throws an error if "poolUid" is empty', () => {
+            const promise = rizeClient.debitCard.create('test', 'test', '');
+            return expect(promise).to.eventually.be.rejectedWith('"poolUid" is required.');
+        });
+
+        it('Throws an error if "street1" is empty when shippingAddress is supplied', () => {
+            const promise = rizeClient.debitCard.create('test', 'test', 'test', {
+                street1: ''
+            });
+            return expect(promise).to.eventually.be.rejectedWith('"shippingAddress.street1" is required if "shippingAddress" is supplied.');
+        });
+
+        it('Throws an error if "city" is empty when shippingAddress is supplied', () => {
+            const promise = rizeClient.debitCard.create('test', 'test', 'test', {
+                street1: 'test',
+                city: ''
+            });
+            return expect(promise).to.eventually.be.rejectedWith('"shippingAddress.city" is required if "shippingAddress" is supplied.');
+        });
+
+        it('Throws an error if "state" is empty when shippingAddress is supplied', () => {
+            const promise = rizeClient.debitCard.create('test', 'test', 'test', {
+                street1: 'test',
+                city: 'test',
+                state: ''
+            });
+            return expect(promise).to.eventually.be.rejectedWith('"shippingAddress.state" is required if "shippingAddress" is supplied.');
+        });
+
+        it('Throws an error if "postal_code" is empty when shippingAddress is supplied', () => {
+            const promise = rizeClient.debitCard.create('test', 'test', 'test', {
+                street1: 'test',
+                city: 'test',
+                state: 'test',
+                postal_code: ''
+            });
+            return expect(promise).to.eventually.be.rejectedWith('"shippingAddress.postal_code" is required if "shippingAddress" is supplied.');
+        });
+
+        it('Creates debit card successfully', async () => {
+            const externalUid = faker.random.uuid();
+            const debitCard = await rizeClient.debitCard.create(
+                externalUid,
+                customerUid,
+                customerPoolUid
+            );
+            expect(debitCard).to.have.property('uid');
+            expect(debitCard).to.have.property('external_uid').that.equals(externalUid);
+            expect(debitCard).to.have.property('customer_uid').that.equals(customerUid);
+            expect(debitCard).to.have.property('pool_uid').that.equals(customerPoolUid);
         });
     });
 });
