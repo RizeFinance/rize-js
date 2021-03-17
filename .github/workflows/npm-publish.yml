@@ -1,10 +1,13 @@
 name: Rize SDK Package
 
-on:
-  release:
-    branches:
-      - master
-    types: [published]
+# on:
+#   release:
+#     branches:
+#       - master
+#     types: [published]
+
+on: [push]
+
 jobs:
   ci-test:
       runs-on: ubuntu-latest
@@ -14,6 +17,7 @@ jobs:
           with:
             node-version: 12
         - run: npm ci
+        - run: echo ${{ secrets.ENV_SECRETS }} | base64 --decode > .env
         - run: npm test
 
   publish-gpr:
