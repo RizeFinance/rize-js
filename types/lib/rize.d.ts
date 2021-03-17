@@ -49,8 +49,23 @@ declare class Rize {
      *
      * Line Items are created for each Transaction Event.
      * They catalogue the individual credits and debits associated with the accounts involved in the Transaction.
+     * @type {TransactionService}
      */
     transaction: TransactionService;
+    /**
+     * A Transfer is the action of moving assets between any two Synthetic Accounts. The majority of asset movement
+     * initiated by your application will result in a Transfer. Asset movement is determined by the makeup of assets
+     * in both participating accounts, the Synthetic Account Type of each account, the available Custodial Accounts
+     * for all participating Customers, as well as the overall Program configuration. A Transfer can never be initiated
+     * between two external accounts.
+     *
+     * Transfers can be initiated between most combinations of Synthetic Account Types. Due to the time required to
+     * complete ACH transfers or trades of assets in underlying Custodial Accounts, it is possible for a Transfer to
+     * take up to 6 business days to settle in the most extreme cases (such as starting with a stock sale and completing
+     * in a checking account deposit at a different financial institution).
+     * @type {TransferService}
+     */
+    transfer: TransferService;
     /**
      * Debit Cards allow a Customer direct access to their funds via Point of Sale and ATM transactions. Each Debit Card is tied
      * to a single Custodial Account and a single Synthetic Account which determines where transactions associated with the Debit
@@ -76,5 +91,6 @@ import CustomerService = require("./core/customer");
 import SyntheticAccountService = require("./core/synthetic-account");
 import CustodialAccountService = require("./core/custodial-account");
 import TransactionService = require("./core/transaction");
+import TransferService = require("./core/transfer");
 import DebitCardService = require("./core/debit-card");
 declare var PACKAGE_VERSION: string;
