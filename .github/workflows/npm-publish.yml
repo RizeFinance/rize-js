@@ -2,8 +2,9 @@ name: Rize SDK Package
 
 on:
   release:
+    branches:
+      - master
     types: [published]
-
 jobs:
   publish-gpr:
     runs-on: ubuntu-latest
