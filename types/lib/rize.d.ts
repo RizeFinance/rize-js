@@ -53,19 +53,21 @@ declare class Rize {
      */
     transaction: TransactionService;
     /**
-     * A Transfer is the action of moving assets between any two Synthetic Accounts. The majority of asset movement
-     * initiated by your application will result in a Transfer. Asset movement is determined by the makeup of assets
-     * in both participating accounts, the Synthetic Account Type of each account, the available Custodial Accounts
-     * for all participating Customers, as well as the overall Program configuration. A Transfer can never be initiated
-     * between two external accounts.
+     * Debit Cards allow a Customer direct access to their funds via Point of Sale and ATM transactions. Each Debit Card is tied
+     * to a single Custodial Account and a single Synthetic Account which determines where transactions associated with the Debit
+     * Card will be settled.
      *
-     * Transfers can be initiated between most combinations of Synthetic Account Types. Due to the time required to
-     * complete ACH transfers or trades of assets in underlying Custodial Accounts, it is possible for a Transfer to
-     * take up to 6 business days to settle in the most extreme cases (such as starting with a stock sale and completing
-     * in a checking account deposit at a different financial institution).
-     * @type {TransferService}
+     * This endpoint supports debit card management, such as requesting a card, activating a card, reporting a card lost or stolen,
+     * and locking and unlocking a debit card. The Custodian participating in your Program will define some characteristics of the
+     * card (maximum transaction limits, international usage, etc.) and these will be configured and communicated to you as part of
+     * the Program configuration.
+     *
+     * Certain information about a Debit Card (such as the PAN, PIN, and CVV) are considered highly sensitive and are subject to
+     * strict PCI compliance requirements. As such, the process for issuing and verifying a card is a multi-step process that can
+     * only be completed by the Customer. At no time will the PCI restricted data be made available to either you or Rize. The last
+     * 4 digits of the Debit Card PAN and/or a unique card nickname can be used to identify the card to the Customer.
      */
-    transfer: TransferService;
+    debitCard: DebitCardService;
 }
 declare namespace Rize {
     export { PACKAGE_VERSION, Rize, Rize as default };
@@ -75,5 +77,5 @@ import CustomerService = require("./core/customer");
 import SyntheticAccountService = require("./core/synthetic-account");
 import CustodialAccountService = require("./core/custodial-account");
 import TransactionService = require("./core/transaction");
-import TransferService = require("./core/transfer");
+import DebitCardService = require("./core/debit-card");
 declare var PACKAGE_VERSION: string;
