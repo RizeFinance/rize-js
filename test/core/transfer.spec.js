@@ -149,8 +149,8 @@ describe('Transfer', () => {
 
             await new Promise(resolve => {
                 setTimeout(() => {
-                    resolve(); // Wait for about 1 min 5 sec for the transfer to be settled
-                }, 65000);
+                    resolve(); // Wait for 70 sec for the transfer to be settled
+                }, 70000);
             });
 
             const updatedTransfer = await rizeClient.transfer.get(transfer.uid);
@@ -179,8 +179,8 @@ describe('Transfer', () => {
 
             await new Promise(resolve => {
                 setTimeout(() => {
-                    resolve(); // Wait for about 1 min 5 sec for the transfer to be settled
-                }, 65000);
+                    resolve(); // Wait for 70 sec for the transfer to be settled
+                }, 70000);
             });
 
             const updatedTransfer = await rizeClient.transfer.get(transfer.uid);
