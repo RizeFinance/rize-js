@@ -13,6 +13,13 @@ declare class DocumentService {
     /** @ignore @protected */ protected _auth: import("./auth");
     /**
      * @ignore @protected
+     * Validates the parameters for the "view" method
+     * @param {string} uid
+     * @param {'pdf' | 'json' | 'html'} extension
+     */
+    protected _validateViewParams(uid: string, extension: 'pdf' | 'json' | 'html'): void;
+    /**
+     * @ignore @protected
      * Validates query parameter object for getList method.
      * @param {} query - An object containing key value pair for filtering the results list.
      */
@@ -34,6 +41,14 @@ declare class DocumentService {
      * });
      */
     getList(query?: DocumentListQuery): Promise<RizeList<Document>>;
+    /**
+     * View or download a document
+     *
+     * @param {string} uid - Rize-generated unique document id
+     * @returns {Promise<Document>} A promise that returns a downloaded Document if resolved.
+     * @example const document = await rize.document.view(documentUid, 'pdf');
+     */
+    view(uid: string, extension?: string): Promise<Document>;
 }
 declare namespace DocumentService {
     export { DocumentListQuery, Document, RizeList };
