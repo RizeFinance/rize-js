@@ -671,7 +671,6 @@ For example, a lock placed by a Custodial Partner for fraud can not be removed b
 #### Parameters
 
 -   `uid` **[string][193]** Rize-generated unique Debit Card id
--   `unlockReason`  
 
 #### Examples
 

@@ -128,7 +128,7 @@ declare class DebitCardService {
      * @example
      * const unlockedDebitCard = await rize.debitCard.unlock('debit_card_uid1');
      */
-    unlock(uid: string, unlockReason: any): Promise<DebitCard>;
+    unlock(uid: string): Promise<DebitCard>;
 }
 declare namespace DebitCardService {
     export { DebitCardListQuery, DebitCard, Address, RizeList };
