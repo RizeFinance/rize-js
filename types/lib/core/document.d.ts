@@ -16,11 +16,6 @@ declare class DocumentService {
      * Validates query parameter object for getList method.
      * @param {} query - An object containing key value pair for filtering the results list.
      */
-    /**
-     * @ignore @protected
-     * Validates query parameter object for getList method.
-     * @param {} query - An object containing key value pair for filtering the results list.
-     */
     protected _validateGetListQuery(query: any): void;
     /**
      * Retrieves a list of Documents filtered by the given parameters.
@@ -31,7 +26,7 @@ declare class DocumentService {
      *     month: 1,
      *     year: 2021,
      *     scope_type: 'customer',
-     *     custodial_account_uid: ['custodial_account_uid1', 'custodial_account_uid2'],
+     *     custodial_account_uid: 'custodial_account_uid1',
      *     customer_uid: ['customer_uid1', 'customer_uid2'],
      *     synthetic_account_uid: ['synthetic_account_uid1', 'synthetic_account_uid2'],
      *     limit: 50,

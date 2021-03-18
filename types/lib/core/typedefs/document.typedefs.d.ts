@@ -8,11 +8,15 @@ export type Document = {
      */
     document_type: string;
     /**
-     * - The type of scope of activities included in the document. If the type is `customer`,
-     * the statement will include all Synthetic and Custodial Accounts associated with the customer in the statement period.
-     * (to be discussed/determined; not implemented) `synthetic_account` and `custodial_account` will include the activities associated with the respective account only.
+     * The type of scope of activities included in the document.
+     *
+     * If the type is `customer`, the statement will include all Synthetic and Custodial Accounts associated
+     * with the customer in the statement period.
+     *
+     * (to be discussed/determined; not implemented) `synthetic_account` and `custodial_account` will include
+     * the activities associated with the respective account only.
      */
-    scope_type: any | any | any;
+    scope_type: 'customer' | 'synthetic_account' | 'custodial_account';
     /**
      * - The date and time when the document period started at, inclusive
      */
@@ -26,48 +30,52 @@ export type Document = {
      */
     created_at: string;
     /**
-     * - A list of UIDs of Customers that are associated with the document.
-     * (not implemented) Note that once we allow joint pool and accounts, this list will be pessimistic; each of the listed
-     * Customers should be associated with every account of which activities are included in the statement. Currently as implemented,
-     * this list should have exactly one UID.
+     * A list of UIDs of Customers that are associated with the document.
+     *
+     * (not implemented) Note that once we allow joint pool and accounts, this list will be pessimistic; each
+     * of the listed Customers should be associated with every account of which activities are included in the
+     * statement. Currently as implemented, this list should have exactly one UID.
      */
     customer_uids: Array<string>;
     /**
-     * - A list of UIDs of Custodial Accounts that are associated with the document.
-     * If `scope_type` is `custodial_account`, this list will contain only one UID. In fact, currently as implemented, this list should always have exactly one UID.
+     * A list of UIDs of Custodial Accounts that are associated with the document.
+     *
+     * If `scope_type` is `custodial_account`, this list will contain only one UID. In fact, currently as implemented,
+     * this list should always have exactly one UID.
      */
     custodial_account_uids: Array<string>;
     /**
-     * - A list of UIDs of Synthetic Accounts that are associated with the document.
+     * A list of UIDs of Synthetic Accounts that are associated with the document.
+     *
      * If `scope_type` is `synthetic_account`, this list will contain only one UID.
      */
     synthetic_account_uids: Array<string>;
 };
 export type DocumentListQuery = {
     /**
-     * - This includes any document for which the period started in the specified month.
+     * - Filter by month. This includes any document for which the period started in the specified month.
      */
-    month: number;
+    month?: number;
     /**
      * - Filter by year
      */
-    year: number;
+    year?: number;
     /**
      * - (not implemented) Filter by scope type
      */
-    scope_type: any | any | any;
+    scope_type?: 'customer' | 'synthetic_account' | 'custodial_account';
     /**
      * - Filter by Custodial Account
      */
-    custodial_account_uid: string;
+    custodial_account_uid?: string;
     /**
      * - Filter by Customer. Multiple values are allowed.
      */
-    customer_uid: Array<string>;
+    customer_uid?: Array<string>;
     /**
      * - Filter by Synthetic Account. Multiple values are allowed.
      */
-    synthetic_account_uid: Array<string>;
+    synthetic_account_uid?: Array<string>;
     /**
      * - Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default = 100.
      */
