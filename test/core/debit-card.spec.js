@@ -196,4 +196,21 @@ describe('DebitCard', () => {
             testDebitCard = updatedDebitCard;
         });
     });
+
+    describe('unlock', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.debitCard.unlock('');
+            return expect(promise).to.eventually.be.rejectedWith('Debit Card "uid" is required.');
+        });
+
+        it('Unlocks debit card successfully', async () => {
+            const updatedDebitCard = await rizeClient.debitCard.unlock(testDebitCard.uid);
+
+            expect(updatedDebitCard).to.have.property('uid').that.equals(testDebitCard.uid);
+            expect(updatedDebitCard).to.have.property('lock_reason').that.is.null;
+            expect(updatedDebitCard).to.have.property('locked_at').that.is.null;
+
+            testDebitCard = updatedDebitCard;
+        });
+    });
 });
