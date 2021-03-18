@@ -34,6 +34,11 @@ declare class DebitCardService {
      */
     protected _validateLockParams(uid: any, lockReason: any): void;
     /**
+     * @ignore @protected
+     * Validates the parameters for the "unlock" method
+     */
+    protected _validateUnlockParams(uid: any): void;
+    /**
      * Retrieves a list of Debit Cards filtered by the given parameters.
      * @param {DebitCardListQuery} [query] - An object containing key value pair for filtering the results list.
      * @returns {Promise<RizeList<DebitCard>>} A promise that returns a Debit Card List if resolved.
@@ -112,6 +117,18 @@ declare class DebitCardService {
      * );
      */
     lock(uid: string, lockReason: string): Promise<DebitCard>;
+    /**
+     * Unlock a Debit Card
+     *
+     * Calling this function will attempt to remove a lock placed on a Debit Card.
+     * Depending on the type of lock in place, this will not always be successful.
+     * For example, a lock placed by a Custodial Partner for fraud can not be removed by a Customer.
+     * @param {string} uid Rize-generated unique Debit Card id
+     * @returns {Promise<DebitCard>} A promise that returns a Debit Card if resolved.
+     * @example
+     * const unlockedDebitCard = await rize.debitCard.unlock('debit_card_uid1');
+     */
+    unlock(uid: string): Promise<DebitCard>;
 }
 declare namespace DebitCardService {
     export { DebitCardListQuery, DebitCard, Address, RizeList };
