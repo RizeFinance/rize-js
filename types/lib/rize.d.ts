@@ -95,6 +95,14 @@ declare class Rize {
      * @type {DocumentService}
      */
     document: DocumentService;
+    /**
+     * The KYC Documents endpoint enables Customers to upload identity verification documentation. These documents are only required
+     * if Rize’s KYC/AML partner is unable to confirm the identity of the Customer with the information provided during onboarding.
+     *
+     * A KYC Document is a file that is uploaded which a reviewer can use to inform a decision as to whether this Customer should be approved
+     * or denied for the Program. These files are generally utility bills or images of state issued driver’s licenses.
+     */
+    kycDocument: KYCDocumentService;
 }
 declare namespace Rize {
     export { PACKAGE_VERSION, Rize, Rize as default };
@@ -107,4 +115,5 @@ import TransactionService = require("./core/transaction");
 import TransferService = require("./core/transfer");
 import DebitCardService = require("./core/debit-card");
 import DocumentService = require("./core/document");
+import KYCDocumentService = require("./core/kyc-document");
 declare var PACKAGE_VERSION: string;
