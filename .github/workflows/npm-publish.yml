@@ -1,12 +1,10 @@
 name: Rize SDK Package
 
-# on:
-#   release:
-#     branches:
-#       - master
-#     types: [published]
-
-on: [push]
+on:
+  release:
+    branches:
+      - master
+    types: [published]
 
 jobs:
   ci-test:
