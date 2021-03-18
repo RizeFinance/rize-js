@@ -28,6 +28,12 @@ describe('Document', () => {
             return expect(promise).to.eventually.be.rejectedWith('"month" query must be an integer.');
         });
 
+        it('Throws an error if "month" query is less than 1', () => {
+            const query = { month: 0 };
+            const promise = rizeClient.document.getList(query);
+            return expect(promise).to.eventually.be.rejectedWith('"month" query value must be from 1 to 12');
+        });
+
         it('Throws an error if "month" query is greater than 12', () => {
             const query = { month: 13 };
             const promise = rizeClient.document.getList(query);
@@ -47,10 +53,10 @@ describe('Document', () => {
         });
 
 
-        it('Throws an error if "custodial_account_uid" query is not an array', () => {
-            const query = { custodial_account_uid: '' };
+        it('Throws an error if "custodial_account_uid" query is not a string', () => {
+            const query = { custodial_account_uid: 123 };   
             const promise = rizeClient.document.getList(query);
-            return expect(promise).to.eventually.be.rejectedWith('"custodial_account_uid" query must be an array.');
+            return expect(promise).to.eventually.be.rejectedWith('"custodial_account_uid" query must be a string.');
         });
 
         it('Throws an error if "customer_uid" query is not an array', () => {
@@ -87,7 +93,7 @@ describe('Document', () => {
                 month: 1,
                 year: 2021,
                 scope_type: 'customer',
-                custodial_account_uid: ['custodial_account_uid1', 'custodial_account_uid2'],
+                custodial_account_uid: 'custodial_account_uid1',
                 customer_uid: ['customer_uid1', 'customer_uid2'],
                 synthetic_account_uid: ['synthetic_account_uid1', 'synthetic_account_uid2'],
                 limit: 50,
