@@ -150,7 +150,7 @@ declare class DebitCardService {
      * @param {'damaged'|'lost'|'stolen'} reissueReason A reissue reason is required when requesting Debit Card reissuance.
      * @returns {Promise<DebitCard>} A promise that returns a Debit Card if resolved.
      * @example
-     * const reissuedDebitCard = await rize.debitCard.reissue('debit_card_uid1');
+     * const reissuedDebitCard = await rize.debitCard.reissue('debit_card_uid1', 'damaged');
      */
     reissue(uid: string, reissueReason: 'damaged' | 'lost' | 'stolen'): Promise<DebitCard>;
 }

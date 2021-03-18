@@ -213,4 +213,32 @@ describe('DebitCard', () => {
             testDebitCard = updatedDebitCard;
         });
     });
+
+    describe('reissue', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.debitCard.reissue('');
+            return expect(promise).to.eventually.be.rejectedWith('Debit Card "uid" is required.');
+        });
+
+        it('Throws an error if "reissueReason" is empty', () => {
+            const promise = rizeClient.debitCard.reissue('test', '');
+            return expect(promise).to.eventually.be.rejectedWith('"reissueReason" is required.');
+        });
+
+        it('Throws an error if "reissueReason" is invalid', () => {
+            const promise = rizeClient.debitCard.reissue('test', 'test');
+            return expect(promise).to.eventually.be.rejectedWith('Invalid reissueReason. Accepted values are: damaged | lost | stolen');
+        });
+
+        it('Reissues debit card successfully', async () => {
+            const updatedDebitCard = await rizeClient.debitCard.reissue(
+                testDebitCard.uid,
+                'damaged'
+            );
+            expect(updatedDebitCard).to.have.property('uid').that.equals(testDebitCard.uid);
+            expect(updatedDebitCard).to.have.property('card_last_four_digits').that.is.not.equal(testDebitCard.card_last_four_digits);
+
+            testDebitCard = updatedDebitCard;
+        });
+    });
 });

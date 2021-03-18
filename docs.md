@@ -705,7 +705,7 @@ The new physical Debit Card will by default be sent to the Customer's primary ad
 #### Examples
 
 ```javascript
-const reissuedDebitCard = await rize.debitCard.reissue('debit_card_uid1');
+const reissuedDebitCard = await rize.debitCard.reissue('debit_card_uid1', 'damaged');
 ```
 
 Returns **[Promise][197]&lt;[DebitCard][207]>** A promise that returns a Debit Card if resolved.
