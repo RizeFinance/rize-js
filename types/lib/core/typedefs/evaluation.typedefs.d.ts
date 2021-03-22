@@ -13,13 +13,13 @@ export type Evaluation = {
      * The category name; value - true if all tags returned from our KYC partner have a
      * positive "polarity" in the context of the service offering for which this evaluation was run, false otherwise
      */
-    flags: string;
+    flags: object;
     /**
      * A mapping of KYC categories to results returned from various services queried by our KYC partner.
      * Items are defined as follows: key - The category name; value - true if all services queried by our
      * KYC partner returned a value of "matched" for this category, false otherwise
      */
-    pii_match: string;
+    pii_match: object;
 };
 export type EvaluationListQuery = {
     /**
