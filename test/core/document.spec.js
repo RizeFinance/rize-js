@@ -106,6 +106,23 @@ describe('Document', () => {
         });
     });
 
+    describe('view', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.document.view('', 'pdf');
+            return expect(promise).to.eventually.be.rejectedWith('Document "uid" is required.');
+        });
+
+        it('Throws an error if "extension" is not valid', async () => {
+            const promise = rizeClient.document.view(testDocument.uid, 'excel');
+            return expect(promise).to.eventually.be.rejectedWith('Accepted values in the "extension" query are: pdf | html | json');
+        });
+
+        it('Download document data successfully', async () => {
+            const promise = rizeClient.document.view(testDocument.uid, 'pdf');
+            return expect(promise).to.be.fulfilled;
+        });
+    });
+
     describe('get', () => {
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.document.get('');
