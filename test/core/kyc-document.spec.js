@@ -17,21 +17,13 @@ const rizeClient = new Rize(
 describe('KYCDocument', () => {
 
     describe('getList', async () => {
-        it('Throws an error if "query" is invalid', () => {
+        it('Throws an error if "evaluationUid" is empty', () => {
             const promise = rizeClient.kycDocument.getList('');
-            return expect(promise).to.eventually.be.rejectedWith('"query" must be a KYCDocumentListQuery object.');
+            return expect(promise).to.eventually.be.rejectedWith('"evaluationUid" is required.');
         });
 
-        it('Throws an error if "evaluation_uid" query parameter is invalid', () => {
-            const promise = rizeClient.kycDocument.getList({evaluation_uid: ''});
-            return expect(promise).to.eventually.be.rejectedWith('"evaluation_uid" query must be a string.');
-        });
-
-        it('Retrieves the KYC document list with query', async () => {
-            const query = {
-                evaluation_uid: 'evaluation_uid1'
-            };
-            const kycDocumentList = await rizeClient.kycDocument.getList(query);
+        it('Retrieves the KYC document list with evaluationUid', async () => {
+            const kycDocumentList = await rizeClient.kycDocument.getList('evaluation_uid1');
             utils.expectRizeList(kycDocumentList);
         });
     });
