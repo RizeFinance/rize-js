@@ -1516,7 +1516,7 @@ Type: [Object][235]
 -   `filename` **[string][206]** The name of this file, exclusive of any extension.
 -   `note` **[string][206]** A note describing the document.
 -   `extension` **[string][206]** The filename extension.
--   `created_at` **[string][206]** The date and time when the document
+-   `created_at` **[string][206]** 
 
 ## SyntheticAccountType
 

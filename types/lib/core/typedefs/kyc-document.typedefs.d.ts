@@ -19,8 +19,5 @@ export type KYCDocument = {
      * - The filename extension.
      */
     extension: string;
-    /**
-     * - The date and time when the document
-     */
     created_at: string;
 };
