@@ -24,9 +24,3 @@ export type KYCDocument = {
      */
     created_at: string;
 };
-export type KYCDocumentListQuery = {
-    /**
-     * - The UID associated with a given KYC evaluation.
-     */
-    evaluation_uid: string;
-};
