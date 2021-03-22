@@ -27,4 +27,16 @@ describe('KYCDocument', () => {
             utils.expectRizeList(kycDocumentList);
         });
     });
+
+    describe('getMetadata', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.kycDocument.get('');
+            return expect(promise).to.eventually.be.rejectedWith('"uid" is required.');
+        });
+
+        it('Retrieves kyc document metadata successfully', async () => {
+            const kycDocumentMetadata = await rizeClient.kycDocument.get('kycDocumentUid');
+            expect(kycDocumentMetadata).to.have.property('uid').that.equals('kycDocumentUid');
+        });
+    });
 });
