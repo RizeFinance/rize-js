@@ -15,6 +15,7 @@ const rizeClient = new Rize(
 );
 
 describe('Document', () => {
+    let testDocument;
 
     describe('getList', async () => {
         it('Throws an error if "query" is invalid', () => {
@@ -85,6 +86,7 @@ describe('Document', () => {
 
         it('Retrieves the document list without query', async () => {
             const documentList = await rizeClient.document.getList();
+            testDocument = documentList.data[0];
             utils.expectRizeList(documentList);
         });
 
@@ -101,6 +103,18 @@ describe('Document', () => {
             };
             const documentList = await rizeClient.document.getList(query);
             utils.expectRizeList(documentList);
+        });
+    });
+
+    describe('get', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.document.get('');
+            return expect(promise).to.eventually.be.rejectedWith('Document "uid" is required.');
+        });
+
+        it('Retrieves document data successfully', async () => {
+            const document = await rizeClient.document.get(testDocument.uid);
+            expect(document).to.have.property('uid').that.equals(testDocument.uid);
         });
     });
 });

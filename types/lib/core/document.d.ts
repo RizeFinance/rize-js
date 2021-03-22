@@ -13,6 +13,12 @@ declare class DocumentService {
     /** @ignore @protected */ protected _auth: import("./auth");
     /**
      * @ignore @protected
+     * Validates the parameters for the "get" method
+     * @param {string} uid
+     */
+    protected _validateGetParams(uid: string): void;
+    /**
+     * @ignore @protected
      * Validates query parameter object for getList method.
      * @param {} query - An object containing key value pair for filtering the results list.
      */
@@ -34,6 +40,14 @@ declare class DocumentService {
      * });
      */
     getList(query?: DocumentListQuery): Promise<RizeList<Document>>;
+    /**
+     * Get a single Document
+     *
+     * @param {string} uid - Rize-generated unique document id
+     * @returns {Promise<Document>} A promise that returns a Document if resolved.
+     * @example const document = await rize.document.get(documentUid);
+     */
+    get(uid: string): Promise<Document>;
 }
 declare namespace DocumentService {
     export { DocumentListQuery, Document, RizeList };
