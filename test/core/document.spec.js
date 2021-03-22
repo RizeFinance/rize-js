@@ -122,4 +122,16 @@ describe('Document', () => {
             return expect(promise).to.be.fulfilled;
         });
     });
+
+    describe('get', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.document.get('');
+            return expect(promise).to.eventually.be.rejectedWith('Document "uid" is required.');
+        });
+
+        it('Retrieves document data successfully', async () => {
+            const document = await rizeClient.document.get(testDocument.uid);
+            expect(document).to.have.property('uid').that.equals(testDocument.uid);
+        });
+    });
 });
