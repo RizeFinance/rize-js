@@ -43,7 +43,7 @@ declare class DocumentService {
     /**
      * Get a single Document
      *
-     * @param {string} uid - Rize-generated unique transaction id
+     * @param {string} uid - Rize-generated unique document id
      * @returns {Promise<Document>} A promise that returns a Document if resolved.
      * @example const document = await rize.document.get(documentUid);
      */

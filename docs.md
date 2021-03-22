@@ -752,7 +752,7 @@ Get a single Document
 
 #### Parameters
 
--   `uid` **[string][199]** Rize-generated unique transaction id
+-   `uid` **[string][199]** Rize-generated unique document id
 
 #### Examples
 
