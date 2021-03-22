@@ -20,7 +20,7 @@ export type KYCDocument = {
      */
     extension: string;
     /**
-     * - The date and time when the document became available
+     * - The date and time when the document
      */
     created_at: string;
 };
