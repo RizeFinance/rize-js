@@ -85,3 +85,13 @@ export type DocumentListQuery = {
      */
     offset?: number;
 };
+export type HTTPResponse = {
+    /**
+     * - Object that contains more information about the response.
+     */
+    data: string;
+    /**
+     * - Collection of response headers.
+     */
+    headers: string;
+};
