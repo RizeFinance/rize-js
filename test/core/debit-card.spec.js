@@ -8,6 +8,7 @@ const faker = require('faker');
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
+const delayAsync = require('../helpers/delayAsync');
 
 const Rize = require('../../index');
 const rizeClient = new Rize(
@@ -169,6 +170,7 @@ describe('DebitCard', () => {
             expect(debitCard).to.have.property('pool_uid').that.equals(customerPoolUid);
 
             testDebitCard = debitCard;
+            await delayAsync(1500);
         });
     });
 
@@ -194,6 +196,7 @@ describe('DebitCard', () => {
             expect(updatedDebitCard).to.have.property('locked_at').that.is.not.empty;
 
             testDebitCard = updatedDebitCard;
+            await delayAsync(1500);
         });
     });
 
@@ -211,6 +214,7 @@ describe('DebitCard', () => {
             expect(updatedDebitCard).to.have.property('locked_at').that.is.null;
 
             testDebitCard = updatedDebitCard;
+            await delayAsync(1500);
         });
     });
 
@@ -239,6 +243,7 @@ describe('DebitCard', () => {
             expect(updatedDebitCard).to.have.property('card_last_four_digits').that.is.not.equal(testDebitCard.card_last_four_digits);
 
             testDebitCard = updatedDebitCard;
+            await delayAsync(1500);
         });
     });
 });

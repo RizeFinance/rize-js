@@ -9,6 +9,7 @@ const chaiAsPromised = require('chai-as-promised');
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
+const delayAsync = require('../helpers/delayAsync');
 
 const faker = require('faker');
 
@@ -413,12 +414,7 @@ describe('Customer', () => {
             let updatedCustomer = await rizeClient.customer.verifyIdentity(customerUid);
             expect(updatedCustomer.status).equals('queued');
 
-            // Wait for 10 sec
-            await new Promise(resolve => {
-                setTimeout(() => {
-                    resolve();
-                }, 10000);
-            });
+            await delayAsync(10000);
 
             updatedCustomer = await rizeClient.customer.get(customerUid);
             expect(updatedCustomer.status).equals('active');

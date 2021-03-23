@@ -10,6 +10,7 @@ const chaiAsPromised = require('chai-as-promised');
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
+const delayAsync = require('../helpers/delayAsync');
 
 const Rize = require('../../index');
 const rizeClient = new Rize(
@@ -31,10 +32,11 @@ describe('Customer', () => {
         });
 
         it('Archives the customer', async () => {
+            await delayAsync(30000);
             await rizeClient.customer.archive(customerUid);
             const updatedCustomer = await rizeClient.customer.get(customerUid);
 
             expect(updatedCustomer.status).equals('archived');
-        });
+        }).timeout(40000);
     });
 });
