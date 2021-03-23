@@ -37,7 +37,7 @@ describe('KYCDocument', () => {
 
     describe('getMetadata', () => {
         it('Throws an error if "uid" is empty', () => {
-            const promise = rizeClient.kycDocument.get('');
+            const promise = rizeClient.kycDocument.getMetadata('');
             return expect(promise).to.eventually.be.rejectedWith('KYC Document "uid" is required.');
         });
 
