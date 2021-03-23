@@ -76,7 +76,7 @@
     -   [getList][72]
         -   [Parameters][73]
         -   [Examples][74]
-    -   [upload][75]
+    -   [getMetadata][75]
         -   [Parameters][76]
         -   [Examples][77]
 -   [SyntheticAccountService][78]
@@ -816,32 +816,21 @@ const kycDocuments = await rize.kycDocument.getList('QSskNJkryskRXeYt');
 
 Returns **[Promise][213]&lt;[RizeList][218]&lt;[KYCDocument][227]>>** A promise that returns a List of KYC Documents if resolved.
 
-### upload
+### getMetadata
 
-Upload a KYC Document for review. This will upload the Document to our KYC partner,
-and create a record of the Document on the Rize platform. Preferred file types are JPG, PDF, and PNG.
+Retrieve metadata for a KYC Document previously uploaded to our KYC partner for evaluation.
 
 #### Parameters
 
--   `evaluationUid` **[string][212]** A uid referring to the evaluation with which this document is associated
--   `filename` **[string][212]** The name of the file to be uploaded
--   `fileContent` **[string][212]** The contents of the file to be uploaded, base64-encoded.
--   `note` **[string][212]** A note describing this document
--   `type` **(`"contract"` \| `"license"` \| `"other"` \| `"passport"` \| `"utility"`)** 
+-   `uid` **[string][212]** Rize-generated unique KYC Document id
 
 #### Examples
 
 ```javascript
-const kycDocument = await rize.kycDocument.upload(
-    'evaluation_uid1',
-    'file_name1',
-    '<base64 encoded image>',
-    'note for the document'
-    'other'
-);
+const kycDocumentMetadata = await rize.kycDocument.getMetadata(kycDocumentUid);
 ```
 
-Returns **[Promise][213]&lt;[KYCDocument][227]>** A promise that returns a KYC Document if resolved.
+Returns **[Promise][213]&lt;[KYCDocument][227]>** A promise that returns a KYC Document Metadata if resolved.
 
 ## 
 
@@ -2100,7 +2089,7 @@ Type: [string][212]
 
 [74]: #examples-21
 
-[75]: #upload
+[75]: #getmetadata
 
 [76]: #parameters-23
 
