@@ -31,10 +31,16 @@ describe('Customer', () => {
         });
 
         it('Archives the customer', async () => {
+            await new Promise(resolve => {
+                setTimeout(() => {
+                    resolve();
+                }, 30000); // Wait for 20 seconds before archiving
+            });
+
             await rizeClient.customer.archive(customerUid);
             const updatedCustomer = await rizeClient.customer.get(customerUid);
 
             expect(updatedCustomer.status).equals('archived');
-        });
+        }).timeout(40000);
     });
 });
