@@ -14,9 +14,8 @@ declare class KYCDocumentService {
     /**
      * @ignore @protected
      * Validates the parameters for the "get" method
-     * @param {string} uid
      */
-    protected _validateGetParams(uid: string): void;
+    protected _validateGetParams(uid: any): void;
     /**
      * @ignore @protected
      * Validates parameters for the getList method.
