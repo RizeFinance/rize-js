@@ -42,7 +42,7 @@ declare class KYCDocumentService {
      * const kycDocument = await rize.kycDocument.upload(
      *     'evaluation_uid1',
      *     'file_name1',
-     *     'data:image/png;base64,iVB...',
+     *     '<base64 encoded image>',
      *     'note for the document'
      *     'other'
      * );
