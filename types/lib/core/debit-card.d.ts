@@ -29,6 +29,21 @@ declare class DebitCardService {
      */
     protected _validateCreateParams(externalUid: any, customerUid: any, poolUid: any, shippingAddress?: any): void;
     /**
+     * @ignore @protected
+     * Validates the parameters for the "lock" method
+     */
+    protected _validateLockParams(uid: any, lockReason: any): void;
+    /**
+     * @ignore @protected
+     * Validates the parameters for the "unlock" method
+     */
+    protected _validateUnlockParams(uid: any): void;
+    /**
+     * @ignore @protected
+     * Validates the parameters for the "unlock" method
+     */
+    protected _validateReissueParams(uid: any, reissueReason: any): void;
+    /**
      * Retrieves a list of Debit Cards filtered by the given parameters.
      * @param {DebitCardListQuery} [query] - An object containing key value pair for filtering the results list.
      * @returns {Promise<RizeList<DebitCard>>} A promise that returns a Debit Card List if resolved.
@@ -92,6 +107,52 @@ declare class DebitCardService {
      * );
      */
     create(externalUid: string, customerUid: string, poolUid: string, shippingAddress?: Address | null): Promise<DebitCard>;
+    /**
+     * Lock a Debit Card
+     *
+     * A Debit Card can be locked temporarily by either the Customer, Client, or the Custodial Partner.
+     * A lock is only temporary and can generally be removed by calling `debitCard.unlock`.
+     * @param {string} uid Rize-generated unique Debit Card id
+     * @param {string} lockReason A lock reason is required to be submitted when locking a Debit Card
+     * @returns {Promise<DebitCard>} A promise that returns a Debit Card if resolved.
+     * @example
+     * const lockedDebitCard = await rize.debitCard.lock(
+     *     'debit_card_uid1',
+     *     'Fraud detected'
+     * );
+     */
+    lock(uid: string, lockReason: string): Promise<DebitCard>;
+    /**
+     * Unlock a Debit Card
+     *
+     * Calling this function will attempt to remove a lock placed on a Debit Card.
+     * Depending on the type of lock in place, this will not always be successful.
+     * For example, a lock placed by a Custodial Partner for fraud can not be removed by a Customer.
+     * @param {string} uid Rize-generated unique Debit Card id
+     * @returns {Promise<DebitCard>} A promise that returns a Debit Card if resolved.
+     * @example
+     * const unlockedDebitCard = await rize.debitCard.unlock('debit_card_uid1');
+     */
+    unlock(uid: string): Promise<DebitCard>;
+    /**
+     * Reissue a Debit Card
+     *
+     * Reissuance may be requested when a Debit Card is lost or stolen, or when it has suffered damage.
+     * In the case of a damaged Debit Card, the original remains usable while the reissued card is being processed.
+     * The reissued card will have the same PAN as the original and the Debit Card UID will not change.
+     *
+     * When a reissued Debit Card is requested because the original was lost or stolen, the original card is closed
+     * and the reissued card will have a new PAN. For Debit Cards reported lost or stolen, a new Debit Card UID will
+     * be provided by Rize to identify the reissued Debit Card.
+     *
+     * The new physical Debit Card will by default be sent to the Customer's primary address, set via `customer.update`.
+     * @param {string} uid Rize-generated unique Debit Card id
+     * @param {'damaged'|'lost'|'stolen'} reissueReason A reissue reason is required when requesting Debit Card reissuance.
+     * @returns {Promise<DebitCard>} A promise that returns a Debit Card if resolved.
+     * @example
+     * const reissuedDebitCard = await rize.debitCard.reissue('debit_card_uid1', 'damaged');
+     */
+    reissue(uid: string, reissueReason: 'damaged' | 'lost' | 'stolen'): Promise<DebitCard>;
 }
 declare namespace DebitCardService {
     export { DebitCardListQuery, DebitCard, Address, RizeList };

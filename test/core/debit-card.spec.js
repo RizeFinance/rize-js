@@ -167,6 +167,78 @@ describe('DebitCard', () => {
             expect(debitCard).to.have.property('external_uid').that.equals(externalUid);
             expect(debitCard).to.have.property('customer_uid').that.equals(customerUid);
             expect(debitCard).to.have.property('pool_uid').that.equals(customerPoolUid);
+
+            testDebitCard = debitCard;
+        });
+    });
+
+    describe('lock', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.debitCard.lock('');
+            return expect(promise).to.eventually.be.rejectedWith('Debit Card "uid" is required.');
+        });
+
+        it('Throws an error if "lockReason" is empty', () => {
+            const promise = rizeClient.debitCard.lock('test', '');
+            return expect(promise).to.eventually.be.rejectedWith('"lockReason" is required.');
+        });
+
+        it('Locks debit card successfully', async () => {
+            const lockReason = 'Test lock';
+            const updatedDebitCard = await rizeClient.debitCard.lock(
+                testDebitCard.uid,
+                lockReason
+            );
+            expect(updatedDebitCard).to.have.property('uid').that.equals(testDebitCard.uid);
+            expect(updatedDebitCard).to.have.property('lock_reason').that.equals(lockReason);
+            expect(updatedDebitCard).to.have.property('locked_at').that.is.not.empty;
+
+            testDebitCard = updatedDebitCard;
+        });
+    });
+
+    describe('unlock', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.debitCard.unlock('');
+            return expect(promise).to.eventually.be.rejectedWith('Debit Card "uid" is required.');
+        });
+
+        it('Unlocks debit card successfully', async () => {
+            const updatedDebitCard = await rizeClient.debitCard.unlock(testDebitCard.uid);
+
+            expect(updatedDebitCard).to.have.property('uid').that.equals(testDebitCard.uid);
+            expect(updatedDebitCard).to.have.property('lock_reason').that.is.null;
+            expect(updatedDebitCard).to.have.property('locked_at').that.is.null;
+
+            testDebitCard = updatedDebitCard;
+        });
+    });
+
+    describe('reissue', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.debitCard.reissue('');
+            return expect(promise).to.eventually.be.rejectedWith('Debit Card "uid" is required.');
+        });
+
+        it('Throws an error if "reissueReason" is empty', () => {
+            const promise = rizeClient.debitCard.reissue('test', '');
+            return expect(promise).to.eventually.be.rejectedWith('"reissueReason" is required.');
+        });
+
+        it('Throws an error if "reissueReason" is invalid', () => {
+            const promise = rizeClient.debitCard.reissue('test', 'test');
+            return expect(promise).to.eventually.be.rejectedWith('Invalid reissueReason. Accepted values are: damaged | lost | stolen');
+        });
+
+        it('Reissues debit card successfully', async () => {
+            const updatedDebitCard = await rizeClient.debitCard.reissue(
+                testDebitCard.uid,
+                'damaged'
+            );
+            expect(updatedDebitCard).to.have.property('uid').that.equals(testDebitCard.uid);
+            expect(updatedDebitCard).to.have.property('card_last_four_digits').that.is.not.equal(testDebitCard.card_last_four_digits);
+
+            testDebitCard = updatedDebitCard;
         });
     });
 });
