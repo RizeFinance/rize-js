@@ -31,7 +31,7 @@ declare class KYCDocumentService {
     getList(evaluationUid: string): Promise<RizeList<KYCDocument>>;
     /**
      * Retrieve metadata for a KYC Document previously uploaded to our KYC partner for evaluation.
-     * @param {string} uid - Rize-generated unique id
+     * @param {string} uid - Rize-generated unique KYC Document id
      * @returns {Promise<KYCDocument>} A promise that returns a KYC Document Metadata if resolved.
      * @example const kycDocumentMetadata = await rize.kycDocument.getMetadata(kycDocumentUid);
      */
