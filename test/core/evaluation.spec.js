@@ -20,7 +20,7 @@ describe('Evaluation', () => {
     describe('getList', async () => {
         it('Throws an error if "query" is invalid', () => {
             const promise = rizeClient.evaluation.getList('');
-            return expect(promise).to.eventually.be.rejectedWith('"query" must be a EvaluationListQuery object.');
+            return expect(promise).to.eventually.be.rejectedWith('"query" must be an EvaluationListQuery object.');
         });
 
         it('Throws an error if "customer_uid" query is not an array', () => {

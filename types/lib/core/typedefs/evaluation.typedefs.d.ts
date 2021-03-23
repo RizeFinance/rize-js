@@ -4,9 +4,6 @@ export type Evaluation = {
      */
     uid: string;
     outcome: 'approved' | 'manual_review' | 'denied';
-    /**
-     * - The date and time when the evaluation became created
-     */
     created_at: string;
     /**
      * A mapping of categories to outcomes for those categories. Items are defined as: key -
