@@ -10,6 +10,7 @@ const faker = require('faker');
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
+const delayAsync = require('../helpers/delayAsync');
 
 const Rize = require('../../index');
 const rizeClient = new Rize(
@@ -147,11 +148,7 @@ describe('Transfer', () => {
             expect(transfer).to.have.property('usd_transfer_amount').that.equals('100.0');
             expect(transfer).to.have.property('status').that.equals('queued');
 
-            await new Promise(resolve => {
-                setTimeout(() => {
-                    resolve(); // Wait for 70 sec for the transfer to be settled
-                }, 70000);
-            });
+            await delayAsync(70000);
 
             const updatedTransfer = await rizeClient.transfer.get(transfer.uid);
 
@@ -177,11 +174,7 @@ describe('Transfer', () => {
             expect(transfer).to.have.property('usd_transfer_amount').that.equals('100.0');
             expect(transfer).to.have.property('status').that.equals('queued');
 
-            await new Promise(resolve => {
-                setTimeout(() => {
-                    resolve(); // Wait for 70 sec for the transfer to be settled
-                }, 70000);
-            });
+            await delayAsync(70000);
 
             const updatedTransfer = await rizeClient.transfer.get(transfer.uid);
 
