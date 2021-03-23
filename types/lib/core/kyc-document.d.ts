@@ -60,9 +60,30 @@ declare class KYCDocumentService {
      * @example const kycDocumentMetadata = await rize.kycDocument.getMetadata(kycDocumentUid);
      */
     getMetadata(uid: string): Promise<KYCDocument>;
+    /**
+     * Retrieve a document (image, PDF, etc) previously uploaded to our KYC partner for evaluation.
+     * The response will include headers that indicate the format of the returned file,
+     * e.g. Content-Type: image/jpeg,
+     *      Content-Disposition: attachment;
+     *      filename="fred.jpg";
+     *      filename*=UTF-8''fred.jpg,
+     *      Content-Transfer-Encoding: binary
+     * @param {string} uid - Rize-generated unique KYC Document id
+     * @returns {Promise<HTTPResponse>} A promise that returns a base64-encoded KYC Document string if resolved.
+     * @example const kycDocument = await rize.kycDocument.get(kycDocumentUid);
+     */
+    get(uid: string): Promise<HTTPResponse>;
+    /**
+     * Retrieve a base64-encoded document (image, PDF, etc) previously uploaded to our KYC partner for evaluation.
+     * @param {string} uid - Rize-generated unique KYC Document id
+     * @returns {Promise<string>} A promise that returns a base64-encoded KYC Document string if resolved.
+     * @example const kycDocument = await rize.kycDocument.getBase64(kycDocumentUid);
+     */
+    getBase64(uid: string): Promise<string>;
 }
 declare namespace KYCDocumentService {
-    export { KYCDocument, RizeList };
+    export { KYCDocument, RizeList, HTTPResponse };
 }
 type RizeList<T> = import('./typedefs/common.typedefs').RizeList<T>;
 type KYCDocument = import('./typedefs/kyc-document.typedefs').KYCDocument;
+type HTTPResponse<T> = import('./typedefs/common.typedefs').HTTPResponse<T>;
