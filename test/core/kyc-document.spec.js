@@ -16,9 +16,12 @@ const rizeClient = new Rize(
 
 const fs = require('fs');
 const path = require('path');
+const testFilePath = path.resolve(__dirname, '../test-files/rize-logo.png');
 
 describe('KYCDocument', () => {
     let testKYCDocument;
+    let newKYCDocument;
+    let testImage;
 
     describe('getList', async () => {
         it('Throws an error if "evaluationUid" is empty', () => {
@@ -60,8 +63,7 @@ describe('KYCDocument', () => {
         });
 
         it('Uploads a KYC document successfully', async () => {
-            const testFilePath = path.resolve(__dirname, '../test-files/rize-logo.png');
-            const testImage = fs.readFileSync(testFilePath, { encoding: 'base64' });
+            testImage = fs.readFileSync(testFilePath, { encoding: 'base64' });
             const kycDocument = await rizeClient.kycDocument.upload(
                 'Ct1EY876A47RZkDX',
                 'rize-logo.png',
@@ -75,6 +77,8 @@ describe('KYCDocument', () => {
             expect(kycDocument).to.have.property('note').that.equals('test upload');
             expect(kycDocument).to.have.property('extension').that.equals('png');
             expect(kycDocument).to.have.property('created_at');
+
+            newKYCDocument = kycDocument;
         });
     });
 
@@ -87,6 +91,32 @@ describe('KYCDocument', () => {
         it('Retrieves kyc document metadata successfully', async () => {
             const kycDocumentMetadata = await rizeClient.kycDocument.getMetadata(testKYCDocument.uid);
             expect(kycDocumentMetadata).to.have.property('uid').that.equals(testKYCDocument.uid);
+        });
+    });
+
+    describe('get', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.kycDocument.get('');
+            return expect(promise).to.eventually.be.rejectedWith('KYC Document "uid" is required.');
+        });
+
+        it('Retrieves kyc document successfully', async () => {
+            const kycDocument = await rizeClient.kycDocument.get(newKYCDocument.uid);
+            expect(kycDocument).to.have.property('data');
+            expect(kycDocument).to.have.property('headers');
+            expect(kycDocument.headers['content-disposition']).to.contain('rize-logo.png');
+        });
+    });
+
+    describe('getBase64', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.kycDocument.getBase64('');
+            return expect(promise).to.eventually.be.rejectedWith('KYC Document "uid" is required.');
+        });
+
+        it('Retrieves kyc document successfully', async () => {
+            const kycDocument = await rizeClient.kycDocument.getBase64(newKYCDocument.uid);
+            expect(kycDocument).to.equal(testImage);
         });
     });
 });
