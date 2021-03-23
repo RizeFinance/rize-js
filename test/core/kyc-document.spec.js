@@ -24,7 +24,7 @@ describe('KYCDocument', () => {
         });
 
         it('Retrieves the KYC document list with evaluationUid', async () => {
-            const kycDocumentList = await rizeClient.kycDocument.getList('evaluation_uid1');
+            const kycDocumentList = await rizeClient.kycDocument.getList('Ct1EY876A47RZkDX');
             testKYCDocument = kycDocumentList.data[0];
             utils.expectRizeList(kycDocumentList);
         });
