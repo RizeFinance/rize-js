@@ -15,6 +15,7 @@ const rizeClient = new Rize(
 );
 
 describe('KYCDocument', () => {
+    let testKYCDocument;
 
     describe('getList', async () => {
         it('Throws an error if "evaluationUid" is empty', () => {
@@ -23,8 +24,21 @@ describe('KYCDocument', () => {
         });
 
         it('Retrieves the KYC document list with evaluationUid', async () => {
-            const kycDocumentList = await rizeClient.kycDocument.getList('evaluation_uid1');
+            const kycDocumentList = await rizeClient.kycDocument.getList('Ct1EY876A47RZkDX');
+            testKYCDocument = kycDocumentList.data[0];
             utils.expectRizeList(kycDocumentList);
+        });
+    });
+
+    describe('getMetadata', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.kycDocument.getMetadata('');
+            return expect(promise).to.eventually.be.rejectedWith('KYC Document "uid" is required.');
+        });
+
+        it('Retrieves kyc document metadata successfully', async () => {
+            const kycDocumentMetadata = await rizeClient.kycDocument.getMetadata(testKYCDocument.uid);
+            expect(kycDocumentMetadata).to.have.property('uid').that.equals(testKYCDocument.uid);
         });
     });
 });
