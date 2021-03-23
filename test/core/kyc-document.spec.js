@@ -14,6 +14,9 @@ const rizeClient = new Rize(
     process.env.RIZE_HMAC
 );
 
+const fs = require('fs');
+const path = require('path');
+
 describe('KYCDocument', () => {
 
     describe('getList', async () => {
@@ -25,6 +28,51 @@ describe('KYCDocument', () => {
         it('Retrieves the KYC document list with evaluationUid', async () => {
             const kycDocumentList = await rizeClient.kycDocument.getList('evaluation_uid1');
             utils.expectRizeList(kycDocumentList);
+        });
+    });
+
+    describe('upload', () => {
+        it('Throws an error if "evaluationUid" is empty', () => {
+            const promise = rizeClient.kycDocument.upload('');
+            return expect(promise).to.eventually.be.rejectedWith('"evaluationUid" is required.');
+        });
+
+        it('Throws an error if "filename" is empty', () => {
+            const promise = rizeClient.kycDocument.upload('test', '');
+            return expect(promise).to.eventually.be.rejectedWith('"filename" is required.');
+        });
+
+        it('Throws an error if "fileContent" is empty', () => {
+            const promise = rizeClient.kycDocument.upload('test', 'test', '');
+            return expect(promise).to.eventually.be.rejectedWith('"fileContent" is required.');
+        });
+
+        it('Throws an error if "note" is empty', () => {
+            const promise = rizeClient.kycDocument.upload('test', 'test', 'test', '');
+            return expect(promise).to.eventually.be.rejectedWith('"note" is required.');
+        });
+
+        it('Throws an error if "type" is not an accepted value', () => {
+            const promise = rizeClient.kycDocument.upload('test', 'test', 'test', 'test', 'test');
+            return expect(promise).to.eventually.be.rejectedWith('Accepted values in the "type" parameter are: contract | license | other | passport | utility');
+        });
+
+        it('Uploads a KYC document successfully', async () => {
+            const testFilePath = path.resolve(__dirname, '../test-files/rize-logo.png');
+            const testImage = fs.readFileSync(testFilePath, { encoding: 'base64' });
+            const kycDocument = await rizeClient.kycDocument.upload(
+                'Ct1EY876A47RZkDX',
+                'rize-logo.png',
+                testImage,
+                'test upload',
+                'other'
+            );
+            expect(kycDocument).to.have.property('uid');
+            expect(kycDocument).to.have.property('type').that.equals('other');
+            expect(kycDocument).to.have.property('filename').that.equals('rize-logo');
+            expect(kycDocument).to.have.property('note').that.equals('test upload');
+            expect(kycDocument).to.have.property('extension').that.equals('png');
+            expect(kycDocument).to.have.property('created_at');
         });
     });
 });
