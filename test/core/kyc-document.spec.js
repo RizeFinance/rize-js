@@ -23,14 +23,9 @@ describe('KYCDocument', () => {
             return expect(promise).to.eventually.be.rejectedWith('"evaluationUid" is required.');
         });
 
-        it('Retrieves the KYC document list without query', async () => {
-            const kycDocumentList = await rizeClient.kycDocument.getList();
-            testKYCDocument = kycDocumentList.data[0];
-            utils.expectRizeList(kycDocumentList);
-        });
-
         it('Retrieves the KYC document list with evaluationUid', async () => {
             const kycDocumentList = await rizeClient.kycDocument.getList('evaluation_uid1');
+            testKYCDocument = kycDocumentList.data[0];
             utils.expectRizeList(kycDocumentList);
         });
     });
