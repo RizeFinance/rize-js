@@ -130,7 +130,7 @@ describe('Document', () => {
         });
 
         it('Retrieves document successfully', async () => {
-            const document = await rizeClient.document.viewBase64(testDocument.uid);
+            const document = await rizeClient.document.viewBase64(testDocument.uid, 'pdf');
             expect(document).to.be.a('string');
         }).timeout(5000);
     });

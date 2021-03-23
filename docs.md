@@ -802,6 +802,7 @@ Retrieve a base64-encoded document (image, PDF, etc)
 #### Parameters
 
 -   `uid` **[string][231]** Rize-generated unique Document id
+-   `extension`   (optional, default `'pdf'`)
 
 #### Examples
 

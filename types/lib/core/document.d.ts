@@ -60,7 +60,7 @@ declare class DocumentService {
      * @returns {Promise<string>} A promise that returns a base64-encoded Document string if resolved.
      * @example const document = await rize.document.viewBase64(documentUid);
      */
-    viewBase64(uid: string): Promise<string>;
+    viewBase64(uid: string, extension?: string): Promise<string>;
     /**
      * Get a single Document
      *
