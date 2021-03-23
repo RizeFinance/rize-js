@@ -66,14 +66,14 @@
     -   [getList][62]
         -   [Parameters][63]
         -   [Examples][64]
-    -   [get][65]
+    -   [view][65]
         -   [Parameters][66]
         -   [Examples][67]
--   [KYCDocumentService][68]
-    -   [getList][69]
-        -   [Parameters][70]
-        -   [Examples][71]
-    -   [getMetadata][72]
+    -   [get][68]
+        -   [Parameters][69]
+        -   [Examples][70]
+-   [KYCDocumentService][71]
+    -   [getList][72]
         -   [Parameters][73]
         -   [Examples][74]
 -   [SyntheticAccountService][75]
@@ -756,6 +756,23 @@ const documents = await rize.document.getList({
 
 Returns **[Promise][210]&lt;[RizeList][215]&lt;[Document][223]>>** A promise that returns a Document List if resolved.
 
+### view
+
+View or download a document
+
+#### Parameters
+
+-   `uid` **[string][209]** Rize-generated unique document id
+-   `extension`   (optional, default `'pdf'`)
+
+#### Examples
+
+```javascript
+const document = await rize.document.view(documentUid, 'pdf');
+```
+
+Returns **[Promise][210]&lt;[Document][223]>** A promise that returns a downloaded Document if resolved.
+
 ### get
 
 Get a single Document
@@ -795,22 +812,6 @@ const kycDocuments = await rize.kycDocument.getList('QSskNJkryskRXeYt');
 ```
 
 Returns **[Promise][210]&lt;[RizeList][215]&lt;[KYCDocument][224]>>** A promise that returns a List of KYC Documents if resolved.
-
-### getMetadata
-
-Retrieve metadata for a KYC Document previously uploaded to our KYC partner for evaluation.
-
-#### Parameters
-
--   `uid` **[string][209]** Rize-generated unique id
-
-#### Examples
-
-```javascript
-const kycDocumentMetadata = await rize.kycDocument.getMetadata(kycDocumentUid);
-```
-
-Returns **[Promise][210]&lt;[KYCDocument][224]>** A promise that returns a KYC Document Metadata if resolved.
 
 ## 
 
@@ -2049,21 +2050,21 @@ Type: [string][209]
 
 [64]: #examples-18
 
-[65]: #get-3
+[65]: #view
 
 [66]: #parameters-20
 
 [67]: #examples-19
 
-[68]: #kycdocumentservice
+[68]: #get-3
 
-[69]: #getlist-4
+[69]: #parameters-21
 
-[70]: #parameters-21
+[70]: #examples-20
 
-[71]: #examples-20
+[71]: #kycdocumentservice
 
-[72]: #getmetadata
+[72]: #getlist-4
 
 [73]: #parameters-22
 
