@@ -103,6 +103,12 @@ declare class Rize {
      * or denied for the Program. These files are generally utility bills or images of state issued driver’s licenses.
      */
     kycDocument: KYCDocumentService;
+    /**
+     * An Evaluation is the result of submitting a customer's personal details to one of Rize's KYC partners. If Customer PII is updated,
+     * another Evaluation is generated with its own unique Evaluation identifier.
+     * @type {EvaluationService}
+     */
+    evaluation: EvaluationService;
 }
 declare namespace Rize {
     export { PACKAGE_VERSION, Rize, Rize as default };
@@ -116,4 +122,5 @@ import TransferService = require("./core/transfer");
 import DebitCardService = require("./core/debit-card");
 import DocumentService = require("./core/document");
 import KYCDocumentService = require("./core/kyc-document");
+import EvaluationService = require("./core/evaluation");
 declare var PACKAGE_VERSION: string;

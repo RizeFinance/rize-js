@@ -11,6 +11,7 @@ const TOKEN_MAX_AGE = 500;
 const expect = require('chai').expect;
 const ApiClient = require('../../lib/api');
 const Auth = require('../../lib/core/auth');
+const delayAsync = require('../helpers/delayAsync');
 
 const api = new ApiClient({
     host: DEFAULT_HOST,
@@ -39,11 +40,8 @@ describe('Auth', () => {
     });
 
     it('Gets a new token if the current one is expired', async () => {
-        const token3 = await new Promise((resolve) => {
-            setTimeout(() => {
-                auth.getToken().then(resolve);
-            }, 600);
-        });
+        await delayAsync(TOKEN_MAX_AGE + 200);
+        const token3 = await auth.getToken();
         expect(token3).to.not.be.empty;
         expect(token3).to.not.equal(token);
     });

@@ -75,148 +75,163 @@
     -   [get][71]
         -   [Parameters][72]
         -   [Examples][73]
--   [KYCDocumentService][74]
+-   [EvaluationService][74]
     -   [getList][75]
         -   [Parameters][76]
         -   [Examples][77]
--   [SyntheticAccountService][78]
-    -   [getList][79]
-        -   [Parameters][80]
-        -   [Examples][81]
-    -   [get][82]
+    -   [get][78]
+        -   [Parameters][79]
+        -   [Examples][80]
+-   [KYCDocumentService][81]
+    -   [getList][82]
         -   [Parameters][83]
         -   [Examples][84]
-    -   [create][85]
+    -   [getMetadata][85]
         -   [Parameters][86]
         -   [Examples][87]
-    -   [update][88]
-        -   [Parameters][89]
-        -   [Examples][90]
-    -   [archive][91]
-        -   [Parameters][92]
-        -   [Examples][93]
-    -   [getTypesList][94]
-        -   [Parameters][95]
-        -   [Examples][96]
-    -   [getType][97]
-        -   [Parameters][98]
-        -   [Examples][99]
--   [TransactionService][100]
-    -   [getList][101]
+-   [SyntheticAccountService][88]
+    -   [getList][89]
+        -   [Parameters][90]
+        -   [Examples][91]
+    -   [get][92]
+        -   [Parameters][93]
+        -   [Examples][94]
+    -   [create][95]
+        -   [Parameters][96]
+        -   [Examples][97]
+    -   [update][98]
+        -   [Parameters][99]
+        -   [Examples][100]
+    -   [archive][101]
         -   [Parameters][102]
         -   [Examples][103]
-    -   [get][104]
+    -   [getTypesList][104]
         -   [Parameters][105]
         -   [Examples][106]
-    -   [getTransactionEventList][107]
+    -   [getType][107]
         -   [Parameters][108]
         -   [Examples][109]
-    -   [getTransactionEvent][110]
-        -   [Parameters][111]
-        -   [Examples][112]
-    -   [getSyntheticLineItemList][113]
-        -   [Parameters][114]
-        -   [Examples][115]
-    -   [getSyntheticLineItem][116]
-        -   [Parameters][117]
-        -   [Examples][118]
-    -   [getCustodialLineItemList][119]
-        -   [Parameters][120]
-        -   [Examples][121]
-    -   [getCustodialLineItem][122]
-        -   [Parameters][123]
-        -   [Examples][124]
--   [TransferService][125]
-    -   [getList][126]
+-   [TransactionService][110]
+    -   [getList][111]
+        -   [Parameters][112]
+        -   [Examples][113]
+    -   [get][114]
+        -   [Parameters][115]
+        -   [Examples][116]
+    -   [getTransactionEventList][117]
+        -   [Parameters][118]
+        -   [Examples][119]
+    -   [getTransactionEvent][120]
+        -   [Parameters][121]
+        -   [Examples][122]
+    -   [getSyntheticLineItemList][123]
+        -   [Parameters][124]
+        -   [Examples][125]
+    -   [getSyntheticLineItem][126]
         -   [Parameters][127]
         -   [Examples][128]
-    -   [get][129]
+    -   [getCustodialLineItemList][129]
         -   [Parameters][130]
         -   [Examples][131]
-    -   [init][132]
+    -   [getCustodialLineItem][132]
         -   [Parameters][133]
         -   [Examples][134]
--   [RizeList][135]
-    -   [Properties][136]
--   [Address][137]
-    -   [Properties][138]
--   [HTTPResponse][139]
-    -   [Properties][140]
--   [HTTPResponse][141]
-    -   [Properties][142]
--   [ComplianceWorkflowSummary][143]
-    -   [Properties][144]
--   [ComplianceWorkflowCustomer][145]
+-   [TransferService][135]
+    -   [getList][136]
+        -   [Parameters][137]
+        -   [Examples][138]
+    -   [get][139]
+        -   [Parameters][140]
+        -   [Examples][141]
+    -   [init][142]
+        -   [Parameters][143]
+        -   [Examples][144]
+-   [RizeList][145]
     -   [Properties][146]
--   [ComplianceDocument][147]
+-   [Address][147]
     -   [Properties][148]
--   [ComplianceDocumentAcknowledgementRequest][149]
+-   [HTTPResponse][149]
     -   [Properties][150]
--   [ComplianceWorkflow][151]
+-   [HTTPResponse][151]
     -   [Properties][152]
--   [AccountError][153]
+-   [ComplianceWorkflowSummary][153]
     -   [Properties][154]
--   [CustodialAccount][155]
+-   [ComplianceWorkflowCustomer][155]
     -   [Properties][156]
--   [CustodialAccountListQuery][157]
+-   [ComplianceDocument][157]
     -   [Properties][158]
--   [CustomerDetails][159]
+-   [ComplianceDocumentAcknowledgementRequest][159]
     -   [Properties][160]
--   [Customer][161]
+-   [ComplianceWorkflow][161]
     -   [Properties][162]
--   [CustomerListQuery][163]
+-   [AccountError][163]
     -   [Properties][164]
--   [DebitCard][165]
+-   [CustodialAccount][165]
     -   [Properties][166]
--   [DebitCardListQuery][167]
+-   [CustodialAccountListQuery][167]
     -   [Properties][168]
--   [debit-card.typedefs][169]
--   [Document][170]
-    -   [Properties][171]
--   [DocumentListQuery][172]
-    -   [Properties][173]
--   [KYCDocument][174]
-    -   [Properties][175]
--   [SyntheticAccountType][176]
-    -   [Properties][177]
--   [SyntheticAccountTypeListQuery][178]
-    -   [Properties][179]
--   [SyntheticAccount][180]
+-   [CustomerDetails][169]
+    -   [Properties][170]
+-   [Customer][171]
+    -   [Properties][172]
+-   [CustomerListQuery][173]
+    -   [Properties][174]
+-   [DebitCard][175]
+    -   [Properties][176]
+-   [DebitCardListQuery][177]
+    -   [Properties][178]
+-   [debit-card.typedefs][179]
+-   [Document][180]
     -   [Properties][181]
--   [SyntheticAccountListQuery][182]
+-   [DocumentListQuery][182]
     -   [Properties][183]
--   [SyntheticAccountCreateRequest][184]
+-   [Evaluation][184]
     -   [Properties][185]
--   [Transaction][186]
+-   [EvaluationListQuery][186]
     -   [Properties][187]
--   [TransactionListQuery][188]
+-   [KYCDocument][188]
     -   [Properties][189]
--   [SyntheticLineItem][190]
+-   [SyntheticAccountType][190]
     -   [Properties][191]
--   [SyntheticLineItemListQuery][192]
+-   [SyntheticAccountTypeListQuery][192]
     -   [Properties][193]
--   [CustodialLineItem][194]
+-   [SyntheticAccount][194]
     -   [Properties][195]
--   [CustodialLineItemListQuery][196]
+-   [SyntheticAccountListQuery][196]
     -   [Properties][197]
--   [Transfer][198]
+-   [SyntheticAccountCreateRequest][198]
     -   [Properties][199]
--   [TransferListQuery][200]
+-   [Transaction][200]
     -   [Properties][201]
--   [RizeOptions][202]
+-   [TransactionListQuery][202]
     -   [Properties][203]
--   [Rize][204]
-    -   [Parameters][205]
-    -   [complianceWorkflow][206]
-    -   [customer][207]
-    -   [syntheticAccount][208]
-    -   [custodialAccount][209]
-    -   [transaction][210]
-    -   [transfer][211]
-    -   [debitCard][212]
-    -   [document][213]
-    -   [kycDocument][214]
-    -   [PACKAGE_VERSION][215]
+-   [SyntheticLineItem][204]
+    -   [Properties][205]
+-   [SyntheticLineItemListQuery][206]
+    -   [Properties][207]
+-   [CustodialLineItem][208]
+    -   [Properties][209]
+-   [CustodialLineItemListQuery][210]
+    -   [Properties][211]
+-   [Transfer][212]
+    -   [Properties][213]
+-   [TransferListQuery][214]
+    -   [Properties][215]
+-   [RizeOptions][216]
+    -   [Properties][217]
+-   [Rize][218]
+    -   [Parameters][219]
+    -   [complianceWorkflow][220]
+    -   [customer][221]
+    -   [syntheticAccount][222]
+    -   [custodialAccount][223]
+    -   [transaction][224]
+    -   [transfer][225]
+    -   [debitCard][226]
+    -   [document][227]
+    -   [kycDocument][228]
+    -   [evaluation][229]
+    -   [PACKAGE_VERSION][230]
 
 ## ComplianceWorkflowService
 
@@ -228,8 +243,8 @@ Creates a new Compliance Workflow.
 
 #### Parameters
 
--   `customerExternalUid` **[string][216]** A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.
--   `email` **[string][216]** Email address associated with the Customer.
+-   `customerExternalUid` **[string][231]** A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.
+-   `email` **[string][231]** Email address associated with the Customer.
 
 #### Examples
 
@@ -237,7 +252,7 @@ Creates a new Compliance Workflow.
 const newWorkflow = await rize.complianceWorkflow.create('client-generated-42', 'tomas@example.com');
 ```
 
-Returns **[Promise][217]&lt;[ComplianceWorkflow][218]>** A promise that returns the new Compliance Workflow if resolved.
+Returns **[Promise][232]&lt;[ComplianceWorkflow][233]>** A promise that returns the new Compliance Workflow if resolved.
 
 ### renew
 
@@ -245,11 +260,11 @@ Renew a Compliance Workflow after it expired the given timeframe
 
 #### Parameters
 
--   `customerExternalUid` **[string][216]** A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.
--   `customerUid` **[string][216]** A UID referring to the Customer generated by Rize
--   `email` **[string][216]** Email address associated with the Customer.
+-   `customerExternalUid` **[string][231]** A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.
+-   `customerUid` **[string][231]** A UID referring to the Customer generated by Rize
+-   `email` **[string][231]** Email address associated with the Customer.
 
-Returns **[Promise][217]&lt;[ComplianceWorkflow][218]>** A promise that returns the new Compliance Workflow entity if resolved.
+Returns **[Promise][232]&lt;[ComplianceWorkflow][233]>** A promise that returns the new Compliance Workflow entity if resolved.
 
 ### viewLatest
 
@@ -257,7 +272,7 @@ Retrieves the most recent Compliance Workflow for a Customer.
 
 #### Parameters
 
--   `customerUid` **[string][216]** A UID referring to the Customer
+-   `customerUid` **[string][231]** A UID referring to the Customer
 
 #### Examples
 
@@ -265,7 +280,7 @@ Retrieves the most recent Compliance Workflow for a Customer.
 const latestWorkflow = await rize.complianceWorkflow.viewLatest('h9MzupcjtA3LPW2e');
 ```
 
-Returns **[Promise][217]&lt;[ComplianceWorkflow][218]>** A promise that returns the latest Compliance Workflow if resolved.
+Returns **[Promise][232]&lt;[ComplianceWorkflow][233]>** A promise that returns the latest Compliance Workflow if resolved.
 
 ### acknowledgeComplianceDocuments
 
@@ -273,9 +288,9 @@ Indicate acceptance or rejection of Compliance Documents within a given Complian
 
 #### Parameters
 
--   `complianceWorkflowUid` **[string][216]** A UID referring to the Compliance Workflow.
--   `customerUid` **[string][216]** A UID referring to the Customer.
--   `documents` **...[ComplianceDocumentAcknowledgementRequest][219]** 
+-   `complianceWorkflowUid` **[string][231]** A UID referring to the Compliance Workflow.
+-   `customerUid` **[string][231]** A UID referring to the Customer.
+-   `documents` **...[ComplianceDocumentAcknowledgementRequest][234]** 
 
 #### Examples
 
@@ -306,7 +321,7 @@ const updatedWorkflow = await rize.complianceWorkflow.acknowledgeComplianceDocum
 );
 ```
 
-Returns **[Promise][217]&lt;[ComplianceWorkflow][218]>** A promise that returns the updated Compliance Workflow if resolved.
+Returns **[Promise][232]&lt;[ComplianceWorkflow][233]>** A promise that returns the updated Compliance Workflow if resolved.
 
 ## 
 
@@ -322,7 +337,7 @@ Returns a single Custodial Account resource along with supporting details and ac
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique custodial account id
+-   `uid` **[string][231]** Rize-generated unique custodial account id
 
 #### Examples
 
@@ -330,7 +345,7 @@ Returns a single Custodial Account resource along with supporting details and ac
 const custodialAccount = await rize.custodialAccount.get(custodialAccountUid);
 ```
 
-Returns **[Promise][217]&lt;[CustodialAccount][220]>** A promise that returns a Custodial Account if resolved.
+Returns **[Promise][232]&lt;[CustodialAccount][235]>** A promise that returns a Custodial Account if resolved.
 
 ### getList
 
@@ -340,7 +355,7 @@ Multiple filter parameters can be provided at once, but a result will not be ret
 
 #### Parameters
 
--   `query` **[CustodialAccountListQuery][221]** An object containing key value pair for filtering the results list. (optional, default `{}`)
+-   `query` **[CustodialAccountListQuery][236]** An object containing key value pair for filtering the results list. (optional, default `{}`)
 
 #### Examples
 
@@ -355,7 +370,7 @@ const custodialAccountList = await rize.custodialAccount.getList({
 });
 ```
 
-Returns **[Promise][217]&lt;[RizeList][222]&lt;CustodialAccountList>>** A promise that returns a Custodial Account List if resolved.
+Returns **[Promise][232]&lt;[RizeList][237]&lt;CustodialAccountList>>** A promise that returns a Custodial Account List if resolved.
 
 ## 
 
@@ -373,7 +388,7 @@ Multiple filter parameters can be provided at once, but a result will not be ret
 
 #### Parameters
 
--   `query` **[CustomerListQuery][223]** An object containing key value pair for filtering the results list. (optional, default `{}`)
+-   `query` **[CustomerListQuery][238]** An object containing key value pair for filtering the results list. (optional, default `{}`)
 
 #### Examples
 
@@ -395,7 +410,7 @@ const customerList = await rize.customer.getList({
 });
 ```
 
-Returns **[Promise][217]&lt;[RizeList][222]&lt;[Customer][224]>>** A promise that returns a Customer List if resolved.
+Returns **[Promise][232]&lt;[RizeList][237]&lt;[Customer][239]>>** A promise that returns a Customer List if resolved.
 
 ### get
 
@@ -405,7 +420,7 @@ Retrieve overall status about a Customer as well as their total Asset Balances a
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique customer id
+-   `uid` **[string][231]** Rize-generated unique customer id
 
 #### Examples
 
@@ -413,7 +428,7 @@ Retrieve overall status about a Customer as well as their total Asset Balances a
 const customer = await rize.customer.get(customerUid);
 ```
 
-Returns **[Promise][217]&lt;[Customer][224]>** A promise that returns a Customer if resolved.
+Returns **[Promise][232]&lt;[Customer][239]>** A promise that returns a Customer if resolved.
 
 ### update
 
@@ -425,9 +440,9 @@ PII can be edited for a Customer up until a valid request is sent using the veri
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique customer id
--   `email` **[string][216]** Email of the customer
--   `details` **[CustomerDetails][225]** An object containing the supplied identifying information for the Customer
+-   `uid` **[string][231]** Rize-generated unique customer id
+-   `email` **[string][231]** Email of the customer
+-   `details` **[CustomerDetails][240]** An object containing the supplied identifying information for the Customer
 
 #### Examples
 
@@ -454,7 +469,7 @@ const updatedCustomer = await rize.customer.update(
 );
 ```
 
-Returns **[Promise][217]&lt;[Customer][224]>** A promise that returns the updated Customer if resolved.
+Returns **[Promise][232]&lt;[Customer][239]>** A promise that returns the updated Customer if resolved.
 
 ### archive
 
@@ -465,7 +480,7 @@ An archived Customer's records will still be available for historical purposes, 
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique customer id
+-   `uid` **[string][231]** Rize-generated unique customer id
 
 #### Examples
 
@@ -473,7 +488,7 @@ An archived Customer's records will still be available for historical purposes, 
 await rize.customer.archive(customerUid);
 ```
 
-Returns **[Promise][217]&lt;void>** A promise that returns void if resolved.
+Returns **[Promise][232]&lt;void>** A promise that returns void if resolved.
 
 ### verifyIdentity
 
@@ -506,7 +521,7 @@ The previously submitted Customer PII remains editable for this customer after a
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique customer id.
+-   `uid` **[string][231]** Rize-generated unique customer id.
 
 #### Examples
 
@@ -514,7 +529,7 @@ The previously submitted Customer PII remains editable for this customer after a
 const updatedCustomer = await rize.customer.verifyIdentity(customerUid);
 ```
 
-Returns **[Promise][217]&lt;[Customer][224]>** A promise that returns the updated Customer if resolved.
+Returns **[Promise][232]&lt;[Customer][239]>** A promise that returns the updated Customer if resolved.
 
 ### lock
 
@@ -533,8 +548,8 @@ This will freeze all activities relating to the Customer. This means, until the 
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique customer id
--   `lockReason` **[string][216]** The reason that the Customer is being locked must be submitted with the request body.
+-   `uid` **[string][231]** Rize-generated unique customer id
+-   `lockReason` **[string][231]** The reason that the Customer is being locked must be submitted with the request body.
 
 #### Examples
 
@@ -542,7 +557,7 @@ This will freeze all activities relating to the Customer. This means, until the 
 const customer = await rize.customer.lock(customerUid, lockReason);
 ```
 
-Returns **[Promise][217]&lt;[Customer][224]>** A promise that returns the locked Customer if resolved.
+Returns **[Promise][232]&lt;[Customer][239]>** A promise that returns the locked Customer if resolved.
 
 ### unlock
 
@@ -557,8 +572,8 @@ the unlock can be performed by the Custodial Partner, the Client, or Rize.
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique customer id
--   `unlockReason` **[string][216]** The reason that the Customer is being unlocked. (optional, default `null`)
+-   `uid` **[string][231]** Rize-generated unique customer id
+-   `unlockReason` **[string][231]** The reason that the Customer is being unlocked. (optional, default `null`)
 
 #### Examples
 
@@ -566,7 +581,7 @@ the unlock can be performed by the Custodial Partner, the Client, or Rize.
 const customer = await rize.customer.unlock(customerUid, unlockReason);
 ```
 
-Returns **[Promise][217]&lt;[Customer][224]>** A promise that returns the unlocked Customer if resolved.
+Returns **[Promise][232]&lt;[Customer][239]>** A promise that returns the unlocked Customer if resolved.
 
 ## 
 
@@ -582,7 +597,7 @@ Retrieves a list of Debit Cards filtered by the given parameters.
 
 #### Parameters
 
--   `query` **[DebitCardListQuery][226]?** An object containing key value pair for filtering the results list. (optional, default `{}`)
+-   `query` **[DebitCardListQuery][241]?** An object containing key value pair for filtering the results list. (optional, default `{}`)
 
 #### Examples
 
@@ -598,7 +613,7 @@ const debitCards = await rize.debitCard.getList({
 });
 ```
 
-Returns **[Promise][217]&lt;[RizeList][222]&lt;[DebitCard][227]>>** A promise that returns a Debit Card List if resolved.
+Returns **[Promise][232]&lt;[RizeList][237]&lt;[DebitCard][242]>>** A promise that returns a Debit Card List if resolved.
 
 ### get
 
@@ -606,7 +621,7 @@ Get a single Debit Card
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique debitCard id
+-   `uid` **[string][231]** Rize-generated unique debitCard id
 
 #### Examples
 
@@ -614,7 +629,7 @@ Get a single Debit Card
 const debitCard = await rize.debitCard.get(debitCardUid);
 ```
 
-Returns **[Promise][217]&lt;[DebitCard][227]>** A promise that returns a Debit Card if resolved.
+Returns **[Promise][232]&lt;[DebitCard][242]>** A promise that returns a Debit Card if resolved.
 
 ### create
 
@@ -636,10 +651,10 @@ the state in the system to `normal`.
 
 #### Parameters
 
--   `externalUid` **[string][216]** A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
--   `customerUid` **[string][216]** A UID referring to the Customer who owns this Card
--   `poolUid` **[string][216]** A UID referring to the Pool to which this Card belongs
--   `shippingAddress` **([Address][228] | null)?** An optional field used to specify the shipping address for a physical Debit Card.Either the whole `address` must be nullable or all fields must be provided, with an except of `street2`, which is nullable.If no address is specified, the primary address associated with the customer will be used as a shipping address. (optional, default `null`)
+-   `externalUid` **[string][231]** A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
+-   `customerUid` **[string][231]** A UID referring to the Customer who owns this Card
+-   `poolUid` **[string][231]** A UID referring to the Pool to which this Card belongs
+-   `shippingAddress` **([Address][243] | null)?** An optional field used to specify the shipping address for a physical Debit Card.Either the whole `address` must be nullable or all fields must be provided, with an except of `street2`, which is nullable.If no address is specified, the primary address associated with the customer will be used as a shipping address. (optional, default `null`)
 
 #### Examples
 
@@ -658,7 +673,7 @@ const debitCard = await rize.debitCard.create(
 );
 ```
 
-Returns **[Promise][217]&lt;[DebitCard][227]>** A promise that returns a Debit Card if resolved.
+Returns **[Promise][232]&lt;[DebitCard][242]>** A promise that returns a Debit Card if resolved.
 
 ### lock
 
@@ -669,8 +684,8 @@ A lock is only temporary and can generally be removed by calling `debitCard.unlo
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique Debit Card id
--   `lockReason` **[string][216]** A lock reason is required to be submitted when locking a Debit Card
+-   `uid` **[string][231]** Rize-generated unique Debit Card id
+-   `lockReason` **[string][231]** A lock reason is required to be submitted when locking a Debit Card
 
 #### Examples
 
@@ -681,7 +696,7 @@ const lockedDebitCard = await rize.debitCard.lock(
 );
 ```
 
-Returns **[Promise][217]&lt;[DebitCard][227]>** A promise that returns a Debit Card if resolved.
+Returns **[Promise][232]&lt;[DebitCard][242]>** A promise that returns a Debit Card if resolved.
 
 ### unlock
 
@@ -693,7 +708,7 @@ For example, a lock placed by a Custodial Partner for fraud can not be removed b
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique Debit Card id
+-   `uid` **[string][231]** Rize-generated unique Debit Card id
 
 #### Examples
 
@@ -701,7 +716,7 @@ For example, a lock placed by a Custodial Partner for fraud can not be removed b
 const unlockedDebitCard = await rize.debitCard.unlock('debit_card_uid1');
 ```
 
-Returns **[Promise][217]&lt;[DebitCard][227]>** A promise that returns a Debit Card if resolved.
+Returns **[Promise][232]&lt;[DebitCard][242]>** A promise that returns a Debit Card if resolved.
 
 ### reissue
 
@@ -719,7 +734,7 @@ The new physical Debit Card will by default be sent to the Customer's primary ad
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique Debit Card id
+-   `uid` **[string][231]** Rize-generated unique Debit Card id
 -   `reissueReason` **(`"damaged"` \| `"lost"` \| `"stolen"`)** A reissue reason is required when requesting Debit Card reissuance.
 
 #### Examples
@@ -728,7 +743,7 @@ The new physical Debit Card will by default be sent to the Customer's primary ad
 const reissuedDebitCard = await rize.debitCard.reissue('debit_card_uid1', 'damaged');
 ```
 
-Returns **[Promise][217]&lt;[DebitCard][227]>** A promise that returns a Debit Card if resolved.
+Returns **[Promise][232]&lt;[DebitCard][242]>** A promise that returns a Debit Card if resolved.
 
 ## 
 
@@ -744,7 +759,7 @@ Retrieves a list of Documents filtered by the given parameters.
 
 #### Parameters
 
--   `query` **[DocumentListQuery][229]** An object containing key value pair for filtering the results list. (optional, default `{}`)
+-   `query` **[DocumentListQuery][244]** An object containing key value pair for filtering the results list. (optional, default `{}`)
 
 #### Examples
 
@@ -761,7 +776,7 @@ const documents = await rize.document.getList({
 });
 ```
 
-Returns **[Promise][217]&lt;[RizeList][222]&lt;[Document][230]>>** A promise that returns a Document List if resolved.
+Returns **[Promise][232]&lt;[RizeList][237]&lt;[Document][245]>>** A promise that returns a Document List if resolved.
 
 ### view
 
@@ -769,7 +784,7 @@ View or download a document
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique document id
+-   `uid` **[string][231]** Rize-generated unique document id
 -   `extension` **(`"pdf"` \| `"html"` \| `"json"`)** the type of file to download. (optional, default `'pdf'`)
 
 #### Examples
@@ -778,7 +793,7 @@ View or download a document
 const document = await rize.document.view(documentUid, 'pdf');
 ```
 
-Returns **[Promise][217]&lt;[HTTPResponse][231]>** A promise that returns a downloaded Document if resolved.
+Returns **[Promise][232]&lt;[HTTPResponse][246]>** A promise that returns a downloaded Document if resolved.
 
 ### viewBase64
 
@@ -786,7 +801,7 @@ Retrieve a base64-encoded document (image, PDF, etc)
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique Document id
+-   `uid` **[string][231]** Rize-generated unique Document id
 
 #### Examples
 
@@ -794,7 +809,7 @@ Retrieve a base64-encoded document (image, PDF, etc)
 const document = await rize.document.viewBase64(documentUid);
 ```
 
-Returns **[Promise][217]&lt;[string][216]>** A promise that returns a base64-encoded Document string if resolved.
+Returns **[Promise][232]&lt;[string][231]>** A promise that returns a base64-encoded Document string if resolved.
 
 ### get
 
@@ -802,7 +817,7 @@ Get a single Document
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique document id
+-   `uid` **[string][231]** Rize-generated unique document id
 
 #### Examples
 
@@ -810,9 +825,52 @@ Get a single Document
 const document = await rize.document.get(documentUid);
 ```
 
-Returns **[Promise][217]&lt;[Document][230]>** A promise that returns a Document if resolved.
+Returns **[Promise][232]&lt;[Document][245]>** A promise that returns a Document if resolved.
 
 ## 
+
+## 
+
+## 
+
+## EvaluationService
+
+The Evaluation service class
+
+### getList
+
+Retrieves a list of Evaluation filtered by the given parameters.
+
+#### Parameters
+
+-   `query` **[EvaluationListQuery][247]** An object containing key value pair for filtering the results list. (optional, default `{}`)
+
+#### Examples
+
+```javascript
+const evaluations = await rize.evaluation.getList({
+    customer_uid: ['customer_uid1', 'customer_uid2'],
+    latest: true
+});
+```
+
+Returns **[Promise][232]&lt;[RizeList][237]&lt;[Evaluation][248]>>** A promise that returns an Evaluation List if resolved.
+
+### get
+
+Get a single Evaluation
+
+#### Parameters
+
+-   `uid` **[string][231]** Rize-generated unique evaluation id
+
+#### Examples
+
+```javascript
+const evaluation = await rize.evaluation.get(evaludationUid);
+```
+
+Returns **[Promise][232]&lt;[Evaluation][248]>** A promise that returns an Evaluation if resolved.
 
 ## 
 
@@ -828,7 +886,7 @@ Retrieves KYC Documents for a given evaluation.
 
 #### Parameters
 
--   `evaluationUid` **[string][216]** An object containing key value pair for getting the results list.
+-   `evaluationUid` **[string][231]** An object containing key value pair for getting the results list.
 
 #### Examples
 
@@ -836,7 +894,23 @@ Retrieves KYC Documents for a given evaluation.
 const kycDocuments = await rize.kycDocument.getList('QSskNJkryskRXeYt');
 ```
 
-Returns **[Promise][217]&lt;[RizeList][222]&lt;[KYCDocument][232]>>** A promise that returns a List of KYC Documents if resolved.
+Returns **[Promise][232]&lt;[RizeList][237]&lt;[KYCDocument][249]>>** A promise that returns a List of KYC Documents if resolved.
+
+### getMetadata
+
+Retrieve metadata for a KYC Document previously uploaded to our KYC partner for evaluation.
+
+#### Parameters
+
+-   `uid` **[string][231]** Rize-generated unique KYC Document id
+
+#### Examples
+
+```javascript
+const kycDocumentMetadata = await rize.kycDocument.getMetadata(kycDocumentUid);
+```
+
+Returns **[Promise][232]&lt;[KYCDocument][249]>** A promise that returns a KYC Document Metadata if resolved.
 
 ## 
 
@@ -852,7 +926,7 @@ List Synthetic Accounts
 
 #### Parameters
 
--   `query` **[SyntheticAccountListQuery][233]** An object containing key value paris for filtering the result. (optional, default `{}`)
+-   `query` **[SyntheticAccountListQuery][250]** An object containing key value paris for filtering the result. (optional, default `{}`)
 
 #### Examples
 
@@ -871,7 +945,7 @@ const syntheticAccounts = await rize.syntheticAccount.getList({
 });
 ```
 
-Returns **[Promise][217]&lt;[RizeList][222]&lt;[SyntheticAccount][234]>>** A promise that returns the Synthetic Account list if resolved.
+Returns **[Promise][232]&lt;[RizeList][237]&lt;[SyntheticAccount][251]>>** A promise that returns the Synthetic Account list if resolved.
 
 ### get
 
@@ -881,7 +955,7 @@ Retrieve a single Synthetic Account resource along with supporting details and a
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique synthetic account id
+-   `uid` **[string][231]** Rize-generated unique synthetic account id
 
 #### Examples
 
@@ -889,13 +963,13 @@ Retrieve a single Synthetic Account resource along with supporting details and a
 const syntheticAccount = await rize.syntheticAccount.get(syntheticAccountUid);
 ```
 
-Returns **[Promise][217]&lt;[SyntheticAccount][234]>** A promise that returns a SyntheticAccount if resolved.
+Returns **[Promise][232]&lt;[SyntheticAccount][251]>** A promise that returns a SyntheticAccount if resolved.
 
 ### create
 
 #### Parameters
 
--   `payload` **[SyntheticAccountCreateRequest][235]** is a JSON object needs to send as body parameters in order to create new synthetic accounts.
+-   `payload` **[SyntheticAccountCreateRequest][252]** is a JSON object needs to send as body parameters in order to create new synthetic accounts.
 
 #### Examples
 
@@ -907,7 +981,7 @@ const syntheticAccountTypes = await rize.syntheticAccount.getTypesList({
 });
 ```
 
-Returns **[Promise][217]&lt;[RizeList][222]&lt;[SyntheticAccount][234]>>** 
+Returns **[Promise][232]&lt;[RizeList][237]&lt;[SyntheticAccount][251]>>** 
 
 ### update
 
@@ -930,7 +1004,7 @@ const syntheticAccountTypes = await rize.syntheticAccount.update({
 });
 ```
 
-Returns **[Promise][217]&lt;[SyntheticAccount][234]>** A promise that returns a Synthetic Account if resolved.
+Returns **[Promise][232]&lt;[SyntheticAccount][251]>** A promise that returns a Synthetic Account if resolved.
 
 ### archive
 
@@ -954,7 +1028,7 @@ In order to archive a Synthetic Account, the account must:
 await rize.syntheticAccount.archive(syntheticAccountUid);
 ```
 
-Returns **[Promise][217]&lt;void>** A promise that returns void if resolved.
+Returns **[Promise][232]&lt;void>** A promise that returns void if resolved.
 
 ### getTypesList
 
@@ -962,7 +1036,7 @@ Retrieves a list of Synthetic Account Types filtered by the given parameters.
 
 #### Parameters
 
--   `query` **[SyntheticAccountTypeListQuery][236]** An object containing key value paris for filtering the result. (optional, default `{}`)
+-   `query` **[SyntheticAccountTypeListQuery][253]** An object containing key value paris for filtering the result. (optional, default `{}`)
 
 #### Examples
 
@@ -974,7 +1048,7 @@ const syntheticAccountTypes = await rize.syntheticAccount.getTypesList({
 });
 ```
 
-Returns **[Promise][217]&lt;[RizeList][222]&lt;[SyntheticAccountType][237]>>** A promise that returns a Synthetic Account Type List if resolved.
+Returns **[Promise][232]&lt;[RizeList][237]&lt;[SyntheticAccountType][254]>>** A promise that returns a Synthetic Account Type List if resolved.
 
 ### getType
 
@@ -984,7 +1058,7 @@ Returns a single Synthetic Account Type resource along with supporting details
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique Synthetic Account Type id
+-   `uid` **[string][231]** Rize-generated unique Synthetic Account Type id
 
 #### Examples
 
@@ -992,7 +1066,7 @@ Returns a single Synthetic Account Type resource along with supporting details
 const syntheticAccountType = await rize.syntheticAccount.getType('EhrQZJNjCd79LLYq');
 ```
 
-Returns **[Promise][217]&lt;[SyntheticAccountType][237]>** A promise that returns a Synthetic Account Type if resolved.
+Returns **[Promise][232]&lt;[SyntheticAccountType][254]>** A promise that returns a Synthetic Account Type if resolved.
 
 ## 
 
@@ -1008,7 +1082,7 @@ Retrieves a list of Transactions filtered by the given parameters.
 
 #### Parameters
 
--   `query` **[TransactionListQuery][238]?** An object containing key value pair for filtering the results list. (optional, default `{}`)
+-   `query` **[TransactionListQuery][255]?** An object containing key value pair for filtering the results list. (optional, default `{}`)
 
 #### Examples
 
@@ -1027,7 +1101,7 @@ const transactions = await rize.transaction.getList({
 });
 ```
 
-Returns **[Promise][217]&lt;[RizeList][222]&lt;[Transaction][239]>>** A promise that returns a Transaction List if resolved.
+Returns **[Promise][232]&lt;[RizeList][237]&lt;[Transaction][256]>>** A promise that returns a Transaction List if resolved.
 
 ### get
 
@@ -1035,7 +1109,7 @@ Get a single Transaction
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique transaction id
+-   `uid` **[string][231]** Rize-generated unique transaction id
 
 #### Examples
 
@@ -1043,7 +1117,7 @@ Get a single Transaction
 const transaction = await rize.transaction.get(transactionUid);
 ```
 
-Returns **[Promise][217]&lt;[Transaction][239]>** A promise that returns a Transaction if resolved.
+Returns **[Promise][232]&lt;[Transaction][256]>** A promise that returns a Transaction if resolved.
 
 ### getTransactionEventList
 
@@ -1068,7 +1142,7 @@ const transactionEventList = await rize.transaction.getTransactionEventList({
 });
 ```
 
-Returns **[Promise][217]&lt;[RizeList][222]&lt;TransactionEvent>>** A promise that returns a TransactionEvent List if resolved.
+Returns **[Promise][232]&lt;[RizeList][237]&lt;TransactionEvent>>** A promise that returns a TransactionEvent List if resolved.
 
 ### getTransactionEvent
 
@@ -1076,7 +1150,7 @@ Get a single Transaction Event
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique transaction event id
+-   `uid` **[string][231]** Rize-generated unique transaction event id
 
 #### Examples
 
@@ -1084,7 +1158,7 @@ Get a single Transaction Event
 const transactionEvent = await rize.transaction.getTransactionEvent(transactionEventUid);
 ```
 
-Returns **[Promise][217]&lt;TransactionEvent>** A promise that returns a Transaction Event if resolved.
+Returns **[Promise][232]&lt;TransactionEvent>** A promise that returns a Transaction Event if resolved.
 
 ### getSyntheticLineItemList
 
@@ -1092,7 +1166,7 @@ Retrieves a list of Synthetic Line Items filtered by the given parameters.
 
 #### Parameters
 
--   `query` **[SyntheticLineItemListQuery][240]** An object containing key value pair for filtering the results list. (optional, default `{}`)
+-   `query` **[SyntheticLineItemListQuery][257]** An object containing key value pair for filtering the results list. (optional, default `{}`)
 
 #### Examples
 
@@ -1109,7 +1183,7 @@ const syntheticLineItems = await rize.transaction.getSyntheticLineItemList({
 });
 ```
 
-Returns **[Promise][217]&lt;[RizeList][222]&lt;[SyntheticLineItem][241]>>** A promise that returns a Synthetic Line Item List if resolved.
+Returns **[Promise][232]&lt;[RizeList][237]&lt;[SyntheticLineItem][258]>>** A promise that returns a Synthetic Line Item List if resolved.
 
 ### getSyntheticLineItem
 
@@ -1117,7 +1191,7 @@ Get a single Synthetic Line Item
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique Synthetic Line Item id
+-   `uid` **[string][231]** Rize-generated unique Synthetic Line Item id
 
 #### Examples
 
@@ -1125,13 +1199,13 @@ Get a single Synthetic Line Item
 const syntheticLineItem = await rize.transaction.getSyntheticLineItem(syntheticLineItemUid);
 ```
 
-Returns **[Promise][217]&lt;[SyntheticLineItem][241]>** A promise that returns a Synthetic Line Item if resolved.
+Returns **[Promise][232]&lt;[SyntheticLineItem][258]>** A promise that returns a Synthetic Line Item if resolved.
 
 ### getCustodialLineItemList
 
 #### Parameters
 
--   `query` **[CustodialLineItemListQuery][242]** An object containing key value pair for filtering the results list. (optional, default `{}`)
+-   `query` **[CustodialLineItemListQuery][259]** An object containing key value pair for filtering the results list. (optional, default `{}`)
 
 #### Examples
 
@@ -1150,7 +1224,7 @@ const custodialLineItems = await rize.transaction.getCustodialLineItemList({
 });
 ```
 
-Returns **[Promise][217]&lt;[RizeList][222]&lt;[CustodialLineItem][243]>>** A promise that returns a Custodial Line Item List if resolved.
+Returns **[Promise][232]&lt;[RizeList][237]&lt;[CustodialLineItem][260]>>** A promise that returns a Custodial Line Item List if resolved.
 
 ### getCustodialLineItem
 
@@ -1158,7 +1232,7 @@ Get a single Custodial Line Item
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique Custodial Line Item id
+-   `uid` **[string][231]** Rize-generated unique Custodial Line Item id
 
 #### Examples
 
@@ -1166,7 +1240,7 @@ Get a single Custodial Line Item
 const custodialLineItem = await rize.transaction.getCustodialLineItem(custodialLineItemUid);
 ```
 
-Returns **[Promise][217]&lt;[CustodialLineItem][243]>** A promise that returns a Custodial Line Item if resolved.
+Returns **[Promise][232]&lt;[CustodialLineItem][260]>** A promise that returns a Custodial Line Item if resolved.
 
 ## 
 
@@ -1182,7 +1256,7 @@ Retrieves a list of Tranfers filtered by the given parameters.
 
 #### Parameters
 
--   `query` **[TransferListQuery][244]** An object containing key value pair for filtering the results list. (optional, default `{}`)
+-   `query` **[TransferListQuery][261]** An object containing key value pair for filtering the results list. (optional, default `{}`)
 
 #### Examples
 
@@ -1197,7 +1271,7 @@ const transfers = await rize.transfer.getList({
 });
 ```
 
-Returns **[Promise][217]&lt;[RizeList][222]&lt;[Transfer][245]>>** A promise that returns a Transfer List if resolved.
+Returns **[Promise][232]&lt;[RizeList][237]&lt;[Transfer][262]>>** A promise that returns a Transfer List if resolved.
 
 ### get
 
@@ -1205,7 +1279,7 @@ Get a single Transfer
 
 #### Parameters
 
--   `uid` **[string][216]** Rize-generated unique Transfer id
+-   `uid` **[string][231]** Rize-generated unique Transfer id
 
 #### Examples
 
@@ -1213,7 +1287,7 @@ Get a single Transfer
 const transfer = await rize.transfer.get(transferUid);
 ```
 
-Returns **[Promise][217]&lt;[Transfer][245]>** A promise that returns a Transfer if resolved.
+Returns **[Promise][232]&lt;[Transfer][262]>** A promise that returns a Transfer if resolved.
 
 ### init
 
@@ -1231,11 +1305,11 @@ only Synthetic Accounts allowed in a Transfer request are:
 
 #### Parameters
 
--   `externalUid` **[string][216]** A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
--   `sourceSyntheticAccountUid` **[string][216]** Synthetic Account to pull asset from. Must be an active liability or external-type account. Cannot be equal to `destination_synthetic_account_uid`.
--   `destinationSyntheticAccountUid` **[string][216]** Synthetic Account where the asset should land. Must be an active liability or external-type account. Cannot be equal to `source_synthetic_account_uid`.
--   `initiatingCustomerUid` **[string][216]** 
--   `usTransferAmount` **[string][216]** The USD amount to transfer.
+-   `externalUid` **[string][231]** A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
+-   `sourceSyntheticAccountUid` **[string][231]** Synthetic Account to pull asset from. Must be an active liability or external-type account. Cannot be equal to `destination_synthetic_account_uid`.
+-   `destinationSyntheticAccountUid` **[string][231]** Synthetic Account where the asset should land. Must be an active liability or external-type account. Cannot be equal to `source_synthetic_account_uid`.
+-   `initiatingCustomerUid` **[string][231]** 
+-   `usTransferAmount` **[string][231]** The USD amount to transfer.
 
 #### Examples
 
@@ -1249,7 +1323,7 @@ const transfer = await rize.transfer.create(
 );
 ```
 
-Returns **[Promise][217]&lt;[Transfer][245]>** A promise that returns a Transfer if resolved.
+Returns **[Promise][232]&lt;[Transfer][262]>** A promise that returns a Transfer if resolved.
 
 ## 
 
@@ -1257,31 +1331,31 @@ Returns **[Promise][217]&lt;[Transfer][245]>** A promise that returns a Transfer
 
 ## RizeList
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `total_count` **[number][247]** Total count of items available to retrieve
--   `count` **[number][247]** Number of items retrieved
--   `limit` **[number][247]** Maximum number of items to retrieve
--   `offset` **[number][247]** Index of the first item to retrieve
--   `data` **[Array][248]&lt;T>** 
+-   `total_count` **[number][264]** Total count of items available to retrieve
+-   `count` **[number][264]** Number of items retrieved
+-   `limit` **[number][264]** Maximum number of items to retrieve
+-   `offset` **[number][264]** Index of the first item to retrieve
+-   `data` **[Array][265]&lt;T>** 
 
 ## Address
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `street1` **[string][216]** 
--   `street2` **([string][216] | null)?** 
--   `city` **[string][216]** 
--   `state` **[string][216]** 
--   `postal_code` **[string][216]** 
+-   `street1` **[string][231]** 
+-   `street2` **([string][231] | null)?** 
+-   `city` **[string][231]** 
+-   `state` **[string][231]** 
+-   `postal_code` **[string][231]** 
 
 ## HTTPResponse
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
@@ -1290,23 +1364,23 @@ Type: [Object][246]
 
 ## HTTPResponse
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `data` **[string][216]** Object that contains more information about the response.
--   `headers` **[string][216]** Collection of response headers.
+-   `data` **[string][231]** Object that contains more information about the response.
+-   `headers` **[string][231]** Collection of response headers.
 
 ## ComplianceWorkflowSummary
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `accepted_quantity` **[number][247]** 
--   `begun_at` **[string][216]** The DateTime at which this Compliance Workflow was requested
--   `completed_step` **[number][247]** 
--   `current_step` **[number][247]** 
+-   `accepted_quantity` **[number][264]** 
+-   `begun_at` **[string][231]** The DateTime at which this Compliance Workflow was requested
+-   `completed_step` **[number][264]** 
+-   `current_step` **[number][264]** 
 -   `status` **(`"accepted"` \| `"in_progress"` \| `"rejected"` \| `"expired"`)** A value indicating the current state of this Compliance Workflow:-   _accepted_ - The Compliance Workflow is complete. All documents in this Compliance Workflow have been accepted.
     -   _in_progress_ - The Compliance Workflow is in progress.
     -   _rejected_ - The Compliance Workflow is rejected. If Rize receives an acknowledgment to a document in a Compliance Workflow with an 'accept' value of 'no', the Compliance Workflow moves to a status of rejected. The Customer must restart a new Compliance Workflow to gain access to the Program.
@@ -1314,131 +1388,131 @@ Type: [Object][246]
 
 ## ComplianceWorkflowCustomer
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `email` **[string][216]** 
--   `external_uid` **[string][216]** A Customer identifier supplied by the Client, unique among the collection of all Client Customers
--   `uid` **[string][216]** A UID referring to the Customer
+-   `email` **[string][231]** 
+-   `external_uid` **[string][231]** A Customer identifier supplied by the Client, unique among the collection of all Client Customers
+-   `uid` **[string][231]** A UID referring to the Customer
 
 ## ComplianceDocument
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
 -   `electronic_signature_required` **(`"yes"` \| `"no"`)** 
--   `external_storage_name` **[string][216]** Amazon S3 key used to retrieve the contents of a Compliance Document
--   `compliance_document_url` **[string][216]** Amazon S3 URL used to retrieve the contents of a Compliance Document
--   `name` **[string][216]** 
--   `step` **[number][247]** Multiple Compliance Documents are grouped into a Step, and Compliance Documents are presented to a Customer, Step-by-Step
--   `version` **[number][247]** 
--   `uid` **[string][216]** A UID referring to a Compliance Document; note that this UID will be different for each Customer
--   `accepted_at` **[string][216]** The DateTime at which this Compliance Document was acknowledged
+-   `external_storage_name` **[string][231]** Amazon S3 key used to retrieve the contents of a Compliance Document
+-   `compliance_document_url` **[string][231]** Amazon S3 URL used to retrieve the contents of a Compliance Document
+-   `name` **[string][231]** 
+-   `step` **[number][264]** Multiple Compliance Documents are grouped into a Step, and Compliance Documents are presented to a Customer, Step-by-Step
+-   `version` **[number][264]** 
+-   `uid` **[string][231]** A UID referring to a Compliance Document; note that this UID will be different for each Customer
+-   `accepted_at` **[string][231]** The DateTime at which this Compliance Document was acknowledged
 
 ## ComplianceDocumentAcknowledgementRequest
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `documentUid` **[string][216]** A UID referring to the Compliance Document being acknowledged.
+-   `documentUid` **[string][231]** A UID referring to the Compliance Document being acknowledged.
 -   `accept` **(`"yes"` \| `"no"`)** An indication of acceptance or rejection.
--   `userName` **[string][216]?** A label associated with the Customer (required for electronic signing).
--   `ipAddress` **[string][216]?** A numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication (required for electronic signing); in this case, the label associated with the computer used by the Customer.
+-   `userName` **[string][231]?** A label associated with the Customer (required for electronic signing).
+-   `ipAddress` **[string][231]?** A numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication (required for electronic signing); in this case, the label associated with the computer used by the Customer.
 
 ## ComplianceWorkflow
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `uid` **[string][216]** A unique identifier generated by Rize.
--   `summary` **[ComplianceWorkflowSummary][249]** 
--   `customer` **[ComplianceWorkflowCustomer][250]** 
--   `accepted_documents` **[Array][248]&lt;[ComplianceDocument][251]>** 
--   `current_step_documents_pending` **[Array][248]&lt;Omit&lt;[ComplianceDocument][251], `"accepted_at"`>>** Compliance Documents that await acknowledgment in the current Step
--   `all_documents` **[Array][248]&lt;Omit&lt;[ComplianceDocument][251], (`"accepted_at"` \| `"uid"`)>>** The set of all Compliance Documents that would require acknowledgment
+-   `uid` **[string][231]** A unique identifier generated by Rize.
+-   `summary` **[ComplianceWorkflowSummary][266]** 
+-   `customer` **[ComplianceWorkflowCustomer][267]** 
+-   `accepted_documents` **[Array][265]&lt;[ComplianceDocument][268]>** 
+-   `current_step_documents_pending` **[Array][265]&lt;Omit&lt;[ComplianceDocument][268], `"accepted_at"`>>** Compliance Documents that await acknowledgment in the current Step
+-   `all_documents` **[Array][265]&lt;Omit&lt;[ComplianceDocument][268], (`"accepted_at"` \| `"uid"`)>>** The set of all Compliance Documents that would require acknowledgment
 
 ## AccountError
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `error_code` **[string][216]** 
--   `error_name` **[string][216]** 
--   `error_description` **[string][216]** 
+-   `error_code` **[string][231]** 
+-   `error_name` **[string][231]** 
+-   `error_description` **[string][231]** 
 
 ## CustodialAccount
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `uid` **[string][216]** A unique identifier generated by Rize
--   `external_uid` **[string][216]** A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
--   `customer_uid` **[string][216]** A UID referring to the customer this Custodial Account belongs to
--   `pool_uid` **[Array][248]&lt;[string][216]>** A UID referring to the pool this Custodial Account belongs to
--   `program_service_offering_uid` **([string][216] | null)** A UID referring to the specific Program Service Offering for which this account was created. Nullable if asset.
+-   `uid` **[string][231]** A unique identifier generated by Rize
+-   `external_uid` **[string][231]** A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
+-   `customer_uid` **[string][231]** A UID referring to the customer this Custodial Account belongs to
+-   `pool_uid` **[Array][265]&lt;[string][231]>** A UID referring to the pool this Custodial Account belongs to
+-   `program_service_offering_uid` **([string][231] | null)** A UID referring to the specific Program Service Offering for which this account was created. Nullable if asset.
 -   `type` **(`"dda"` \| `"dda_cash_external"` \| `"dda_cash_received"`)** A value indicating the overall state of this Customer:-   **_dda_** - Are liability DDA accounts. Any asset movements in or out of the brick-and-mortar accounts will be journaled in the dda Custodial Accounts. Balances shown in the dda accounts are the balances the owner Customers have.
     -   **_dda_cash_external_** - Are asset accounts, representing external accounts. When ODFI transfers, initated by a Synthetic Transfer from or to external Synthetic Accounts, are settled, the dda_cash_external Custodial Accounts will be credited or debited.
     -   **_dda_cash_received_** - Are asset cash accounts. When RDFI transfers, initiated outside of Rize from or to Custodial Accounts, are settled, the dda_cash_received Custodial Accounts will be credited or debited.
--   `liability` **[boolean][252]** Liability or asset. Liability Custodial Accounts represent real accounts at Financial Institutions. Asset accounts are used for accounting purposes and may be generated by Rize during events such as new custodial account creations or new external account connections.
--   `name` **([string][216] | null)** A friendly name used to identify the account at the Custodial Partner.
--   `primary_account` **[boolean][252]** The date and time when the Customer was locked. This field will be null if and only if the lock_reason is null.
+-   `liability` **[boolean][269]** Liability or asset. Liability Custodial Accounts represent real accounts at Financial Institutions. Asset accounts are used for accounting purposes and may be generated by Rize during events such as new custodial account creations or new external account connections.
+-   `name` **([string][231] | null)** A friendly name used to identify the account at the Custodial Partner.
+-   `primary_account` **[boolean][269]** The date and time when the Customer was locked. This field will be null if and only if the lock_reason is null.
 -   `status` **(`"active"` \| `"archived"` \| `"good"` | null)** A value indicating the overall state of this Custodial Account (nullable if account type is asset):-   **_active_** - The Custodial Account is opened and available for asset movement and balance inquiries.
     -   **_archived_** - The Custodial Account is archived. All archived Custodial Accounts will have a $0.00 balance. This generally occurs when a Customer is archived or leaves the Service Offering that requires this Custodial Account.
--   `account_errors` **[Array][248]&lt;[AccountError][253]>** A list of errors related to this account. These are passed through during interactions with the underlying Custodial Partner and can help with resolving customer issues. Only provided for accounts that are in an error or manual_review status.
--   `net_usd_balance` **[string][216]** The current settled balance of this Custodial Account in US Dollars
--   `net_usd_pending_balance` **[string][216]** The sum of all pending transactions for this Custodial Account in US Dollars
--   `net_usd_available_balance` **[string][216]** The balance available to spend calculated as Normal balance less any withdrawals. Pending deposits are not included
--   `account_number` **([string][216] | null)** The ACH account number that can be used to make transfers into/out of this account. Nullable if asset.
--   `account_number_masked` **([string][216] | null)** Last 4 digits of the ACH account number. Nullable if asset.
--   `routing_number` **([string][216] | null)** The ABA routing number associated with the Custodial Partner. Nullable if asset.
--   `opened_at` **[Date][254]** The DateTime at which this account was created
--   `closed_at` **[Date][254]** The DateTime at which this account was closed
+-   `account_errors` **[Array][265]&lt;[AccountError][270]>** A list of errors related to this account. These are passed through during interactions with the underlying Custodial Partner and can help with resolving customer issues. Only provided for accounts that are in an error or manual_review status.
+-   `net_usd_balance` **[string][231]** The current settled balance of this Custodial Account in US Dollars
+-   `net_usd_pending_balance` **[string][231]** The sum of all pending transactions for this Custodial Account in US Dollars
+-   `net_usd_available_balance` **[string][231]** The balance available to spend calculated as Normal balance less any withdrawals. Pending deposits are not included
+-   `account_number` **([string][231] | null)** The ACH account number that can be used to make transfers into/out of this account. Nullable if asset.
+-   `account_number_masked` **([string][231] | null)** Last 4 digits of the ACH account number. Nullable if asset.
+-   `routing_number` **([string][231] | null)** The ABA routing number associated with the Custodial Partner. Nullable if asset.
+-   `opened_at` **[Date][271]** The DateTime at which this account was created
+-   `closed_at` **[Date][271]** The DateTime at which this account was closed
 
 ## CustodialAccountListQuery
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `customer_uid` **[Array][248]&lt;[string][216]>?** Filter by Customer. Multiple values are allowed
--   `external_uid` **[string][216]?** A unique, immutable id provided Clien
--   `limit` **[string][216]?**  Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
--   `offset` **[string][216]?** Index of the items to start retrieving from. Default: 0
--   `liability` **[string][216]?** Filter by liability or asset
--   `type` **[Array][248]&lt;[string][216]>?** Filter by type. Multiple values are allowed.
+-   `customer_uid` **[Array][265]&lt;[string][231]>?** Filter by Customer. Multiple values are allowed
+-   `external_uid` **[string][231]?** A unique, immutable id provided Clien
+-   `limit` **[string][231]?**  Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
+-   `offset` **[string][231]?** Index of the items to start retrieving from. Default: 0
+-   `liability` **[string][231]?** Filter by liability or asset
+-   `type` **[Array][265]&lt;[string][231]>?** Filter by type. Multiple values are allowed.
 
 ## CustomerDetails
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `first_name` **[string][216]** 
--   `middle_name` **([string][216] | null)?** 
--   `last_name` **[string][216]** 
--   `suffix` **([string][216] | null)?** 
--   `phone` **[string][216]** 
--   `ssn` **[string][216]** 
--   `dob` **[string][216]** 
--   `address` **[Address][228]** 
+-   `first_name` **[string][231]** 
+-   `middle_name` **([string][231] | null)?** 
+-   `last_name` **[string][231]** 
+-   `suffix` **([string][231] | null)?** 
+-   `phone` **[string][231]** 
+-   `ssn` **[string][231]** 
+-   `dob` **[string][231]** 
+-   `address` **[Address][243]** 
 
 ## Customer
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `uid` **[string][216]** A unique identifier generated by Rize
--   `external_uid` **[string][216]** A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
--   `program_uid` **[string][216]** A uid referring to the program this customer belongs to.
--   `pool_uids` **[Array][248]&lt;[string][216]>** A list of uids referring to Pools belonging to this Customer.
--   `email` **[string][216]** Email of the customer
+-   `uid` **[string][231]** A unique identifier generated by Rize
+-   `external_uid` **[string][231]** A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
+-   `program_uid` **[string][231]** A uid referring to the program this customer belongs to.
+-   `pool_uids` **[Array][265]&lt;[string][231]>** A list of uids referring to Pools belonging to this Customer.
+-   `email` **[string][231]** Email of the customer
 -   `status` **(`"initiated"` \| `"queued"` \| `"identity_verified"` \| `"active"` \| `"manual_review"` \| `"rejected"` \| `"archived"` \| `"under_review"`)** A value indicating the overall state of this Customer:-   **_initiated_** - Rize has created the Customer as a result of a post to the Compliance Workflows endpoint. This status will persist until Rize receives a successful request to perform Identity Verification. The Customer status will move to 'queued' after a successful request to perform Identity Verification.
     -   **_queued_** - Rize has determined that the required Customer PII has been provided and the Compliance Workflow is complete. The Customer record has been sent for KYC/AML partner verification. If the KYC/AML verification returns 'approved' the Customer status will move to 'identity_verified'. If the KYC/AML verification returns 'denied' the Customer status will move to 'rejected'. If the KYC/AML verification status returns 'manual_review' the Customer status will move to 'manual_review'.
     -   **_identity_verified_** - The Customer has been approved by the KYC/AML partner's verification process. This Customer's Master Synthetic Account and Custodial Account(s) are in the process of being opened.
@@ -1455,45 +1529,45 @@ Type: [Object][246]
     -   **_documents_rejected_** - The identity verification documents are not valid. Please request valid/clear images of the identity verification documents from the Customer.
     -   **_under_review_** - The Customer is being reviewed.
     -   **_ready_for_custodial_partner_review_** - The Customer is being reviewed by the Custodial Partner participating in the Program. Not all Customers that are reviewed will enter this state but some records will require Custodial Partner inputs.
--   `total_balance` **[string][216]** Total asset owned by the customer in US dollars.
--   `created_at` **[Date][254]** 
--   `locked_at` **([Date][254] | null)?** The date and time when the Customer was locked. This field will be null if and only if the lock_reason is null.
--   `lock_reason` **([string][216] | null)?** The lock reason provided by the Client, an admin User, or the system at the time the Customer was locked. This field will be null if and only if the locked_at is null.
--   `details` **[CustomerDetails][225]** An object containing the supplied identifying information for the Customer.
+-   `total_balance` **[string][231]** Total asset owned by the customer in US dollars.
+-   `created_at` **[Date][271]** 
+-   `locked_at` **([Date][271] | null)?** The date and time when the Customer was locked. This field will be null if and only if the lock_reason is null.
+-   `lock_reason` **([string][231] | null)?** The lock reason provided by the Client, an admin User, or the system at the time the Customer was locked. This field will be null if and only if the locked_at is null.
+-   `details` **[CustomerDetails][240]** An object containing the supplied identifying information for the Customer.
 
 ## CustomerListQuery
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
 -   `status` **(`"initiated"` \| `"queued"` \| `"identity_verified"` \| `"active"` \| `"manual_review"` \| `"rejected"` \| `"archived"` \| `"under_review"`)?** Filter by onboarding status. Please note that the initiated enum value will not be respected unless the `include_initiated=true` parameter is also provided.
--   `include_initiated` **[boolean][252]?** By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
+-   `include_initiated` **[boolean][269]?** By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
 -   `kyc_status` **(`"approved"` \| `"denied"` \| `"documents_provided"` \| `"documents_rejected"` \| `"manual_review"` \| `"pending_documents"` \| `"ready_for_custodial_partner_review"` \| `"under_review"`)?** Filter by KYC status.
--   `first_name` **[string][216]?** Only return Customers with a first name matching exactly what is submitted
--   `last_name` **[string][216]?** Only return Customers with a last name matching exactly what is submitted
--   `email` **[string][216]?** Only return Customers with an email address matching exactly what is submitted
--   `locked` **[boolean][252]?** Only return locked Customers if true and only return unlocked Customers if false
--   `program_uid` **[string][216]?** Only return Customers belonging to the submitted Program.
--   `external_uid` **[string][216]?** A unique, immutable id provided by Client.
--   `pool_uid` **[Array][248]&lt;[string][216]>?** Filter by pool. Multiple values are allowed.
--   `limit` **[string][216]?**  Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
--   `offset` **[string][216]?** Index of the items to start retrieving from. Default: 0
+-   `first_name` **[string][231]?** Only return Customers with a first name matching exactly what is submitted
+-   `last_name` **[string][231]?** Only return Customers with a last name matching exactly what is submitted
+-   `email` **[string][231]?** Only return Customers with an email address matching exactly what is submitted
+-   `locked` **[boolean][269]?** Only return locked Customers if true and only return unlocked Customers if false
+-   `program_uid` **[string][231]?** Only return Customers belonging to the submitted Program.
+-   `external_uid` **[string][231]?** A unique, immutable id provided by Client.
+-   `pool_uid` **[Array][265]&lt;[string][231]>?** Filter by pool. Multiple values are allowed.
+-   `limit` **[string][231]?**  Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
+-   `offset` **[string][231]?** Index of the items to start retrieving from. Default: 0
 -   `sort` **(`"first_name_asc"` \| `"first_name_desc"` \| `"last_name_asc"` \| `"last_name_desc"` \| `"email_asc"` \| `"email_desc"`)?** Sort returned items.
 
 ## DebitCard
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `uid` **[string][216]** A unique identifier generated by Rize
--   `external_uid` **[string][216]** A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
--   `customer_uid` **[string][216]** A UID referring to the Customer who owns this Card.
--   `pool_uid` **[string][216]** A UID referring to the Pool to which this Card belongs.
--   `synthetic_account_uid` **[string][216]** A UID referring to the specific Synthetic Account to which this Card belongs. Any debit or credit transactions from this Card will occur in this account.
--   `custodial_account_uid` **[string][216]** A UID referring to the specific Custodial Account to which this Card belongs. Any debit or credit transactions from this Card will occur in this account.
--   `card_last_four_digits` **([string][216] | null)?** Last 4 digits of the Debit Card number to aid in indentifying the Card. Null if the Card is not yet issued (i.e. status is `initiated`).
+-   `uid` **[string][231]** A unique identifier generated by Rize
+-   `external_uid` **[string][231]** A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
+-   `customer_uid` **[string][231]** A UID referring to the Customer who owns this Card.
+-   `pool_uid` **[string][231]** A UID referring to the Pool to which this Card belongs.
+-   `synthetic_account_uid` **[string][231]** A UID referring to the specific Synthetic Account to which this Card belongs. Any debit or credit transactions from this Card will occur in this account.
+-   `custodial_account_uid` **[string][231]** A UID referring to the specific Custodial Account to which this Card belongs. Any debit or credit transactions from this Card will occur in this account.
+-   `card_last_four_digits` **([string][231] | null)?** Last 4 digits of the Debit Card number to aid in indentifying the Card. Null if the Card is not yet issued (i.e. status is `initiated`).
 -   `status` **(`"queued"` \| `"issued"` \| `"printing_physical_card"` \| `"printing_physical_card_replacement"` \| `"shipped"` \| `"card_replacement_shipped"` \| `"usable_without_pin"` \| `"normal"` \| `"closed"` \| `"damaged"` \| `"lost"` \| `"stolen"` \| `"administrative_lock"` \| `"closed_by_administrator"` \| `"shipment_returned"` \| `"card_replacement_shipment_returned"`)** A value indicating the current status for this Card. Some of these are subject to change, and additional statuses may be added.-   **_queued_** - This is the first state a debit card will enter. This status indicates that a create request has been submitted successfully from the Client and is queued to be issued. A debit card will be in this state for a very short (less than one second) period of time.
     -   **_issued_** - This is the second state a requested debit card will enter. An Issued debit card has been assigned a PIN, PAN, CVV, and expiration and these details are submitted to a card printer for physical card production. The last 4 digits of the card are available once this status is reached.
     -   **_printing_physical_card_** - The physical Card is being produced. This status applies only to new physical cards; the corresponding status for replacement cards is `printing_physical_card_replacement`
@@ -1510,173 +1584,198 @@ Type: [Object][246]
     -   **_closed_by_administrator_** - A Program Administrator from the Custodial Partner or the Rize Team have closed the card. Customers will have to request a new card. This will occur in rare occasions.
     -   **_shipment_returned_** - The shipped Card has been returned. An administrator must manually reissue the Card to the Customer for a new Card to be printed and shipped. This status applies only to new physical Cards; the corresponding status for replacement Cards is `card_replacement_shipment_returned`
     -   **_card_replacement_shipment_returned_** - The shipped Card has been returned. An administrator must manually reissue the Card to the Customer for a new Card to be printed and shipped. This status applies only to replacement physical Cards with the same PAN; the corresponding status for new Cards is `shipment_returned`
--   `ready_to_use` **[boolean][252]** If the Card can be used, this value will be `true`; `false` otherwise.
--   `lock_reason` **([string][216] | null)?** If the Card is in a locked state, this field will be populated describing why the Card was locked. Null if the Card is not locked.
--   `issued_on` **([string][216] | null)?** The date this Card was issued. It may be briefly null when a new Card is requested, but the issuance has not yet happened (i.e. status is `initiated`).
--   `locked_at` **([string][216] | null)?** The date and time at which this Card was locked. Null if the Card is not locked.
--   `closed_at` **([string][216] | null)?** The date and time at which this Card was closed. This field will be null unless the `status` is `closed`, `closed_by_administrator`, `lost`, or `stolen`.
--   `latest_shipping_address` **([Address][228] | null)?** An optional field used to specify the shipping address for a physical Debit Card.If no address was specified via `debitCard.create`, this field will be null. In case of reissuance, only the address from the latest shipment will be provided, if any.
+-   `ready_to_use` **[boolean][269]** If the Card can be used, this value will be `true`; `false` otherwise.
+-   `lock_reason` **([string][231] | null)?** If the Card is in a locked state, this field will be populated describing why the Card was locked. Null if the Card is not locked.
+-   `issued_on` **([string][231] | null)?** The date this Card was issued. It may be briefly null when a new Card is requested, but the issuance has not yet happened (i.e. status is `initiated`).
+-   `locked_at` **([string][231] | null)?** The date and time at which this Card was locked. Null if the Card is not locked.
+-   `closed_at` **([string][231] | null)?** The date and time at which this Card was closed. This field will be null unless the `status` is `closed`, `closed_by_administrator`, `lost`, or `stolen`.
+-   `latest_shipping_address` **([Address][243] | null)?** An optional field used to specify the shipping address for a physical Debit Card.If no address was specified via `debitCard.create`, this field will be null. In case of reissuance, only the address from the latest shipment will be provided, if any.
 
 ## DebitCardListQuery
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `customer_uid` **[Array][248]&lt;[string][216]>?** Filter by Customer. Multiple values are allowed.
--   `external_uid` **[string][216]?** A unique, immutable id provided Client
--   `limit` **[string][216]?**  Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
--   `offset` **[string][216]?** Index of the items to start retrieving from. Default: 0
--   `pool_uid` **[Array][248]&lt;[string][216]>?** Filter by pool. Multiple values are allowed.
--   `locked` **[boolean][252]?** Only return locked Cards if `true` and only return unlocked Cards if `false`
+-   `customer_uid` **[Array][265]&lt;[string][231]>?** Filter by Customer. Multiple values are allowed.
+-   `external_uid` **[string][231]?** A unique, immutable id provided Client
+-   `limit` **[string][231]?**  Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
+-   `offset` **[string][231]?** Index of the items to start retrieving from. Default: 0
+-   `pool_uid` **[Array][265]&lt;[string][231]>?** Filter by pool. Multiple values are allowed.
+-   `locked` **[boolean][269]?** Only return locked Cards if `true` and only return unlocked Cards if `false`
 
 ## debit-card.typedefs
 
 ## Document
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `uid` **[string][216]** A unique identifier generated by Rize
--   `document_type` **[string][216]** The document type. Only monthly statements are currently available.
+-   `uid` **[string][231]** A unique identifier generated by Rize
+-   `document_type` **[string][231]** The document type. Only monthly statements are currently available.
 -   `scope_type` **(`"customer"` \| `"synthetic_account"` \| `"custodial_account"`)** The type of scope of activities included in the document.If the type is `customer`, the statement will include all Synthetic and Custodial Accounts associated
     with the customer in the statement period.(to be discussed/determined; not implemented) `synthetic_account` and `custodial_account` will include 
     the activities associated with the respective account only.
--   `period_started_at` **[string][216]** The date and time when the document period started at, inclusive
--   `period_ended_at` **[string][216]** The date and time when the document period ended at, exclusive
--   `created_at` **[string][216]** The date and time when the document became available
--   `customer_uids` **[Array][248]&lt;[string][216]>** A list of UIDs of Customers that are associated with the document.(not implemented) Note that once we allow joint pool and accounts, this list will be pessimistic; each
+-   `period_started_at` **[string][231]** The date and time when the document period started at, inclusive
+-   `period_ended_at` **[string][231]** The date and time when the document period ended at, exclusive
+-   `created_at` **[string][231]** The date and time when the document became available
+-   `customer_uids` **[Array][265]&lt;[string][231]>** A list of UIDs of Customers that are associated with the document.(not implemented) Note that once we allow joint pool and accounts, this list will be pessimistic; each
     of the listed Customers should be associated with every account of which activities are included in the
     statement. Currently as implemented, this list should have exactly one UID.
--   `custodial_account_uids` **[Array][248]&lt;[string][216]>** A list of UIDs of Custodial Accounts that are associated with the document.If `scope_type` is `custodial_account`, this list will contain only one UID. In fact, currently as implemented,
+-   `custodial_account_uids` **[Array][265]&lt;[string][231]>** A list of UIDs of Custodial Accounts that are associated with the document.If `scope_type` is `custodial_account`, this list will contain only one UID. In fact, currently as implemented,
     this list should always have exactly one UID.
--   `synthetic_account_uids` **[Array][248]&lt;[string][216]>** A list of UIDs of Synthetic Accounts that are associated with the document.If `scope_type` is `synthetic_account`, this list will contain only one UID.
+-   `synthetic_account_uids` **[Array][265]&lt;[string][231]>** A list of UIDs of Synthetic Accounts that are associated with the document.If `scope_type` is `synthetic_account`, this list will contain only one UID.
 
 ## DocumentListQuery
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `month` **[number][247]?** Filter by month. This includes any document for which the period started in the specified month.
--   `year` **[number][247]?** Filter by year
+-   `month` **[number][264]?** Filter by month. This includes any document for which the period started in the specified month.
+-   `year` **[number][264]?** Filter by year
 -   `scope_type` **(`"customer"` \| `"synthetic_account"` \| `"custodial_account"`)?** (not implemented) Filter by scope type
--   `custodial_account_uid` **[string][216]?** Filter by Custodial Account
--   `customer_uid` **[Array][248]&lt;[string][216]>?** Filter by Customer. Multiple values are allowed.
--   `synthetic_account_uid` **[Array][248]&lt;[string][216]>?** Filter by Synthetic Account. Multiple values are allowed.
--   `limit` **[number][247]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default = 100.
--   `offset` **[number][247]?** Index of the items to start retrieving from. Default = 0.
+-   `custodial_account_uid` **[string][231]?** Filter by Custodial Account
+-   `customer_uid` **[Array][265]&lt;[string][231]>?** Filter by Customer. Multiple values are allowed.
+-   `synthetic_account_uid` **[Array][265]&lt;[string][231]>?** Filter by Synthetic Account. Multiple values are allowed.
+-   `limit` **[number][264]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default = 100.
+-   `offset` **[number][264]?** Index of the items to start retrieving from. Default = 0.
+
+## Evaluation
+
+Type: [Object][263]
+
+### Properties
+
+-   `uid` **[string][231]** A unique identifier generated by Rize
+-   `outcome` **(`"approved"` \| `"manual_review"` \| `"denied"`)** 
+-   `created_at` **[string][231]** 
+-   `flags` **any** A mapping of categories to outcomes for those categories. Items are defined as: key - 
+    The category name; value - true if all tags returned from our KYC partner have a 
+    positive "polarity" in the context of the service offering for which this evaluation was run, false otherwise
+-   `pii_match` **any** A mapping of KYC categories to results returned from various services queried by our KYC partner.
+    Items are defined as follows: key - The category name; value - true if all services queried by our
+    KYC partner returned a value of "matched" for this category, false otherwise
+
+## EvaluationListQuery
+
+Type: [Object][263]
+
+### Properties
+
+-   `customer_uid` **[Array][265]&lt;[string][231]>?** Filter by Customer. Multiple values are allowed
+-   `latest` **[boolean][269]?** Return only the latest evaluation
 
 ## KYCDocument
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `uid` **[string][216]** A unique identifier generated by Rize.
+-   `uid` **[string][231]** A unique identifier generated by Rize.
 -   `type` **(`"contract"` \| `"license"` \| `"other"` \| `"passport"` \| `"utility"`)** The KYC document type.
--   `filename` **[string][216]** The name of this file, exclusive of any extension.
--   `note` **[string][216]** A note describing the document.
--   `extension` **[string][216]** The filename extension.
--   `created_at` **[string][216]** 
+-   `filename` **[string][231]** The name of this file, exclusive of any extension.
+-   `note` **[string][231]** A note describing the document.
+-   `extension` **[string][231]** The filename extension.
+-   `created_at` **[string][231]** 
 
 ## SyntheticAccountType
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `uid` **[string][216]** A unique identifier generated by Rize
--   `name` **[string][216]** A unique name to identify the resource
+-   `uid` **[string][231]** A unique identifier generated by Rize
+-   `name` **[string][231]** A unique name to identify the resource
 -   `synthetic_account_category` **(`"general"` \| `"external"` \| `"plaid_external"`)** The name of the Synthetic Account Category for this type. Accounts can be in one of several categories that indicate their handling properties and defining characteristics such as 'general' or 'external'. As an example, 'external' accounts do not actually hold any assets and are instead used to represent an account at an external institution for use in initiating transfers.
--   `description` **[string][216]** A description outlining the intended use and requirements for this program's instance of the synthetic_account_type
--   `program_uid` **[string][216]?** A uid referring to the Program this synthetic_account_type belongs to
+-   `description` **[string][231]** A description outlining the intended use and requirements for this program's instance of the synthetic_account_type
+-   `program_uid` **[string][231]?** A uid referring to the Program this synthetic_account_type belongs to
 
 ## SyntheticAccountTypeListQuery
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `program_uid` **[string][216]?** Only list Synthetic Account Types that are available to be used by the given Program
--   `limit` **[number][247]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
--   `offset` **[number][247]?** Index of the items to start retrieving from. Default: 0
+-   `program_uid` **[string][231]?** Only list Synthetic Account Types that are available to be used by the given Program
+-   `limit` **[number][264]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
+-   `offset` **[number][264]?** Index of the items to start retrieving from. Default: 0
 
 ## SyntheticAccount
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `uid` **[string][216]** A unique identifier generated by Rize
--   `external_uid` **[string][216]** A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
--   `name` **[string][216]** A unique name to identify the resource.
--   `pool_uid` **[string][216]** A UID referring to the pool this Synthetic Account belongs to.
--   `synthetic_account_type_uid` **[string][216]** A UID referring to the Synthetic Account Type this Synthetic Account should be created as.
+-   `uid` **[string][231]** A unique identifier generated by Rize
+-   `external_uid` **[string][231]** A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
+-   `name` **[string][231]** A unique name to identify the resource.
+-   `pool_uid` **[string][231]** A UID referring to the pool this Synthetic Account belongs to.
+-   `synthetic_account_type_uid` **[string][231]** A UID referring to the Synthetic Account Type this Synthetic Account should be created as.
 -   `synthetic_account_category` **(`"general"` \| `"external"` \| `"plaid_external"`)** The name of the Synthetic Account Category associated with the Synthetic Account Type for this account. Refer to the Synthetic Account Type for details.
 -   `status` **(`"initiated"` \| `"active"` \| `"archived"` \| `"failed"`)** A value indicating the overall state of this account:-   **_initiated_** - The Synthetic Account is being set up and is not usable. Currently this status is only applicable to the `plaid_external` category. A `plaid_external` Synthetic Account will have the `initiated` status when created. The status will be updated to `active` when the setup is complete.
     -   **_active_** - The Synthetic Account is available for Customers to interact with. The Synthetic Account can be used in Transfers and transaction and balance inquiries.
     -   **_archived_** - The Synthetic Account is no longer available. Archived Synthetic Accounts will have a balance of $0.00.
     -   **_failed_** - The Synthetic Account setup has failed. Currently the `failed` status is only applicable to the `plaid_external` Synthetic Account category. Synthetic Accounts will start in the `initiated` status before transitioning to the `failed` status. Rize will not retry setting up Synthetic Accounts in the `failed` status and will treat them as inactive.
--   `liability` **[boolean][252]** Liability or asset. Any Synthetic Account created via POST /synthetic_accounts is a liability account, except for external accounts. Some asset Synthetic Accounts are automatically created by Rize during Customer onboarding for accounting purposes.
--   `net_usd_balance` **[string][216]** The current settled balance of this account in US Dollars. This field will be null for synthetic_account_types in the external category.
--   `net_usd_pending_balance` **[string][216]** The sum of all pending transactions for this account in US Dollars. This field will be null for Synthetic Account Types in the external category.
--   `net_usd_available_balance` **[string][216]** The balance available to spend calculated as the settled balance less any pending withdrawals Pending deposits are not included. This field will be null for Synthetic Account Types in the external category.
--   `master_account` **[boolean][252]** Used to identify the Master Synthetic Accounts that exist for every Program Customer. Master Synthetic Accounts are the default accounts where any unknown custodial transactions will settle and cannot be archived while a Program Customer is still active.
--   `account_number` **([string][216] | null)** The ACH account number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require an `account_number`. Submitting an `account_number` with a Synthetic Account Type that does not require one will result in the account number being ignored.
--   `account_number_last_four` **([string][216] | null)** Last 4 digits of the ACH account number.
--   `routing_number` **([string][216] | null)** The ABA routing number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require a `routing_number`. Submitting a `routing_number` with a Synthetic Account Type that does not require one will result in the routing number being ignored.
--   `opened_at` **[string][216]** The DateTime at which this account was created
--   `closed_at` **([string][216] | null)** The DateTime at which this account was closed. This value will be present if the status is `archived` or `failed`.
--   `closed_to_synthetic_account_uid` **([string][216] | null)** A UID referring to the Synthetic Account where the funds in this account were transferred when closed. Any transactions issued against this account after it is closed will instead go to the `closed_to` account
+-   `liability` **[boolean][269]** Liability or asset. Any Synthetic Account created via POST /synthetic_accounts is a liability account, except for external accounts. Some asset Synthetic Accounts are automatically created by Rize during Customer onboarding for accounting purposes.
+-   `net_usd_balance` **[string][231]** The current settled balance of this account in US Dollars. This field will be null for synthetic_account_types in the external category.
+-   `net_usd_pending_balance` **[string][231]** The sum of all pending transactions for this account in US Dollars. This field will be null for Synthetic Account Types in the external category.
+-   `net_usd_available_balance` **[string][231]** The balance available to spend calculated as the settled balance less any pending withdrawals Pending deposits are not included. This field will be null for Synthetic Account Types in the external category.
+-   `master_account` **[boolean][269]** Used to identify the Master Synthetic Accounts that exist for every Program Customer. Master Synthetic Accounts are the default accounts where any unknown custodial transactions will settle and cannot be archived while a Program Customer is still active.
+-   `account_number` **([string][231] | null)** The ACH account number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require an `account_number`. Submitting an `account_number` with a Synthetic Account Type that does not require one will result in the account number being ignored.
+-   `account_number_last_four` **([string][231] | null)** Last 4 digits of the ACH account number.
+-   `routing_number` **([string][231] | null)** The ABA routing number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require a `routing_number`. Submitting a `routing_number` with a Synthetic Account Type that does not require one will result in the routing number being ignored.
+-   `opened_at` **[string][231]** The DateTime at which this account was created
+-   `closed_at` **([string][231] | null)** The DateTime at which this account was closed. This value will be present if the status is `archived` or `failed`.
+-   `closed_to_synthetic_account_uid` **([string][231] | null)** A UID referring to the Synthetic Account where the funds in this account were transferred when closed. Any transactions issued against this account after it is closed will instead go to the `closed_to` account
 
 ## SyntheticAccountListQuery
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `customer_uid` **[Array][248]&lt;[string][216]>?** Filter by Customer. Multiple string values are allowed.
--   `external_uid` **[string][216]?** A unique, immutable id provided Client
--   `pool_uid` **[Array][248]&lt;[string][216]>?** Filter by pool. Multiple string values are allowed.
--   `limit` **[number][247]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
--   `offset` **[number][247]?** Index of the items to start retrieving from. Default: 0
--   `synthetic_account_type_uid` **[string][216]?** Filter by Synthetic Account Type
+-   `customer_uid` **[Array][265]&lt;[string][231]>?** Filter by Customer. Multiple string values are allowed.
+-   `external_uid` **[string][231]?** A unique, immutable id provided Client
+-   `pool_uid` **[Array][265]&lt;[string][231]>?** Filter by pool. Multiple string values are allowed.
+-   `limit` **[number][264]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
+-   `offset` **[number][264]?** Index of the items to start retrieving from. Default: 0
+-   `synthetic_account_type_uid` **[string][231]?** Filter by Synthetic Account Type
 -   `synthetic_account_category` **(`"general"` \| `"external"` \| `"plaid_external"`)?** Filter by Synthetic Account Category
--   `liability` **[boolean][252]?** Filter by liability or asset
+-   `liability` **[boolean][269]?** Filter by liability or asset
 -   `sort` **(`"name_asc"` \| `"name_desc"` \| `"net_usd_balance_asc"` \| `"net_usd_balance_desc"` \| `"net_usd_pending_balance_asc"` \| `"net_usd_pending_balance_desc"` \| `"net_usd_available_balance_asc"` \| `"net_usd_available_balance_desc"`)?** 
 
 ## SyntheticAccountCreateRequest
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `externalUid` **([string][216] | null)?** A unique identifier Client supplies
--   `name` **([string][216] | null)?** A unique name to identify the resource
--   `poolUid` **([string][216] | null)?** A UID referring to the pool this Synthetic Account belongs to
--   `syntheticAccountTypeUid` **([string][216] | null)?** A UID referring to the Synthetic Account Type this Synthetic Account should be created as
--   `accountNumber` **([string][216] | null)?** The ACH account number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require an `account_number`. Submitting an `account_number` with a Synthetic Account Type that does not require one will result in the account number being ignored.
--   `routingNumber` **([string][216] | null)?** The ABA routing number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require a `routing_number`. Submitting a `routing_number` with a Synthetic Account Type that does not require one will result in the routing number being ignored.
+-   `externalUid` **([string][231] | null)?** A unique identifier Client supplies
+-   `name` **([string][231] | null)?** A unique name to identify the resource
+-   `poolUid` **([string][231] | null)?** A UID referring to the pool this Synthetic Account belongs to
+-   `syntheticAccountTypeUid` **([string][231] | null)?** A UID referring to the Synthetic Account Type this Synthetic Account should be created as
+-   `accountNumber` **([string][231] | null)?** The ACH account number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require an `account_number`. Submitting an `account_number` with a Synthetic Account Type that does not require one will result in the account number being ignored.
+-   `routingNumber` **([string][231] | null)?** The ABA routing number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require a `routing_number`. Submitting a `routing_number` with a Synthetic Account Type that does not require one will result in the routing number being ignored.
 
 ## Transaction
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `uid` **[string][216]** A unique identifier generated by Rize
--   `id` **[number][247]** A unique numeric identifier that indicates the order in which the Transactions were created
--   `settled_index` **([number][247] | null)?** A unique index that indicates the order in which the Transactions were settled. Null if status is `queued` or `pending`.
--   `transfer_uid` **([number][247] | null)?** The UID of the Transfer this Transaction is associated with, if any.
--   `source_synthetic_account_uid` **[string][216]** Synthetic Account from where the asset is pulled
--   `destination_synthetic_account_uid` **[string][216]** Synthetic Account where the asset is landed
--   `transaction_event_uids` **[Array][248]&lt;[string][216]>** A list of UIDS referring to Transaction Events belonging to this Transaction, if any. 
+-   `uid` **[string][231]** A unique identifier generated by Rize
+-   `id` **[number][264]** A unique numeric identifier that indicates the order in which the Transactions were created
+-   `settled_index` **([number][264] | null)?** A unique index that indicates the order in which the Transactions were settled. Null if status is `queued` or `pending`.
+-   `transfer_uid` **([number][264] | null)?** The UID of the Transfer this Transaction is associated with, if any.
+-   `source_synthetic_account_uid` **[string][231]** Synthetic Account from where the asset is pulled
+-   `destination_synthetic_account_uid` **[string][231]** Synthetic Account where the asset is landed
+-   `transaction_event_uids` **[Array][265]&lt;[string][231]>** A list of UIDS referring to Transaction Events belonging to this Transaction, if any. 
     An empty array will be returned if there is no event involved. 
     The array may contain more values as the Transaction progresses and will no longer grow when its status becomes settled. 
     The array may still be empty by the time the Transaction is `settled` if there is no custodial asset movement as a result of this Transaction.
--   `custodial_account_uids` **[Array][248]&lt;[string][216]>** A list of UIDS referring to Custodial Accounts that are so far invovled in this Transaction. 
+-   `custodial_account_uids` **[Array][265]&lt;[string][231]>** A list of UIDS referring to Custodial Accounts that are so far invovled in this Transaction. 
     An empty array will be returned if there is Custodial Account involved. 
     The array may contain more values as the Transaction progresses and will no longer grow when its status becomes settled. 
     The array may still be empty by the time the Transaction is `settled` if there is no custodial asset movement as a result of this Transaction.
@@ -1685,7 +1784,7 @@ Type: [Object][246]
     -   **_pending_** - The Transaction is being processed. This state will persist until all related Transaction Events have settled or could not be completed.
     -   **_settled_** - The Transaction is complete. All of the related Transaction Events are settled.
     -   **_failed_** - The Transaction has failed. This state indicates that one of the related Transaction Events could not be settled. A failed Transaction may require the reversal of a related Synthetic Line Item and/or Custodial Line Item.
--   `us_dollar_amount` **[string][216]** The amount will never be negative
+-   `us_dollar_amount` **[string][231]** The amount will never be negative
 -   `type` **(`"atm_withdrawal"` \| `"card_purchase"` \| `"card_refund"` \| `"dispute"` \| `"external_transfer"` \| `"fee"` \| `"internal_transfer"` \| `"other"` \| `"reversed_transfer"` \| `"third_party_transfer"`)** **_atm_withdrawal_** - Cash is withdrawn at an ATM using a Debit Card.-   **_card_purchase_** - A purchase is made using a Debit Card.
     -   **_card_refund_** - A previous Debit Card Transaction is refunded.
     -   **_dispute_** - If a Customer claims that a Transaction was created in error, one or more Transactions will be created with this type to credit or debit based on the dispute outcome.
@@ -1696,157 +1795,157 @@ Type: [Object][246]
     -   **_reversed_transfer_** - A previous Transfer is reversed; when a Transfer is reversed, the type of the original Transaction will be `external_transfer`, `internal_transfer`, or `third_party_transfer`.
     -   **_third_party_transfer_** - The Transaction was initiated from an external source. This will likely be an RDFI ACH, where an external source initiates a withdrawal from or deposit to the account.
 -   `net_asset` **(`"positive"` \| `"negative"` \| `"neutral"`)** Indicates whether the Customer's asset has gone up (`positive`), gone down (`negative`) or stayed the same (`neutral`) as a result of this Transaction.
--   `description` **[string][216]** 
--   `created_at` **[string][216]** The date and time when the Transaction is first recognized by Rize. This may be when the Transfer is initiated if the Transaction is associated with one.
--   `settled_at` **[string][216]** The date and time when the Transaction is settled.
+-   `description` **[string][231]** 
+-   `created_at` **[string][231]** The date and time when the Transaction is first recognized by Rize. This may be when the Transfer is initiated if the Transaction is associated with one.
+-   `settled_at` **[string][231]** The date and time when the Transaction is settled.
 
 ## TransactionListQuery
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `customer_uid` **[Array][248]&lt;[string][216]>?** Filter by Customer.
--   `source_synthetic_account_uid` **[Array][248]&lt;[string][216]>?** Filter by source Synthetic Account.
--   `destination_synthetic_account_uid` **[Array][248]&lt;[string][216]>?** Filter by destination Synthetic Account.
--   `synthetic_account_uid` **[Array][248]&lt;[string][216]>?** Filter by Synthetic Account, source or destination.
--   `type` **[Array][248]&lt;(`"atm_withdrawal"` \| `"card_purchase"` \| `"card_refund"` \| `"dispute"` \| `"external_transfer"` \| `"fee"` \| `"internal_transfer"` \| `"other"` \| `"reversed_transfer"` \| `"third_party_transfer"`)>?** Filter by type.
--   `status` **[Array][248]&lt;(`"queued"` \| `"pending"` \| `"settled"` \| `"failed"`)>?** Filter by status.
--   `search_description` **[string][216]?** Attempts to search for the provided string in the description field. '\*' can be used as a wildcard. Any record with a match will be returned.
--   `limit` **[number][247]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default = 100.
--   `offset` **[number][247]?** Index of the items to start retrieving from. Default = 0.
+-   `customer_uid` **[Array][265]&lt;[string][231]>?** Filter by Customer.
+-   `source_synthetic_account_uid` **[Array][265]&lt;[string][231]>?** Filter by source Synthetic Account.
+-   `destination_synthetic_account_uid` **[Array][265]&lt;[string][231]>?** Filter by destination Synthetic Account.
+-   `synthetic_account_uid` **[Array][265]&lt;[string][231]>?** Filter by Synthetic Account, source or destination.
+-   `type` **[Array][265]&lt;(`"atm_withdrawal"` \| `"card_purchase"` \| `"card_refund"` \| `"dispute"` \| `"external_transfer"` \| `"fee"` \| `"internal_transfer"` \| `"other"` \| `"reversed_transfer"` \| `"third_party_transfer"`)>?** Filter by type.
+-   `status` **[Array][265]&lt;(`"queued"` \| `"pending"` \| `"settled"` \| `"failed"`)>?** Filter by status.
+-   `search_description` **[string][231]?** Attempts to search for the provided string in the description field. '\*' can be used as a wildcard. Any record with a match will be returned.
+-   `limit` **[number][264]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default = 100.
+-   `offset` **[number][264]?** Index of the items to start retrieving from. Default = 0.
 -   `sort` **(`"created_at_asc"` \| `"created_at_desc"` \| `"description_asc"` \| `"description_desc"` \| `"id_asc"` \| `"id_desc"` \| `"settled_index_asc"` \| `"settled_index_desc"` \| `"us_dollar_amount_asc"` \| `"us_dollar_amount_desc"`)?** 
 
 ## SyntheticLineItem
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `uid` **[string][216]** A unique identifier generated by Rize
--   `settled_index` **[number][247]** A unique index that indicates the order in which Transaction Events were settled
--   `transaction_uid` **[string][216]** UID of the Transaction this line item belongs to
--   `phase` **[number][247]** Some Transfer types will trigger multiple transfers at the custodial level. Some of these custodial transfers must wait for all dependent custodial transfers to complete before initiating. Transaction Events with `phase` value 1 are recorded for the first set of custodial transfers that get initiated after the (Synthetic) Transfer starts. Custodial transfers in later phases cannot initiate before all events from previous phases are settled.
--   `source_custodial_account_uid` **[string][216]** Custodial Account from which the asset is pulled
--   `destination_custodial_account_uid` **[string][216]** Custodial Account where the asset lands
--   `custodial_line_item_uids` **[Array][248]&lt;[string][216]>** A list of UIDS referring to Custodial Line Items belonging to this event. There are always at least two line items if the status is `settled`.
--   `status` **[string][216]** 
--   `us_dollar_amount` **[string][216]** The amount will never be negative
+-   `uid` **[string][231]** A unique identifier generated by Rize
+-   `settled_index` **[number][264]** A unique index that indicates the order in which Transaction Events were settled
+-   `transaction_uid` **[string][231]** UID of the Transaction this line item belongs to
+-   `phase` **[number][264]** Some Transfer types will trigger multiple transfers at the custodial level. Some of these custodial transfers must wait for all dependent custodial transfers to complete before initiating. Transaction Events with `phase` value 1 are recorded for the first set of custodial transfers that get initiated after the (Synthetic) Transfer starts. Custodial transfers in later phases cannot initiate before all events from previous phases are settled.
+-   `source_custodial_account_uid` **[string][231]** Custodial Account from which the asset is pulled
+-   `destination_custodial_account_uid` **[string][231]** Custodial Account where the asset lands
+-   `custodial_line_item_uids` **[Array][265]&lt;[string][231]>** A list of UIDS referring to Custodial Line Items belonging to this event. There are always at least two line items if the status is `settled`.
+-   `status` **[string][231]** 
+-   `us_dollar_amount` **[string][231]** The amount will never be negative
 -   `type` **(`"odfi_ach_deposit"` \| `"odfi_ach_withdrawal"` \| `"rdfi_ach_deposit"` \| `"rdfi_ach_withdrawal"`)** 
 -   `net_asset` **(`"positive"` \| `"negative"` \| `"neutral"`)** Indicates whether the Customer's asset has gone up (`positive`), gone down (`negative`) or stayed the same (`neutral`) as a result of this Transaction Event. This value is determined by `type`.
--   `description` **[string][216]** 
--   `created_at` **[string][216]** The date and time when the event is first recognized by Rize. This may be when the Transfer is initiated if the event is associated with one.
--   `settled_at` **[string][216]** The date and time when the event is settled.
+-   `description` **[string][231]** 
+-   `created_at` **[string][231]** The date and time when the event is first recognized by Rize. This may be when the Transfer is initiated if the event is associated with one.
+-   `settled_at` **[string][231]** The date and time when the event is settled.
     //\*\*
--   `source_custodial_account_uid` **[Array][248]&lt;[string][216]>?** Filter by source Custodial Account.
--   `destination_custodial_account_uid` **[Array][248]&lt;[string][216]>?** Filter by destination Custodial Account.
--   `custodial_account_uid` **[Array][248]&lt;[string][216]>?** Filter by Custodial Account, source or destination.
--   `type` **[Array][248]&lt;(`"odfi_ach_deposit"` \| `"odfi_ach_withdrawal"` \| `"rdfi_ach_deposit"` \| `"rdfi_ach_withdrawal"`)>?** Filter by type. Multiple values are allowed.
--   `transaction_uid` **[Array][248]&lt;[string][216]>?** Filter by Transaction. Multiple values are allowed
--   `limit` **[number][247]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default = 100.
--   `offset` **[number][247]?** Index of the items to start retrieving from. Default = 0.
+-   `source_custodial_account_uid` **[Array][265]&lt;[string][231]>?** Filter by source Custodial Account.
+-   `destination_custodial_account_uid` **[Array][265]&lt;[string][231]>?** Filter by destination Custodial Account.
+-   `custodial_account_uid` **[Array][265]&lt;[string][231]>?** Filter by Custodial Account, source or destination.
+-   `type` **[Array][265]&lt;(`"odfi_ach_deposit"` \| `"odfi_ach_withdrawal"` \| `"rdfi_ach_deposit"` \| `"rdfi_ach_withdrawal"`)>?** Filter by type. Multiple values are allowed.
+-   `transaction_uid` **[Array][265]&lt;[string][231]>?** Filter by Transaction. Multiple values are allowed
+-   `limit` **[number][264]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default = 100.
+-   `offset` **[number][264]?** Index of the items to start retrieving from. Default = 0.
 -   `sort` **(`"created_at_asc"` \| `"created_at_desc"` \| `"description_asc"` \| `"description_desc"` \| `"settled_index_asc"` \| `"settled_index_desc"` \| `"us_dollar_amount_asc"` \| `"us_dollar_amount_desc"`)?** /\*\*
--   `uid` **[string][216]** A unique identifier generated by Rize
--   `settled_index` **[number][247]** A unique index that indicates the order in which the Synthetic Line Items were settled
--   `transaction_uid` **[string][216]** UID of the Transaction this Synthetic Line Item belongs to
--   `synthetic_account_uid` **[string][216]** UID of the Synthetic Account this Synthetic Line Item is associated with
--   `status` **[string][216]** 
--   `us_dollar_amount` **[string][216]** The signed USD amount of this specific Synthetic Line Item
--   `running_us_dollar_balance` **[string][216]** The Synthetic Account balance after this Synthetic Line Item was settled
--   `description` **[string][216]** Human-readable description in context of Synthetic Accounts
--   `created_at` **[string][216]** The date and time when the Synthetic Line Item is first recognized by Rize. This may be when the Transfer is initiated if the Synthetic Line Item is associated with one.
--   `settled_at` **[string][216]** The date and time when the Synthetic Line Item is settled
+-   `uid` **[string][231]** A unique identifier generated by Rize
+-   `settled_index` **[number][264]** A unique index that indicates the order in which the Synthetic Line Items were settled
+-   `transaction_uid` **[string][231]** UID of the Transaction this Synthetic Line Item belongs to
+-   `synthetic_account_uid` **[string][231]** UID of the Synthetic Account this Synthetic Line Item is associated with
+-   `status` **[string][231]** 
+-   `us_dollar_amount` **[string][231]** The signed USD amount of this specific Synthetic Line Item
+-   `running_us_dollar_balance` **[string][231]** The Synthetic Account balance after this Synthetic Line Item was settled
+-   `description` **[string][231]** Human-readable description in context of Synthetic Accounts
+-   `created_at` **[string][231]** The date and time when the Synthetic Line Item is first recognized by Rize. This may be when the Transfer is initiated if the Synthetic Line Item is associated with one.
+-   `settled_at` **[string][231]** The date and time when the Synthetic Line Item is settled
 
 ## SyntheticLineItemListQuery
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `customer_uid` **[Array][248]&lt;[string][216]>?** Filter by Customer.
--   `pool_uid` **[Array][248]&lt;[string][216]>?** Filter by pool.
--   `synthetic_account_uid` **[Array][248]&lt;[string][216]>?** Filter by Synthetic Account.
--   `limit` **[number][247]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default = 100.
--   `offset` **[number][247]?** Index of the items to start retrieving from. Default = 0.
--   `transaction_uid` **[Array][248]&lt;[string][216]>?** Filter by Transaction.
--   `status` **[Array][248]&lt;(`"begun"` \| `"failed"` \| `"in_progress"` \| `"settled"`)>?** Filter by status.
+-   `customer_uid` **[Array][265]&lt;[string][231]>?** Filter by Customer.
+-   `pool_uid` **[Array][265]&lt;[string][231]>?** Filter by pool.
+-   `synthetic_account_uid` **[Array][265]&lt;[string][231]>?** Filter by Synthetic Account.
+-   `limit` **[number][264]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default = 100.
+-   `offset` **[number][264]?** Index of the items to start retrieving from. Default = 0.
+-   `transaction_uid` **[Array][265]&lt;[string][231]>?** Filter by Transaction.
+-   `status` **[Array][265]&lt;(`"begun"` \| `"failed"` \| `"in_progress"` \| `"settled"`)>?** Filter by status.
 
 ## CustodialLineItem
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `uid` **[string][216]** A unique identifier generated by Rize.
--   `settled_index` **[number][247]** A unique index that indicates the order in which the Custodial Line Items were settled.
--   `transaction_uid` **[string][216]** UID of the Transaction this Custodial Line Item belongs to.
--   `transaction_event_uid` **[string][216]** UID of the Transaction Event this Custodial Line Item belongs to.
--   `custodial_account_uid` **[string][216]** UID of the Custodial Account this Custodial Line Item is associated with.
--   `status` **[string][216]** 
--   `us_dollar_amount` **[string][216]** The signed USD amount of this specific Custodial Line Item
--   `running_us_dollar_balance` **([string][216] | null)?** US dollar balance of the Custodial Account as of the completion of this Custodial Line Item. This field may be empty unless the status is `settled` or `voided`.
--   `type` **[string][216]** Symbols and/or numbers that represent different types of Custodial Line Items.
--   `description` **[string][216]** Descriptions pulled from the custodians, such as through NACHA description or ISO-8583 data element 43.
--   `created_at` **[string][216]** The date and time when the Custodial Line Items is first recognized by Rize. This may be when the Transfer is initiated if the Custodial Line Item is associated with one.
--   `occurred_at` **[string][216]** This field may be empty if status is not settled or voided.
--   `settled_at` **[string][216]** The date and time when the Custodial Line Item is settled.
+-   `uid` **[string][231]** A unique identifier generated by Rize.
+-   `settled_index` **[number][264]** A unique index that indicates the order in which the Custodial Line Items were settled.
+-   `transaction_uid` **[string][231]** UID of the Transaction this Custodial Line Item belongs to.
+-   `transaction_event_uid` **[string][231]** UID of the Transaction Event this Custodial Line Item belongs to.
+-   `custodial_account_uid` **[string][231]** UID of the Custodial Account this Custodial Line Item is associated with.
+-   `status` **[string][231]** 
+-   `us_dollar_amount` **[string][231]** The signed USD amount of this specific Custodial Line Item
+-   `running_us_dollar_balance` **([string][231] | null)?** US dollar balance of the Custodial Account as of the completion of this Custodial Line Item. This field may be empty unless the status is `settled` or `voided`.
+-   `type` **[string][231]** Symbols and/or numbers that represent different types of Custodial Line Items.
+-   `description` **[string][231]** Descriptions pulled from the custodians, such as through NACHA description or ISO-8583 data element 43.
+-   `created_at` **[string][231]** The date and time when the Custodial Line Items is first recognized by Rize. This may be when the Transfer is initiated if the Custodial Line Item is associated with one.
+-   `occurred_at` **[string][231]** This field may be empty if status is not settled or voided.
+-   `settled_at` **[string][231]** The date and time when the Custodial Line Item is settled.
 
 ## CustodialLineItemListQuery
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `customer_uid` **[Array][248]&lt;[string][216]>?** Filter by Customer.
--   `custodial_account_uid` **[Array][248]&lt;[string][216]>?** Filter by Custodial Account.
--   `status` **[Array][248]&lt;(`"settled"` \| `"voided"`)>?** Filter by status.
--   `us_dollar_amount_tax` **[number][247]?** Return any records having a us_dollar_amount at or below us_dollar_amount_max.
--   `us_dollar_amount_min` **[number][247]?** Return any records having a us_dollar_amount at or above us_dollar_amount_min.
--   `transaction_event_uid` **[Array][248]&lt;[string][216]>?** Filter by Transaction Event.
--   `transaction_uid` **[Array][248]&lt;[string][216]>?** Filter by Transaction.
--   `limit` **[number][247]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default = 100.
--   `offset` **[number][247]?** Index of the items to start retrieving from. Default = 0.
+-   `customer_uid` **[Array][265]&lt;[string][231]>?** Filter by Customer.
+-   `custodial_account_uid` **[Array][265]&lt;[string][231]>?** Filter by Custodial Account.
+-   `status` **[Array][265]&lt;(`"settled"` \| `"voided"`)>?** Filter by status.
+-   `us_dollar_amount_tax` **[number][264]?** Return any records having a us_dollar_amount at or below us_dollar_amount_max.
+-   `us_dollar_amount_min` **[number][264]?** Return any records having a us_dollar_amount at or above us_dollar_amount_min.
+-   `transaction_event_uid` **[Array][265]&lt;[string][231]>?** Filter by Transaction Event.
+-   `transaction_uid` **[Array][265]&lt;[string][231]>?** Filter by Transaction.
+-   `limit` **[number][264]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default = 100.
+-   `offset` **[number][264]?** Index of the items to start retrieving from. Default = 0.
 -   `sort` **(`"created_at_asc"` \| `"created_at_desc"` \| `"description_asc"` \| `"description_desc"` \| `"settled_index_asc"` \| `"settled_index_desc"` \| `"us_dollar_amount_asc"` \| `"us_dollar_amount_desc"`)?** 
 
 ## Transfer
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `uid` **[string][216]** A unique identifier generated by Rize.
--   `external_uid` **[string][216]** A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
--   `source_synthetic_account_uid` **[string][216]** Synthetic Account to pull asset from. Must be an active liability or external-type account. Cannot be equal to `destination_synthetic_account_uid`.
--   `destination_synthetic_account_uid` **[string][216]** Synthetic Account where the asset should land. Must be an active liability or external-type account. Cannot be equal to `source_synthetic_account_uid`.
--   `initiating_customer_uid` **[string][216]** 
--   `usd_transfer_amount` **[string][216]** The USD amount to transfer
+-   `uid` **[string][231]** A unique identifier generated by Rize.
+-   `external_uid` **[string][231]** A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
+-   `source_synthetic_account_uid` **[string][231]** Synthetic Account to pull asset from. Must be an active liability or external-type account. Cannot be equal to `destination_synthetic_account_uid`.
+-   `destination_synthetic_account_uid` **[string][231]** Synthetic Account where the asset should land. Must be an active liability or external-type account. Cannot be equal to `source_synthetic_account_uid`.
+-   `initiating_customer_uid` **[string][231]** 
+-   `usd_transfer_amount` **[string][231]** The USD amount to transfer
 -   `status` **(`"queued"` \| `"pending"` \| `"settled"` \| `"failed"`)** A value indicating the overall status of the Transfer:-   **_queued_** - Transfers begin in the Queued status. Queued indicates that Rize has received a valid Transfer request and is preparing the Transfer.
     -   **_pending_** - Transfers move from a status of Queued to a status of Pending. A Pending status indicates that Rize has begun the movement of funds to complete the Transfer.
     -   **_settled_** - The Transfer is complete. The funds have been moved between the source and destination accounts.
     -   **_failed_** - The Transfer has failed. This may occur due to a system error, or problems with the origin and/or destination account. A new Transfer must be created to move the assets.
--   `created_at` **[string][216]** 
+-   `created_at` **[string][231]** 
 
 ## TransferListQuery
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
--   `customer_uid` **[Array][248]&lt;[string][216]>?** Filter by Customer. Multiple values are allowed.
--   `external_uid` **[string][216]?** A unique, immutable id provided Client.
--   `pool_uid` **[Array][248]&lt;[string][216]>?** Filter by pool. Multiple values are allowed.
--   `synthetic_account_uid` **[Array][248]&lt;[string][216]>?** Filter by Synthetic Account. Multiple values are allowed.
--   `limit` **[number][247]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default = 100.
--   `offset` **[number][247]?** Index of the items to start retrieving from. Default = 0.
+-   `customer_uid` **[Array][265]&lt;[string][231]>?** Filter by Customer. Multiple values are allowed.
+-   `external_uid` **[string][231]?** A unique, immutable id provided Client.
+-   `pool_uid` **[Array][265]&lt;[string][231]>?** Filter by pool. Multiple values are allowed.
+-   `synthetic_account_uid` **[Array][265]&lt;[string][231]>?** Filter by Synthetic Account. Multiple values are allowed.
+-   `limit` **[number][264]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default = 100.
+-   `offset` **[number][264]?** Index of the items to start retrieving from. Default = 0.
 
 ## RizeOptions
 
-Type: [Object][246]
+Type: [Object][263]
 
 ### Properties
 
 -   `environment` **(`"sandbox"` \| `"integration"` \| `"production"`)?** The Rize environment to be used. (Default: 'sandbox')
--   `timeout` **[number][247]?** Specifies the number of milliseconds before the each request times out. (Default: 80000)
+-   `timeout` **[number][264]?** Specifies the number of milliseconds before the each request times out. (Default: 80000)
 
 ## Rize
 
@@ -1854,9 +1953,9 @@ Represents a Rize API client.
 
 ### Parameters
 
--   `programUid` **[string][216]** The Rize Program ID.
--   `hmac` **[string][216]** The HMAC that will be used to sign the JSON web signature in order to get access to the API.
--   `options` **[RizeOptions][255]?** Configuration options (optional, default `RizeOptions`)
+-   `programUid` **[string][231]** The Rize Program ID.
+-   `hmac` **[string][231]** The HMAC that will be used to sign the JSON web signature in order to get access to the API.
+-   `options` **[RizeOptions][272]?** Configuration options (optional, default `RizeOptions`)
     -   `options.environment`   (optional, default `RizeOptions.environment`)
     -   `options.timeout`   (optional, default `RizeOptions.timeout`)
 
@@ -1865,28 +1964,28 @@ Represents a Rize API client.
 The Compliance Workflow is where you begin onboarding Customers to your Program.
 Compliance Workflows are used to group all of the required Compliance Documents together and to ensure they are presented and acknowledged in the correct order.
 
-Type: [ComplianceWorkflowService][256]
+Type: [ComplianceWorkflowService][273]
 
 ### customer
 
 A Customer on the Rize Platform is the end user of your application.
 Customers are unique to each Program and the management of all accounts and identifying information is handled on a Program-by-Program basis.
 
-Type: [CustomerService][257]
+Type: [CustomerService][274]
 
 ### syntheticAccount
 
 Synthetic Accounts are what your application will build around and your Customers will interact with.
 Synthetic Accounts are designed to track any asset types, for any Customers, at any Custodian.
 
-Type: [SyntheticAccountService][258]
+Type: [SyntheticAccountService][275]
 
 ### custodialAccount
 
 Custodial Account is the account held by the Custodian participating in your Program. Custodial Accounts in a Program can only be created for the Service Offerings that have been configured for that Program.
 A Customer must successfully complete onboarding and pass all KYC/AML checks before their Custodial Accounts can be opened.
 
-Type: [CustodialAccountService][259]
+Type: [CustodialAccountService][276]
 
 ### transaction
 
@@ -1904,7 +2003,7 @@ These can be used to view the progress of an in-flight Transaction or see the hi
 Line Items are created for each Transaction Event. 
 They catalogue the individual credits and debits associated with the accounts involved in the Transaction.
 
-Type: [TransactionService][260]
+Type: [TransactionService][277]
 
 ### transfer
 
@@ -1919,7 +2018,7 @@ complete ACH transfers or trades of assets in underlying Custodial Accounts, it 
 take up to 6 business days to settle in the most extreme cases (such as starting with a stock sale and completing 
 in a checking account deposit at a different financial institution).
 
-Type: [TransferService][261]
+Type: [TransferService][278]
 
 ### debitCard
 
@@ -1949,7 +2048,7 @@ The document type specifies whether the document is a statement or tax document.
 Please note that only the settled transactions will appear in the statement i.e. if a transaction is initiated before a settlement 
 period ends and settles after the new period starts, it will appear in the statement for the latter period.
 
-Type: [DocumentService][262]
+Type: [DocumentService][279]
 
 ### kycDocument
 
@@ -1959,11 +2058,18 @@ if Rize’s KYC/AML partner is unable to confirm the identity of the Customer wi
 A KYC Document is a file that is uploaded which a reviewer can use to inform a decision as to whether this Customer should be approved
 or denied for the Program. These files are generally utility bills or images of state issued driver’s licenses.
 
+### evaluation
+
+An Evaluation is the result of submitting a customer's personal details to one of Rize's KYC partners. If Customer PII is updated,
+another Evaluation is generated with its own unique Evaluation identifier.
+
+Type: [EvaluationService][280]
+
 ### PACKAGE_VERSION
 
 The Rize SDK version
 
-Type: [string][216]
+Type: [string][231]
 
 [1]: #complianceworkflowservice
 
@@ -2111,7 +2217,7 @@ Type: [string][216]
 
 [73]: #examples-21
 
-[74]: #kycdocumentservice
+[74]: #evaluationservice
 
 [75]: #getlist-4
 
@@ -2119,372 +2225,408 @@ Type: [string][216]
 
 [77]: #examples-22
 
-[78]: #syntheticaccountservice
+[78]: #get-4
 
-[79]: #getlist-5
+[79]: #parameters-24
 
-[80]: #parameters-24
+[80]: #examples-23
 
-[81]: #examples-23
+[81]: #kycdocumentservice
 
-[82]: #get-4
+[82]: #getlist-5
 
 [83]: #parameters-25
 
 [84]: #examples-24
 
-[85]: #create-2
+[85]: #getmetadata
 
 [86]: #parameters-26
 
 [87]: #examples-25
 
-[88]: #update-1
+[88]: #syntheticaccountservice
 
-[89]: #parameters-27
+[89]: #getlist-6
 
-[90]: #examples-26
+[90]: #parameters-27
 
-[91]: #archive-1
+[91]: #examples-26
 
-[92]: #parameters-28
+[92]: #get-5
 
-[93]: #examples-27
+[93]: #parameters-28
 
-[94]: #gettypeslist
+[94]: #examples-27
 
-[95]: #parameters-29
+[95]: #create-2
 
-[96]: #examples-28
+[96]: #parameters-29
 
-[97]: #gettype
+[97]: #examples-28
 
-[98]: #parameters-30
+[98]: #update-1
 
-[99]: #examples-29
+[99]: #parameters-30
 
-[100]: #transactionservice
+[100]: #examples-29
 
-[101]: #getlist-6
+[101]: #archive-1
 
 [102]: #parameters-31
 
 [103]: #examples-30
 
-[104]: #get-5
+[104]: #gettypeslist
 
 [105]: #parameters-32
 
 [106]: #examples-31
 
-[107]: #gettransactioneventlist
+[107]: #gettype
 
 [108]: #parameters-33
 
 [109]: #examples-32
 
-[110]: #gettransactionevent
+[110]: #transactionservice
 
-[111]: #parameters-34
+[111]: #getlist-7
 
-[112]: #examples-33
+[112]: #parameters-34
 
-[113]: #getsyntheticlineitemlist
+[113]: #examples-33
 
-[114]: #parameters-35
+[114]: #get-6
 
-[115]: #examples-34
+[115]: #parameters-35
 
-[116]: #getsyntheticlineitem
+[116]: #examples-34
 
-[117]: #parameters-36
+[117]: #gettransactioneventlist
 
-[118]: #examples-35
+[118]: #parameters-36
 
-[119]: #getcustodiallineitemlist
+[119]: #examples-35
 
-[120]: #parameters-37
+[120]: #gettransactionevent
 
-[121]: #examples-36
+[121]: #parameters-37
 
-[122]: #getcustodiallineitem
+[122]: #examples-36
 
-[123]: #parameters-38
+[123]: #getsyntheticlineitemlist
 
-[124]: #examples-37
+[124]: #parameters-38
 
-[125]: #transferservice
+[125]: #examples-37
 
-[126]: #getlist-7
+[126]: #getsyntheticlineitem
 
 [127]: #parameters-39
 
 [128]: #examples-38
 
-[129]: #get-6
+[129]: #getcustodiallineitemlist
 
 [130]: #parameters-40
 
 [131]: #examples-39
 
-[132]: #init
+[132]: #getcustodiallineitem
 
 [133]: #parameters-41
 
 [134]: #examples-40
 
-[135]: #rizelist
+[135]: #transferservice
 
-[136]: #properties
+[136]: #getlist-8
 
-[137]: #address
+[137]: #parameters-42
 
-[138]: #properties-1
+[138]: #examples-41
 
-[139]: #httpresponse
+[139]: #get-7
 
-[140]: #properties-2
+[140]: #parameters-43
 
-[141]: #httpresponse-1
+[141]: #examples-42
 
-[142]: #properties-3
+[142]: #init
 
-[143]: #complianceworkflowsummary
+[143]: #parameters-44
 
-[144]: #properties-4
+[144]: #examples-43
 
-[145]: #complianceworkflowcustomer
+[145]: #rizelist
 
-[146]: #properties-5
+[146]: #properties
 
-[147]: #compliancedocument
+[147]: #address
 
-[148]: #properties-6
+[148]: #properties-1
 
-[149]: #compliancedocumentacknowledgementrequest
+[149]: #httpresponse
 
-[150]: #properties-7
+[150]: #properties-2
 
-[151]: #complianceworkflow
+[151]: #httpresponse-1
 
-[152]: #properties-8
+[152]: #properties-3
 
-[153]: #accounterror
+[153]: #complianceworkflowsummary
 
-[154]: #properties-9
+[154]: #properties-4
 
-[155]: #custodialaccount
+[155]: #complianceworkflowcustomer
 
-[156]: #properties-10
+[156]: #properties-5
 
-[157]: #custodialaccountlistquery
+[157]: #compliancedocument
 
-[158]: #properties-11
+[158]: #properties-6
 
-[159]: #customerdetails
+[159]: #compliancedocumentacknowledgementrequest
 
-[160]: #properties-12
+[160]: #properties-7
 
-[161]: #customer
+[161]: #complianceworkflow
 
-[162]: #properties-13
+[162]: #properties-8
 
-[163]: #customerlistquery
+[163]: #accounterror
 
-[164]: #properties-14
+[164]: #properties-9
 
-[165]: #debitcard
+[165]: #custodialaccount
 
-[166]: #properties-15
+[166]: #properties-10
 
-[167]: #debitcardlistquery
+[167]: #custodialaccountlistquery
 
-[168]: #properties-16
+[168]: #properties-11
 
-[169]: #debit-cardtypedefs
+[169]: #customerdetails
 
-[170]: #document
+[170]: #properties-12
 
-[171]: #properties-17
+[171]: #customer
 
-[172]: #documentlistquery
+[172]: #properties-13
 
-[173]: #properties-18
+[173]: #customerlistquery
 
-[174]: #kycdocument
+[174]: #properties-14
 
-[175]: #properties-19
+[175]: #debitcard
 
-[176]: #syntheticaccounttype
+[176]: #properties-15
 
-[177]: #properties-20
+[177]: #debitcardlistquery
 
-[178]: #syntheticaccounttypelistquery
+[178]: #properties-16
 
-[179]: #properties-21
+[179]: #debit-cardtypedefs
 
-[180]: #syntheticaccount
+[180]: #document
 
-[181]: #properties-22
+[181]: #properties-17
 
-[182]: #syntheticaccountlistquery
+[182]: #documentlistquery
 
-[183]: #properties-23
+[183]: #properties-18
 
-[184]: #syntheticaccountcreaterequest
+[184]: #evaluation
 
-[185]: #properties-24
+[185]: #properties-19
 
-[186]: #transaction
+[186]: #evaluationlistquery
 
-[187]: #properties-25
+[187]: #properties-20
 
-[188]: #transactionlistquery
+[188]: #kycdocument
 
-[189]: #properties-26
+[189]: #properties-21
 
-[190]: #syntheticlineitem
+[190]: #syntheticaccounttype
 
-[191]: #properties-27
+[191]: #properties-22
 
-[192]: #syntheticlineitemlistquery
+[192]: #syntheticaccounttypelistquery
 
-[193]: #properties-28
+[193]: #properties-23
 
-[194]: #custodiallineitem
+[194]: #syntheticaccount
 
-[195]: #properties-29
+[195]: #properties-24
 
-[196]: #custodiallineitemlistquery
+[196]: #syntheticaccountlistquery
 
-[197]: #properties-30
+[197]: #properties-25
 
-[198]: #transfer
+[198]: #syntheticaccountcreaterequest
 
-[199]: #properties-31
+[199]: #properties-26
 
-[200]: #transferlistquery
+[200]: #transaction
 
-[201]: #properties-32
+[201]: #properties-27
 
-[202]: #rizeoptions
+[202]: #transactionlistquery
 
-[203]: #properties-33
+[203]: #properties-28
 
-[204]: #rize
+[204]: #syntheticlineitem
 
-[205]: #parameters-42
+[205]: #properties-29
 
-[206]: #complianceworkflow-1
+[206]: #syntheticlineitemlistquery
 
-[207]: #customer-1
+[207]: #properties-30
 
-[208]: #syntheticaccount-1
+[208]: #custodiallineitem
 
-[209]: #custodialaccount-1
+[209]: #properties-31
 
-[210]: #transaction-1
+[210]: #custodiallineitemlistquery
 
-[211]: #transfer-1
+[211]: #properties-32
 
-[212]: #debitcard-1
+[212]: #transfer
 
-[213]: #document-1
+[213]: #properties-33
 
-[214]: #kycdocument-1
+[214]: #transferlistquery
 
-[215]: #package_version
+[215]: #properties-34
 
-[216]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[216]: #rizeoptions
 
-[217]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[217]: #properties-35
 
-[218]: #complianceworkflow
+[218]: #rize
 
-[219]: #compliancedocumentacknowledgementrequest
+[219]: #parameters-45
 
-[220]: #custodialaccount
+[220]: #complianceworkflow-1
 
-[221]: #custodialaccountlistquery
+[221]: #customer-1
 
-[222]: #rizelist
+[222]: #syntheticaccount-1
 
-[223]: #customerlistquery
+[223]: #custodialaccount-1
 
-[224]: #customer
+[224]: #transaction-1
 
-[225]: #customerdetails
+[225]: #transfer-1
 
-[226]: #debitcardlistquery
+[226]: #debitcard-1
 
-[227]: #debitcard
+[227]: #document-1
 
-[228]: #address
+[228]: #kycdocument-1
 
-[229]: #documentlistquery
+[229]: #evaluation-1
 
-[230]: #document
+[230]: #package_version
 
-[231]: #httpresponse
+[231]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[232]: #kycdocument
+[232]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
-[233]: #syntheticaccountlistquery
+[233]: #complianceworkflow
 
-[234]: #syntheticaccount
+[234]: #compliancedocumentacknowledgementrequest
 
-[235]: #syntheticaccountcreaterequest
+[235]: #custodialaccount
 
-[236]: #syntheticaccounttypelistquery
+[236]: #custodialaccountlistquery
 
-[237]: #syntheticaccounttype
+[237]: #rizelist
 
-[238]: #transactionlistquery
+[238]: #customerlistquery
 
-[239]: #transaction
+[239]: #customer
 
-[240]: #syntheticlineitemlistquery
+[240]: #customerdetails
 
-[241]: #syntheticlineitem
+[241]: #debitcardlistquery
 
-[242]: #custodiallineitemlistquery
+[242]: #debitcard
 
-[243]: #custodiallineitem
+[243]: #address
 
-[244]: #transferlistquery
+[244]: #documentlistquery
 
-[245]: #transfer
+[245]: #document
 
-[246]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[246]: #httpresponse
 
-[247]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[247]: #evaluationlistquery
 
-[248]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[248]: #evaluation
 
-[249]: #complianceworkflowsummary
+[249]: #kycdocument
 
-[250]: #complianceworkflowcustomer
+[250]: #syntheticaccountlistquery
 
-[251]: #compliancedocument
+[251]: #syntheticaccount
 
-[252]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[252]: #syntheticaccountcreaterequest
 
-[253]: #accounterror
+[253]: #syntheticaccounttypelistquery
 
-[254]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date
+[254]: #syntheticaccounttype
 
-[255]: #rizeoptions
+[255]: #transactionlistquery
 
-[256]: #complianceworkflowservice
+[256]: #transaction
 
-[257]: #customerservice
+[257]: #syntheticlineitemlistquery
 
-[258]: #syntheticaccountservice
+[258]: #syntheticlineitem
 
-[259]: #custodialaccountservice
+[259]: #custodiallineitemlistquery
 
-[260]: #transactionservice
+[260]: #custodiallineitem
 
-[261]: #transferservice
+[261]: #transferlistquery
 
-[262]: #documentservice
+[262]: #transfer
+
+[263]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+
+[264]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+
+[265]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+[266]: #complianceworkflowsummary
+
+[267]: #complianceworkflowcustomer
+
+[268]: #compliancedocument
+
+[269]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+
+[270]: #accounterror
+
+[271]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date
+
+[272]: #rizeoptions
+
+[273]: #complianceworkflowservice
+
+[274]: #customerservice
+
+[275]: #syntheticaccountservice
+
+[276]: #custodialaccountservice
+
+[277]: #transactionservice
+
+[278]: #transferservice
+
+[279]: #documentservice
+
+[280]: #evaluationservice
