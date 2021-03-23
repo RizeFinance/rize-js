@@ -14,9 +14,8 @@ declare class DocumentService {
     /**
      * @ignore @protected
      * Validates the parameters for the "view" method
-     * @param {string} uid
      */
-    protected _validateViewParams(uid: string, extension: any): void;
+    protected _validateViewParams(uid: any, extension: any): void;
     /**
      * @ignore @protected
      * Validates the parameters for the "get" method
@@ -56,6 +55,13 @@ declare class DocumentService {
      */
     view(uid: string, extension?: 'pdf' | 'html' | 'json'): Promise<HTTPResponse>;
     /**
+     * Retrieve a base64-encoded document (image, PDF, etc)
+     * @param {string} uid - Rize-generated unique Document id
+     * @returns {Promise<string>} A promise that returns a base64-encoded Document string if resolved.
+     * @example const document = await rize.document.viewBase64(documentUid);
+     */
+    viewBase64(uid: string): Promise<string>;
+    /**
      * Get a single Document
      *
      * @param {string} uid - Rize-generated unique document id
@@ -65,9 +71,9 @@ declare class DocumentService {
     get(uid: string): Promise<Document>;
 }
 declare namespace DocumentService {
-    export { DocumentListQuery, Document, HTTPResponse, RizeList };
+    export { DocumentListQuery, Document, RizeList, HTTPResponse };
 }
 type DocumentListQuery = import('./typedefs/document.typedefs').DocumentListQuery;
 type RizeList<T> = import('./typedefs/common.typedefs').RizeList<T>;
 type Document = import('./typedefs/document.typedefs').Document;
-type HTTPResponse = import('./typedefs/document.typedefs').HTTPResponse;
+type HTTPResponse<T> = import('./typedefs/common.typedefs').HTTPResponse<T>;

@@ -123,6 +123,18 @@ describe('Document', () => {
         });
     });
 
+    describe('viewBase64', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.document.viewBase64('');
+            return expect(promise).to.eventually.be.rejectedWith('Document "uid" is required.');
+        });
+
+        it('Retrieves document successfully', async () => {
+            const document = await rizeClient.document.viewBase64(testDocument.uid);
+            expect(document).to.be.a('string');
+        }).timeout(5000);
+    });
+
     describe('get', () => {
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.document.get('');

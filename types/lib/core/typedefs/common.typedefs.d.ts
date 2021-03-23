@@ -27,3 +27,16 @@ export type Address = {
     state: string;
     postal_code: string;
 };
+/**
+ * <T>
+ */
+export type HTTPResponse<T> = {
+    /**
+     * - Object that contains more information about the response.
+     */
+    data: T;
+    /**
+     * - Collection of response headers.
+     */
+    headers: any;
+};
