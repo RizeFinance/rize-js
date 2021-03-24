@@ -791,7 +791,7 @@ View or download a document
 const document = await rize.document.view(documentUid, 'pdf');
 ```
 
-Returns **[Promise][230]&lt;[HTTPResponse][244]&lt;[string][229]>>** A promise that returns a downloaded Document if resolved.
+Returns **[Promise][230]&lt;[HTTPResponse][244]&lt;[string][229]>>** A promise that returns a binary Document with headers if resolved.
 
 ### viewBase64
 
