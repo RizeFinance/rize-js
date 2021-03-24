@@ -50,10 +50,10 @@ declare class DocumentService {
      *
      * @param {string} uid - Rize-generated unique document id
      * @param {'pdf' | 'html' | 'json'} extension - the type of file to download.
-     * @returns {Promise<HTTPResponse>} A promise that returns a downloaded Document if resolved.
+     * @returns {Promise<HTTPResponse<string>>} A promise that returns a downloaded Document if resolved.
      * @example const document = await rize.document.view(documentUid, 'pdf');
      */
-    view(uid: string, extension?: 'pdf' | 'html' | 'json'): Promise<HTTPResponse>;
+    view(uid: string, extension?: 'pdf' | 'html' | 'json'): Promise<HTTPResponse<string>>;
     /**
      * View or download a base64-encoded document (image, PDF, etc)
      * @param {string} uid - Rize-generated unique Document id
