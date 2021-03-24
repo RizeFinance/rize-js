@@ -10,6 +10,7 @@ const faker = require('faker');
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
+const delayAsync = require('../helpers/delayAsync');
 
 const Rize = require('../../index');
 const rizeClient = new Rize(
@@ -122,7 +123,7 @@ describe('Transfer', () => {
             return expect(promise).to.eventually.be.rejectedWith('"usTransferAmount" is required.');
         });
 
-        it('Initializes an External-to-PrimaryAccount Transfer successfully', async () => {
+        xit('Initializes an External-to-PrimaryAccount Transfer successfully', async () => {
             const customerAccounts = await rizeClient.syntheticAccount.getList({
                 customer_uid: [customerUid]
             });
@@ -147,18 +148,14 @@ describe('Transfer', () => {
             expect(transfer).to.have.property('usd_transfer_amount').that.equals('100.0');
             expect(transfer).to.have.property('status').that.equals('queued');
 
-            await new Promise(resolve => {
-                setTimeout(() => {
-                    resolve(); // Wait for 70 sec for the transfer to be settled
-                }, 70000);
-            });
+            await delayAsync(70000);
 
             const updatedTransfer = await rizeClient.transfer.get(transfer.uid);
 
             expect(updatedTransfer).to.have.property('status').that.equals('settled');
         }).timeout(100000);
 
-        it('Initializes a PrimaryAccount-to-External Transfer successfully', async () => {
+        xit('Initializes a PrimaryAccount-to-External Transfer successfully', async () => {
             const newTransferExternalUid = faker.random.uuid();
 
             const transfer = await rizeClient.transfer.init(
@@ -177,11 +174,7 @@ describe('Transfer', () => {
             expect(transfer).to.have.property('usd_transfer_amount').that.equals('100.0');
             expect(transfer).to.have.property('status').that.equals('queued');
 
-            await new Promise(resolve => {
-                setTimeout(() => {
-                    resolve(); // Wait for 70 sec for the transfer to be settled
-                }, 70000);
-            });
+            await delayAsync(70000);
 
             const updatedTransfer = await rizeClient.transfer.get(transfer.uid);
 

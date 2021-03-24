@@ -77,7 +77,7 @@ describe('KYCDocument', () => {
             expect(kycDocument).to.have.property('note').that.equals('test upload');
             expect(kycDocument).to.have.property('extension').that.equals('png');
             expect(kycDocument).to.have.property('created_at');
-
+            
             newKYCDocument = kycDocument;
         });
     });
