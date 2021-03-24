@@ -69,7 +69,7 @@ declare class KYCDocumentService {
      *      filename*=UTF-8''fred.jpg,
      *      Content-Transfer-Encoding: binary
      * @param {string} uid - Rize-generated unique KYC Document id
-     * @returns {Promise<HTTPResponse<string>>} A promise that returns a base64-encoded KYC Document string if resolved.
+     * @returns {Promise<HTTPResponse<string>>} A promise that returns a binary KYC Document with headers if resolved.
      * @example const kycDocument = await rize.kycDocument.get(kycDocumentUid);
      */
     get(uid: string): Promise<HTTPResponse<string>>;
