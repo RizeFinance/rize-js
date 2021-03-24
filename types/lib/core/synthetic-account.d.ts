@@ -31,6 +31,12 @@ declare class SyntheticAccountService {
     protected _validateGetListQuery(query: SyntheticAccountListQuery): void;
     /**
      * @ignore @protected
+     * Validates payload parameter object for the "create" method
+     * @param {SyntheticAccountCreateRequest} request
+     */
+    protected _validateCreateParams(request: SyntheticAccountCreateRequest): void;
+    /**
+     * @ignore @protected
      * Validates query parameter object for the "getTypesList" method
      * @param {SyntheticAccountTypeListQuery} query
      */
@@ -42,13 +48,11 @@ declare class SyntheticAccountService {
      */
     protected _validateUpdateParams(uid: any, name: any, note: any): void;
     /**
-     *
-     * @param {*} query
      * List Synthetic Accounts
-     * @param {SyntheticAccountListQuery} query
+     * @param {SyntheticAccountListQuery} query - An object containing key value paris for filtering the result.
      * @returns {Promise<RizeList<SyntheticAccount>>} A promise that returns the Synthetic Account list if resolved.
      * @example
-     * const customer = await rize.syntheticAccount.getList({
+     * const syntheticAccounts = await rize.syntheticAccount.getList({
      *     customer_uid: ['customer_uid1', 'customer_uid2'],
      *     external_uid: 'external_uid',
      *     pool_uid: ['pool_uid1', 'pool_uid2'],
@@ -61,22 +65,16 @@ declare class SyntheticAccountService {
      *     sort: 'name_asc'
      * });
      */
-    getList(query?: any): Promise<RizeList<SyntheticAccount>>;
+    getList(query?: SyntheticAccountListQuery): Promise<RizeList<SyntheticAccount>>;
     /**
      * Get a single Synthetic account
      *
      * Retrieve a single Synthetic Account resource along with supporting details and account balances
      * @param {string} uid - Rize-generated unique synthetic account id
      * @returns {Promise<SyntheticAccount>} - A promise that returns a SyntheticAccount if resolved.
-     * @example const syntheticAccount = await rize.syntheticAccount.get(customerUid);
+     * @example const syntheticAccount = await rize.syntheticAccount.get(syntheticAccountUid);
      */
     get(uid: string): Promise<SyntheticAccount>;
-    /**
-     * @ignore @protected
-     * Validates payload parameter object for the "create" method
-     * @param {SyntheticAccountCreateRequest} request
-     */
-    protected _validateCreateParams(request: SyntheticAccountCreateRequest): void;
     /**
      * @param {SyntheticAccountCreateRequest} payload - is a JSON object needs to send as body parameters in order to create new synthetic accounts.
      * @returns {Promise<RizeList<SyntheticAccount>>}
@@ -109,8 +107,8 @@ declare class SyntheticAccountService {
      * - not be a Master Synthetic Account i.e. master_account must be false
      * - have zero balance
      * - have no pending Transfers
-     * Master Synthetic Accounts are archived when the Program Customer is archived (DELETE /customers/:uid).
-     * External Synthetic Accounts cannot be archived through DELETE /synthetic_accounts/:uid.
+     * Master Synthetic Accounts are archived when the Program Customer is archived (customer.archive()).
+     * External Synthetic Accounts cannot be archived through syntheticAccount.archive().
      * For on overview of how to archive an external Synthetic Account, please contact your Rize account manager.
      * @param {*} uid {string} uid - Rize-generated unique Synthetic Account id
      * @returns {Promise<void>} A promise that returns void if resolved.
@@ -145,8 +143,8 @@ declare namespace SyntheticAccountService {
     export { SyntheticAccount, SyntheticAccountListQuery, SyntheticAccountType, SyntheticAccountTypeListQuery, SyntheticAccountCreateRequest, RizeList };
 }
 type SyntheticAccountListQuery = import('./typedefs/synthetic-account.typedefs').SyntheticAccountListQuery;
+type SyntheticAccountCreateRequest = import('./typedefs/synthetic-account.typedefs').SyntheticAccountCreateRequest;
 type SyntheticAccountTypeListQuery = import('./typedefs/synthetic-account.typedefs').SyntheticAccountTypeListQuery;
 type RizeList<T> = import('./typedefs/common.typedefs').RizeList<T>;
 type SyntheticAccount = import('./typedefs/synthetic-account.typedefs').SyntheticAccount;
-type SyntheticAccountCreateRequest = import('./typedefs/synthetic-account.typedefs').SyntheticAccountCreateRequest;
 type SyntheticAccountType = import('./typedefs/synthetic-account.typedefs').SyntheticAccountType;

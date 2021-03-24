@@ -20,3 +20,23 @@ export type RizeList<T> = {
     offset: number;
     data: Array<T>;
 };
+export type Address = {
+    street1: string;
+    street2?: string | null;
+    city: string;
+    state: string;
+    postal_code: string;
+};
+/**
+ * <T>
+ */
+export type HTTPResponse<T> = {
+    /**
+     * - Object that contains more information about the response.
+     */
+    data: T;
+    /**
+     * - Collection of response headers.
+     */
+    headers: any;
+};

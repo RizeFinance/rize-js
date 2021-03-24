@@ -1,6 +1,6 @@
 {
-  "name": "@rize/rize-js",
-  "version": "1.0.0",
+  "name": "@rizefinance/rize-js",
+  "version": "0.0.1",
   "description": "Rize API wrapper",
   "main": "index.js",
   "typings": "types/index.d.ts",
@@ -9,8 +9,8 @@
     "lint-fix": "eslint . --ext .js,.ts --fix",
     "typings:build": "npx typescript",
     "docs:build": "documentation build lib/** -f md -o docs.md",
-    "test": "yarn lint && yarn mocha",
-    "local:publish": "yarn typings:build && yarn docs:build && npm unpublish --force --registry http://localhost @rize/rize-js && npm publish --registry http://localhost"
+    "test": "yarn lint && yarn mocha $1",
+    "local:publish": "yarn typings:build && yarn docs:build && npm unpublish --force --registry http://localhost @rizefinance/rize-js && npm publish --registry http://localhost"
   },
   "author": "",
   "license": "ISC",
@@ -36,5 +36,11 @@
     "jsrsasign": "^10.1.11",
     "query-string": "^6.14.0",
     "validator": "^13.5.2"
+  },
+  "repository": {
+    "url": "git://github.com/RizeFinance/rize-sdks.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }
