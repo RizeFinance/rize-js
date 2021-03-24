@@ -1,11 +1,11 @@
 # Rize Node.js SDK
 ## Installation
 ```
-npm install @rize/rize-js
+npm install @rizefinance/rize-js
 ```
 ## Usage
 ```
-const Rize = require('@rize/rize-js');
+const Rize = require('@rizefinance/rize-js');
 const rize = new Rize('your_program_id', 'your_hmac_key');
 
 rize.complianceWorkflow.create(
@@ -17,7 +17,7 @@ rize.complianceWorkflow.create(
 ```
 Or with ES modules and `async/await`:
 ```
-import Rize from '@rize/rize-js';
+import Rize from '@rizefinance/rize-js';
 const rize = new Rize('your_program_id', 'your_hmac_key');
 
 (async () => {
