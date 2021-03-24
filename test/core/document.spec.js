@@ -118,8 +118,9 @@ describe('Document', () => {
         });
 
         it('Download document data successfully', async () => {
-            const promise = rizeClient.document.view(testDocument.uid, 'pdf');
-            return expect(promise).to.be.fulfilled;
+            const promise = await rizeClient.document.view(testDocument.uid, 'pdf');
+            expect(promise).to.have.property('data');
+            expect(promise).to.have.property('headers');
         });
     });
 
