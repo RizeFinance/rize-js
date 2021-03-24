@@ -118,9 +118,22 @@ describe('Document', () => {
         });
 
         it('Download document data successfully', async () => {
-            const promise = rizeClient.document.view(testDocument.uid, 'pdf');
-            return expect(promise).to.be.fulfilled;
+            const promise = await rizeClient.document.view(testDocument.uid, 'pdf');
+            expect(promise).to.have.property('data');
+            expect(promise).to.have.property('headers');
         });
+    });
+
+    describe('viewBase64', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.document.viewBase64('');
+            return expect(promise).to.eventually.be.rejectedWith('Document "uid" is required.');
+        });
+
+        it('Retrieves document successfully', async () => {
+            const document = await rizeClient.document.viewBase64(testDocument.uid, 'pdf');
+            expect(document).to.be.a('string');
+        }).timeout(5000);
     });
 
     describe('get', () => {
