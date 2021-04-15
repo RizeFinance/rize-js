@@ -12,6 +12,7 @@ const expect = chai.expect;
 const delayAsync = require('../helpers/delayAsync');
 
 const faker = require('faker');
+const { RandomSSN } = require('ssn');
 
 const Rize = require('../../index');
 const rizeClient = new Rize(
@@ -27,7 +28,7 @@ describe('Customer', () => {
     const fakeLastName = faker.name.lastName();
     const fakeSuffix = faker.name.suffix();
     const fakePhone = faker.phone.phoneNumber('##########');
-    const fakeSsn = '111-22-3333';
+    const fakeSsn = new RandomSSN().value().toFormattedString();
     const fakeDob = '1990-01-31';
     const fakeStreet1 = faker.address.streetAddress();
     const fakeStreet2 = faker.address.streetAddress();

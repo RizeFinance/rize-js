@@ -109,6 +109,10 @@ declare class Rize {
      * @type {EvaluationService}
      */
     evaluation: EvaluationService;
+    /**
+     * Helper tools to connect to Rize Message Queue and subscribe to durable topics
+     */
+    rmq: RizeMessageQueue;
 }
 declare namespace Rize {
     export { PACKAGE_VERSION, Rize, Rize as default };
@@ -123,4 +127,5 @@ import DebitCardService = require("./core/debit-card");
 import DocumentService = require("./core/document");
 import KYCDocumentService = require("./core/kyc-document");
 import EvaluationService = require("./core/evaluation");
+import RizeMessageQueue = require("./mq");
 declare var PACKAGE_VERSION: string;

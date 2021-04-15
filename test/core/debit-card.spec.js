@@ -240,7 +240,6 @@ describe('DebitCard', () => {
                 'damaged'
             );
             expect(updatedDebitCard).to.have.property('uid').that.equals(testDebitCard.uid);
-            expect(updatedDebitCard).to.have.property('card_last_four_digits').that.is.not.equal(testDebitCard.card_last_four_digits);
 
             testDebitCard = updatedDebitCard;
             await delayAsync(1500);
