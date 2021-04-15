@@ -342,13 +342,7 @@ describe('Synthetic Account', () => {
         it('Throws an error if "name" is empty', () => {
             const syntheticAccountUid = testGeneralSyntheticAccount.uid;
             const promise = rizeClient.syntheticAccount.update(syntheticAccountUid, ' ', 'note');
-            return expect(promise).to.eventually.be.rejectedWith('Name is required.');
-        });
-
-        it('Throws an error if "note" is empty', () => {
-            const syntheticAccountUid = testGeneralSyntheticAccount.uid;
-            const promise = rizeClient.syntheticAccount.update(syntheticAccountUid, 'name', ' ');
-            return expect(promise).to.eventually.be.rejectedWith('Note is required.');
+            return expect(promise).to.eventually.be.rejectedWith('Synthetic Account "name" is required.');
         });
 
         it('Update a synthetic account', async () => {
