@@ -32,11 +32,11 @@ describe('Customer', () => {
         });
 
         it('Archives the customer', async () => {
-            await delayAsync(30000);
+            await delayAsync(40000);
             await rizeClient.customer.archive(customerUid);
             const updatedCustomer = await rizeClient.customer.get(customerUid);
 
             expect(updatedCustomer.status).equals('archived');
-        }).timeout(40000);
+        }).timeout(50000);
     });
 });
