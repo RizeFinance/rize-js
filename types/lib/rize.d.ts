@@ -80,6 +80,7 @@ declare class Rize {
      * strict PCI compliance requirements. As such, the process for issuing and verifying a card is a multi-step process that can
      * only be completed by the Customer. At no time will the PCI restricted data be made available to either you or Rize. The last
      * 4 digits of the Debit Card PAN and/or a unique card nickname can be used to identify the card to the Customer.
+     * @type {DebitCardService}
      */
     debitCard: DebitCardService;
     /**
@@ -101,6 +102,7 @@ declare class Rize {
      *
      * A KYC Document is a file that is uploaded which a reviewer can use to inform a decision as to whether this Customer should be approved
      * or denied for the Program. These files are generally utility bills or images of state issued driver’s licenses.
+     * @type {KYCDocumentService}
      */
     kycDocument: KYCDocumentService;
     /**
@@ -110,7 +112,24 @@ declare class Rize {
      */
     evaluation: EvaluationService;
     /**
+     * A Pool is a construct Rize uses to associate multiple Customers to each other. A Pool is always associated with at least one Customer,
+     * but all accounts are only ever associated with a single Pool. This enables asset sharing and distributed ownership of accounts across
+     * multiple Customers.
+     *
+     * Rize currently supports single Customer Pools, where one Customer is associated to one Pool and vice versa. All accounts, transfers,
+     * and transactions are associated with the Customer’s Pool, not the Customer. The Pool UID appears on several endpoint responses and may
+     * be required by the API in some instances.
+     *
+     * Multi-Customer Pools is a beta product - contact us at hello@rizemoney.com for more information on how to build with joint accounts
+     * involving multiple Customers and multiple Pools. A multi-Customer Pool represents a group of Customers within a Program that have
+     * elected to share assets with each other. All assets within a Pool are shared by all members of the Pool, but the initial creator of
+     * the Pool is designated as the owner of both the Pool itself and all Custodial Accounts that are created for the Pool.
+     * @type {PoolService}
+     */
+    pool: PoolService;
+    /**
      * Helper tools to connect to Rize Message Queue and subscribe to durable topics
+     * @type {RizeMessageQueue}
      */
     rmq: RizeMessageQueue;
 }
@@ -127,5 +146,6 @@ import DebitCardService = require("./core/debit-card");
 import DocumentService = require("./core/document");
 import KYCDocumentService = require("./core/kyc-document");
 import EvaluationService = require("./core/evaluation");
+import PoolService = require("./core/pool");
 import RizeMessageQueue = require("./mq");
 declare var PACKAGE_VERSION: string;
