@@ -1,5 +1,7 @@
 'use strict';
 
+require('./customer.spec');
+
 const utils = require('../../lib/test-utils');
 
 const chai = require('chai');
@@ -19,6 +21,7 @@ describe('Synthetic Account', () => {
     let customerPoolUid;
     let testGeneralSyntheticAccountTypeUid;
     let testExternalSyntheticAccountTypeUid;
+    let testPlaidExternalSyntheticAccountTypeUid;
     let testGeneralSyntheticAccount;
     let testExternalSyntheticAccount;
 
@@ -41,7 +44,7 @@ describe('Synthetic Account', () => {
         expect(data).to.have.property('pool_uid').that.equals(poolUid);
         expect(data).to.have.property('synthetic_account_type_uid').that.equals(syntheticAccountTypeUid);
         expect(data).to.have.property('synthetic_account_category').that.equals(syntheticAccountCategory);
-        expect(data).to.have.property('status').that.equals('active');
+        expect(data).to.have.property('status');
         expect(data).to.have.property('liability');
         expect(data).to.have.property('net_usd_balance');
         expect(data).to.have.property('net_usd_pending_balance');
@@ -196,6 +199,10 @@ describe('Synthetic Account', () => {
             testExternalSyntheticAccountTypeUid = syntheticAccountTypes.data
                 .find(x => x.synthetic_account_category === 'external')
                 .uid;
+
+            testPlaidExternalSyntheticAccountTypeUid = syntheticAccountTypes.data
+                .find(x => x.synthetic_account_category === 'plaid_external')
+                .uid;
         });
     });
 
@@ -330,6 +337,28 @@ describe('Synthetic Account', () => {
             );
 
             testExternalSyntheticAccount = syntheticAccount;
+        });
+
+        xit('Creates a new plaid_external synthetic account', async () => {
+            const plaidProcessorToken = faker.random.uuid();
+            const request = {
+                externalUid: fakeExternalSyntheticAccountExternalUid,
+                poolUid: customerPoolUid,
+                name: fakeExternalSyntheticAccountName,
+                syntheticAccountTypeUid: testPlaidExternalSyntheticAccountTypeUid,
+                plaidProcessorToken,
+            };
+
+            const syntheticAccount = await rizeClient.syntheticAccount.create(request);
+
+            verifyNewSyntheticAccount(
+                syntheticAccount,
+                fakeExternalSyntheticAccountName,
+                fakeExternalSyntheticAccountExternalUid,
+                customerPoolUid,
+                testPlaidExternalSyntheticAccountTypeUid,
+                'plaid_external'
+            );
         });
     });
 

@@ -1403,7 +1403,7 @@ only Synthetic Accounts allowed in a Transfer request are:
 #### Examples
 
 ```javascript
-const transfer = await rize.transfer.create(
+const transfer = await rize.transfer.init(
     'external_uid1',
     'synthetic_account_uid1',
     'synthetic_account_uid2',

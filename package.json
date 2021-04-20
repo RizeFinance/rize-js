@@ -9,7 +9,6 @@
     "lint-fix": "eslint . --ext .js,.ts --fix",
     "docs:build": "tsc && documentation build lib/** -f md -o docs.md",
     "test": "npm run lint && mocha $1",
-    "haha": "npm run docs:build",
     "local:publish": "npm run docs:build && npm unpublish --force --registry http://localhost @rizefinance/rize-js && npm publish --registry http://localhost"
   },
   "author": "",
