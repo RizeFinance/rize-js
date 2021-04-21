@@ -39,9 +39,9 @@ describe('Pools', () => {
             return expect(promise).to.eventually.be.rejectedWith('"query" must be a PoolListQuery object.');
         });
 
-        it('Throws an error if "customer_uid" query parameter is invalid', () => {
-            const promise = rizeClient.pool.getList({customer_uid: ''});
-            return expect(promise).to.eventually.be.rejectedWith('"customer_uid" query should not be empty.');
+        it('Throws an error if "customer_uid" query is not an array', () => {
+            const promise = rizeClient.custodialAccount.getList({customer_uid: ''});
+            return expect(promise).to.eventually.be.rejectedWith('"customer_uid" query must be an array.');
         });
 
         it('Throws an error if "external_uid" query parameter is invalid', () => {
@@ -68,7 +68,7 @@ describe('Pools', () => {
 
         it('Retrieves the pool list with query', async () => {
             const query = {
-                customer_uid: customerUid,
+                customer_uid: [customerUid],
                 external_uid: fakeExternalId,
                 limit: 50,
                 offset: 0,
