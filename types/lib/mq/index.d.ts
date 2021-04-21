@@ -18,9 +18,9 @@ declare class RizeMessageQueue {
      * @param {string} username Your Rize Message Queue username
      * @param {string} password Your Rize Message Queue password
      * @param {RizeMessageQueueConnectOptions} [options]
-     * @returns {Promise<RizeMessageQueueClient>} A promise that returns a RizeMessageQueueClient when resolved
+     * @returns {RizeMessageQueueClient} A RizeMessageQueueClient instance
      */
-    connect(clientId: string, username: string, password: string, options?: RizeMessageQueueConnectOptions): Promise<RizeMessageQueueClient>;
+    connect(clientId: string, username: string, password: string, options?: RizeMessageQueueConnectOptions): RizeMessageQueueClient;
 }
 declare namespace RizeMessageQueue {
     export { RizeMessageQueueConnectOptions };
