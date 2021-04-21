@@ -239,12 +239,12 @@
 -   [TransferListQuery][235]
     -   [Properties][236]
 -   [RizeMessageQueue][237]
-    -   [Parameters][238]
-    -   [connect][239]
-        -   [Parameters][240]
--   [RizeMessageQueueClient][241]
-    -   [Parameters][242]
-    -   [subscribe][243]
+    -   [connect][238]
+        -   [Parameters][239]
+-   [RizeMessageQueueConnectOptions][240]
+    -   [Properties][241]
+-   [RizeMessageQueueClient][242]
+    -   [subscribeToRizeTopic][243]
         -   [Parameters][244]
 -   [RizeOptions][245]
     -   [Properties][246]
@@ -2111,10 +2111,6 @@ Type: [Object][298]
 
 The RizeMessageQueue class
 
-### Parameters
-
--   `options`  
-
 ### connect
 
 Connect to the Rize Message Queue server
@@ -2124,34 +2120,40 @@ Connect to the Rize Message Queue server
 -   `clientId` **[string][262]** Assign a client ID
 -   `username` **[string][262]** Your Rize Message Queue username
 -   `password` **[string][262]** Your Rize Message Queue password
--   `options`  
+-   `options` **[RizeMessageQueueConnectOptions][307]?** 
 
-Returns **[Promise][263]&lt;[RizeMessageQueueClient][307]>** A promise that returns a RizeMessageQueueClient when resolved
+Returns **[Promise][263]&lt;[RizeMessageQueueClient][308]>** A promise that returns a RizeMessageQueueClient when resolved
+
+## RizeMessageQueueConnectOptions
+
+Type: [Object][298]
+
+### Properties
+
+-   `environment` **(`"sandbox"` \| `"integration"` \| `"production"`)?** 
+-   `maxReconnects` **[number][299]?** 
 
 ## RizeMessageQueueClient
 
+**Extends Stomp.Channel**
+
 The RizeMessageQueueClient class
 
-### Parameters
+### subscribeToRizeTopic
 
--   `stompClient`  
-
-### subscribe
-
-Subscribe to a Rize Message Queue topic
+Creates a durable Rize Message Queue topic subscription
 
 #### Parameters
 
 -   `topicSubject` **(`"customer"` \| `"debit_card"` \| `"synthetic_account"` \| `"synthetic_account"` \| `"transfer"` \| `"transaction"`)** The subject of the Topic to subscribe to
 -   `subscriptionName` **[string][262]** Assign a name for the subscription
 -   `messageListener`  
--   `ackHeader` **(`"client"` \| `"client-individual"` \| `"auto"`)?** (Default=`'client'`)When the ack mode is `'client'`, then the client MUST use the `consumptionSuccess` function that was passed to the `messageListener` 
-    to send the server ACK frames for the messages it processes. 
+-   `ackHeader` **(`"client"` \| `"client-individual"` \| `"auto"`)?** (Default=`'client'`)When the ack mode is `'client'`, then the client MUST use the `msg.ack` to send the server ACK frames for the messages it processes. 
     If the connection fails before a client sends an ACK frame for the message, the server will assume the message has not been processed 
     and MAY redeliver the message to another client. The ACK frames sent by the client will be treated as a cumulative acknowledgment. 
     This means the acknowledgment operates on the message specified in the ACK frame and all messages sent to the subscription before 
-    the ACK'ed message.In case the client did not process some messages, it SHOULD use the `consumptionFailed` function that was passed to the `messageListener` 
-    to send NACK frames to tell the server it did not consume these messages.When the ack mode is `'client-individual'`, the acknowledgment operates just like the client acknowledgment mode except that the 
+    the ACK'ed message.In case the client did not process some messages, it SHOULD use `msg.nack()` to send NACK frames to tell the server it did not consume 
+    these messages.When the ack mode is `'client-individual'`, the acknowledgment operates just like the client acknowledgment mode except that the 
     ACK or NACK frames sent by the client are not cumulative. This means that an ACK or NACK frame for a subsequent message MUST NOT cause a 
     previous message to get acknowledged.When the ack mode is `'auto'`, then the client does not need to send the server ACK frames for the messages it receives. The server will 
     assume the client has received the message as soon as it sends it to the client. This acknowledgment mode can cause messages being 
@@ -2174,7 +2176,7 @@ Represents a Rize API client.
 
 -   `programUid` **[string][262]** The Rize Program ID.
 -   `hmac` **[string][262]** The HMAC that will be used to sign the JSON web signature in order to get access to the API.
--   `options` **[RizeOptions][308]?** Configuration options (optional, default `RizeOptions`)
+-   `options` **[RizeOptions][309]?** Configuration options (optional, default `RizeOptions`)
     -   `options.environment`   (optional, default `RizeOptions.environment`)
     -   `options.timeout`   (optional, default `RizeOptions.timeout`)
 
@@ -2183,28 +2185,28 @@ Represents a Rize API client.
 The Compliance Workflow is where you begin onboarding Customers to your Program.
 Compliance Workflows are used to group all of the required Compliance Documents together and to ensure they are presented and acknowledged in the correct order.
 
-Type: [ComplianceWorkflowService][309]
+Type: [ComplianceWorkflowService][310]
 
 ### customer
 
 A Customer on the Rize Platform is the end user of your application.
 Customers are unique to each Program and the management of all accounts and identifying information is handled on a Program-by-Program basis.
 
-Type: [CustomerService][310]
+Type: [CustomerService][311]
 
 ### syntheticAccount
 
 Synthetic Accounts are what your application will build around and your Customers will interact with.
 Synthetic Accounts are designed to track any asset types, for any Customers, at any Custodian.
 
-Type: [SyntheticAccountService][311]
+Type: [SyntheticAccountService][312]
 
 ### custodialAccount
 
 Custodial Account is the account held by the Custodian participating in your Program. Custodial Accounts in a Program can only be created for the Service Offerings that have been configured for that Program.
 A Customer must successfully complete onboarding and pass all KYC/AML checks before their Custodial Accounts can be opened.
 
-Type: [CustodialAccountService][312]
+Type: [CustodialAccountService][313]
 
 ### transaction
 
@@ -2222,7 +2224,7 @@ These can be used to view the progress of an in-flight Transaction or see the hi
 Line Items are created for each Transaction Event. 
 They catalogue the individual credits and debits associated with the accounts involved in the Transaction.
 
-Type: [TransactionService][313]
+Type: [TransactionService][314]
 
 ### transfer
 
@@ -2237,7 +2239,7 @@ complete ACH transfers or trades of assets in underlying Custodial Accounts, it 
 take up to 6 business days to settle in the most extreme cases (such as starting with a stock sale and completing 
 in a checking account deposit at a different financial institution).
 
-Type: [TransferService][314]
+Type: [TransferService][315]
 
 ### debitCard
 
@@ -2255,7 +2257,7 @@ strict PCI compliance requirements. As such, the process for issuing and verifyi
 only be completed by the Customer. At no time will the PCI restricted data be made available to either you or Rize. The last 
 4 digits of the Debit Card PAN and/or a unique card nickname can be used to identify the card to the Customer.
 
-Type: [DebitCardService][315]
+Type: [DebitCardService][316]
 
 ### document
 
@@ -2269,7 +2271,7 @@ The document type specifies whether the document is a statement or tax document.
 Please note that only the settled transactions will appear in the statement i.e. if a transaction is initiated before a settlement 
 period ends and settles after the new period starts, it will appear in the statement for the latter period.
 
-Type: [DocumentService][316]
+Type: [DocumentService][317]
 
 ### kycDocument
 
@@ -2279,14 +2281,14 @@ if Rize’s KYC/AML partner is unable to confirm the identity of the Customer wi
 A KYC Document is a file that is uploaded which a reviewer can use to inform a decision as to whether this Customer should be approved
 or denied for the Program. These files are generally utility bills or images of state issued driver’s licenses.
 
-Type: [KYCDocumentService][317]
+Type: [KYCDocumentService][318]
 
 ### evaluation
 
 An Evaluation is the result of submitting a customer's personal details to one of Rize's KYC partners. If Customer PII is updated,
 another Evaluation is generated with its own unique Evaluation identifier.
 
-Type: [EvaluationService][318]
+Type: [EvaluationService][319]
 
 ### pool
 
@@ -2303,13 +2305,13 @@ involving multiple Customers and multiple Pools. A multi-Customer Pool represent
 elected to share assets with each other. All assets within a Pool are shared by all members of the Pool, but the initial creator of 
 the Pool is designated as the owner of both the Pool itself and all Custodial Accounts that are created for the Pool.
 
-Type: [PoolService][319]
+Type: [PoolService][320]
 
 ### rmq
 
 Helper tools to connect to Rize Message Queue and subscribe to durable topics
 
-Type: [RizeMessageQueue][320]
+Type: [RizeMessageQueue][321]
 
 ### PACKAGE_VERSION
 
@@ -2791,27 +2793,27 @@ Type: [string][262]
 
 [237]: #rizemessagequeue
 
-[238]: #parameters-50
+[238]: #connect
 
-[239]: #connect
+[239]: #parameters-50
 
-[240]: #parameters-51
+[240]: #rizemessagequeueconnectoptions
 
-[241]: #rizemessagequeueclient
+[241]: #properties-38
 
-[242]: #parameters-52
+[242]: #rizemessagequeueclient
 
-[243]: #subscribe
+[243]: #subscribetorizetopic
 
-[244]: #parameters-53
+[244]: #parameters-51
 
 [245]: #rizeoptions
 
-[246]: #properties-38
+[246]: #properties-39
 
 [247]: #rize
 
-[248]: #parameters-54
+[248]: #parameters-52
 
 [249]: #complianceworkflow-1
 
@@ -2929,30 +2931,32 @@ Type: [string][262]
 
 [306]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date
 
-[307]: #rizemessagequeueclient
+[307]: #rizemessagequeueconnectoptions
 
-[308]: #rizeoptions
+[308]: #rizemessagequeueclient
 
-[309]: #complianceworkflowservice
+[309]: #rizeoptions
 
-[310]: #customerservice
+[310]: #complianceworkflowservice
 
-[311]: #syntheticaccountservice
+[311]: #customerservice
 
-[312]: #custodialaccountservice
+[312]: #syntheticaccountservice
 
-[313]: #transactionservice
+[313]: #custodialaccountservice
 
-[314]: #transferservice
+[314]: #transactionservice
 
-[315]: #debitcardservice
+[315]: #transferservice
 
-[316]: #documentservice
+[316]: #debitcardservice
 
-[317]: #kycdocumentservice
+[317]: #documentservice
 
-[318]: #evaluationservice
+[318]: #kycdocumentservice
 
-[319]: #poolservice
+[319]: #evaluationservice
 
-[320]: #rizemessagequeue
+[320]: #poolservice
+
+[321]: #rizemessagequeue

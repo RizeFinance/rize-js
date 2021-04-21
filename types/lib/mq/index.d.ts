@@ -4,7 +4,7 @@ export = RizeMessageQueue;
  */
 declare class RizeMessageQueue {
     /**
-     * @ignore
+     * @hideconstructor
      * @param {{ environment?: string }} [options]
      */
     constructor(options?: {
@@ -17,11 +17,16 @@ declare class RizeMessageQueue {
      * @param {string} clientId Assign a client ID
      * @param {string} username Your Rize Message Queue username
      * @param {string} password Your Rize Message Queue password
-     * @param {{ environment?: 'sandbox' | 'integration' | 'production' }} [options]
+     * @param {RizeMessageQueueConnectOptions} [options]
      * @returns {Promise<RizeMessageQueueClient>} A promise that returns a RizeMessageQueueClient when resolved
      */
-    connect(clientId: string, username: string, password: string, options?: {
-        environment?: 'sandbox' | 'integration' | 'production';
-    }): Promise<RizeMessageQueueClient>;
+    connect(clientId: string, username: string, password: string, options?: RizeMessageQueueConnectOptions): Promise<RizeMessageQueueClient>;
 }
+declare namespace RizeMessageQueue {
+    export { RizeMessageQueueConnectOptions };
+}
+type RizeMessageQueueConnectOptions = {
+    environment?: 'sandbox' | 'integration' | 'production';
+    maxReconnects?: number;
+};
 import RizeMessageQueueClient = require("./RizeMessageQueueClient");
