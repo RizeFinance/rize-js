@@ -341,10 +341,10 @@ const updatedWorkflow = await rize.complianceWorkflow.acknowledgeComplianceDocum
     'SPbiwv93C6M5pSWu', //complianceWorkflowUid
     'h9MzupcjtA3LPW2e', //customerUid
     {
-        documentUid: 'Yqyjk5b2xgQ9FrxS',
+        document_uid: 'Yqyjk5b2xgQ9FrxS',
         accept: 'yes',
-        userName: 'Olive Oyl',
-        ipAddress: '152.32.111.61'
+        user_name: 'Olive Oyl',
+        ip_address: '152.32.111.61'
     }
 );
 
