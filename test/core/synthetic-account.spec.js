@@ -236,64 +236,64 @@ describe('Synthetic Account', () => {
         const fakeExternalSyntheticAccountName = 'Test External Account';
         const fakeExternalSyntheticAccountExternalUid = faker.random.uuid();
 
-        it('Throws an error if "externalUid" is empty', () => {
+        it('Throws an error if "external_uid" is empty', () => {
 
             const request = {
-                externalUid: '',
-                poolUid: testGeneralSyntheticAccount.pool_uid,
+                external_uid: '',
+                pool_uid: testGeneralSyntheticAccount.pool_uid,
                 name: fakeGeneralSyntheticAccountName,
-                syntheticAccountTypeUid: testGeneralSyntheticAccount.synthetic_account_type_uid
+                synthetic_account_type_uid: testGeneralSyntheticAccount.synthetic_account_type_uid
             };
 
             const promise = rizeClient.syntheticAccount.create(request);
-            return expect(promise).to.eventually.be.rejectedWith('Create Synthetic Account "externalUid" is required.');
+            return expect(promise).to.eventually.be.rejectedWith('Create Synthetic Account "external_uid" is required.');
         });
 
-        it('Throws an error if "poolUid" is empty', () => {
+        it('Throws an error if "pool_uid" is empty', () => {
 
             const request = {
-                externalUid: fakeGeneralSyntheticAccountExternalUid,
-                poolUid: '',
+                external_uid: fakeGeneralSyntheticAccountExternalUid,
+                pool_uid: '',
                 name: fakeGeneralSyntheticAccountName,
-                syntheticAccountTypeUid: testGeneralSyntheticAccount.synthetic_account_type_uid
+                synthetic_account_type_uid: testGeneralSyntheticAccount.synthetic_account_type_uid
             };
 
             const promise = rizeClient.syntheticAccount.create(request);
-            return expect(promise).to.eventually.be.rejectedWith('Create Synthetic Account "poolUid" is required.');
+            return expect(promise).to.eventually.be.rejectedWith('Create Synthetic Account "pool_uid" is required.');
         });
 
         it('Throws an error if "name" is empty', () => {
 
             const request = {
-                externalUid: fakeGeneralSyntheticAccountExternalUid,
-                poolUid: testGeneralSyntheticAccount.pool_uid,
+                external_uid: fakeGeneralSyntheticAccountExternalUid,
+                pool_uid: testGeneralSyntheticAccount.pool_uid,
                 name: '',
-                syntheticAccountTypeUid: testGeneralSyntheticAccount.synthetic_account_type_uid
+                synthetic_account_type_uid: testGeneralSyntheticAccount.synthetic_account_type_uid
             };
 
             const promise = rizeClient.syntheticAccount.create(request);
             return expect(promise).to.eventually.be.rejectedWith('Create Synthetic Account "name" is required.');
         });
 
-        it('Throws an error if "syntheticAccountTypeUid" is empty', () => {
+        it('Throws an error if "synthetic_account_type_uid" is empty', () => {
 
             const request = {
-                externalUid: fakeGeneralSyntheticAccountExternalUid,
-                poolUid: testGeneralSyntheticAccount.pool_uid,
+                external_uid: fakeGeneralSyntheticAccountExternalUid,
+                pool_uid: testGeneralSyntheticAccount.pool_uid,
                 name: fakeGeneralSyntheticAccountName,
-                syntheticAccountTypeUid: ''
+                synthetic_account_type_uid: ''
             };
 
             const promise = rizeClient.syntheticAccount.create(request);
-            return expect(promise).to.eventually.be.rejectedWith('Create Synthetic Account "syntheticAccountTypeUid" is required.');
+            return expect(promise).to.eventually.be.rejectedWith('Create Synthetic Account "synthetic_account_type_uid" is required.');
         });
 
         it('Creates a new general synthetic account', async () => {
             const request = {
-                externalUid: fakeGeneralSyntheticAccountExternalUid,
-                poolUid: customerPoolUid,
+                external_uid: fakeGeneralSyntheticAccountExternalUid,
+                pool_uid: customerPoolUid,
                 name: fakeGeneralSyntheticAccountName,
-                syntheticAccountTypeUid: testGeneralSyntheticAccountTypeUid
+                synthetic_account_type_uid: testGeneralSyntheticAccountTypeUid
             };
 
             const syntheticAccount = await rizeClient.syntheticAccount.create(request);
@@ -315,12 +315,12 @@ describe('Synthetic Account', () => {
             const routingNumber = Math.random().toString().slice(2, 11);
 
             const request = {
-                externalUid: fakeExternalSyntheticAccountExternalUid,
-                poolUid: customerPoolUid,
+                external_uid: fakeExternalSyntheticAccountExternalUid,
+                pool_uid: customerPoolUid,
                 name: fakeExternalSyntheticAccountName,
-                syntheticAccountTypeUid: testExternalSyntheticAccountTypeUid,
-                accountNumber,
-                routingNumber
+                synthetic_account_type_uid: testExternalSyntheticAccountTypeUid,
+                account_number: accountNumber,
+                routing_number: routingNumber
             };
 
             const syntheticAccount = await rizeClient.syntheticAccount.create(request);
@@ -342,11 +342,11 @@ describe('Synthetic Account', () => {
         xit('Creates a new plaid_external synthetic account', async () => {
             const plaidProcessorToken = faker.random.uuid();
             const request = {
-                externalUid: fakeExternalSyntheticAccountExternalUid,
-                poolUid: customerPoolUid,
+                external_uid: fakeExternalSyntheticAccountExternalUid,
+                pool_uid: customerPoolUid,
                 name: fakeExternalSyntheticAccountName,
-                syntheticAccountTypeUid: testPlaidExternalSyntheticAccountTypeUid,
-                plaidProcessorToken,
+                synthetic_account_type_uid: testPlaidExternalSyntheticAccountTypeUid,
+                plaid_processor_token: plaidProcessorToken,
             };
 
             const syntheticAccount = await rizeClient.syntheticAccount.create(request);

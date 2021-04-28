@@ -403,11 +403,11 @@ describe('Customer', () => {
                 currentWorkflow = await rizeClient.complianceWorkflow.acknowledgeComplianceDocuments(
                     currentWorkflow.uid,
                     currentWorkflow.customer.uid,
-                    ...pendingDocIds.map(uid => ({
-                        documentUid: uid,
+                    pendingDocIds.map(uid => ({
+                        document_uid: uid,
                         accept: 'yes',
-                        userName: `${fakeFirstName} ${fakeLastName}`,
-                        ipAddress: fakeIp
+                        user_name: `${fakeFirstName} ${fakeLastName}`,
+                        ip_address: fakeIp
                     }))
                 );
             }
