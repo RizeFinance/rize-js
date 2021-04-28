@@ -336,7 +336,7 @@ Indicate acceptance or rejection of Compliance Documents within a given Complian
 #### Examples
 
 ```javascript
-* // Acknowledge a single compliance document
+// Acknowledge a single compliance document
 const updatedWorkflow = await rize.complianceWorkflow.acknowledgeComplianceDocuments(
     'SPbiwv93C6M5pSWu', //complianceWorkflowUid
     'h9MzupcjtA3LPW2e', //customerUid
