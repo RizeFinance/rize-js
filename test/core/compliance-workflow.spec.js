@@ -92,17 +92,17 @@ describe('Compliance Workflow', () => {
             return expect(promise).to.eventually.be.rejectedWith('Please submit at least one document.');
         });
 
-        it('Throws an error if "documentUid" is empty', () => {
-            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocuments('test', 'test', { documentUid: '' });
-            return expect(promise).to.eventually.be.rejectedWith('"documentUid" is required.');
+        it('Throws an error if "document_uid" is empty', () => {
+            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocuments('test', 'test', { document_uid: '' });
+            return expect(promise).to.eventually.be.rejectedWith('"document_uid" is required.');
         });
 
         it('Throws an error if "accept" is invalid', () => {
-            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocuments('test', 'test', { documentUid: 'test' });
+            const promise = rizeClient.complianceWorkflow.acknowledgeComplianceDocuments('test', 'test', { document_uid: 'test' });
             return expect(promise).to.eventually.be.rejectedWith('The value for "accept" is should be either "yes" or "no".');
         });
 
-        it('Throws an error if electronic signing is required and "userName" is not supplied', function () {
+        it('Throws an error if electronic signing is required and "user_name" is not supplied', function () {
             const eSignRequiredDoc = workflow
                 .current_step_documents_pending
                 .find(x => x.electronic_signature_required === 'yes');
@@ -116,17 +116,17 @@ describe('Compliance Workflow', () => {
                 workflow.uid,
                 workflow.customer.uid,
                 {
-                    documentUid: eSignRequiredDoc.uid,
+                    document_uid: eSignRequiredDoc.uid,
                     accept: 'yes',
-                    userName: undefined,
-                    ipAddress: fakeIp
+                    user_name: undefined,
+                    ip_address: fakeIp
                 }
             );
 
             return expect(promise).to.eventually.be.rejectedWith();
         });
 
-        it('Throws an error if electronic signing is required and "ipAddress" is not supplied', function () {
+        it('Throws an error if electronic signing is required and "ip_address" is not supplied', function () {
             const eSignRequiredDoc = workflow
                 .current_step_documents_pending
                 .find(x => x.electronic_signature_required === 'yes');
@@ -140,10 +140,10 @@ describe('Compliance Workflow', () => {
                 workflow.uid,
                 workflow.customer.uid,
                 {
-                    documentUid: eSignRequiredDoc.uid,
+                    document_uid: eSignRequiredDoc.uid,
                     accept: 'yes',
-                    userName: fakeName,
-                    ipAddress: ''
+                    user_name: fakeName,
+                    ip_address: ''
                 }
             );
 
@@ -161,10 +161,10 @@ describe('Compliance Workflow', () => {
                 workflow.uid,
                 workflow.customer.uid,
                 {
-                    documentUid: document.uid,
+                    document_uid: document.uid,
                     accept: 'yes',
-                    userName: fakeName,
-                    ipAddress: fakeIp
+                    user_name: fakeName,
+                    ip_address: fakeIp
                 }
             );
 
@@ -182,11 +182,11 @@ describe('Compliance Workflow', () => {
             workflow = await rizeClient.complianceWorkflow.acknowledgeComplianceDocuments(
                 workflow.uid,
                 workflow.customer.uid,
-                ...pendingDocIds.map(uid => ({
-                    documentUid: uid,
+                pendingDocIds.map(uid => ({
+                    document_uid: uid,
                     accept: 'yes',
-                    userName: fakeName,
-                    ipAddress: fakeIp
+                    user_name: fakeName,
+                    ip_address: fakeIp
                 }))
             );
 
