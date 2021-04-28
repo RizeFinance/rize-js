@@ -1133,10 +1133,10 @@ Returns **[Promise][273]&lt;[SyntheticAccount][295]>** A promise that returns a 
 
 ```javascript
 const syntheticAccountTypes = await rize.syntheticAccount.create({
-    externalUid: 'partner-generated-id',
+    external_uid: 'partner-generated-id',
     name: 'Spinach Fund',
-    poolUid: 'wTSMX1GubP21ev2h',
-    syntheticAccountTypeUid: 'fRMwt6H14ovFUz1s'
+    pool_uid: 'wTSMX1GubP21ev2h',
+    synthetic_account_type_uid: 'fRMwt6H14ovFUz1s'
 });
 ```
 
@@ -1921,13 +1921,13 @@ Type: [Object][309]
 
 ### Properties
 
--   `externalUid` **[string][272]** (Required) A unique identifier Client supplies
+-   `external_uid` **[string][272]** (Required) A unique identifier Client supplies
 -   `name` **[string][272]** (Required) A unique name to identify the resource
--   `poolUid` **[string][272]** (Required) A UID referring to the pool this Synthetic Account belongs to
--   `syntheticAccountTypeUid` **[string][272]** (Required) A UID referring to the Synthetic Account Type this Synthetic Account should be created as
--   `accountNumber` **([string][272] | null)?** The ACH account number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require an `account_number`. Submitting an `account_number` with a Synthetic Account Type that does not require one will result in the account number being ignored.
--   `routingNumber` **([string][272] | null)?** The ABA routing number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require a `routing_number`. Submitting a `routing_number` with a Synthetic Account Type that does not require one will result in the routing number being ignored.
--   `plaidProcessorToken` **([string][272] | null)?** The Rize processor token from Plaid. If a Synthetic Account Type from the category `plaid_external` is provided, `plaid_processor_token` must also be provided. Submitting a `plaid_processor_token` with any other Synthetic Account Type will result in the token being ignored.
+-   `pool_uid` **[string][272]** (Required) A UID referring to the pool this Synthetic Account belongs to
+-   `synthetic_account_type_uid` **[string][272]** (Required) A UID referring to the Synthetic Account Type this Synthetic Account should be created as
+-   `account_number` **([string][272] | null)?** The ACH account number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require an `account_number`. Submitting an `account_number` with a Synthetic Account Type that does not require one will result in the account number being ignored.
+-   `routing_number` **([string][272] | null)?** The ABA routing number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require a `routing_number`. Submitting a `routing_number` with a Synthetic Account Type that does not require one will result in the routing number being ignored.
+-   `plaid_processor_token` **([string][272] | null)?** The Rize processor token from Plaid. If a Synthetic Account Type from the category `plaid_external` is provided, `plaid_processor_token` must also be provided. Submitting a `plaid_processor_token` with any other Synthetic Account Type will result in the token being ignored.
 
 ## Transaction
 

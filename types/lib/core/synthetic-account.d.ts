@@ -74,10 +74,10 @@ declare class SyntheticAccountService {
      * @returns {Promise<SyntheticAccount>} A promise that returns a SyntheticAccount if resolved.
      * @example
      * const syntheticAccountTypes = await rize.syntheticAccount.create({
-     *     externalUid: 'partner-generated-id',
+     *     external_uid: 'partner-generated-id',
      *     name: 'Spinach Fund',
-     *     poolUid: 'wTSMX1GubP21ev2h',
-     *     syntheticAccountTypeUid: 'fRMwt6H14ovFUz1s'
+     *     pool_uid: 'wTSMX1GubP21ev2h',
+     *     synthetic_account_type_uid: 'fRMwt6H14ovFUz1s'
      * });
      */
     create(payload: SyntheticAccountCreateRequest): Promise<SyntheticAccount>;
