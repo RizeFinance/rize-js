@@ -123,7 +123,7 @@ describe('Transfer', () => {
             return expect(promise).to.eventually.be.rejectedWith('"usTransferAmount" is required.');
         });
 
-        xit('Initializes an External-to-PrimaryAccount Transfer successfully', async () => {
+        it('Initializes an External-to-PrimaryAccount Transfer successfully', async () => {
             const customerAccounts = await rizeClient.syntheticAccount.getList({
                 customer_uid: [customerUid]
             });
@@ -155,7 +155,7 @@ describe('Transfer', () => {
             expect(updatedTransfer).to.have.property('status').that.equals('settled');
         }).timeout(100000);
 
-        xit('Initializes a PrimaryAccount-to-External Transfer successfully', async () => {
+        it('Initializes a PrimaryAccount-to-External Transfer successfully', async () => {
             const newTransferExternalUid = faker.random.uuid();
 
             const transfer = await rizeClient.transfer.init(
