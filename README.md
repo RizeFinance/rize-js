@@ -1,8 +1,18 @@
 # Rize Node.js SDK
-## Installation
-```
-npm install @rizefinance/rize-js
-```
+
+## Getting Started
+1. [Log in to GitHub Package Registry](#logging-in-to-the-github-package-registry)
+2. Install the `@rizefinance/rize-js` package 
+    ```sh
+    npm install @rizefinance/rize-js
+    ```
+
+## Logging in to the GitHub Package Registry
+1. Run `npm adduser --scope=@rizefinance --registry=https://npm.pkg.github.com`
+2. Input your GitHub Username.
+3. For the Password, input your [GitHub Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token). Your token should have the following scopes/permissions: `repo`, `read:packages`
+4. Input the email address that you're using in GitHub.
+
 ## Usage
 ```
 const Rize = require('@rizefinance/rize-js');
