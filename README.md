@@ -51,9 +51,6 @@ const rize = new Rize('your_program_id', 'your_hmac_key', {
 | environment   | The Rize environment to be used: `'sandbox'`, `'integration'` or `'production'` | 'sandbox'|
 | timeout       | The number of milliseconds before the each request times out                    | 80000    |
 
-## SDK Reference
-See [docs.md](docs.md)
-
 ## API Docs
 Go to https://developer.rizefs.com/
 
@@ -177,3 +174,6 @@ Sandbox and the last names that trigger these statuses are listed below.
 | Any value, excluding Smith and Johnson | Approved                       | Approved status indicates that the Custodian will allow the Customer to access their Service Offering immediately. The Customer has completed onboarding to the Program. No documentation is required. |
 | Johnson                                | Denied                         | The Customer is denied access to the Custodian’s products. No recourse is available through the Custodian or Rize.    |
 | Smith                                  | Manual Review                  | The Custodian is unable to onboard the Customer through an automated process and additional information is required.
+
+## SDK Reference
+For a more detailed documentation of the SDK, see [docs.md](docs.md).
