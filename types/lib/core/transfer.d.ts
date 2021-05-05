@@ -6,11 +6,9 @@ declare class TransferService {
     /**
      * @hideconstructor
      * @param {import('axios').AxiosInstance} api
-     * @param {import('./auth')} auth
      */
-    constructor(api: import('axios').AxiosInstance, auth: import('./auth'));
+    constructor(api: import('axios').AxiosInstance);
     /** @ignore @protected */ protected _api: import("axios").AxiosInstance;
-    /** @ignore @protected */ protected _auth: import("./auth");
     /**
      * @ignore @protected
      * Validates query parameter object for getList method.
@@ -75,7 +73,7 @@ declare class TransferService {
      * @param {string} usTransferAmount - The USD amount to transfer.
      * @returns {Promise<Transfer>} A promise that returns a Transfer if resolved.
      * @example
-     * const transfer = await rize.transfer.create(
+     * const transfer = await rize.transfer.init(
      *     'external_uid1',
      *     'synthetic_account_uid1',
      *     'synthetic_account_uid2',

@@ -55,7 +55,7 @@ export type ComplianceDocumentAcknowledgementRequest = {
     /**
      * - A UID referring to the Compliance Document being acknowledged.
      */
-    documentUid: string;
+    document_uid: string;
     /**
      * - An indication of acceptance or rejection.
      */
@@ -63,11 +63,11 @@ export type ComplianceDocumentAcknowledgementRequest = {
     /**
      * - A label associated with the Customer (required for electronic signing).
      */
-    userName: string | null;
+    user_name: string | null;
     /**
      * - A numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication (required for electronic signing); in this case, the label associated with the computer used by the Customer.
      */
-    ipAddress: string | null;
+    ip_address: string | null;
 };
 export type ComplianceWorkflow = {
     /**

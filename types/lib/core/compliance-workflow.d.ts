@@ -6,11 +6,9 @@ declare class ComplianceWorkflowService {
     /**
      * @hideconstructor
      * @param {import('axios').AxiosInstance} api
-     * @param {import('./auth')} auth
      */
-    constructor(api: import('axios').AxiosInstance, auth: import('./auth'));
+    constructor(api: import('axios').AxiosInstance);
     /** @ignore @protected */ protected _api: import("axios").AxiosInstance;
-    /** @ignore @protected */ protected _auth: import("./auth");
     /**
      * @ignore
      * @protected
@@ -53,7 +51,7 @@ declare class ComplianceWorkflowService {
      * Indicate acceptance or rejection of Compliance Documents within a given Compliance Workflow.
      * @param {string} complianceWorkflowUid - A UID referring to the Compliance Workflow.
      * @param {string} customerUid - A UID referring to the Customer.
-     * @param {...ComplianceDocumentAcknowledgementRequest} documents
+     * @param {ComplianceDocumentAcknowledgementRequest | Array<ComplianceDocumentAcknowledgementRequest>} documents
      * @returns {Promise<ComplianceWorkflow>} - A promise that returns the updated Compliance Workflow if resolved.
      * @example
      * // Acknowledge a single compliance document
@@ -61,27 +59,31 @@ declare class ComplianceWorkflowService {
      *     'SPbiwv93C6M5pSWu', //complianceWorkflowUid
      *     'h9MzupcjtA3LPW2e', //customerUid
      *     {
-     *         documentUid: 'Yqyjk5b2xgQ9FrxS',
+     *         document_uid: 'Yqyjk5b2xgQ9FrxS',
      *         accept: 'yes',
-     *         userName: 'Olive Oyl',
-     *         ipAddress: '152.32.111.61'
+     *         user_name: 'Olive Oyl',
+     *         ip_address: '152.32.111.61'
      *     }
      * );
      *
      * // Acknowledge multiple compliance documents
-     * const documentUidsToAcknowledge = ['Yqyjk5b2xgQ9FrxS', 'dc6PApa2nn9K3jwL'];
      * const updatedWorkflow = await rize.complianceWorkflow.acknowledgeComplianceDocuments(
      *     'SPbiwv93C6M5pSWu', //complianceWorkflowUid
      *     'h9MzupcjtA3LPW2e', //customerUid
-     *     ...documentUidsToAcknowledge.map(uid => ({
-     *         documentUid: uid,
+     *     [{
+     *         document_uid: 'Yqyjk5b2xgQ9FrxS',
      *         accept: 'yes',
-     *         userName: 'Olive Oyl',
-     *         ipAddress: '152.32.111.61'
-     *     }))
+     *         user_name: 'Olive Oyl',
+     *         ip_address: '152.32.111.61'
+     *     }, {
+     *         document_uid: 'dc6PApa2nn9K3jwL',
+     *         accept: 'yes',
+     *         user_name: 'Olive Oyl',
+     *         ip_address: '152.32.111.61'
+     *     }])
      * );
      */
-    acknowledgeComplianceDocuments(complianceWorkflowUid: string, customerUid: string, ...documents: ComplianceDocumentAcknowledgementRequest[]): Promise<ComplianceWorkflow>;
+    acknowledgeComplianceDocuments(complianceWorkflowUid: string, customerUid: string, documents: ComplianceDocumentAcknowledgementRequest | Array<ComplianceDocumentAcknowledgementRequest>): Promise<ComplianceWorkflow>;
 }
 declare namespace ComplianceWorkflowService {
     export { ComplianceWorkflow, ComplianceDocumentAcknowledgementRequest };

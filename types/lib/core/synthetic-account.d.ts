@@ -6,11 +6,9 @@ declare class SyntheticAccountService {
     /**
      * @hideconstructor
      * @param {import('axios').AxiosInstance} api
-     * @param {import('./auth')} auth
      */
-    constructor(api: import('axios').AxiosInstance, auth: import('./auth'));
+    constructor(api: import('axios').AxiosInstance);
     /** @ignore @protected */ protected _api: import("axios").AxiosInstance;
-    /** @ignore @protected */ protected _auth: import("./auth");
     /**
      * @ignore @protected
      * Validates the parameters for the "get" method
@@ -76,10 +74,10 @@ declare class SyntheticAccountService {
      * @returns {Promise<SyntheticAccount>} A promise that returns a SyntheticAccount if resolved.
      * @example
      * const syntheticAccountTypes = await rize.syntheticAccount.create({
-     *     externalUid: 'partner-generated-id',
+     *     external_uid: 'partner-generated-id',
      *     name: 'Spinach Fund',
-     *     poolUid: 'wTSMX1GubP21ev2h',
-     *     syntheticAccountTypeUid: 'fRMwt6H14ovFUz1s'
+     *     pool_uid: 'wTSMX1GubP21ev2h',
+     *     synthetic_account_type_uid: 'fRMwt6H14ovFUz1s'
      * });
      */
     create(payload: SyntheticAccountCreateRequest): Promise<SyntheticAccount>;
