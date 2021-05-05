@@ -6,7 +6,7 @@ services:
     image: verdaccio/verdaccio:4
     container_name: verdaccio_root_path
     ports:
-      - '80:4873'
+      - '4873:4873'
     volumes:
       - verdaccio:/verdaccio
 
