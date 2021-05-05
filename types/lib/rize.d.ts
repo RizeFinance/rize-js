@@ -10,7 +10,9 @@ declare class Rize {
      * @param {string} hmac - The HMAC that will be used to sign the JSON web signature in order to get access to the API.
      * @param {RizeOptions} [options] - Configuration options
      */
-    constructor(programUid: string, hmac: string, { environment, timeout, }?: any);
+    constructor(programUid: string, hmac: string, options?: RizeOptions);
+    /** @ignore @protected */
+    protected _getEnvironment: () => string;
     /**
      * The Compliance Workflow is where you begin onboarding Customers to your Program.
      * Compliance Workflows are used to group all of the required Compliance Documents together and to ensure they are presented and acknowledged in the correct order.
@@ -132,9 +134,11 @@ declare class Rize {
      * @type {RizeMessageQueue}
      */
     rmq: RizeMessageQueue;
+    set environment(arg: string);
+    get environment(): string;
 }
 declare namespace Rize {
-    export { PACKAGE_VERSION, Rize, Rize as default };
+    export { PACKAGE_VERSION, Rize, Rize as default, RizeOptions };
 }
 import ComplianceWorkflowService = require("./core/compliance-workflow");
 import CustomerService = require("./core/customer");
@@ -148,4 +152,14 @@ import KYCDocumentService = require("./core/kyc-document");
 import EvaluationService = require("./core/evaluation");
 import PoolService = require("./core/pool");
 import RizeMessageQueue = require("./mq");
+type RizeOptions = {
+    /**
+     * - The Rize environment to be used. (Default: 'sandbox')
+     */
+    environment?: 'sandbox' | 'integration' | 'production';
+    /**
+     * - Specifies the number of milliseconds before the each request times out. (Default: 80000)
+     */
+    timeout?: number;
+};
 declare var PACKAGE_VERSION: string;

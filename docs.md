@@ -256,23 +256,23 @@
     -   [Parameters][252]
 -   [NackCallback][253]
     -   [Parameters][254]
--   [RizeOptions][255]
-    -   [Properties][256]
--   [Rize][257]
-    -   [Parameters][258]
-    -   [complianceWorkflow][259]
-    -   [customer][260]
-    -   [syntheticAccount][261]
-    -   [custodialAccount][262]
-    -   [transaction][263]
-    -   [transfer][264]
-    -   [debitCard][265]
-    -   [document][266]
-    -   [kycDocument][267]
-    -   [evaluation][268]
-    -   [pool][269]
-    -   [rmq][270]
-    -   [PACKAGE_VERSION][271]
+-   [Rize][255]
+    -   [Parameters][256]
+    -   [complianceWorkflow][257]
+    -   [customer][258]
+    -   [syntheticAccount][259]
+    -   [custodialAccount][260]
+    -   [transaction][261]
+    -   [transfer][262]
+    -   [debitCard][263]
+    -   [document][264]
+    -   [kycDocument][265]
+    -   [evaluation][266]
+    -   [pool][267]
+    -   [rmq][268]
+    -   [PACKAGE_VERSION][269]
+-   [RizeOptions][270]
+    -   [Properties][271]
 
 ## ComplianceWorkflowService
 
@@ -2217,15 +2217,6 @@ Type: [Function][320]
 
 -   `error` **[Error][321]?** 
 
-## RizeOptions
-
-Type: [Object][309]
-
-### Properties
-
--   `environment` **(`"sandbox"` \| `"integration"` \| `"production"`)?** The Rize environment to be used. (Default: 'sandbox')
--   `timeout` **[number][310]?** Specifies the number of milliseconds before the each request times out. (Default: 80000)
-
 ## Rize
 
 Represents a Rize API client.
@@ -2234,9 +2225,7 @@ Represents a Rize API client.
 
 -   `programUid` **[string][272]** The Rize Program ID.
 -   `hmac` **[string][272]** The HMAC that will be used to sign the JSON web signature in order to get access to the API.
--   `options` **[RizeOptions][326]?** Configuration options (optional, default `RizeOptions`)
-    -   `options.environment`   (optional, default `RizeOptions.environment`)
-    -   `options.timeout`   (optional, default `RizeOptions.timeout`)
+-   `options` **[RizeOptions][326]?** Configuration options
 
 ### complianceWorkflow
 
@@ -2376,6 +2365,15 @@ Type: [RizeMessageQueue][338]
 The Rize SDK version
 
 Type: [string][272]
+
+## RizeOptions
+
+Type: [Object][309]
+
+### Properties
+
+-   `environment` **(`"sandbox"` \| `"integration"` \| `"production"`)?** The Rize environment to be used. (Default: 'sandbox')
+-   `timeout` **[number][310]?** Specifies the number of milliseconds before the each request times out. (Default: 80000)
 
 [1]: #complianceworkflowservice
 
@@ -2885,39 +2883,39 @@ Type: [string][272]
 
 [254]: #parameters-56
 
-[255]: #rizeoptions
+[255]: #rize
 
-[256]: #properties-39
+[256]: #parameters-57
 
-[257]: #rize
+[257]: #complianceworkflow-1
 
-[258]: #parameters-57
+[258]: #customer-1
 
-[259]: #complianceworkflow-1
+[259]: #syntheticaccount-1
 
-[260]: #customer-1
+[260]: #custodialaccount-1
 
-[261]: #syntheticaccount-1
+[261]: #transaction-1
 
-[262]: #custodialaccount-1
+[262]: #transfer-1
 
-[263]: #transaction-1
+[263]: #debitcard-1
 
-[264]: #transfer-1
+[264]: #document-1
 
-[265]: #debitcard-1
+[265]: #kycdocument-1
 
-[266]: #document-1
+[266]: #evaluation-1
 
-[267]: #kycdocument-1
+[267]: #pool-1
 
-[268]: #evaluation-1
+[268]: #rmq
 
-[269]: #pool-1
+[269]: #package_version
 
-[270]: #rmq
+[270]: #rizeoptions
 
-[271]: #package_version
+[271]: #properties-39
 
 [272]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 

@@ -9,7 +9,7 @@
     "lint-fix": "eslint . --ext .js,.ts --fix",
     "docs:build": "tsc && documentation build lib/** -f md -o docs.md",
     "test": "npm run lint && mocha $1",
-    "local:publish": "npm run docs:build && npm unpublish --force --registry http://localhost @rizefinance/rize-js && npm publish --registry http://localhost"
+    "local:publish": "npm run docs:build && npm unpublish --force --registry http://localhost:4873 @rizefinance/rize-js && npm publish --registry http://localhost:4873"
   },
   "author": "",
   "license": "ISC",
