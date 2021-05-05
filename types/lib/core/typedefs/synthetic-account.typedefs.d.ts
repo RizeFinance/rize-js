@@ -151,7 +151,7 @@ export type SyntheticAccountCreateRequest = {
     /**
      * - (Required) A unique identifier Client supplies
      */
-    externalUid: string;
+    external_uid: string;
     /**
      * - (Required) A unique name to identify the resource
      */
@@ -159,21 +159,21 @@ export type SyntheticAccountCreateRequest = {
     /**
      * - (Required) A UID referring to the pool this Synthetic Account belongs to
      */
-    poolUid: string;
+    pool_uid: string;
     /**
      * - (Required) A UID referring to the Synthetic Account Type this Synthetic Account should be created as
      */
-    syntheticAccountTypeUid: string;
+    synthetic_account_type_uid: string;
     /**
      * - The ACH account number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require an `account_number`. Submitting an `account_number` with a Synthetic Account Type that does not require one will result in the account number being ignored.
      */
-    accountNumber?: string | null;
+    account_number?: string | null;
     /**
      * - The ABA routing number (if any) associated with this account. Some Synthetic Account Types require this field to be submitted along with the POST request. For example, any Synthetic Account Type from the `external` category will require a `routing_number`. Submitting a `routing_number` with a Synthetic Account Type that does not require one will result in the routing number being ignored.
      */
-    routingNumber?: string | null;
+    routing_number?: string | null;
     /**
      * - The Rize processor token from Plaid. If a Synthetic Account Type from the category `plaid_external` is provided, `plaid_processor_token` must also be provided. Submitting a `plaid_processor_token` with any other Synthetic Account Type will result in the token being ignored.
      */
-    plaidProcessorToken?: string | null;
+    plaid_processor_token?: string | null;
 };
