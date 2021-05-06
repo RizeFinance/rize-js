@@ -177,3 +177,73 @@ Sandbox and the last names that trigger these statuses are listed below.
 
 ## SDK Reference
 For a more detailed documentation of the SDK, see [docs.md](docs.md).
+
+## Message Queue
+The SDK also provides a facility to utilize the Rize Message Queue.
+
+```js
+const rmqClient = rizeProvider.rmq.connect(
+    your_rmq_clientId,
+    your_rmq_usernae,
+    your_rmq_password
+);
+
+rmqClient.on('connecting', function (connector) {
+    const address = connector.serverProperties.remoteAddress.transportPath;
+
+    console.log('Connecting to ' + address);
+});
+
+rmqClient.on('connect', function (connector) {
+    const address = connector.serverProperties.remoteAddress.transportPath;
+
+    console.log('Connected to ' + address);
+});
+
+rmqClient.on('error', function (error) {
+    const connectArgs = error.connectArgs;
+    const address = connectArgs.host + ':' + connectArgs.port;
+
+    console.log('Connection error to ' + address + ': ' + error.message);
+});
+```
+
+After initializing a client. You may then subscribe to different Rize topics.
+
+```js
+rmqClient.subscribeToRizeTopic(
+    'your_topic_here',
+    'your_topic_subscription',
+    listener,
+    'client-individual'
+)
+
+const listener = (err, msg, ack, nack) => {
+    if (!err) {
+        try {
+            msg.readString('UTF-8', (err, body) => {
+                if (!err) {
+                    const message = JSON.parse(body);
+
+                    if (!message) {
+                        nack();
+                        return;
+                    }
+
+                    console.log(message);
+                    ack();
+                } else {
+                    console.log(err);
+                    nack();
+                }
+            });
+        } catch (e) {
+            console.log(e);
+            nack();
+        }
+    } else {
+        console.log(err);
+        nack();
+    }
+};
+```
