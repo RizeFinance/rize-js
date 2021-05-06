@@ -184,7 +184,7 @@ The SDK also provides a facility to utilize the Rize Message Queue.
 ```js
 const rmqClient = rizeProvider.rmq.connect(
     your_rmq_clientId,
-    your_rmq_usernae,
+    your_rmq_username,
     your_rmq_password
 );
 
