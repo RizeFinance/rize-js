@@ -14,7 +14,7 @@
 4. Input the email address that you're using in GitHub.
 
 ## Usage
-```
+```js
 const Rize = require('@rizefinance/rize-js');
 const rize = new Rize('your_program_id', 'your_hmac_key');
 
@@ -26,7 +26,7 @@ rize.complianceWorkflow.create(
     .catch(error => console.log(error));
 ```
 Or with ES modules and `async/await`:
-```
+```js
 import Rize from '@rizefinance/rize-js';
 const rize = new Rize('your_program_id', 'your_hmac_key');
 
@@ -40,7 +40,7 @@ const rize = new Rize('your_program_id', 'your_hmac_key');
 });
 ```
 ## Configuration
-```
+```js
 const rize = new Rize('your_program_id', 'your_hmac_key', {
     environment: 'sandbox',
     timeout: 50000,
@@ -61,7 +61,7 @@ Your first request to create a compliance workflow creates a Customer on the Riz
 The Customer UID returned in the response is how Rize identifies this customer on your Rize Program.
 
 To create a new Compliance Workflow ([more info](docs.md#create)):
-```
+```js
 const complianceWorkflow = await rize.complianceWorkflow.create(
     'client-generated-external-uid-42',
     'tomas@example.com'
@@ -85,7 +85,7 @@ Custodians with regulatory inquiries. These records are available to you and you
 through the Compliance Workflows endpoint.
 
 To view the latest compliance workflow of a customer ([more info](docs.md#viewlatest)):
-```
+```js
 const latestWorkflow = await rize.complianceWorkflow.viewLatest(customerUid);
 console.log(latestWorkflow.all_documents);
 ```
@@ -107,7 +107,7 @@ Your application can discern which documents require an electronic signature thr
 Compliance Workflows endpoint response.
 
 To acknowledge a compliance document ([more info](docs.md#acknowledgecompliancedocuments)):
-```
+```js
 const updatedWorkflow = await rize.complianceWorkflow.acknowledgeComplianceDocuments(
     complianceWorkflowUid,
     customerUid,
@@ -123,7 +123,7 @@ const updatedWorkflow = await rize.complianceWorkflow.acknowledgeComplianceDocum
 After a Customer starts a Compliance Workflow, Rize expects you to submit their remaining PII.
 
 To submit the customer's PII ([more info](docs.md#update)):
-```
+```js
 const updatedCustomer = await rize.customer.update(
     customerUid,
     customerEmail,
@@ -153,7 +153,7 @@ and account opening at the Custodian(s) in your Program. This is a billable even
 intentionally for you to confirm that the Customer record is complete. ([more info](docs.md#verifyidentity))
 
 To request for identity verification:
-```
+```js
 const updatedCustomer = await rize.customer.verifyIdentity(customerUid);
 ```
 
@@ -177,3 +177,73 @@ Sandbox and the last names that trigger these statuses are listed below.
 
 ## SDK Reference
 For a more detailed documentation of the SDK, see [docs.md](docs.md).
+
+## Message Queue
+The SDK also provides a facility to utilize the Rize Message Queue.
+
+```js
+const rmqClient = rizeProvider.rmq.connect(
+    'your_rmq_clientId',
+    'your_rmq_username',
+    'your_rmq_password'
+);
+
+rmqClient.on('connecting', function (connector) {
+    const address = connector.serverProperties.remoteAddress.transportPath;
+
+    console.log('Connecting to ' + address);
+});
+
+rmqClient.on('connect', function (connector) {
+    const address = connector.serverProperties.remoteAddress.transportPath;
+
+    console.log('Connected to ' + address);
+});
+
+rmqClient.on('error', function (error) {
+    const connectArgs = error.connectArgs;
+    const address = connectArgs.host + ':' + connectArgs.port;
+
+    console.log('Connection error to ' + address + ': ' + error.message);
+});
+```
+
+After initializing a client. You may then subscribe to different Rize topics.
+
+```js
+rmqClient.subscribeToRizeTopic(
+    'your_topic_here',
+    'your_topic_subscription',
+    listener,
+    'client-individual'
+)
+
+const listener = (err, msg, ack, nack) => {
+    if (!err) {
+        try {
+            msg.readString('UTF-8', (err, body) => {
+                if (!err) {
+                    const message = JSON.parse(body);
+
+                    if (!message) {
+                        nack();
+                        return;
+                    }
+
+                    console.log(message);
+                    ack();
+                } else {
+                    console.log(err);
+                    nack();
+                }
+            });
+        } catch (e) {
+            console.log(e);
+            nack();
+        }
+    } else {
+        console.log(err);
+        nack();
+    }
+};
+```
