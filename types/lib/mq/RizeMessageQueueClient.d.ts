@@ -11,6 +11,8 @@ declare class RizeMessageQueueClient extends Stomp.Channel {
     /** @ignore @protected */
     protected _connectFailover: Stomp.ConnectFailover;
     /** @ignore @protected */
+    protected _baseTopic: any;
+    /** @ignore @protected */
     protected _username: any;
     /** @ignore @protected */
     protected _environment: any;
