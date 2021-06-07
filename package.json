@@ -44,6 +44,6 @@
     "url": "git://github.com/RizeFinance/rize-sdks.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com/@rizefinance"
   }
 }
