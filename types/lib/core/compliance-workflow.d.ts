@@ -25,12 +25,12 @@ declare class ComplianceWorkflowService {
     /**
      * Creates a new Compliance Workflow.
      * @param {string} customerExternalUid - A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.
-     * @param {string} email - Email address associated with the Customer.
+     * @param {string} compliancePlanUid - A unique identifier for a Compliance Plan
      * @returns {Promise<ComplianceWorkflow>} - A promise that returns the new Compliance Workflow if resolved.
      * @example
-     * const newWorkflow = await rize.complianceWorkflow.create('client-generated-42', 'tomas@example.com');
+     * const newWorkflow = await rize.complianceWorkflow.create('client-generated-42', 'compliance-plan-123');
      */
-    create(customerExternalUid: string, email: string): Promise<ComplianceWorkflow>;
+    create(customerExternalUid: string, compliancePlanUid: string): Promise<ComplianceWorkflow>;
     /**
      * Renew a Compliance Workflow after it expired the given timeframe
      * @param {string} customerExternalUid - A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.

@@ -20,11 +20,22 @@ declare class Rize {
      */
     complianceWorkflow: ComplianceWorkflowService;
     /**
+     * Customer Product records are generated when a Customer is submitted for onboarding to a specific Product.
+     *
+     * Clients will POST when a Customer has fulfilled the prerequisite Product requirements.
+     * Rize will then verify that the Product requirements have been met. If the Product requirements are met,
+     * Rize will proceed with account opening and feature enablement as specified by the Product.
+     *
+     * If the Product requirements are not met, Rize will return an error response indicating what element of the Product validation failed.
+     * @type {CustomerProductService}
+     */
+    customer: CustomerProductService;
+    /**
      * A Customer on the Rize Platform is the end user of your application.
      * Customers are unique to each Program and the management of all accounts and identifying information is handled on a Program-by-Program basis.
      * @type {CustomerService}
      */
-    customer: CustomerService;
+    customerProduct: CustomerService;
     /**
      * Synthetic Accounts are what your application will build around and your Customers will interact with.
      * Synthetic Accounts are designed to track any asset types, for any Customers, at any Custodian.
@@ -130,6 +141,14 @@ declare class Rize {
      */
     pool: PoolService;
     /**
+     * Products contain the specific group of features, accounts, and requirements necessary to make a Product available to your Customers.
+     * Use getList to view the Products available to your Program as well as the prerequisite information or actions that must be taken for a Customer to access the Product.
+     * multiple Customers.
+     *
+     * @type {ProductService}
+     */
+    product: ProductService;
+    /**
      * Helper tools to connect to Rize Message Queue and subscribe to durable topics
      * @type {RizeMessageQueue}
      */
@@ -141,6 +160,7 @@ declare namespace Rize {
     export { PACKAGE_VERSION, Rize, Rize as default, RizeOptions };
 }
 import ComplianceWorkflowService = require("./core/compliance-workflow");
+import CustomerProductService = require("./core/customer-product");
 import CustomerService = require("./core/customer");
 import SyntheticAccountService = require("./core/synthetic-account");
 import CustodialAccountService = require("./core/custodial-account");
@@ -151,6 +171,7 @@ import DocumentService = require("./core/document");
 import KYCDocumentService = require("./core/kyc-document");
 import EvaluationService = require("./core/evaluation");
 import PoolService = require("./core/pool");
+import ProductService = require("./core/product");
 import RizeMessageQueue = require("./mq");
 type RizeOptions = {
     /**

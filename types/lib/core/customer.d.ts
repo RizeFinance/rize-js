@@ -23,6 +23,13 @@ declare class CustomerService {
     protected _validateGetParams(uid: string): void;
     /**
      * @ignore @protected
+     * Validates the parameters for the "create" method
+     * @param {string} externalUid
+     * @param {string} email
+     */
+    protected _validateCreateParams(externalUid: string, email: string): void;
+    /**
+     * @ignore @protected
      * Validates the parameters for the "update" method
      * @param {string} uid
      * @param {string} email
@@ -35,6 +42,18 @@ declare class CustomerService {
      * @param {string} uid
      */
     protected _validateArchiveParams(uid: string): void;
+    /**
+     * @ignore @protected
+     * Validates the parameters for the "updateProfileAnswers" method
+     * @param {string} uid
+     */
+    protected _validateUpdateProfileAnswers(uid: string): void;
+    /**
+     * @ignore
+     * @protected
+     * @param {CustomerProfileAnswerDetails} details
+     */
+    protected _validateProfileAnswerDetails(details: CustomerProfileAnswerDetails): void;
     /**
      * @ignore @protected
      * Validates the parameters for the "verifyIdentity" method
@@ -75,6 +94,16 @@ declare class CustomerService {
      */
     get(uid: string): Promise<Customer>;
     /**
+     * Create a single Customer
+     *
+     * Creates a new instance of a customer.
+     * @param {string} externalUid - A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.
+     * @param {string} email - Email of the customer
+     * @returns {Promise<Customer>} - A promise that returns a Customer if resolved.
+     * @example const newCustomer = await rize.customer.post(extenalUid, email);
+     */
+    create(externalUid: string, email: string): Promise<Customer>;
+    /**
      * Adjusts Customer Data
      *
      * This function is used to supply the remaining personally identifiable information (PII) for each Customer after they are created with a new Compliance Workflow.
@@ -108,6 +137,34 @@ declare class CustomerService {
      */
     update(uid: string, email: string, details: CustomerDetails): Promise<Customer>;
     /**
+     * Used to submit a Customer's Profile Responses to Profile Requirements.
+     * @param {string} customerUid - A UID referring to the Customer.
+     * @param {CustomerProfileAnswerDetails | Array<CustomerProfileAnswerDetails>} details
+     * @returns {Promise<Customer>} - A promise that returns the updated Customer with their Profile Responses updated.
+     * @example
+     * // Submit a single profile response
+     * const updatedCustomerResponse = await rize.customer.updateProfileAnswers(
+     *     'h9MzupcjtA3LPW2e', //customerUid
+     *     {
+     *         profile_requirement_uid: 'Yqyjk5b2xgQ9FrxS',
+     *         profile_response: 'yes',
+     *     }
+     * );
+     *
+     * // Submit multiple profile responses
+     * const updatedCustomerResponses = await rize.customer.updateProfileAnswers(
+     *     'h9MzupcjtA3LPW2e', //customerUid
+     *     [{
+     *         profile_requirement_uid: 'Yqyjk5b2xgQ9FrxS',
+     *         profile_response: 'no'
+     *     }, {
+     *         profile_requirement_uid: 'dc6PApa2nn9K3jwL',
+     *         profile_response: 'yes',
+     *     }])
+     * );
+     */
+    updateProfileAnswers(uid: any, details: CustomerProfileAnswerDetails | Array<CustomerProfileAnswerDetails>): Promise<Customer>;
+    /**
      * Archives a customer.
      *
      * A Customer can not be archived until all associated Synthetic and Custodial Accounts have been closed and retain a zero balance.
@@ -118,39 +175,6 @@ declare class CustomerService {
      * await rize.customer.archive(customerUid);
      */
     archive(uid: string): Promise<void>;
-    /**
-     * Submit a request for Identity Verification
-     *
-     * The Identity Verification of a customer serves as explicit confirmation from you that the Customer is ready for account opening.
-     * This event initiates the KYC/AML verification process and account opening at the Custodian(s) in your Program.
-     * This is a billable event and is isolated intentionally for you to confirm that the Customer record is complete.
-     *
-     * Identity Verification is the event that locks the customer PII from further edits.
-     *
-     * Identity Verification is designed to work as follows:
-     *
-     * - The Customer completes the Compliance Workflow initiated from the Compliance Workflows endpoint and all documents are acknowledged.
-     * - The Customer provides complete PII as defined by the Customers endpoint
-     * - You submit a request to Identity Verification
-     * - Rize performs a validation on the PII provided and the Compliance Workflow to confirm both are valid.
-     * - If the Customer passes these validations and meets the duration requirements described below, the Customer record is submitted to the KYC process.
-     *
-     * Duration Requirements:
-     *
-     * You have a set duration to submit to Identity Verification for a Customer.
-     * Rize measures the duration from the begun_at timestamp of the current Compliance Workflow returned from the Compliance Workflows endpoint to the time Rize receives the Identity Verification request.
-     *
-     * If the Identity Verification request falls outside of the set duration, your request will fail.
-     * If your request fails, a new Compliance Workflow must be started for this Customer.
-     * This will restart the duration available for a valid submission to Identity Verification.
-     *
-     * The previously submitted Customer PII remains editable for this customer after a failed submission to Identity Verification.
-     * @param {string} uid - Rize-generated unique customer id.
-     * @returns {Promise<Customer>} A promise that returns the updated Customer if resolved.
-     * @example
-     * const updatedCustomer = await rize.customer.verifyIdentity(customerUid);
-     */
-    verifyIdentity(uid: string): Promise<Customer>;
     /**
      * Lock a Customer
      *
@@ -186,9 +210,10 @@ declare class CustomerService {
     unlock(uid: string, unlockReason?: string): Promise<Customer>;
 }
 declare namespace CustomerService {
-    export { CustomerListQuery, CustomerDetails, Customer, RizeList };
+    export { CustomerListQuery, CustomerDetails, Customer, CustomerProfileAnswerDetails, RizeList };
 }
 type CustomerListQuery = import('./typedefs/customer.typedefs').CustomerListQuery;
 type CustomerDetails = import('./typedefs/customer.typedefs').CustomerDetails;
+type CustomerProfileAnswerDetails = import('./typedefs/customer.typedefs').CustomerProfileAnswerDetails;
 type RizeList<T> = import('./typedefs/common.typedefs').RizeList<T>;
 type Customer = import('./typedefs/customer.typedefs').Customer;

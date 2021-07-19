@@ -14,6 +14,7 @@ declare class RizeMessageQueue {
     protected _environment: string;
     /**
      * Connect to the Rize Message Queue server
+     * @param {string} hosts Assign the connection host(s). Comma delimited string.
      * @param {string} clientId Assign a client ID
      * @param {string} topic Your Rize Message Queue base topic
      * @param {string} username Your Rize Message Queue username
@@ -21,7 +22,7 @@ declare class RizeMessageQueue {
      * @param {RizeMessageQueueConnectOptions} [options]
      * @returns {RizeMessageQueueClient} A RizeMessageQueueClient instance
      */
-    connect(clientId: string, topic: string, username: string, password: string, options?: RizeMessageQueueConnectOptions): RizeMessageQueueClient;
+    connect(hosts: string, clientId: string, topic: string, username: string, password: string, options?: RizeMessageQueueConnectOptions): RizeMessageQueueClient;
 }
 declare namespace RizeMessageQueue {
     export { RizeMessageQueueConnectOptions };
