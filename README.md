@@ -65,7 +65,7 @@ const rize = new Rize('your_program_id', 'your_hmac_key', {
 | Option      | Description                                                  | Default   |
 | ----------- | ------------------------------------------------------------ | --------- |
 | environment | The Rize environment to be used: `'sandbox'`, `'integration'` or `'production'` | 'sandbox' |
-| timeout     | The number of milliseconds before the each request times out | 80000     |
+| timeout     | The number of milliseconds before each request times out     | 80000     |
 
 
 
@@ -79,8 +79,8 @@ Go to https://developer.rizefs.com/
 
 ### 1. Create a new Customer.
 
-Create Customer is the first endpoint you will use to start the onboard flow.
-Your first request to create empty customer with a external id and the users email and a customer object is returned with a uid.
+Create Customer is the first endpoint to start the onboard flow.
+Your first request to create a customer with a external id and the user's email, after a new customer object is returned with a uid.
 
 To create a new Customer ([more info](docs.md#create)):
 
@@ -97,7 +97,7 @@ console.log(newCustomer.uid); // Customer UID
 
 ### 2. Get Avaliable Products
 
-Next we need to retrieve a list of products available for your program and all requirements for the new customer to complete.
+Next, we need to retrieve a list of products available for your program and all requirements for the new customer to complete.
 We will use the product requirements to have the customer answer all required questions later in the process.
 
 To get a list of Products ([more info](docs.md#product)):
@@ -112,23 +112,20 @@ console.log(productList[0].uid); // First product UID
 
 ### 3. Create a new Compliance Workflow.
 
-Creating a compliance workflow just requires the new customer UID and the compliance plan UID from the last two steps.
+Creating a compliance workflow requires the new customer UID and the product compliance plan UID from the last two steps.
 
 To create a new Compliance Workflow ([more info](docs.md#create)):
 
 ```js
 const complianceWorkflow = await rize.complianceWorkflow.create(
     'client-generated-external-uid-42',
-    'compliance-plan-92'
+    'product-compliance-plan-92'
 );
 
 console.log(complianceWorkflow.uid); // Workflow UID
 ```
 
-Your request to the Compliance workflows endpoint initiates a Compliance Workflow for the
-Customer you are onboarding. The Compliance Workflow contains all of the disclosure and
-compliance documents that your Customer must acknowledge before they can open a Custodial
-Account. (see [ComplianceWorkflow](docs.md#complianceworkflow))
+Sending a request to the Compliance workflow's endpoint initiates a Compliance Workflow for the onboarding customer. The Compliance Workflow contains disclosure and compliance documents that the Customer must acknowledge before opening a Custodial Account. (see [ComplianceWorkflow](docs.md#complianceworkflow))
 
 
 
@@ -173,10 +170,16 @@ To acknowledge a compliance document ([more info](docs.md#acknowledgecomplianced
 
 ```js
 const updatedWorkflow = await rize.complianceWorkflow.acknowledgeComplianceDocuments(
-    complianceWorkflowUid,
-    customerUid,
+    '23fdeasfds3qwdfw', // complianceWorkflowUid,
+    'h9MzupcjtA3LPW2e', // customerUid
     [{
         document_uid: 'Yqyjk5b2xgQ9FrxS',
+        accept: 'yes',
+        user_name: 'Olive Oyl',
+        ip_address: '152.32.111.61'
+    },
+    {
+        document_uid: 'fdewedf34323e32e',
         accept: 'yes',
         user_name: 'Olive Oyl',
         ip_address: '152.32.111.61'
@@ -194,8 +197,8 @@ To submit the customer's PII ([more info](docs.md#update)):
 
 ```js
 const updatedCustomer = await rize.customer.update(
-    customerUid,
-    customerEmail,
+    'h9MzupcjtA3LPW2e', // customerUid
+    'test@test.com', // customerEmail
     {
         first_name: 'Olive',
         middle_name: 'Olivia',
@@ -219,13 +222,13 @@ const updatedCustomer = await rize.customer.update(
 
 ### 7. Answer Profile Answers for the Plan Requirements (if needed)
 
-Each plan may come with questions that are required in order to complete the onboarding flow for the new customer. ([more info](docs.md#customer))
+Each plan may come with questions that are required to complete the onboarding flow for the new customer. ([more info](docs.md#customer))
 
 To update profile answers:
 
 ```js
 const updatedCustomerResponse = await rize.customer.updateProfileAnswers(
-    'h9MzupcjtA3LPW2e', //customerUid
+    'h9MzupcjtA3LPW2e', // customerUid
     {
         profile_requirement_uid: 'Yqyjk5b2xgQ9FrxS',
         profile_response: 'yes',
@@ -237,15 +240,15 @@ const updatedCustomerResponse = await rize.customer.updateProfileAnswers(
 
 ### 8. Create new Customer Product
 
-The last step will trigger verification that all Product requirements have been met. After completion Rize will automatically kick off the KYC process if it the customers first product. Upon successful create, all required custodial accounts will be created and the customer will be active. This is a billable event and is isolated intentionally for you to confirm that the Customer record is complete. ([more info](docs.md#customer))
+The last step will trigger verification that all Product requirements have been met. After completion, Rize will automatically kick off the KYC process if it is the customer's first product. Upon successful creation, all required custodial accounts will be created, and the customer will be active. This is a billable event and is intentionally isolated for you to confirm that the Customer record is complete.  ([more info](docs.md#customer))
 
 To request for identity verification:
 
 ```js
-const customerProduct = await rize.customerProduct.create({
-    customer_uid: customer123,
-    product_uid: product123
-});
+const customerProduct = await rize.customerProduct.create(
+    'h9MzupcjtA3LPW2e', // customerUid
+    'fdsazupcjtdsaw3', // productUid
+);
 ```
 
 
@@ -267,7 +270,7 @@ Sandbox and the last names that trigger these statuses are listed below.
 | -------------------------------------- | ---------------------------- | ------------------------------------------------------------ |
 | Any value, excluding Smith and Johnson | Approved                     | Approved status indicates that the Custodian will allow the Customer to access their Service Offering immediately. The Customer has completed onboarding to the Program. No documentation is required. |
 | Johnson                                | Denied                       | The Customer is denied access to the Custodian’s products. No recourse is available through the Custodian or Rize. |
-| Smith                                  | Manual Review                | The Custodian is unable to onboard the Customer through an automated process and additional information is required. |
+| Smith                                  | Manual Review                | The Custodian is unable to onboard the Customer through an automated process, and additional information is required. |
 
 
 
@@ -285,7 +288,7 @@ The SDK also provides a facility to utilize the Rize Message Queue.
 const rmqClient = rizeProvider.rmq.connect(
     'your_rmq_hosts',
     'your_rmq_clientId',
-        'your_rmq_topic',
+    'your_rmq_topic',
     'your_rmq_username',
     'your_rmq_password'
 );
