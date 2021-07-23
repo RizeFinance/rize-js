@@ -28,8 +28,8 @@ const Rize = require('@rizefinance/rize-js');
 const rize = new Rize('your_program_id', 'your_hmac_key');
 
 rize.complianceWorkflow.create(
-    'user-external-uid-42',
-    'product-plan-123',
+    'customer-rize-uid-123',
+    'product-compliance-plan-92',
 )
     .then(workflow => console.log(workflow.uid))
     .catch(error => console.log(error));
@@ -43,8 +43,8 @@ const rize = new Rize('your_program_id', 'your_hmac_key');
 
 (async () => {
     const workflow = await rize.complianceWorkflow.create(
-        'user-external-uid-42',
-        'product-plan-123',
+        'customer-rize-uid-123',
+        'product-compliance-plan-92',
     );
 
     console.log(workflow.uid);
@@ -118,7 +118,7 @@ To create a new Compliance Workflow ([more info](docs.md#create)):
 
 ```js
 const complianceWorkflow = await rize.complianceWorkflow.create(
-    'client-generated-external-uid-42',
+    'customer-rize-uid-123',
     'product-compliance-plan-92'
 );
 
