@@ -34,9 +34,9 @@ export type CustomerProductListQuery = {
      */
     product_uid?: string;
     /**
-     * - Filter by Customer. Multiple values are allowed.
+     * - Filter by Customer.
      */
-    customer_uid?: Array<string>;
+    customer_uid?: string;
     /**
      * - Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default = 100.
      */

@@ -49,7 +49,7 @@ declare class CustomerProductService {
     getList(query?: CustomerProductListQuery): Promise<RizeList<CustomerProduct>>;
     /**
      * Creates a new instance of a customer product. This will verify that all Product requirements have been met.
-     * After completion Rize will automatically kick off the KYC process if it the customers first product.
+     * After completion, Rize will automatically kick off the KYC process if it is the customer's first product.
      * Upon KYC approval, all required custodial accounts will be created and the customer will be active
      * @param {string} customerUid - A UID referring to the Customer.
      * @param {string} productUid - A UID referring to the Product.
