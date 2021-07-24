@@ -71,6 +71,18 @@ export type Customer = {
      */
     details: CustomerDetails;
 };
+export type CustomerProfileAnswerDetails = {
+    /**
+     * - A UID referring to the Profile Requirement
+     */
+    profile_requirement_uid: string;
+    /**
+     * - The Customer's response to the Profile Requirement
+     *
+     * /**
+     */
+    profile_response: string;
+};
 export type CustomerListQuery = {
     /**
      * - Filter by onboarding status. Please note that the initiated enum value will not be respected unless the `include_initiated=true` parameter is also provided.
