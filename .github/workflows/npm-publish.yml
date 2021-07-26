@@ -5,19 +5,8 @@ on:
     types: [published]
 
 jobs:
-  ci-test:
-    if: ${{ github.event.release.draft == false && github.event.release.prerelease == false }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - run: npm ci
-      - run: echo ${{ secrets.ENV_SECRETS }} | base64 --decode > .env
-      - run: npm test
-
   publish-gpr:
+    if: ${{ github.event.release.draft == false && github.event.release.prerelease == false }}
     needs: ci-test
     runs-on: ubuntu-latest
     permissions:

@@ -14,7 +14,7 @@ const Auth = require('../../lib/core/auth');
 const delayAsync = require('../helpers/delayAsync');
 
 const api = new ApiClient({
-    host: DEFAULT_HOST['sandbox'],
+    host: DEFAULT_HOST[process.env.RIZE_TIER || 'sandbox'],
     basePath: DEFAULT_BASE_PATH,
     timeout: DEFAULT_TIMEOUT
 });
