@@ -80,10 +80,11 @@ describe('Document', () => {
             return expect(promise).to.eventually.be.rejectedWith('"offset" query must be an integer.');
         });
 
-        it('Retrieves the document list without query', async () => {
+        it('Retrieves the document list without query', async (done) => {
             const documentList = await rizeClient.document.getList();
             testDocument = documentList.data[0];
             utils.expectRizeList(documentList);
+            done();
         });
 
         it('Retrieves the document list with query', async () => {
