@@ -19,6 +19,8 @@
 3. For the Password, input your [GitHub Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token). Your token should have the following scopes/permissions: `repo`, `read:packages`
 4. Input the email address that you're using in GitHub.
 
+## Changelogs
+Checkout the changelogs per release [here](https://github.com/RizeFinance/rize-sdks/releases)!
 
 
 ## Usage
