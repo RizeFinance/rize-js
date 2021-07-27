@@ -9,12 +9,7 @@ const faker = require('faker');
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 const delayAsync = require('../helpers/delayAsync');
-
-const Rize = require('../../index');
-const rizeClient = new Rize(
-    process.env.RIZE_PROGRAM_ID,
-    process.env.RIZE_HMAC
-);
+const rizeClient = require('../helpers/rizeClient');
 
 describe('DebitCard', () => {
     let testDebitCard;

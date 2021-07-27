@@ -1,6 +1,8 @@
 'use strict';
 
 require('./auth.spec');
+require('./customer.create.spec');
+require('./product.spec');
 
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
@@ -8,16 +10,10 @@ const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
-const uuid = require('uuid').v4;
+const mlog = require('mocha-logger');
 const faker = require('faker');
 
-const mlog = require('mocha-logger');
-
-const Rize = require('../../index');
-const rizeClient = new Rize(
-    process.env.RIZE_PROGRAM_ID,
-    process.env.RIZE_HMAC
-);
+const rizeClient = require('../helpers/rizeClient');
 
 describe('Compliance Workflow', () => {
     const fakeName = faker.name.findName();
@@ -26,36 +22,39 @@ describe('Compliance Workflow', () => {
     /** @type {import('../../lib/core/typedefs/compliance-workflow.typedefs').ComplianceWorkflow} */
     let workflow;
 
-    const verifyComplianceWorkflow = (workflow, email) => {
+    let customerUid;
+    let productCompliancePlanUid;
+
+    before(async () => {
+        customerUid = process.env.TEST_CUSTOMER_UID;
+        productCompliancePlanUid = process.env.TEST_PRODUCT_COMPLIANCE_PLAN_UID;
+    });
+
+    const verifyComplianceWorkflow = (workflow, customerUid) => {
         expect(workflow).to.have.property('uid').that.is.not.empty;
-        expect(workflow).to.have.nested.property('customer.uid').that.is.not.empty;
-        expect(workflow).to.have.nested.property('customer.email').that.equals(email);
+        expect(workflow).to.have.nested.property('customer.uid').that.equals(customerUid);
+        expect(workflow).to.have.nested.property('customer.email').that.is.not.empty;
         expect(workflow).to.have.property('accepted_documents').to.be.an('array');
         expect(workflow).to.have.property('current_step_documents_pending').to.be.an('array');
         expect(workflow).to.have.property('all_documents').to.be.an('array');
     };
 
     describe('create', () => {
-        it('Throws an error if "customerExternalUid" is empty', () => {
+        it('Throws an error if "customerUid" is empty', () => {
             const promise = rizeClient.complianceWorkflow.create(' ', '');
-            return expect(promise).to.eventually.be.rejectedWith('"customerExternalUid" is required.');
+            return expect(promise).to.eventually.be.rejectedWith('"customerUid" is required.');
         });
 
-        it('Throws an error if "email" is invalid', () => {
+        it('Throws an error if "productCompliancePlanUid" is empty', () => {
             const promise = rizeClient.complianceWorkflow.create('test', '');
-            return expect(promise).to.eventually.be.rejectedWith('"email" is invalid.');
+            return expect(promise).to.eventually.be.rejectedWith('"productCompliancePlanUid" is required.');
         });
 
         it('Creates a new compliance workflow', async () => {
-            const externalUid = uuid();
-            const fakeEmail = faker.internet.email(undefined, undefined, 'rizetest.com');
-
-            const newWorkflow = await rizeClient.complianceWorkflow.create(externalUid, fakeEmail);
-
-            verifyComplianceWorkflow(newWorkflow, fakeEmail);
+            const newWorkflow = await rizeClient.complianceWorkflow.create(customerUid, productCompliancePlanUid);
+            verifyComplianceWorkflow(newWorkflow, customerUid);
 
             mlog.log(`Compliance Workflow UID: ${newWorkflow.uid}`);
-            mlog.log(`New Customer UID: ${newWorkflow.customer.uid}`);
 
             // Store the workflow for next tests
             workflow = newWorkflow;
@@ -71,7 +70,7 @@ describe('Compliance Workflow', () => {
         it('Retrieves the latest compliance workflow', async () => {
             const latestWorkflow = await rizeClient.complianceWorkflow.viewLatest(workflow.customer.uid);
 
-            verifyComplianceWorkflow(latestWorkflow, workflow.customer.email);
+            verifyComplianceWorkflow(latestWorkflow, customerUid);
             expect(latestWorkflow.uid).to.be.equal(workflow.uid);
         });
     });
@@ -173,22 +172,21 @@ describe('Compliance Workflow', () => {
         });
 
         it('Acknowledges a multiple compliance documents', async function () {
-            if (workflow.current_step_documents_pending.length < 2) {
-                this.skip();
+            let pendingDocIds; 
+            while (workflow.current_step_documents_pending.length > 0) {
+                pendingDocIds = workflow.current_step_documents_pending.map(doc => doc.uid);
+
+                workflow = await rizeClient.complianceWorkflow.acknowledgeComplianceDocuments(
+                    workflow.uid,
+                    workflow.customer.uid,
+                    pendingDocIds.map(uid => ({
+                        document_uid: uid,
+                        accept: 'yes',
+                        user_name: fakeName,
+                        ip_address: fakeIp
+                    }))
+                );
             }
-
-            const pendingDocIds = workflow.current_step_documents_pending.map(doc => doc.uid);
-
-            workflow = await rizeClient.complianceWorkflow.acknowledgeComplianceDocuments(
-                workflow.uid,
-                workflow.customer.uid,
-                pendingDocIds.map(uid => ({
-                    document_uid: uid,
-                    accept: 'yes',
-                    user_name: fakeName,
-                    ip_address: fakeIp
-                }))
-            );
 
             const acceptedDocumentUids = workflow.accepted_documents.map(x => x.uid);
             expect(acceptedDocumentUids).to.include.members(pendingDocIds);
@@ -211,8 +209,14 @@ describe('Compliance Workflow', () => {
             return expect(promise).to.eventually.be.rejectedWith('"email" is invalid.');
         });
 
-        it('Renew compliance worflow after latest expired', async function () {
-            const customerUidToTest = '5HPYLUeaHPmy3jHT';
+        xit('Renew compliance worflow after latest expired', async function () {
+            const customerUidToTest = process.env.TEST_EXPIRED_CUSTOMER_UID;
+
+            if (customerUidToTest) {
+                // Skip test if no expired customer is passed into tests
+                this.skip();
+            }
+
             const latestWorkflow = await rizeClient.complianceWorkflow.viewLatest(customerUidToTest);
             if (latestWorkflow.summary.status !== 'expired') {
                 // Skip test if the customer's latest workflow is not yet expired
@@ -223,13 +227,9 @@ describe('Compliance Workflow', () => {
                     latestWorkflow.customer.uid,
                     latestWorkflow.customer.email);
 
-                verifyComplianceWorkflow(newWorkflow, latestWorkflow.customer.email);
+                verifyComplianceWorkflow(newWorkflow, customerUid);
                 expect(newWorkflow.summary.status === 'in_progress');
             }
         });
-    });
-    
-    after(() => {
-        process.env.TEST_CUSTOMER_UID = workflow.customer.uid;
     });
 });

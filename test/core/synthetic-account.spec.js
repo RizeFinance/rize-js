@@ -1,6 +1,6 @@
 'use strict';
 
-require('./customer.spec');
+require('./customer-product.spec');
 
 const utils = require('../../lib/test-utils');
 
@@ -11,13 +11,10 @@ const faker = require('faker');
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
-const Rize = require('../../index');
-const rizeClient = new Rize(
-    process.env.RIZE_PROGRAM_ID,
-    process.env.RIZE_HMAC
-);
+const rizeClient = require('../helpers/rizeClient');
 
 describe('Synthetic Account', () => {
+    let customerUid;
     let customerPoolUid;
     let testGeneralSyntheticAccountTypeUid;
     let testExternalSyntheticAccountTypeUid;
@@ -26,6 +23,7 @@ describe('Synthetic Account', () => {
     let testExternalSyntheticAccount;
 
     before(async () => {
+        customerUid = process.env.TEST_CUSTOMER_UID;
         customerPoolUid = process.env.TEST_CUSTOMER_POOL_UID;
     });
 
@@ -52,7 +50,7 @@ describe('Synthetic Account', () => {
         expect(data).to.have.property('master_account');
 
         if (syntheticAccountCategory === 'external') {
-            expect(data).to.have.property('account_number').that.equals(accountNumber);
+            expect(data).to.have.property('account_number').that.equals(null);
             expect(data).to.have.property('account_number_last_four').that.equals(accountNumber.substring(accountNumber.length - 4, accountNumber.length));
             expect(data).to.have.property('routing_number').that.equals(routingNumber);
         } else {
@@ -144,6 +142,14 @@ describe('Synthetic Account', () => {
 
         it('Retrieves the synthetic account list without query', async () => {
             const syntheticAccountList = await rizeClient.syntheticAccount.getList();
+
+            utils.expectRizeList(syntheticAccountList);
+        });
+
+        it('Retrieves the synthetic account list with customer_uid query', async () => {
+            const syntheticAccountList = await rizeClient.syntheticAccount.getList({
+                customer_uid: [customerUid]
+            });
 
             utils.expectRizeList(syntheticAccountList);
 
@@ -250,7 +256,6 @@ describe('Synthetic Account', () => {
         });
 
         it('Throws an error if "pool_uid" is empty', () => {
-
             const request = {
                 external_uid: fakeGeneralSyntheticAccountExternalUid,
                 pool_uid: '',
@@ -263,7 +268,6 @@ describe('Synthetic Account', () => {
         });
 
         it('Throws an error if "name" is empty', () => {
-
             const request = {
                 external_uid: fakeGeneralSyntheticAccountExternalUid,
                 pool_uid: testGeneralSyntheticAccount.pool_uid,
@@ -276,7 +280,6 @@ describe('Synthetic Account', () => {
         });
 
         it('Throws an error if "synthetic_account_type_uid" is empty', () => {
-
             const request = {
                 external_uid: fakeGeneralSyntheticAccountExternalUid,
                 pool_uid: testGeneralSyntheticAccount.pool_uid,

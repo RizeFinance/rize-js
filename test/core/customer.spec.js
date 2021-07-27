@@ -9,16 +9,11 @@ const chaiAsPromised = require('chai-as-promised');
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
-const delayAsync = require('../helpers/delayAsync');
 
 const faker = require('faker');
 const { RandomSSN } = require('ssn');
 
-const Rize = require('../../index');
-const rizeClient = new Rize(
-    process.env.RIZE_PROGRAM_ID,
-    process.env.RIZE_HMAC
-);
+const rizeClient = require('../helpers/rizeClient');
 
 describe('Customer', () => {
     let customerUid;
@@ -35,7 +30,6 @@ describe('Customer', () => {
     const fakeCity = faker.address.city();
     const fakeState = faker.address.stateAbbr();
     const fakePostalCode = faker.address.zipCodeByState(fakeState);
-    let approvedCustomer;
 
     before(() => {
         customerUid = process.env.TEST_CUSTOMER_UID;
@@ -379,52 +373,5 @@ describe('Customer', () => {
             expect(unlockedCustomer.lock_reason).equals(null);
             expect(unlockedCustomer.locked_at).equals(null);
         });
-    });
-    
-    describe('verifyIdentity', () => {
-        it('Throws an error if "uid" is empty', () => {
-            const promise = rizeClient.customer.verifyIdentity(' ');
-            return expect(promise).to.eventually.be.rejectedWith('Customer "uid" is required.');
-        });
-
-        it('Submits an identity verification request successfully', async function () {
-            let currentWorkflow = await rizeClient.complianceWorkflow.viewLatest(customerUid);
-
-            if (currentWorkflow.summary.status !== 'in_progress' && currentWorkflow.summary.status !== 'accepted') {
-                this.skip();
-            }
-
-            const fakeIp = faker.internet.ip();
-
-            // acknowledge all pending compliance documents
-            while (currentWorkflow.summary.status === 'in_progress') {
-                const pendingDocIds = currentWorkflow.current_step_documents_pending.map(doc => doc.uid);
-
-                currentWorkflow = await rizeClient.complianceWorkflow.acknowledgeComplianceDocuments(
-                    currentWorkflow.uid,
-                    currentWorkflow.customer.uid,
-                    pendingDocIds.map(uid => ({
-                        document_uid: uid,
-                        accept: 'yes',
-                        user_name: `${fakeFirstName} ${fakeLastName}`,
-                        ip_address: fakeIp
-                    }))
-                );
-            }
-
-            let updatedCustomer = await rizeClient.customer.verifyIdentity(customerUid);
-            expect(updatedCustomer.status).equals('queued');
-
-            await delayAsync(10000);
-
-            updatedCustomer = await rizeClient.customer.get(customerUid);
-            expect(updatedCustomer.status).equals('active');
-
-            approvedCustomer = updatedCustomer;
-        }).timeout(20000);
-    });
-
-    after(() => {
-        process.env.TEST_CUSTOMER_POOL_UID = approvedCustomer.pool_uids[0];
     });
 });
