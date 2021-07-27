@@ -84,7 +84,7 @@ describe('Document', () => {
             const documentList = await rizeClient.document.getList();
             testDocument = documentList.data[0];
             utils.expectRizeList(documentList);
-            done()
+            done();
         });
 
         it('Retrieves the document list with query', async () => {
