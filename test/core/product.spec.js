@@ -45,4 +45,9 @@ describe('Product', () => {
             expect(product).to.have.property('uid').that.equals(testProduct.uid);
         });
     });
+
+    after(() => {
+        process.env.TEST_PRODUCT_UID = testProduct.uid;
+        process.env.TEST_PRODUCT_COMPLIANCE_PLAN_UID = testProduct.product_compliance_plan_uid;
+    });
 });

@@ -1,5 +1,7 @@
 'use strict';
 
+require('./customer-product.spec');
+
 const utils = require('../../lib/test-utils');
 
 const chai = require('chai');
@@ -8,11 +10,7 @@ const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
-const Rize = require('../../index');
-const rizeClient = new Rize(
-    process.env.RIZE_PROGRAM_ID,
-    process.env.RIZE_HMAC
-);
+const rizeClient = require('../helpers/rizeClient');
 
 describe('Evaluation', () => {
     let testEvaluation;
@@ -43,7 +41,7 @@ describe('Evaluation', () => {
 
         it('Retrieves the evaluation list with query', async () => {
             const query = {
-                customer_uid: ['customer_uid1', 'customer_uid2'],
+                customer_uid: ['customerUid'],
                 latest: true
             };
             const evaluationList = await rizeClient.evaluation.getList(query);
@@ -61,5 +59,9 @@ describe('Evaluation', () => {
             const evaluation = await rizeClient.evaluation.get(testEvaluation.uid);
             expect(evaluation).to.have.property('uid').that.equals(testEvaluation.uid);
         });
+    });
+
+    after(() => {
+        process.env.TEST_EVALUATION_UID = testEvaluation.uid;
     });
 });

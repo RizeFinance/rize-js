@@ -1,5 +1,7 @@
 'use strict';
 
+require('./evaluation.spec');
+
 const utils = require('../../lib/test-utils');
 
 const chai = require('chai');
@@ -8,20 +10,21 @@ const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
-const Rize = require('../../index');
-const rizeClient = new Rize(
-    process.env.RIZE_PROGRAM_ID,
-    process.env.RIZE_HMAC
-);
+const rizeClient = require('../helpers/rizeClient');
 
 const fs = require('fs');
 const path = require('path');
 const testFilePath = path.resolve(__dirname, '../test-files/rize-logo.png');
 
 describe('KYCDocument', () => {
+    let evaluationUid;
     let testKYCDocument;
     let newKYCDocument;
     let testImage;
+
+    before(() => {
+        evaluationUid = process.env.TEST_EVALUATION_UID;
+    });
 
     describe('getList', async () => {
         it('Throws an error if "evaluationUid" is empty', () => {
@@ -30,7 +33,7 @@ describe('KYCDocument', () => {
         });
 
         it('Retrieves the KYC document list with evaluationUid', async () => {
-            const kycDocumentList = await rizeClient.kycDocument.getList('Ct1EY876A47RZkDX');
+            const kycDocumentList = await rizeClient.kycDocument.getList(evaluationUid);
             testKYCDocument = kycDocumentList.data[0];
             utils.expectRizeList(kycDocumentList);
         });

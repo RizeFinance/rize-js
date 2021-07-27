@@ -1,5 +1,7 @@
 'use strict';
 
+require('./customer.spec');
+
 const utils = require('../../lib/test-utils');
 
 const chai = require('chai');
@@ -8,10 +10,26 @@ const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
+const mlog = require('mocha-logger');
+
+const delayAsync = require('../helpers/delayAsync');
 const rizeClient = require('../helpers/rizeClient');
 
 describe('Product', () => {
     let testCustomerProduct;
+    let customerUid;
+    let productUid;
+
+    const verifyNewCustomerProduct = (customerProduct, customerUid, productUid) => {
+        expect(customerProduct).to.have.property('uid').that.is.not.empty;
+        expect(customerProduct).to.have.property('customer_uid').that.equals(customerUid);
+        expect(customerProduct).to.have.property('product_uid').that.equals(productUid);
+    };
+
+    before(async () => {
+        customerUid = process.env.TEST_CUSTOMER_UID;
+        productUid = process.env.TEST_PRODUCT_UID;
+    });
 
     describe('getList', async () => {
         it('Throws an error if "query" is invalid', () => {
@@ -37,7 +55,7 @@ describe('Product', () => {
 
         it('Retrieves the product list with query', async () => {
             const query = {
-                customer_uid: 'customer_uid_123',
+                customer_uid: ['customer_uid_123'],
                 product_uid: 'program_uid_123',
                 limit: 2
             };
@@ -55,6 +73,28 @@ describe('Product', () => {
         it('Retrieves customer product data successfully', async () => {
             const customerProduct = await rizeClient.customerProduct.get(testCustomerProduct.uid);
             expect(customerProduct).to.have.property('uid').that.equals(testCustomerProduct.uid);
+        });
+    });
+
+    describe('create', () => {
+        it('Throws an error if customer "uid" is empty', () => {
+            const promise = rizeClient.customerProduct.create('', '');
+            return expect(promise).to.eventually.be.rejectedWith('Customer "uid" is required.');
+        });
+
+        it('Throws an error if product "uid" is empty', () => {
+            const promise = rizeClient.customerProduct.create('test', '');
+            return expect(promise).to.eventually.be.rejectedWith('Product "uid" is required.');
+        });
+
+        it('Creates a new customer product', async () => {
+            const customerProduct = await rizeClient.customerProduct.create(customerUid, productUid);
+            
+            verifyNewCustomerProduct(customerProduct, customerUid, productUid);
+
+            await delayAsync(7000);
+
+            mlog.log(`New Customer Product UID: ${customerProduct.uid} -- Status: ${customerProduct.status}`);
         });
     });
 });
