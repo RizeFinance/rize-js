@@ -1,0 +1,60 @@
+'use strict';
+
+const utils = require('../../lib/test-utils');
+
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
+
+chai.use(chaiAsPromised);
+const expect = chai.expect;
+
+const rizeClient = require('../helpers/rizeClient');
+
+describe('Product', () => {
+    let testCustomerProduct;
+
+    describe('getList', async () => {
+        it('Throws an error if "query" is invalid', () => {
+            const promise = rizeClient.customerProduct.getList('');
+            return expect(promise).to.eventually.be.rejectedWith('"query" must be a CustomerProductListQuery object.');
+        });
+
+        it('Throws an error if "customer_uid" query parameter is invalid', () => {
+            const promise = rizeClient.customerProduct.getList({ customer_uid: 'abc' });
+            return expect(promise).to.eventually.be.rejectedWith('"customer_uid" query must be an array.');
+        });
+
+        it('Throws an error if "product_uid" query parameter is invalid', () => {
+            const promise = rizeClient.customerProduct.getList({ product_uid: 123 });
+            return expect(promise).to.eventually.be.rejectedWith('"product_uid" query must be a string.');
+        });
+
+        it('Retrieves the customer product list without query', async () => {
+            const customerProductList = await rizeClient.customerProduct.getList();
+            testCustomerProduct = customerProductList.data[0];
+            utils.expectRizeList(customerProductList);
+        });
+
+        it('Retrieves the product list with query', async () => {
+            const query = {
+                customer_uid: 'customer_uid_123',
+                product_uid: 'program_uid_123',
+                limit: 2
+            };
+            const customerProductList = await rizeClient.customerProduct.getList(query);
+            utils.expectRizeList(customerProductList);
+        });
+    });
+
+    describe('get', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.customerProduct.get('');
+            return expect(promise).to.eventually.be.rejectedWith('Customer Product "uid" is required.');
+        });
+
+        it('Retrieves customer product data successfully', async () => {
+            const customerProduct = await rizeClient.customerProduct.get(testCustomerProduct.uid);
+            expect(customerProduct).to.have.property('uid').that.equals(testCustomerProduct.uid);
+        });
+    });
+});

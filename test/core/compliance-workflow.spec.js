@@ -13,11 +13,7 @@ const faker = require('faker');
 
 const mlog = require('mocha-logger');
 
-const Rize = require('../../index');
-const rizeClient = new Rize(
-    process.env.RIZE_PROGRAM_ID,
-    process.env.RIZE_HMAC
-);
+const rizeClient = require('../helpers/rizeClient');
 
 describe('Compliance Workflow', () => {
     const fakeName = faker.name.findName();
