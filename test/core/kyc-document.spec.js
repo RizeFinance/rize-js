@@ -68,7 +68,7 @@ describe('KYCDocument', () => {
         it('Uploads a KYC document successfully', async () => {
             testImage = fs.readFileSync(testFilePath, { encoding: 'base64' });
             const kycDocument = await rizeClient.kycDocument.upload(
-                'Ct1EY876A47RZkDX',
+                evaluationUid,
                 'rize-logo.png',
                 testImage,
                 'test upload',

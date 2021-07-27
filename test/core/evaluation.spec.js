@@ -10,6 +10,7 @@ const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
+const mlog = require('mocha-logger');
 const rizeClient = require('../helpers/rizeClient');
 
 describe('Evaluation', () => {
@@ -58,6 +59,9 @@ describe('Evaluation', () => {
         it('Retrieves evaluation data successfully', async () => {
             const evaluation = await rizeClient.evaluation.get(testEvaluation.uid);
             expect(evaluation).to.have.property('uid').that.equals(testEvaluation.uid);
+
+            mlog.log(`New Evaluation UID: ${evaluation.uid}`);
+
         });
     });
 

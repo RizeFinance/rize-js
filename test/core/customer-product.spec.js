@@ -12,13 +12,13 @@ const expect = chai.expect;
 
 const mlog = require('mocha-logger');
 
-const delayAsync = require('../helpers/delayAsync');
 const rizeClient = require('../helpers/rizeClient');
 
 describe('Product', () => {
     let testCustomerProduct;
     let customerUid;
     let productUid;
+    let customerPoolUid;
 
     const verifyNewCustomerProduct = (customerProduct, customerUid, productUid) => {
         expect(customerProduct).to.have.property('uid').that.is.not.empty;
@@ -92,9 +92,14 @@ describe('Product', () => {
             
             verifyNewCustomerProduct(customerProduct, customerUid, productUid);
 
-            await delayAsync(7000);
+            const customer = await rizeClient.customer.get(customerUid);
+            customerPoolUid = customer.pool_uids[0];
 
             mlog.log(`New Customer Product UID: ${customerProduct.uid} -- Status: ${customerProduct.status}`);
         });
+    });
+
+    after(() => {
+        process.env.TEST_CUSTOMER_POOL_UID = customerPoolUid;
     });
 });

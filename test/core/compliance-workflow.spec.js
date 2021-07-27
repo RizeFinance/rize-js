@@ -209,7 +209,7 @@ describe('Compliance Workflow', () => {
             return expect(promise).to.eventually.be.rejectedWith('"email" is invalid.');
         });
 
-        it('Renew compliance worflow after latest expired', async function () {
+        xit('Renew compliance worflow after latest expired', async function () {
             const customerUidToTest = process.env.TEST_EXPIRED_CUSTOMER_UID;
 
             if (customerUidToTest) {
@@ -231,9 +231,5 @@ describe('Compliance Workflow', () => {
                 expect(newWorkflow.summary.status === 'in_progress');
             }
         });
-    });
-    
-    after(() => {
-        process.env.TEST_CUSTOMER_UID = workflow.customer.uid;
     });
 });

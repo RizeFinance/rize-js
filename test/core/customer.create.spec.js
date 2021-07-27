@@ -13,7 +13,7 @@ const faker = require('faker');
 const rizeClient = require('../helpers/rizeClient');
 
 describe('Customer', () => {
-    let customerUid;
+    let customer;
 
     const verifyNewCustomer = (customer, external_uid, email) => {
         expect(customer).to.have.property('uid').that.is.not.empty;
@@ -46,13 +46,12 @@ describe('Customer', () => {
             verifyNewCustomer(newCustomer, externalUid, fakeEmail);
 
             mlog.log(`New Customer UID: ${newCustomer.uid}`);
-
             // Store the customerUid for next tests
-            customerUid = newCustomer.uid;
+            customer = newCustomer;
         });
     });
 
     after(() => {
-        process.env.TEST_CUSTOMER_UID = customerUid;
+        process.env.TEST_CUSTOMER_UID = customer.uid;
     });
 });
