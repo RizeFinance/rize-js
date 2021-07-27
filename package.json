@@ -1,0 +1,49 @@
+{
+  "name": "@rizefinance/rize-js",
+  "version": "1.0.0-beta.3",
+  "description": "Rize API wrapper",
+  "main": "index.js",
+  "typings": "types/index.d.ts",
+  "scripts": {
+    "lint": "eslint . --ext .js,.ts",
+    "lint-fix": "eslint . --ext .js,.ts --fix",
+    "docs:build": "tsc && documentation build lib/** -f md -o docs.md",
+    "test": "npm run lint && mocha $1",
+    "local:publish": "npm run docs:build && npm unpublish --force --registry http://localhost:4873 @rizefinance/rize-js && npm publish --registry http://localhost:4873"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jsrsasign": "^8.0.9",
+    "@types/stompit": "^0.26.1",
+    "@types/validator": "^13.1.3",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "chai": "^4.3.0",
+    "chai-as-promised": "^7.1.1",
+    "documentation": "^13.1.1",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.20.0",
+    "eslint-plugin-chai-friendly": "^0.6.0",
+    "faker": "^5.4.0",
+    "mocha": "^8.3.0",
+    "mocha-logger": "^1.0.7",
+    "ssn": "^1.0.3",
+    "typescript": "^4.2.4",
+    "uuid": "^8.3.2"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "jsrsasign": "^10.1.11",
+    "lodash": "^4.17.21",
+    "query-string": "^6.14.0",
+    "stompit": "^1.0.0",
+    "validator": "^13.5.2"
+  },
+  "repository": {
+    "url": "git://github.com/RizeFinance/rize-sdks.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@rizefinance"
+  }
+}
