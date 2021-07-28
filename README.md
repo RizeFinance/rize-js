@@ -1,4 +1,23 @@
-# Rize Node.js SDK
+<p align="center">
+  <a href="https://rizefs.com" target="_blank" align="center">
+    <img src="https://rizefs.com/wp-content/uploads/2021/01/rizelogo-grey.svg" width="200">
+  </a>
+  <br />
+</p>
+
+
+
+*Make financial services simple and accessible. Rize enables fintechs, financial institutions and brands to build across multiple account types with one API.* *If you want to join us [<kbd>**Check out our open positions**</kbd>](https://rizefs.com/careers/)_*
+
+
+
+# Official Sentry SDKs for JavaScript ![](https://img.shields.io/badge/SDK-CommonJS-blue)![](https://img.shields.io/badge/Version-1.0.0-green)
+
+## Changelogs
+
+Checkout the changelogs per release [here](https://github.com/RizeFinance/rize-sdks/releases)!
+
+
 
 ## Getting Started
 
@@ -18,9 +37,8 @@
 2. Input your GitHub Username.
 3. For the Password, input your [GitHub Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token). Your token should have the following scopes/permissions: `repo`, `read:packages`
 4. Input the email address that you're using in GitHub.
-
-## Changelogs
-Checkout the changelogs per release [here](https://github.com/RizeFinance/rize-sdks/releases)!
+   
+   
 
 
 ## Usage
