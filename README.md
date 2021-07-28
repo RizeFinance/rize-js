@@ -11,7 +11,7 @@
 
 
 
-# Official Sentry SDKs for JavaScript ![](https://img.shields.io/badge/SDK-CommonJS-blue)![](https://img.shields.io/badge/Version-1.0.0-green)
+# Official Rize SDKs for JavaScript ![](https://img.shields.io/badge/SDK-CommonJS-blue)![](https://img.shields.io/badge/Version-1.0.0-green)
 
 ## Changelogs
 
