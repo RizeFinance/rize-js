@@ -26,8 +26,23 @@ const auth = new Auth(
     TOKEN_MAX_AGE
 );
 
+const invalidAuth = new Auth(
+    process.env.RIZE_PROGRAM_ID,
+    'fsdafdsa4eea',
+    api
+);
+
 describe('Auth', () => {
     let token;
+    it('Fails to get token if invalid credentials', async () => {
+        let token;
+        try {
+            token = await invalidAuth.getToken();
+        } finally {
+            expect(token).be.an('error');
+        }
+    });
+
     it('Gets a new auth token', async () => {
         token = await auth.getToken();
         expect(token).to.not.be.empty;
