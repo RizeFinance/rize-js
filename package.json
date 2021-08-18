@@ -41,7 +41,7 @@
     "validator": "^13.5.2"
   },
   "repository": {
-    "url": "git://github.com/RizeFinance/rize-sdks.git"
+    "url": "git://github.com/RizeFinance/rize-js.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/@rizefinance"
