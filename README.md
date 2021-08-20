@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://rizefs.com" target="_blank" align="center">
-    <img src="https://rizefs.com/wp-content/uploads/2021/01/rizelogo-grey.svg" width="200">
+    <img src="https://rizefs.com/wp-content/uploads/2021/01/rizelogo-grey.svg" width="220">
   </a>
   <br />
 </p>
