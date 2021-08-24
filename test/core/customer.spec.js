@@ -334,7 +334,7 @@ describe('Customer', () => {
             const promise = rizeClient.customer.identityConfirmation(' ');
             return expect(promise).to.eventually.be.rejectedWith('Customer "uid" is required.');
         });
-    })
+    });
 
     describe('lock', () => {
         const lockReason = 'Account must be locked.';
