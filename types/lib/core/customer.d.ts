@@ -56,10 +56,10 @@ declare class CustomerService {
     protected _validateProfileAnswerDetails(details: CustomerProfileAnswerDetails): void;
     /**
      * @ignore @protected
-     * Validates the parameters for the "verifyIdentity" method
+     * Validates the parameters for the "identityConfirmation" method
      * @param {string} uid
      */
-    protected _validateVerifyIdentityParams(uid: string): void;
+    protected _validateVerifyIdentityConfirmation(uid: string): void;
     /**
      * Retrieves a list of Customers filtered by the given parameters.
      * Filter parameters are not case sensitive, but will only return exact matches.
@@ -175,6 +175,16 @@ declare class CustomerService {
      * await rize.customer.archive(customerUid);
      */
     archive(uid: string): Promise<void>;
+    /**
+     * Submit a request for Identity Confirmation.
+     *
+     * This method is used to explicitly confirm a Customer's PII data is up-to-date in order to add additional products.
+     * @param {string} uid - Rize-generated unique customer id
+     * @returns {Promise<Customer>} - A promise that returns the Customer with their pii_confirmed_at updated
+     * @example
+     * await rize.customer.identityConfirmation(customerUid);
+     */
+    identityConfirmation(uid: string): Promise<Customer>;
     /**
      * Lock a Customer
      *

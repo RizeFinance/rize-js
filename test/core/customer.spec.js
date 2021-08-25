@@ -329,6 +329,13 @@ describe('Customer', () => {
         });
     });
 
+    describe('identityConfirmation', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.customer.identityConfirmation(' ');
+            return expect(promise).to.eventually.be.rejectedWith('Customer "uid" is required.');
+        });
+    });
+
     describe('lock', () => {
         const lockReason = 'Account must be locked.';
         it('Throws an error if "uid" is empty', () => {
