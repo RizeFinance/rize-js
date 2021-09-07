@@ -104,4 +104,10 @@ export type DebitCardListQuery = {
      */
     status?: Array<'queued' | 'issued' | 'printing_physical_card' | 'printing_physical_card_replacement' | 'card_replacement_shipped' | 'shipped' | 'usable_without_pin' | 'normal' | 'closed' | 'damaged' | 'lost' | 'stolen' | 'administrative_lock' | 'closed_by_administrator' | 'card_replacement_shipment_returned' | 'shipment_returned'>;
 };
+export type PinChangeToken = {
+    /**
+     * - This token will be used with a PIN-set form that a Customer can submit to change their PIN.
+     */
+    pin_change_token?: string;
+};
 export type Address = import('./common.typedefs').Address;

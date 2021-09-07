@@ -151,11 +151,23 @@ declare class DebitCardService {
      * const reissuedDebitCard = await rize.debitCard.reissue('debit_card_uid1', 'damaged');
      */
     reissue(uid: string, reissueReason: 'damaged' | 'lost' | 'stolen'): Promise<DebitCard>;
+    /**
+     * Get Debit Card PIN token
+     *
+     * This method is used to retrieve a token necessary to change a Debit Card's PIN.
+     * This token will be used with a PIN-set form that a Customer can submit to change their PIN.
+     *
+     * @param {string} uid - Rize-generated unique debitCard id
+     * @returns {Promise<PinChangeToken>} A promise that returns a Pin Change Token if resolved.
+     * @example const debitCard = await rize.debitCard.getPinChangeToken(debitCardUid);
+     */
+    getPinChangeToken(uid: string): Promise<PinChangeToken>;
 }
 declare namespace DebitCardService {
-    export { DebitCardListQuery, DebitCard, Address, RizeList };
+    export { DebitCardListQuery, DebitCard, PinChangeToken, Address, RizeList };
 }
 type DebitCardListQuery = import('./typedefs/debit-card.typedefs').DebitCardListQuery;
 type RizeList<T> = import('./typedefs/common.typedefs').RizeList<T>;
 type DebitCard = import('./typedefs/debit-card.typedefs').DebitCard;
 type Address = import('./typedefs/common.typedefs').Address;
+type PinChangeToken = import('./typedefs/debit-card.typedefs').PinChangeToken;
