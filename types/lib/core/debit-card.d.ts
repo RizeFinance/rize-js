@@ -28,6 +28,11 @@ declare class DebitCardService {
     protected _validateCreateParams(externalUid: any, customerUid: any, poolUid: any, shippingAddress?: any): void;
     /**
      * @ignore @protected
+     * Validates the parameters for the "activate" method
+     */
+    protected _validateActivateParams(uid: any, cardLastFourDigits: any, cvv: any, expiryDate: any): void;
+    /**
+     * @ignore @protected
      * Validates the parameters for the "lock" method
      */
     protected _validateLockParams(uid: any, lockReason: any): void;
@@ -106,6 +111,24 @@ declare class DebitCardService {
      */
     create(externalUid: string, customerUid: string, poolUid: string, shippingAddress?: Address | null): Promise<DebitCard>;
     /**
+     * Activate a Debit Card
+     *
+     * A Debit Card can be activated once a customer has received it.
+     * @param {string} uid Rize-generated unique Debit Card id
+     * @param {string} cardLastFourDigits The last four digits of the Debit Card
+     * @param {string} cvv The CVV number of the Debit Card
+     * @param {string} expiryDate Debit Card expiration date. It should be formatted YYYY-MM.
+     * @returns {Promise<DebitCard>} A promise that returns a Debit Card if resolved.
+     * @example
+     * const activatedDebitCard = await rize.debitCard.activate(
+     *      'debit_card_uid1',
+     *      '5678',
+     *      '930',
+     *      '2030-02'
+     * );
+     */
+    activate(uid: string, cardLastFourDigits: string, cvv: string, expiryDate: string): Promise<DebitCard>;
+    /**
      * Lock a Debit Card
      *
      * A Debit Card can be locked temporarily by either the Customer, Client, or the Custodial Partner.
@@ -151,11 +174,23 @@ declare class DebitCardService {
      * const reissuedDebitCard = await rize.debitCard.reissue('debit_card_uid1', 'damaged');
      */
     reissue(uid: string, reissueReason: 'damaged' | 'lost' | 'stolen'): Promise<DebitCard>;
+    /**
+     * Get Debit Card PIN token
+     *
+     * This method is used to retrieve a token necessary to change a Debit Card's PIN.
+     * This token will be used with a PIN-set form that a Customer can submit to change their PIN.
+     *
+     * @param {string} uid - Rize-generated unique debitCard id
+     * @returns {Promise<PinChangeToken>} A promise that returns a Pin Change Token if resolved.
+     * @example const debitCard = await rize.debitCard.getPinChangeToken(debitCardUid);
+     */
+    getPinChangeToken(uid: string): Promise<PinChangeToken>;
 }
 declare namespace DebitCardService {
-    export { DebitCardListQuery, DebitCard, Address, RizeList };
+    export { DebitCardListQuery, DebitCard, PinChangeToken, Address, RizeList };
 }
 type DebitCardListQuery = import('./typedefs/debit-card.typedefs').DebitCardListQuery;
 type RizeList<T> = import('./typedefs/common.typedefs').RizeList<T>;
 type DebitCard = import('./typedefs/debit-card.typedefs').DebitCard;
 type Address = import('./typedefs/common.typedefs').Address;
+type PinChangeToken = import('./typedefs/debit-card.typedefs').PinChangeToken;
