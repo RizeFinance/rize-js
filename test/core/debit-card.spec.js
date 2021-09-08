@@ -169,6 +169,41 @@ describe('DebitCard', () => {
         });
     });
 
+    describe('activate', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.debitCard.activate('');
+            return expect(promise).to.eventually.be.rejectedWith('Debit Card "uid" is required.');
+        });
+        it('Throws an error if "cardLastFourDigits" is empty', () => {
+            const promise = rizeClient.debitCard.activate('test', '');
+            return expect(promise).to.eventually.be.rejectedWith('"cardLastFourDigits" is required.');
+        });
+        it('Throws an error if "cvv" is empty', () => {
+            const promise = rizeClient.debitCard.activate('test', '5678', '');
+            return expect(promise).to.eventually.be.rejectedWith('"cvv" is required.');
+        });
+        it('Throws an error if "expiryDate" is empty', () => {
+            const promise = rizeClient.debitCard.activate('test', '5678', '930', '');
+            return expect(promise).to.eventually.be.rejectedWith('"expiryDate" is required.');
+        });
+
+        it('Activates a debit card', async () => {
+            let testDebitCard;
+            const testDebitCards = await rizeClient.debitCard.getList({
+                customer_uid: [customerUid]
+            });
+            testDebitCard = testDebitCards.data[0];
+            const activatedCard = await rizeClient.debitCard.activate(
+                testDebitCard.uid,
+                testDebitCard.card_last_four_digits,
+                '321',
+                '2025-01'
+            );
+            expect(activatedCard).to.have.property('status').that.equals('usable_without_pin');
+            expect(activatedCard).to.have.property('uid').that.equals(testDebitCard.uid);
+        });
+    });
+
     describe('lock', () => {
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.debitCard.lock('');
@@ -181,7 +216,7 @@ describe('DebitCard', () => {
         });
 
         it('Locks debit card successfully', async () => {
-            const lockReason = 'Test lock';
+            const lockReason = 'Fraud detected';
             const updatedDebitCard = await rizeClient.debitCard.lock(
                 testDebitCard.uid,
                 lockReason
