@@ -4,6 +4,8 @@ require('./auth.spec');
 require('./customer.create.spec');
 require('./product.spec');
 
+const utils = require('../../lib/test-utils');
+
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 
@@ -72,6 +74,48 @@ describe('Compliance Workflow', () => {
 
             verifyComplianceWorkflow(latestWorkflow, customerUid);
             expect(latestWorkflow.uid).to.be.equal(workflow.uid);
+        });
+    });
+
+    describe('getList', () => {
+        it('Throws an error if "query" is invalid', () => {
+            const promise = rizeClient.complianceWorkflow.getList('');
+            return expect(promise).to.eventually.be.rejectedWith('"query" must be a ComplianceWorkflowListQuery object.');
+        });
+
+        it('Throws an error if "custome_uid" query is not an array', () => {
+            const promise = rizeClient.complianceWorkflow.getList({ customer_uid: customerUid});
+            return expect(promise).to.eventually.be.rejectedWith('"customer_uid" query must be an array.');
+        });
+
+        it('Throws an error if "product_uid" query is not an array', () => {
+            const promise = rizeClient.complianceWorkflow.getList({ product_uid: 'product_uid_123'});
+            return expect(promise).to.eventually.be.rejectedWith('"product_uid" query must be an array.');
+        });
+
+        it('Throws an error if "in_progress" query is not boolean', () => {
+            const query = { in_progress: 'true' };
+            const promise = rizeClient.complianceWorkflow.getList(query);
+            return expect(promise).to.eventually.be.rejectedWith('"in_progress" query must be a boolean.');
+        });
+
+        it('Throws an error if "limit" query is not an integer', () => {
+            const query = { limit: 1.5 };
+            const promise = rizeClient.complianceWorkflow.getList(query);
+            return expect(promise).to.eventually.be.rejectedWith('"limit" query must be an integer.');
+        });
+
+        it('Throws an error if "offset" query is not an integer', () => {
+            const query = { offset: 1.5 };
+            const promise = rizeClient.complianceWorkflow.getList(query);
+            return expect(promise).to.eventually.be.rejectedWith('"offset" query must be an integer.');
+        });
+
+        it('Retrieves the latest compliance workflow', async () => {
+            const allCustomerWorkflows = await rizeClient.complianceWorkflow.getList({ customer_uid: [customerUid] });
+
+            verifyComplianceWorkflow(allCustomerWorkflows.data[0], customerUid);
+            utils.expectRizeList(allCustomerWorkflows);
         });
     });
 
