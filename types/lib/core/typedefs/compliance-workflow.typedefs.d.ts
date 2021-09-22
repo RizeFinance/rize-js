@@ -86,3 +86,25 @@ export type ComplianceWorkflow = {
      */
     all_documents: Array<Omit<ComplianceDocument, 'accepted_at' | 'uid'>>;
 };
+export type ComplianceWorkflowListQuery = {
+    /**
+     * - Filter by Customers. Only return Compliance Workflows belonging to the submitted Customers.
+     */
+    customer_uid?: Array<string>;
+    /**
+     * - Filter by Products. Only return Compliance Workflows belonging to the submitted Products.
+     */
+    product_uid?: Array<string>;
+    /**
+     * - If true, only return Compliance Workflows that are currently in progress.
+     */
+    in_progress?: boolean;
+    /**
+     * - Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default = 100.
+     */
+    limit?: number;
+    /**
+     * - Index of the items to start retrieving from. Default = 0.
+     */
+    offset?: number;
+};
