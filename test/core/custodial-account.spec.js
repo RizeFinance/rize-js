@@ -15,7 +15,7 @@ const rizeClient = require('../helpers/rizeClient');
 describe('Custodial Accounts', () => {
     let customerUid;
     let custodialAccountId;
-    const fakeExternalId = faker.random.uuid();
+    const fakeExternalId = faker.datatype.uuid();
 
     before(() => {
         customerUid = process.env.TEST_CUSTOMER_UID;

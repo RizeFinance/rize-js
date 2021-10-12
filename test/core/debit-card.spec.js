@@ -153,7 +153,7 @@ describe('DebitCard', () => {
         });
 
         it('Creates debit card successfully', async () => {
-            const externalUid = faker.random.uuid();
+            const externalUid = faker.datatype.uuid();
             const debitCard = await rizeClient.debitCard.create(
                 externalUid,
                 customerUid,
