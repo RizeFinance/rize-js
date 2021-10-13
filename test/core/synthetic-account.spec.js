@@ -238,9 +238,9 @@ describe('Synthetic Account', () => {
 
     describe('create', () => {
         const fakeGeneralSyntheticAccountName = 'Test General Account';
-        const fakeGeneralSyntheticAccountExternalUid = faker.random.uuid();
+        const fakeGeneralSyntheticAccountExternalUid = faker.datatype.uuid();
         const fakeExternalSyntheticAccountName = 'Test External Account';
-        const fakeExternalSyntheticAccountExternalUid = faker.random.uuid();
+        const fakeExternalSyntheticAccountExternalUid = faker.datatype.uuid();
 
         it('Throws an error if "external_uid" is empty', () => {
 
@@ -343,7 +343,7 @@ describe('Synthetic Account', () => {
         });
 
         xit('Creates a new plaid_external synthetic account', async () => {
-            const plaidProcessorToken = faker.random.uuid();
+            const plaidProcessorToken = faker.datatype.uuid();
             const request = {
                 external_uid: fakeExternalSyntheticAccountExternalUid,
                 pool_uid: customerPoolUid,
