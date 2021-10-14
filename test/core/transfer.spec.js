@@ -126,7 +126,7 @@ describe('Transfer', () => {
 
             primarySyntheticAccount = customerAccounts.data.find(x => x.master_account && x.liability);
 
-            const newTransferExternalUid = faker.random.uuid();
+            const newTransferExternalUid = faker.datatype.uuid();
 
             const transfer = await rizeClient.transfer.init(
                 newTransferExternalUid,
@@ -152,7 +152,7 @@ describe('Transfer', () => {
         }).timeout(100000);
 
         it('Initializes a PrimaryAccount-to-External Transfer successfully', async () => {
-            const newTransferExternalUid = faker.random.uuid();
+            const newTransferExternalUid = faker.datatype.uuid();
 
             const transfer = await rizeClient.transfer.init(
                 newTransferExternalUid,
