@@ -16,7 +16,7 @@
   "devDependencies": {
     "@types/jsrsasign": "^8.0.13",
     "@types/stompit": "^0.26.2",
-    "@types/validator": "^13.6.3",
+    "@types/validator": "^13.6.6",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.33.0",
     "chai": "^4.3.4",
