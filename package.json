@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
-    "jsrsasign": "^10.5.0",
+    "jsrsasign": "^10.5.1",
     "lodash": "^4.17.21",
     "query-string": "^7.0.1",
     "stompit": "^1.0.0",
