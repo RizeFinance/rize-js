@@ -19,11 +19,11 @@ export type Product = {
     /**
      * - A list of uids referring to Products that must be onboarded before this one
      */
-    prerequisite_product_uids: any;
+    prerequisite_product_uids: array<string>;
     /**
      * - A list of Profile Requirements a Customer must provide Profile Responses to
      */
-    profile_requirements: any;
+    profile_requirements: array<ProfileRequirement>;
     /**
      * - A uid referring to the program.
      */

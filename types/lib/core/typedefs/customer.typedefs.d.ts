@@ -6,7 +6,7 @@ export type CustomerDetails = {
     phone: string;
     ssn: string;
     dob: string;
-    address: any;
+    address: Address;
 };
 export type Customer = {
     /**
