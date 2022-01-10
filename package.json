@@ -25,7 +25,7 @@
     "dotenv": "^10.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-chai-friendly": "^0.7.2",
-    "faker": "^5.5.3",
+    "faker": "^6.6.6",
     "mocha": "^8.4.0",
     "mocha-logger": "^1.0.7",
     "ssn": "^1.0.3",
