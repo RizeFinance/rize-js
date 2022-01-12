@@ -46,7 +46,7 @@ declare class CustodialAccountService {
      *     type: ['data']
      * });
      */
-    getList(query?: CustodialAccountListQuery): Promise<RizeList<any>>;
+    getList(query?: CustodialAccountListQuery): Promise<RizeList<CustodialAccountList>>;
 }
 declare namespace CustodialAccountService {
     export { CustodialAccount, CustodialAccountListQuery, RizeList };

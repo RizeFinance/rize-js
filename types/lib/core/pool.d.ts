@@ -40,7 +40,7 @@ declare class PoolService {
      *     offset: 0,
      * });
      */
-    getList(query?: PoolListQuery): Promise<RizeList<any>>;
+    getList(query?: PoolListQuery): Promise<RizeList<PoolList>>;
 }
 declare namespace PoolService {
     export { Pool, PoolListQuery, RizeList };
