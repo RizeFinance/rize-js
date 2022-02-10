@@ -131,7 +131,7 @@ To get a list of Products ([more info](docs.md#product)):
 ```js
 const productList = await rize.product.getList();
 
-console.log(productList[0].uid); // First product UID
+console.log(productList.data[0].uid); // First product UID
 ```
 
 

@@ -11,9 +11,9 @@ export type Product = {
     /**
      * - A unique identifier for a Compliance Plan
      */
-    compliance_plan_uid: string;
+    product_compliance_plan_uid: string;
     /**
-     * - A unique identifier for a Compliance Plan
+     * - Name for a Compliance Plan
      */
     compliance_plan_name: string;
     /**
@@ -39,9 +39,13 @@ export type ProfileRequirement = {
      */
     profile_requirement: string;
     /**
+     * - A list of accepted responses from the customer
+     */
+    response_values: array<string>;
+    /**
      * - an indication of whether a response is required or optional
      */
-    required: string;
+    required: boolean;
 };
 export type ProductListQuery = {
     /**
