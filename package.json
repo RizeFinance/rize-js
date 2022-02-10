@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/jsrsasign": "^9.0.2",
+    "@types/jsrsasign": "^9.0.3",
     "@types/stompit": "^0.26.3",
     "@types/validator": "^13.7.1",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
