@@ -22,7 +22,7 @@
     "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
     "documentation": "^13.2.5",
-    "dotenv": "^10.0.0",
+    "dotenv": "^16.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-chai-friendly": "^0.7.2",
     "faker": "^5.5.3",
@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
-    "jsrsasign": "^10.5.1",
+    "jsrsasign": "^10.5.3",
     "lodash": "^4.17.21",
     "query-string": "^7.1.0",
     "stompit": "^1.0.0",
