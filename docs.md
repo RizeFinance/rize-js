@@ -2603,14 +2603,14 @@ Rize will proceed with account opening and feature enablement as specified by th
 
 If the Product requirements are not met, Rize will return an error response indicating what element of the Product validation failed.
 
-Type: [CustomerProductService][386]
+Type: [CustomerService][386]
 
 ### customerProduct
 
 A Customer on the Rize Platform is the end user of your application.
 Customers are unique to each Program and the management of all accounts and identifying information is handled on a Program-by-Program basis.
 
-Type: [CustomerService][387]
+Type: [CustomerProductService][387]
 
 ### syntheticAccount
 
@@ -3524,9 +3524,9 @@ Type: [Object][365]
 
 [385]: #complianceworkflowservice
 
-[386]: #customerproductservice
+[386]: #customerservice
 
-[387]: #customerservice
+[387]: #customerproductservice
 
 [388]: #syntheticaccountservice
 

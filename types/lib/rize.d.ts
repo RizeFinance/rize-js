@@ -27,15 +27,15 @@ declare class Rize {
      * Rize will proceed with account opening and feature enablement as specified by the Product.
      *
      * If the Product requirements are not met, Rize will return an error response indicating what element of the Product validation failed.
-     * @type {CustomerProductService}
+     * @type {CustomerService}
      */
-    customer: CustomerProductService;
+    customer: CustomerService;
     /**
      * A Customer on the Rize Platform is the end user of your application.
      * Customers are unique to each Program and the management of all accounts and identifying information is handled on a Program-by-Program basis.
-     * @type {CustomerService}
+     * @type {CustomerProductService}
      */
-    customerProduct: CustomerService;
+    customerProduct: CustomerProductService;
     /**
      * Synthetic Accounts are what your application will build around and your Customers will interact with.
      * Synthetic Accounts are designed to track any asset types, for any Customers, at any Custodian.
@@ -160,8 +160,8 @@ declare namespace Rize {
     export { PACKAGE_VERSION, Rize, Rize as default, RizeOptions };
 }
 import ComplianceWorkflowService = require("./core/compliance-workflow");
-import CustomerProductService = require("./core/customer-product");
 import CustomerService = require("./core/customer");
+import CustomerProductService = require("./core/customer-product");
 import SyntheticAccountService = require("./core/synthetic-account");
 import CustodialAccountService = require("./core/custodial-account");
 import TransactionService = require("./core/transaction");
