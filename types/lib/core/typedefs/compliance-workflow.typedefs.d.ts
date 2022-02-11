@@ -77,6 +77,8 @@ export type ComplianceWorkflow = {
     summary: ComplianceWorkflowSummary;
     customer: ComplianceWorkflowCustomer;
     accepted_documents: Array<ComplianceDocument>;
+    product_uid: string;
+    product_compliance_plan_uid: string;
     /**
      * - Compliance Documents that await acknowledgment in the current Step
      */
