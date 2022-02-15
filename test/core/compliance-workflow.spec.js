@@ -13,7 +13,7 @@ chai.use(chaiAsPromised);
 const expect = chai.expect;
 
 const mlog = require('mocha-logger');
-const faker = require('faker');
+const { faker } = require('@faker-js/faker');
 
 const rizeClient = require('../helpers/rizeClient');
 

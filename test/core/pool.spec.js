@@ -8,7 +8,7 @@ const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
-const faker = require('faker');
+const { faker } = require('@faker-js/faker');
 
 const rizeClient = require('../helpers/rizeClient');
 
