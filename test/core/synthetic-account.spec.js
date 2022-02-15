@@ -6,7 +6,7 @@ const utils = require('../../lib/test-utils');
 
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
-const faker = require('faker');
+const { faker } = require('@faker-js/faker');
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;

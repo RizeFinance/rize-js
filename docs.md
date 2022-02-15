@@ -1994,7 +1994,7 @@ Type: [Object][365]
 ### Properties
 
 *   `profile_requirement_uid` **[string][326]** A UID referring to the Profile Requirement
-*   `profile_response` **[string][326]** The Customer's response to the Profile Requirement/\*\*
+*   `profile_response` **([string][326] | [object][365])** The Customer's response to the Profile Requirement, pending on the question may require a string or object ordered hash list response./\*\*
 *   `status` **(`"initiated"` | `"queued"` | `"identity_verified"` | `"active"` | `"manual_review"` | `"rejected"` | `"archived"` | `"under_review"`)?** Filter by onboarding status. Please note that the initiated enum value will not be respected unless the `include_initiated=true` parameter is also provided.
 *   `include_initiated` **[boolean][370]?** By default, Customers in initiated status are not shown, even if the `status=initiated` parameter is provided. In order for Customers with status initiated to appear in search results, parameters must include `include_initiated=true`.
 *   `kyc_status` **(`"approved"` | `"denied"` | `"documents_provided"` | `"documents_rejected"` | `"manual_review"` | `"pending_documents"` | `"ready_for_custodial_partner_review"` | `"under_review"`)?** Filter by KYC status.
