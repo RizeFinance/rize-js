@@ -20,7 +20,7 @@ jobs:
           node-version: 14
 
       - name: Install Node.js dependencies
-        run: npm install
+        run: npm ci
 
       - name: ESLint
         uses: wearerequired/lint-action@v1
