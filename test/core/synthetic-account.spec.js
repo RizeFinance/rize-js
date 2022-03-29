@@ -22,7 +22,7 @@ describe('Synthetic Account', () => {
     let testGeneralSyntheticAccount;
     let testExternalSyntheticAccount;
 
-    before(async () => {
+    before(() => {
         customerUid = process.env.TEST_CUSTOMER_UID;
         customerPoolUid = process.env.TEST_CUSTOMER_POOL_UID;
     });

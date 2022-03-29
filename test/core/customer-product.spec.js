@@ -55,24 +55,13 @@ describe('Product', () => {
 
         it('Retrieves the product list with query', async () => {
             const query = {
-                customer_uid: ['customer_uid_123'],
-                product_uid: 'program_uid_123',
+                customer_uid: [customerUid],
+                product_uid: productUid,
+                kyc_status: 'approved',
                 limit: 2
             };
             const customerProductList = await rizeClient.customerProduct.getList(query);
             utils.expectRizeList(customerProductList);
-        });
-    });
-
-    describe('get', () => {
-        it('Throws an error if "uid" is empty', () => {
-            const promise = rizeClient.customerProduct.get('');
-            return expect(promise).to.eventually.be.rejectedWith('Customer Product "uid" is required.');
-        });
-
-        it('Retrieves customer product data successfully', async () => {
-            const customerProduct = await rizeClient.customerProduct.get(testCustomerProduct.uid);
-            expect(customerProduct).to.have.property('uid').that.equals(testCustomerProduct.uid);
         });
     });
 
@@ -99,6 +88,19 @@ describe('Product', () => {
         });
     });
 
+    describe('get', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.customerProduct.get('');
+            return expect(promise).to.eventually.be.rejectedWith('Customer Product "uid" is required.');
+        });
+
+        it('Retrieves customer product data successfully', async () => {
+            const customerProduct = await rizeClient.customerProduct.get(testCustomerProduct.uid);
+            expect(customerProduct).to.have.property('uid').that.equals(testCustomerProduct.uid);
+        });
+    });
+
+   
     after(() => {
         process.env.TEST_CUSTOMER_POOL_UID = customerPoolUid;
     });

@@ -27,7 +27,7 @@ describe('Compliance Workflow', () => {
     let customerUid;
     let productCompliancePlanUid;
 
-    before(async () => {
+    before(() => {
         customerUid = process.env.TEST_CUSTOMER_UID;
         productCompliancePlanUid = process.env.TEST_PRODUCT_COMPLIANCE_PLAN_UID;
     });

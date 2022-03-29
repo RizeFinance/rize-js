@@ -80,7 +80,7 @@ describe('Document', () => {
             return expect(promise).to.eventually.be.rejectedWith('"offset" query must be an integer.');
         });
 
-        // This hits our timeout, skip for now
+        // This hits our timeout, for now
         xit('Retrieves the document list without query', async () => {
             const documentList = await rizeClient.document.getList();
             utils.expectRizeList(documentList);
