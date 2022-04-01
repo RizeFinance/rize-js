@@ -9,6 +9,7 @@ const { faker } = require('@faker-js/faker');
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 const rizeClient = require('../helpers/rizeClient');
+const delayAsync = require('../helpers/delayAsync');
 
 describe('DebitCards', () => {
     let customerUid;
@@ -107,7 +108,7 @@ describe('DebitCards', () => {
 
     describe('Physical Card', function() {
         before(function() {
-            if (testDebitCard) {
+            if (testDebitCard && testDebitCard.type === 'virtual') {
                 this.skip();
             }
         });
@@ -330,7 +331,7 @@ describe('DebitCards', () => {
 
         describe('migrateVirtualCard', () => {
             it('Throws an error if "uid" is empty', () => {
-                const promise = rizeClient.debitCard.migrateVirtualCard({uid: '', customer_uid: 'customerUid', pool_uid: 'poolUid'});
+                const promise = rizeClient.debitCard.migrateVirtualCard({uid: '', customerUid: 'customerUid', poolUid: 'poolUid'});
                 return expect(promise).to.eventually.be.rejectedWith(
                     'Debit Card "uid" is required.',
                 );
@@ -338,7 +339,7 @@ describe('DebitCards', () => {
 
             it('Throws an error if "customerUid" is empty', () => {
                 const promise = rizeClient.debitCard.migrateVirtualCard(
-                    {uid: 'uid', customer_uid: '', pool_uid: 'poolUid'}
+                    {uid: 'uid', customerUid: '', poolUid: 'poolUid'}
                 );
                 return expect(promise).to.eventually.be.rejectedWith(
                     '"customerUid" is required.',
@@ -347,7 +348,7 @@ describe('DebitCards', () => {
 
             it('Throws an error if "poolUid" is empty', () => {
                 const promise = rizeClient.debitCard.migrateVirtualCard(
-                    {uid: 'uid', customer_uid: 'customerUid', pool_uid: ''}
+                    {uid: 'uid', customerUid: 'customerUid', poolUid: ''}
                 );
                 return expect(promise).to.eventually.be.rejectedWith(
                     '"poolUid" is required.',
@@ -355,24 +356,23 @@ describe('DebitCards', () => {
             });
 
             it('Migrates virtual card to physical card successfully', async () => {
-                const migratedCard = await rizeClient.debitCard.migrateVirtualCard({
+               const migratedCard =  await rizeClient.debitCard.migrateVirtualCard({
                     uid: testDebitCard.uid,
-                    external_uid: testDebitCard.external_uid,
-                    customer_uid: testDebitCard.customer_uid,
-                    pool_uid: testDebitCard.pool_uid,
+                    customerUid: testDebitCard.customer_uid,
+                    poolUid: testDebitCard.pool_uid,
                 });
 
-
-
                 expect(migratedCard).to.include({ uid: testDebitCard.uid });
-
                 expect(migratedCard).to.include({
                     customer_uid: testDebitCard.customer_uid,
                 });
                 expect(migratedCard).to.include({ pool_uid: testDebitCard.pool_uid });
-                expect(migratedCard).to.include({ type: 'physical' });
 
-            });
+                await delayAsync(5000);
+
+                const updatedCard = await rizeClient.debitCard.get(migratedCard.uid)
+                expect(updatedCard).to.include({type: 'physical'})
+            }).timeout(10000);
         });
 
     }); 
