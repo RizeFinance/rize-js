@@ -356,7 +356,7 @@ describe('DebitCards', () => {
             });
 
             it('Migrates virtual card to physical card successfully', async () => {
-               const migratedCard =  await rizeClient.debitCard.migrateVirtualCard({
+                const migratedCard =  await rizeClient.debitCard.migrateVirtualCard({
                     uid: testDebitCard.uid,
                     customerUid: testDebitCard.customer_uid,
                     poolUid: testDebitCard.pool_uid,
@@ -370,8 +370,8 @@ describe('DebitCards', () => {
 
                 await delayAsync(5000);
 
-                const updatedCard = await rizeClient.debitCard.get(migratedCard.uid)
-                expect(updatedCard).to.include({type: 'physical'})
+                const updatedCard = await rizeClient.debitCard.get(migratedCard.uid);
+                expect(updatedCard).to.include({type: 'physical'});
             }).timeout(10000);
         });
 
