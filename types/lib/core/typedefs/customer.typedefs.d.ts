@@ -78,10 +78,8 @@ export type CustomerProfileAnswerDetails = {
     profile_requirement_uid: string;
     /**
      * - The Customer's response to the Profile Requirement, pending on the question may require a string or object ordered hash list response.
-     *
-     * /**
      */
-    profile_response: string | object;
+    profile_response: string | Record<string, unknown>;
 };
 export type CustomerListQuery = {
     /**
