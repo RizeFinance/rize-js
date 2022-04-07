@@ -168,7 +168,7 @@ describe('Customer', () => {
         });
 
         it('Updates customer info successfully', async () => {
-            const updatedCustomer = await rizeClient.customer.update(customerUid, fakeEmail, {
+            updatedCustomer = await rizeClient.customer.update(customerUid, fakeEmail, {
                 first_name: fakeFirstName,
                 middle_name: fakeMiddleName,
                 last_name: fakeLastName,

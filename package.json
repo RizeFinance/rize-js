@@ -8,11 +8,7 @@
     "lint": "eslint . --ext .js,.ts",
     "lint-fix": "eslint . --ext .js,.ts --fix",
     "docs:build": "tsc && documentation build lib/** -f md -o docs.md",
-<<<<<<< HEAD
     "test": "nyc mocha $1",
-=======
-    "test": "mocha $1",
->>>>>>> 62d6d54989bfa0d88a86247202b1e876f144614a
     "local:publish": "npm run docs:build && npm unpublish --force --registry http://localhost:4873 @rizefinance/rize-js && npm publish --registry http://localhost:4873"
   },
   "author": "",
