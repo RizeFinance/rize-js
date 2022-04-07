@@ -1,10 +1,5 @@
 'use strict';
 
-require('./compliance-workflow.spec');
-require('./synthetic-account.spec');
-require('./transfer.spec');
-require('./debit-card.spec');
-
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 
@@ -30,8 +25,7 @@ describe('Customer', () => {
             await delayAsync(60000);
             await rizeClient.customer.archive(customerUid);
             const updatedCustomer = await rizeClient.customer.get(customerUid);
-
             expect(updatedCustomer.status).equals('archived');
-        }).timeout(60000);
+        }).timeout(100000);
     });
 });

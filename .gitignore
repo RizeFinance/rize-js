@@ -3,3 +3,4 @@ node_modules
 .npm/
 .env
 .history
+.nyc_output

@@ -1,7 +1,5 @@
 'use strict';
 
-require('./evaluation.spec');
-
 const utils = require('../../lib/test-utils');
 
 const chai = require('chai');
@@ -11,6 +9,7 @@ chai.use(chaiAsPromised);
 const expect = chai.expect;
 
 const rizeClient = require('../helpers/rizeClient');
+const delayAsync = require('../helpers/delayAsync');
 
 const fs = require('fs');
 const path = require('path');
@@ -23,7 +22,7 @@ describe('KYCDocument', () => {
     let testImage;
 
     before(() => {
-        evaluationUid = process.env.TEST_EVALUATION_UID;
+        evaluationUid = 'b7xEPnimxzf8gBtR';
     });
 
     describe('getList', async () => {
@@ -92,6 +91,7 @@ describe('KYCDocument', () => {
         });
 
         it('Retrieves kyc document metadata successfully', async () => {
+            delayAsync(1000);
             const kycDocumentMetadata = await rizeClient.kycDocument.getMetadata(testKYCDocument.uid);
             expect(kycDocumentMetadata).to.have.property('uid').that.equals(testKYCDocument.uid);
         });

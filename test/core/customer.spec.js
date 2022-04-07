@@ -1,7 +1,5 @@
 'use strict';
 
-require('./compliance-workflow.spec');
-
 const utils = require('../../lib/test-utils');
 
 const chai = require('chai');
@@ -17,11 +15,11 @@ const rizeClient = require('../helpers/rizeClient');
 
 describe('Customer', () => {
     let customerUid;
-    const fakeEmail = faker.internet.email();
     const fakeFirstName = faker.name.firstName();
     const fakeMiddleName = faker.name.middleName();
     const fakeLastName = faker.name.lastName();
     const fakeSuffix = faker.name.suffix();
+    const fakeEmail = `qa+${fakeFirstName+fakeLastName}@rizemoney.com`;
     const fakePhone = faker.phone.phoneNumber('##########');
     const fakeSsn = new RandomSSN().value().toFormattedString();
     const fakeDob = '1990-01-31';
@@ -337,7 +335,7 @@ describe('Customer', () => {
     });
 
     describe('lock', () => {
-        const lockReason = 'Account must be locked.';
+        const lockReason = 'Customer Request';
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.customer.lock(' ', lockReason);
             return expect(promise).to.eventually.be.rejectedWith('Customer "uid" is required.');
