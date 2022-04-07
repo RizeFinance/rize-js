@@ -15,6 +15,7 @@ const rizeClient = require('../helpers/rizeClient');
 
 describe('Customer', () => {
     let customerUid;
+    let updatedCustomer;
     const fakeFirstName = faker.name.firstName();
     const fakeMiddleName = faker.name.middleName();
     const fakeLastName = faker.name.lastName();
@@ -31,133 +32,6 @@ describe('Customer', () => {
 
     before(() => {
         customerUid = process.env.TEST_CUSTOMER_UID;
-    });
-
-    describe('getList', () => {
-        it('Throws an error if "query" is invalid', () => {
-            const promise = rizeClient.customer.getList('');
-            return expect(promise).to.eventually.be.rejectedWith('"query" must be a CustomerListQuery object.');
-        });
-
-        it('Throws an error if "status" query parameter is invalid', () => {
-            const promise = rizeClient.customer.getList({status: ' '});
-            return expect(promise).to.eventually.be.rejectedWith('"status" query must be a string. Accepted values are: initiated | queued | identity_verified | active | manual_review | rejected | archived | under_review');
-        });
-
-        it('Throws an error if "include_initiated" query parameter is invalid', () => {
-            const promise = rizeClient.customer.getList({include_initiated: ' '});
-            return expect(promise).to.eventually.be.rejectedWith('"include_initiated" query must be boolean.');
-        });
-        
-        it('Throws an error if "kyc_status" query parameter is invalid', () => {
-            const promise = rizeClient.customer.getList({kyc_status: ' '});
-            return expect(promise).to.eventually.be.rejectedWith('"kyc_status" query must be a string. Accepted values are: approved | denied | documents_provided | documents_rejected | manual_review | pending_documents | ready_for_custodial_partner_review | under_review');
-        });
-
-        it('Throws an error if "first_name" query parameter is invalid', () => {
-            const promise = rizeClient.customer.getList({first_name: null});
-            return expect(promise).to.eventually.be.rejectedWith('"first_name" query must be a string.');
-        });
-
-        it('Throws an error if "last_name" query parameter is invalid', () => {
-            const promise = rizeClient.customer.getList({last_name: null});
-            return expect(promise).to.eventually.be.rejectedWith('"last_name" query must be a string.');
-        });
-
-        it('Throws an error if "email" query parameter is invalid', () => {
-            const promise = rizeClient.customer.getList({email: null});
-            return expect(promise).to.eventually.be.rejectedWith('"email" query must be a string.');
-        });
-
-        it('Throws an error if "locked" query parameter is invalid', () => {
-            const promise = rizeClient.customer.getList({locked: ' '});
-            return expect(promise).to.eventually.be.rejectedWith('"locked" query must be boolean.');
-        });
-
-        it('Throws an error if "program_uid" query parameter is invalid', () => {
-            const promise = rizeClient.customer.getList({program_uid: null});
-            return expect(promise).to.eventually.be.rejectedWith('"program_uid" query must be a string.');
-        });
-
-        it('Throws an error if "external_uid" query parameter is invalid', () => {
-            const promise = rizeClient.customer.getList({external_uid: null});
-            return expect(promise).to.eventually.be.rejectedWith('"external_uid" query must be a string.');
-        });
-
-        it('Throws an error if "pool_uid" query parameter is invalid', () => {
-            const promise = rizeClient.customer.getList({pool_uid: []});
-            return expect(promise).to.eventually.be.rejectedWith('"pool_uid" query must be an array of strings.');
-        });
-
-        it('Throws an error if "pool_uid" query parameter is invalid: array with not string value', () => {
-            const promise = rizeClient.customer.getList({pool_uid: ['test', null]});
-            return expect(promise).to.eventually.be.rejectedWith('"pool_uid" query must be an array of strings.');
-        });
-
-        it('Throws an error if "limit" query parameter is invalid', () => {
-            const promise = rizeClient.customer.getList({limit: ' '});
-            return expect(promise).to.eventually.be.rejectedWith('"limit" query must be an integer.');
-        });
-
-        it('Throws an error if "offset" query parameter is invalid', () => {
-            const promise = rizeClient.customer.getList({offset: ' '});
-            return expect(promise).to.eventually.be.rejectedWith('"offset" query must be an integer.');
-        });
-
-        it('Throws an error if "sort" query parameter is invalid', () => {
-            const promise = rizeClient.customer.getList({sort: ' '});
-            return expect(promise).to.eventually.be.rejectedWith('"sort" query must be a string. Accepted values are: first_name_asc | first_name_desc | last_name_asc | last_name_desc | email_asc | email_desc');
-        });
-
-        it('Retrieves the customer list', async () => {
-            const customerList = await rizeClient.customer.getList();
-            utils.expectRizeList(customerList);
-        });
-
-        it('Retrieves the customer list with query', async () => {
-            const query = {
-                status: 'initiated',
-                include_initiated: true,
-                kyc_status: 'approved',
-                first_name: 'Rize',
-                last_name: 'Rize',
-                email: 'rize@rizefs.com',
-                locked: false,
-                program_uid: 'program_uid',
-                external_uid: 'external_uid',
-                pool_uid: ['pool_uid1', 'pool_uid2'],
-                limit: 50,
-                offset: 0,
-                sort: 'first_name_asc',
-                customer: 'wew'
-            };
-            const customerList = await rizeClient.customer.getList(query);
-            utils.expectRizeList(customerList);
-        });
-    });
-
-    describe('get', () => {
-        it('Throws an error if "uid" is empty', () => {
-            const promise = rizeClient.customer.get('');
-            return expect(promise).to.eventually.be.rejectedWith('Customer "uid" is required.');
-        });
-
-        it('Retrieves customer info successfully', async () => {
-            const customer = await rizeClient.customer.get(customerUid);
-            expect(customer).to.have.property('uid').that.equals(customerUid);
-            expect(customer).to.have.nested.property('details.first_name');
-            expect(customer).to.have.nested.property('details.middle_name');
-            expect(customer).to.have.nested.property('details.last_name');
-            expect(customer).to.have.nested.property('details.dob');
-            expect(customer).to.have.nested.property('details.phone');
-            expect(customer).to.have.nested.property('details.ssn_last_four');
-            expect(customer).to.have.nested.property('details.suffix');
-            expect(customer).to.have.nested.property('details.address.street1');
-            expect(customer).to.have.nested.property('details.address.street2');
-            expect(customer).to.have.nested.property('details.address.city');
-            expect(customer).to.have.nested.property('details.address.state');
-            expect(customer).to.have.nested.property('details.address.postal_code');
-        });
     });
 
     describe('update', () => {
@@ -326,6 +200,135 @@ describe('Customer', () => {
             expect(updatedCustomer).to.have.nested.property('details.address.postal_code').that.equals(fakePostalCode);
         });
     });
+
+    describe('getList', () => {
+        it('Throws an error if "query" is invalid', () => {
+            const promise = rizeClient.customer.getList('');
+            return expect(promise).to.eventually.be.rejectedWith('"query" must be a CustomerListQuery object.');
+        });
+
+        it('Throws an error if "status" query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({status: ' '});
+            return expect(promise).to.eventually.be.rejectedWith('"status" query must be a string. Accepted values are: initiated | queued | identity_verified | active | manual_review | rejected | archived | under_review');
+        });
+
+        it('Throws an error if "include_initiated" query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({include_initiated: ' '});
+            return expect(promise).to.eventually.be.rejectedWith('"include_initiated" query must be boolean.');
+        });
+        
+        it('Throws an error if "kyc_status" query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({kyc_status: ' '});
+            return expect(promise).to.eventually.be.rejectedWith('"kyc_status" query must be a string. Accepted values are: approved | denied | documents_provided | documents_rejected | manual_review | pending_documents | ready_for_custodial_partner_review | under_review');
+        });
+
+        it('Throws an error if "first_name" query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({first_name: null});
+            return expect(promise).to.eventually.be.rejectedWith('"first_name" query must be a string.');
+        });
+
+        it('Throws an error if "last_name" query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({last_name: null});
+            return expect(promise).to.eventually.be.rejectedWith('"last_name" query must be a string.');
+        });
+
+        it('Throws an error if "email" query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({email: null});
+            return expect(promise).to.eventually.be.rejectedWith('"email" query must be a string.');
+        });
+
+        it('Throws an error if "locked" query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({locked: ' '});
+            return expect(promise).to.eventually.be.rejectedWith('"locked" query must be boolean.');
+        });
+
+        it('Throws an error if "program_uid" query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({program_uid: null});
+            return expect(promise).to.eventually.be.rejectedWith('"program_uid" query must be a string.');
+        });
+
+        it('Throws an error if "external_uid" query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({external_uid: null});
+            return expect(promise).to.eventually.be.rejectedWith('"external_uid" query must be a string.');
+        });
+
+        it('Throws an error if "pool_uid" query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({pool_uid: []});
+            return expect(promise).to.eventually.be.rejectedWith('"pool_uid" query must be an array of strings.');
+        });
+
+        it('Throws an error if "pool_uid" query parameter is invalid: array with not string value', () => {
+            const promise = rizeClient.customer.getList({pool_uid: ['test', null]});
+            return expect(promise).to.eventually.be.rejectedWith('"pool_uid" query must be an array of strings.');
+        });
+
+        it('Throws an error if "limit" query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({limit: ' '});
+            return expect(promise).to.eventually.be.rejectedWith('"limit" query must be an integer.');
+        });
+
+        it('Throws an error if "offset" query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({offset: ' '});
+            return expect(promise).to.eventually.be.rejectedWith('"offset" query must be an integer.');
+        });
+
+        it('Throws an error if "sort" query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({sort: ' '});
+            return expect(promise).to.eventually.be.rejectedWith('"sort" query must be a string. Accepted values are: first_name_asc | first_name_desc | last_name_asc | last_name_desc | email_asc | email_desc');
+        });
+
+        it('Retrieves the customer list', async () => {
+            const customerList = await rizeClient.customer.getList();
+            utils.expectRizeList(customerList);
+        });
+
+        it('Retrieves the customer list with query', async () => {
+            const query = {
+                status: updatedCustomer.status,
+                include_initiated: true,
+                kyc_status: 'approved',
+                first_name: updatedCustomer.details.first_name,
+                last_name: updatedCustomer.details.last_name,
+                email: updatedCustomer.email,
+                locked: false,
+                program_uid: updatedCustomer.program_uid,
+                external_uid: updatedCustomer.external_uid,
+                limit: 50,
+                offset: 0,
+                sort: 'first_name_asc',
+            };
+
+
+            const customerList = await rizeClient.customer.getList(query);
+            utils.expectRizeList(customerList);
+        });
+    });
+
+    describe('get', () => {
+        it('Throws an error if "uid" is empty', () => {
+            const promise = rizeClient.customer.get('');
+            return expect(promise).to.eventually.be.rejectedWith('Customer "uid" is required.');
+        });
+
+        it('Retrieves customer info successfully', async () => {
+            const customer = await rizeClient.customer.get(customerUid);
+            expect(customer).to.have.property('uid').that.equals(customerUid);
+            expect(customer).to.have.nested.property('details.first_name');
+            expect(customer).to.have.nested.property('details.middle_name');
+            expect(customer).to.have.nested.property('details.last_name');
+            expect(customer).to.have.nested.property('details.dob');
+            expect(customer).to.have.nested.property('details.phone');
+            expect(customer).to.have.nested.property('details.ssn_last_four');
+            expect(customer).to.have.nested.property('details.suffix');
+            expect(customer).to.have.nested.property('details.address.street1');
+            expect(customer).to.have.nested.property('details.address.street2');
+            expect(customer).to.have.nested.property('details.address.city');
+            expect(customer).to.have.nested.property('details.address.state');
+            expect(customer).to.have.nested.property('details.address.postal_code');
+        });
+    });
+
+
 
     describe('identityConfirmation', () => {
         it('Throws an error if "uid" is empty', () => {

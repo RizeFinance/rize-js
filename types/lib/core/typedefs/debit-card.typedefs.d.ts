@@ -28,6 +28,10 @@ export type DebitCard = {
      */
     card_last_four_digits?: string | null;
     /**
+     * - The type of debit card
+     */
+    type: 'physical' | 'virtual';
+    /**
      * A value indicating the current status for this Card. Some of these are subject to change, and additional statuses may be added.
      * - ***queued*** - This is the first state a debit card will enter. This status indicates that a create request has been submitted successfully from the Client and is queued to be issued. A debit card will be in this state for a very short (less than one second) period of time.
      * - ***issued*** - This is the second state a requested debit card will enter. An Issued debit card has been assigned a PIN, PAN, CVV, and expiration and these details are submitted to a card printer for physical card production. The last 4 digits of the card are available once this status is reached.
@@ -109,5 +113,37 @@ export type PinChangeToken = {
      * - This token will be used with a PIN-set form that a Customer can submit to change their PIN.
      */
     pin_change_token?: string;
+};
+export type DebitCardAccessToken = {
+    /**
+     * - This token will be used to request a virtual card image.
+     */
+    token: string;
+    /**
+     * - This configuration ID is required to retrieve the virtual card image.
+     */
+    config_id: string;
+};
+export type DebitCardMigrateData = {
+    /**
+     * - Rize-generated unique Debit Card uid
+     */
+    uid: string;
+    /**
+     * - A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
+     */
+    externalUid?: string;
+    /**
+     * - A UID referring to the Customer who owns this Card
+     */
+    customerUid: string;
+    /**
+     * - A UID referring to the Pool to which this Card belongs
+     */
+    poolUid: string;
+    /**
+     * - An optional field used to specify the shipping address for a physical Debit Card.
+     */
+    shippingAddress?: Address;
 };
 export type Address = import('./common.typedefs').Address;
