@@ -8,7 +8,7 @@
     "lint": "eslint . --ext .js,.ts",
     "lint-fix": "eslint . --ext .js,.ts --fix",
     "docs:build": "tsc && documentation build lib/** -f md -o docs.md",
-    "test": "mocha $1",
+    "test": "nyc mocha $1",
     "local:publish": "npm run docs:build && npm unpublish --force --registry http://localhost:4873 @rizefinance/rize-js && npm publish --registry http://localhost:4873"
   },
   "author": "",
@@ -28,13 +28,14 @@
     "eslint-plugin-chai-friendly": "^0.7.2",
     "mocha": "^8.4.0",
     "mocha-logger": "^1.0.7",
+    "nyc": "^15.1.0",
     "ssn": "^1.0.3",
     "typescript": "^4.5.5",
     "uuid": "^8.3.2"
   },
   "dependencies": {
     "axios": "^0.25.0",
-    "jsrsasign": "^10.5.3",
+    "jsrsasign": "^10.5.16",
     "lodash": "^4.17.21",
     "query-string": "^7.1.1",
     "stompit": "^1.0.0",
