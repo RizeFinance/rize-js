@@ -1,5 +1,8 @@
 'use strict';
 
+require('./compliance-workflow.spec');
+require('./customer.spec');
+
 const utils = require('../../lib/test-utils');
 
 const chai = require('chai');
@@ -27,6 +30,7 @@ describe('Product', () => {
     before(async () => {
         customerUid = process.env.TEST_CUSTOMER_UID;
         productUid = process.env.TEST_PRODUCT_UID;
+
     });
 
     describe('getList', async () => {

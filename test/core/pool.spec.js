@@ -1,5 +1,7 @@
 'use strict';
 
+require('./customer.spec');
+
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 

@@ -13,7 +13,6 @@
         "test/**/*.spec.js"
     ],
     "file": [
-        "test/tests.js", 
         "test/setup-env.js"
-    ]
+        ]
 }
