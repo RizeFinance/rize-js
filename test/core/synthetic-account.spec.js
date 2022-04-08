@@ -1,7 +1,5 @@
 'use strict';
 
-require('./customer-product.spec');
-
 const utils = require('../../lib/test-utils');
 
 const chai = require('chai');
@@ -192,7 +190,7 @@ describe('Synthetic Account', () => {
 
         it('Retrieves the synthetic account type list with query', async () => {
             const query = {
-                limit: 3,
+                limit: 10,
                 offset: 0,
             };
             const syntheticAccountTypes = await rizeClient.syntheticAccount.getTypesList(query);

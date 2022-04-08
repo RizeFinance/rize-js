@@ -1,7 +1,5 @@
 'use strict';
 
-require('./synthetic-account.spec');
-
 const utils = require('../../lib/test-utils');
 
 const chai = require('chai');
@@ -143,7 +141,6 @@ describe('Transfer', () => {
             expect(transfer).to.have.property('initiating_customer_uid').that.equals(customerUid);
             expect(transfer).to.have.property('usd_transfer_amount').that.equals('100.0');
             expect(transfer).to.have.property('status').that.equals('queued');
-
             await delayAsync(70000);
 
             const updatedTransfer = await rizeClient.transfer.get(transfer.uid);

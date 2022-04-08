@@ -1,0 +1,22 @@
+name: Run Test Suite
+on:
+  pull_request_target:
+    branches: 
+      - main
+jobs:
+  run-specs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 14
+    - name: Install Dependencies  
+      run: npm install
+    - name: Run specs
+      run: npm run test
+      env:
+        RIZE_PROGRAM_ID: ${{ secrets.STG_TEST_PROGRAM_ID }}
+        RIZE_HMAC: ${{ secrets.STG_TEST_PROGRAM_SECRET }}
+        RIZE_TIER: ${{ secrets.STG_TEST_TIER }}

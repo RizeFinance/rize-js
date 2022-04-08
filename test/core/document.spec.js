@@ -9,6 +9,7 @@ chai.use(chaiAsPromised);
 const expect = chai.expect;
 
 const rizeClient = require('../helpers/rizeClient');
+const delayAsync = require('../helpers/delayAsync');
 
 describe('Document', () => {
     let testDocument;
@@ -113,7 +114,8 @@ describe('Document', () => {
         });
     });
 
-    describe('view', () => {
+    describe('view', async () => {
+        await delayAsync(1000);
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.document.view('', 'pdf');
             return expect(promise).to.eventually.be.rejectedWith('Document "uid" is required.');
@@ -131,7 +133,8 @@ describe('Document', () => {
         });
     });
 
-    describe('viewBase64', () => {
+    describe('viewBase64', async () => {
+        await delayAsync(1000);
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.document.viewBase64('');
             return expect(promise).to.eventually.be.rejectedWith('Document "uid" is required.');
@@ -143,7 +146,8 @@ describe('Document', () => {
         }).timeout(5000);
     });
 
-    describe('get', () => {
+    describe('get', async () => {
+        await delayAsync(1000);
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.document.get('');
             return expect(promise).to.eventually.be.rejectedWith('Document "uid" is required.');

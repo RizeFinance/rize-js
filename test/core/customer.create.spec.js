@@ -40,7 +40,7 @@ describe('Customer', () => {
 
         it('Creates a new customer', async () => {
             const externalUid = uuid();
-            const fakeEmail = faker.internet.email(undefined, undefined, 'rizetest.com');
+            const fakeEmail = faker.internet.email('qa+', null, 'rizemoney.com');
 
             const newCustomer = await rizeClient.customer.create(externalUid, fakeEmail);
             verifyNewCustomer(newCustomer, externalUid, fakeEmail);
