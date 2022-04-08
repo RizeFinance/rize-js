@@ -22,7 +22,7 @@ describe('KYCDocument', () => {
     let testImage;
 
     before(() => {
-        evaluationUid = 'b7xEPnimxzf8gBtR';
+        evaluationUid = process.env.TEST_EVALUATION_UID;
     });
 
     describe('getList', async () => {
