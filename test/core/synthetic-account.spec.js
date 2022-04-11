@@ -1,7 +1,5 @@
 'use strict';
 
-require('./customer-product.spec');
-
 const utils = require('../../lib/test-utils');
 
 const chai = require('chai');
@@ -18,6 +16,7 @@ describe('Synthetic Account', () => {
     let customerPoolUid;
     let testGeneralSyntheticAccountTypeUid;
     let testExternalSyntheticAccountTypeUid;
+    let testOutboundAchSyntheticAccountTypeUid;
     let testPlaidExternalSyntheticAccountTypeUid;
     let testGeneralSyntheticAccount;
     let testExternalSyntheticAccount;
@@ -209,6 +208,10 @@ describe('Synthetic Account', () => {
             testPlaidExternalSyntheticAccountTypeUid = syntheticAccountTypes.data
                 .find(x => x.synthetic_account_category === 'plaid_external')
                 .uid;
+
+            testOutboundAchSyntheticAccountTypeUid = syntheticAccountTypes.data
+                .find(x => x.synthetic_account_category === 'outbound_ach')
+                .uid;
         });
     });
 
@@ -241,6 +244,8 @@ describe('Synthetic Account', () => {
         const fakeGeneralSyntheticAccountExternalUid = faker.datatype.uuid();
         const fakeExternalSyntheticAccountName = 'Test External Account';
         const fakeExternalSyntheticAccountExternalUid = faker.datatype.uuid();
+        const fakeOutboundAchSyntheticAccountName = 'Test Outbound ACH Account';
+        const fakeOutboundAchSyntheticAccountExternalUid = faker.datatype.uuid();
 
         it('Throws an error if "external_uid" is empty', () => {
 
@@ -361,6 +366,33 @@ describe('Synthetic Account', () => {
                 customerPoolUid,
                 testPlaidExternalSyntheticAccountTypeUid,
                 'plaid_external'
+            );
+        });
+
+        it('Creates a new outbound_ach synthetic account', async () => {
+            const accountNumber = Math.random().toString().slice(2, 14);
+            const routingNumber = Math.random().toString().slice(2, 11);
+
+            const request = {
+                external_uid: fakeOutboundAchSyntheticAccountExternalUid,
+                pool_uid: customerPoolUid,
+                name: fakeOutboundAchSyntheticAccountName,
+                synthetic_account_type_uid: testOutboundAchSyntheticAccountTypeUid,
+                account_number: accountNumber,
+                routing_number: routingNumber
+            };
+
+            const syntheticAccount = await rizeClient.syntheticAccount.create(request);
+
+            verifyNewSyntheticAccount(
+                syntheticAccount,
+                fakeOutboundAchSyntheticAccountName,
+                fakeOutboundAchSyntheticAccountExternalUid,
+                customerPoolUid,
+                testOutboundAchSyntheticAccountTypeUid,
+                'outbound_ach',
+                accountNumber,
+                routingNumber
             );
         });
     });

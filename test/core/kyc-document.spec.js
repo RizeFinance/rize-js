@@ -1,7 +1,5 @@
 'use strict';
 
-require('./evaluation.spec');
-
 const utils = require('../../lib/test-utils');
 
 const chai = require('chai');
