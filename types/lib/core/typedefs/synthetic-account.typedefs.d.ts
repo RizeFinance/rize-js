@@ -10,7 +10,7 @@ export type SyntheticAccountType = {
     /**
      * - The name of the Synthetic Account Category for this type. Accounts can be in one of several categories that indicate their handling properties and defining characteristics such as 'general' or 'external'. As an example, 'external' accounts do not actually hold any assets and are instead used to represent an account at an external institution for use in initiating transfers.
      */
-    synthetic_account_category: 'general' | 'external' | 'plaid_external' | 'target_yield_account';
+    synthetic_account_category: 'general' | 'external' | 'plaid_external' | 'target_yield_account' | 'outbound_ach';
     /**
      * - A description outlining the intended use and requirements for this program's instance of the synthetic_account_type
      */
@@ -58,7 +58,7 @@ export type SyntheticAccount = {
     /**
      * - The name of the Synthetic Account Category associated with the Synthetic Account Type for this account. Refer to the Synthetic Account Type for details.
      */
-    synthetic_account_category: 'general' | 'external' | 'plaid_external' | 'target_yield_account';
+    synthetic_account_category: 'general' | 'external' | 'plaid_external' | 'target_yield_account' | 'outbound_ach';
     /**
      * A value indicating the overall state of this account:
      * - ***initiated*** - The Synthetic Account is being set up and is not usable. Currently this status is only applicable to the `plaid_external` category. A `plaid_external` Synthetic Account will have the `initiated` status when created. The status will be updated to `active` when the setup is complete.
@@ -149,7 +149,7 @@ export type SyntheticAccountListQuery = {
     /**
      * - Filter by Synthetic Account Category
      */
-    synthetic_account_category?: 'general' | 'external' | 'plaid_external' | 'target_yield_account';
+    synthetic_account_category?: 'general' | 'external' | 'plaid_external' | 'target_yield_account' | 'outbound_ach';
     /**
      * - Filter by liability or asset
      */
