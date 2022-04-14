@@ -11,7 +11,7 @@
     "test": "nyc mocha $1",
     "local:publish": "npm run docs:build && npm unpublish --force --registry http://localhost:4873 @rizefinance/rize-js && npm publish --registry http://localhost:4873"
   },
-  "author": "",
+  "author": "Rize Developer",
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^6.0.0-alpha.6",
