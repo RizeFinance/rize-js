@@ -39,8 +39,9 @@ export type Customer = {
      * - ***rejected*** - The Customer is not eligible for an account on this Program.
      * - ***archived*** - The Customer is archived; no actions are available for this Customer. All archived accounts have a $0.00 balance.
      * - ***under_review*** - The Customer's account balances are under review. Rize will not accept Transfer requests for this Customer until their status returns to 'active'. The Customer can continue using their Debit Card while in a status of 'under_review'. The Customer status must be 'active' before entering a status of 'under_review'. Rize will not return an 'under_review' status during any portion of creating a Customer or a Compliance Workflow.
+     * - ***pending_archival*** - A request has been received to archive the Customer, but the Customer's accounts are still being provisioned. Archival will occur after provisioning is complete. This status is expected to be very short-lived.
      */
-    status: 'initiated' | 'queued' | 'identity_verified' | 'active' | 'manual_review' | 'rejected' | 'archived' | 'under_review';
+    status: 'initiated' | 'queued' | 'identity_verified' | 'active' | 'manual_review' | 'rejected' | 'archived' | 'under_review' | 'pending_archival';
     /**
      * A value indicating the state of KYC/AML evaluation:
      * - ***manual_review*** - The Customer has been selected for manual review by the KYC/AML partner supporting the Program. This is an interim step and the Customer KYC Status will likely be moved to Pending Documents.
