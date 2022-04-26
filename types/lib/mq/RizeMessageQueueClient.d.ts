@@ -45,6 +45,7 @@ declare class RizeMessageQueueClient extends Stomp.Channel {
      * transmitted to the client to get dropped.
      */
     subscribeToRizeTopic(topicSubject: 'customer' | 'debit_card' | 'synthetic_account' | 'synthetic_account' | 'transfer' | 'transaction', subscriptionName: string, messageListener: messageListener, ackHeader?: 'client' | 'client-individual' | 'auto'): Stomp.Channel.ChannelSubscription;
+    on(event: any, listener: any): void;
 }
 declare namespace RizeMessageQueueClient {
     export { messageListener, ack, nack, AckCallback, NackCallback };

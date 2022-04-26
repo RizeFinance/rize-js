@@ -209,7 +209,7 @@ describe('Customer', () => {
 
         it('Throws an error if "status" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({status: ' '});
-            return expect(promise).to.eventually.be.rejectedWith('"status" query must be a string. Accepted values are: initiated | queued | identity_verified | active | manual_review | rejected | archived | under_review');
+            return expect(promise).to.eventually.be.rejectedWith('"status" query must be a string. Accepted values are: initiated | queued | identity_verified | active | manual_review | rejected | archived | under_review | pending_archival');
         });
 
         it('Throws an error if "include_initiated" query parameter is invalid', () => {
