@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "axios": "^0.26.1",
-    "jsrsasign": "^10.5.17",
+    "jsrsasign": "^10.5.20",
     "lodash": "^4.17.21",
     "query-string": "^7.1.1",
     "stompit": "^1.0.0",
