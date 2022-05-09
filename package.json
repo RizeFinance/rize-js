@@ -15,7 +15,7 @@
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^6.3.1",
-    "@types/jsrsasign": "^10.2.1",
+    "@types/jsrsasign": "^10.5.0",
     "@types/stompit": "^0.26.3",
     "@types/validator": "^13.7.2",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
