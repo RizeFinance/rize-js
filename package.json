@@ -23,7 +23,7 @@
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
     "documentation": "^13.2.5",
-    "dotenv": "^16.0.0",
+    "dotenv": "^16.0.1",
     "eslint": "^8.15.0",
     "eslint-plugin-chai-friendly": "^0.7.2",
     "mocha": "^10.0.0",
