@@ -1,5 +1,11 @@
 'use strict';
 
+require('./transfer.spec');
+require('./debit-card.spec');
+require('./transaction.spec');
+require('./kyc-document.spec');
+require('./document.spec');
+
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 

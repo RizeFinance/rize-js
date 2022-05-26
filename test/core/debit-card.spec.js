@@ -1,5 +1,8 @@
 'use strict';
 
+require('./customer-product.spec');
+require('./pool.spec');
+
 const utils = require('../../lib/test-utils');
 
 const chai = require('chai');
