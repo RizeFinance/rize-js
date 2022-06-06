@@ -2,6 +2,7 @@ export type CustomerDetails = {
     first_name: string;
     middle_name?: string | null;
     last_name: string;
+    business_name: string;
     suffix?: string | null;
     phone: string;
     ssn: string;
@@ -17,6 +18,10 @@ export type Customer = {
      * - A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
      */
     external_uid: string;
+    /**
+     * - The type of Customer. Defaults to unaffiliated.
+     */
+    customer_type: 'unaffiliated' | 'sole_proprietor';
     /**
      * - A uid referring to the program this customer belongs to.
      */
@@ -119,6 +124,10 @@ export type CustomerListQuery = {
      * - A unique, immutable id provided by Client.
      */
     external_uid?: string;
+    /**
+     * - Only return Customers with a customer type matching exactly what is submitted.
+     */
+    customer_type?: string;
     /**
      * - Filter by pool. Multiple values are allowed.
      */
