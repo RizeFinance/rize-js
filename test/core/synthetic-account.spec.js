@@ -410,8 +410,8 @@ describe('Synthetic Account', () => {
     });
 
     it('Creates a new external synthetic account', async () => {
-      const accountNumber = Math.random().toString().slice(2, 14);
-      const routingNumber = Math.random().toString().slice(2, 11);
+      const accountNumber = faker.finance.account();
+      const routingNumber = faker.finance.account(9);
 
       const request = {
         external_uid: fakeExternalSyntheticAccountExternalUid,
