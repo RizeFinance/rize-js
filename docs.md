@@ -665,6 +665,7 @@ PII can be edited for a Customer up until a valid request is sent using the veri
 *   `uid` **[string][341]** Rize-generated unique customer id
 *   `email` **[string][341]** Email of the customer
 *   `details` **[CustomerDetails][350]** An object containing the supplied identifying information for the Customer
+*   `customer_type`  
 
 #### Examples
 
@@ -2088,7 +2089,7 @@ Type: [Object][383]
 *   `locked` **[boolean][388]?** Only return locked Customers if true and only return unlocked Customers if false
 *   `program_uid` **[string][341]?** Only return Customers belonging to the submitted Program.
 *   `external_uid` **[string][341]?** A unique, immutable id provided by Client.
-*   `customer_type` **[string][341]?** Only return Customers with a customer type matching exactly what is submitted.
+*   `customer_type` **CustomerType?** Only return Customers with a customer type matching exactly what is submitted.
 *   `pool_uid` **[Array][343]<[string][341]>?** Filter by pool. Multiple values are allowed.
 *   `limit` **[string][341]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
 *   `offset` **[string][341]?** Index of the items to start retrieving from. Default: 0

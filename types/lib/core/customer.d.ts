@@ -139,7 +139,7 @@ declare class CustomerService {
      *     }
      * );
      */
-    update(uid: string, email: string, details: CustomerDetails): Promise<Customer>;
+    update(uid: string, email: string, details: CustomerDetails, customer_type: any): Promise<Customer>;
     /**
      * Used to submit a Customer's Profile Responses to Profile Requirements.
      * @param {string} customerUid - A UID referring to the Customer.

@@ -127,7 +127,7 @@ export type CustomerListQuery = {
     /**
      * - Only return Customers with a customer type matching exactly what is submitted.
      */
-    customer_type?: string;
+    customer_type?: CustomerType;
     /**
      * - Filter by pool. Multiple values are allowed.
      */
