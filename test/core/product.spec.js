@@ -16,18 +16,20 @@ describe('Product', () => {
     describe('getList', async () => {
         it('Throws an error if "query" is invalid', () => {
             const promise = rizeClient.product.getList('');
-            return expect(promise).to.eventually.be.rejectedWith('"query" must be a ProductListQuery object.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"query" must be a ProductListQuery object.'
+            );
         });
 
         it('Retrieves the product list without query', async () => {
             const productList = await rizeClient.product.getList();
             testProduct = productList.data[0];
             utils.expectRizeList(productList);
-        });
+        }).timeout(10000);
 
         it('Retrieves the product list with query', async () => {
             const query = {
-                limit: 2
+                limit: 2,
             };
             const productList = await rizeClient.product.getList(query);
             utils.expectRizeList(productList);
@@ -37,7 +39,9 @@ describe('Product', () => {
     describe('get', () => {
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.product.get('');
-            return expect(promise).to.eventually.be.rejectedWith('Product "uid" is required.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                'Product "uid" is required.'
+            );
         });
 
         it('Retrieves product data successfully', async () => {
@@ -48,6 +52,7 @@ describe('Product', () => {
 
     after(() => {
         process.env.TEST_PRODUCT_UID = testProduct.uid;
-        process.env.TEST_PRODUCT_COMPLIANCE_PLAN_UID = testProduct.product_compliance_plan_uid;
+        process.env.TEST_PRODUCT_COMPLIANCE_PLAN_UID =
+      testProduct.product_compliance_plan_uid;
     });
 });

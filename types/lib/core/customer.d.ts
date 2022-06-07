@@ -26,8 +26,9 @@ declare class CustomerService {
      * Validates the parameters for the "create" method
      * @param {string} externalUid
      * @param {string} email
+     * @param {'unaffiliated'|'sole_proprietor'} customer_type
      */
-    protected _validateCreateParams(externalUid: string, email: string): void;
+    protected _validateCreateParams(externalUid: string, email: string, customer_type: 'unaffiliated' | 'sole_proprietor'): void;
     /**
      * @ignore @protected
      * Validates the parameters for the "update" method
@@ -35,7 +36,7 @@ declare class CustomerService {
      * @param {string} email
      * @param {CustomerDetails} details
      */
-    protected _validateUpdateParams(uid: string, email: string, details: CustomerDetails): void;
+    protected _validateUpdateParams(uid: string, email: string, details: CustomerDetails, customer_type?: string): void;
     /**
      * @ignore @protected
      * Validates the parameters for the "archive" method
@@ -77,6 +78,7 @@ declare class CustomerService {
      *     locked: false,
      *     program_uid: 'program_uid',
      *     external_uid: 'external_uid',
+     *     customer_type: 'unaffiliated',
      *     pool_uid: ['pool_uid1', 'pool_uid2'],
      *     limit: 50,
      *     offset: 0,
@@ -99,10 +101,11 @@ declare class CustomerService {
      * Creates a new instance of a customer.
      * @param {string} externalUid - A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.
      * @param {string} email - Email of the customer
+     * @param {'unaffiliated'|'sole_proprietor'} customer_type - Type of customer
      * @returns {Promise<Customer>} - A promise that returns a Customer if resolved.
-     * @example const newCustomer = await rize.customer.post(extenalUid, email);
+     * @example const newCustomer = await rize.customer.post(extenalUid, email, customer_type);
      */
-    create(externalUid: string, email: string): Promise<Customer>;
+    create(externalUid: string, email: string, customer_type?: 'unaffiliated' | 'sole_proprietor'): Promise<Customer>;
     /**
      * Adjusts Customer Data
      *
@@ -121,6 +124,7 @@ declare class CustomerService {
      *         first_name: 'Olive',
      *         middle_name: 'Olivia',
      *         last_name: 'Oyl',
+     *         business_name: `Olive's Olive Market`,
      *         suffix: 'Jr.',
      *         phone: '5555551212',
      *         ssn: '111-22-3333',
@@ -135,7 +139,7 @@ declare class CustomerService {
      *     }
      * );
      */
-    update(uid: string, email: string, details: CustomerDetails): Promise<Customer>;
+    update(uid: string, email: string, details: CustomerDetails, customer_type: any): Promise<Customer>;
     /**
      * Used to submit a Customer's Profile Responses to Profile Requirements.
      * @param {string} customerUid - A UID referring to the Customer.

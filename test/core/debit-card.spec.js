@@ -28,7 +28,7 @@ describe('DebitCards', () => {
         it('Throws an error if "query" is invalid', async () => {
             const promise = rizeClient.debitCard.getList('');
             return expect(promise).to.eventually.be.rejectedWith(
-                '"query" must be a DebitCardListQuery object.',
+                '"query" must be a DebitCardListQuery object.'
             );
         });
 
@@ -36,7 +36,7 @@ describe('DebitCards', () => {
             const query = { customer_uid: '' };
             const promise = rizeClient.debitCard.getList(query);
             return expect(promise).to.eventually.be.rejectedWith(
-                '"customer_uid" query must be an array.',
+                '"customer_uid" query must be an array.'
             );
         });
 
@@ -44,7 +44,7 @@ describe('DebitCards', () => {
             const query = { pool_uid: '' };
             const promise = rizeClient.debitCard.getList(query);
             return expect(promise).to.eventually.be.rejectedWith(
-                '"pool_uid" query must be an array.',
+                '"pool_uid" query must be an array.'
             );
         });
 
@@ -52,7 +52,7 @@ describe('DebitCards', () => {
             const query = { limit: 1.5 };
             const promise = rizeClient.debitCard.getList(query);
             return expect(promise).to.eventually.be.rejectedWith(
-                '"limit" query must be an integer.',
+                '"limit" query must be an integer.'
             );
         });
 
@@ -60,7 +60,7 @@ describe('DebitCards', () => {
             const query = { offset: 1.5 };
             const promise = rizeClient.debitCard.getList(query);
             return expect(promise).to.eventually.be.rejectedWith(
-                '"offset" query must be an integer.',
+                '"offset" query must be an integer.'
             );
         });
 
@@ -68,7 +68,7 @@ describe('DebitCards', () => {
             const query = { locked: 'true' };
             const promise = rizeClient.debitCard.getList(query);
             return expect(promise).to.eventually.be.rejectedWith(
-                '"locked" query must be boolean.',
+                '"locked" query must be boolean.'
             );
         });
 
@@ -76,7 +76,7 @@ describe('DebitCards', () => {
             const query = { status: '' };
             const promise = rizeClient.debitCard.getList(query);
             return expect(promise).to.eventually.be.rejectedWith(
-                '"status" query must be an array. Accepted values inside the array are: queued | issued | printing_physical_card | printing_physical_card_replacement | card_replacement_shipped | shipped | usable_without_pin | normal | closed | damaged | lost | stolen | administrative_lock | closed_by_administrator | card_replacement_shipment_returned | shipment_returned',
+                '"status" query must be an array. Accepted values inside the array are: queued | issued | printing_physical_card | printing_physical_card_replacement | card_replacement_shipped | shipped | usable_without_pin | normal | closed | damaged | lost | stolen | administrative_lock | closed_by_administrator | card_replacement_shipment_returned | shipment_returned'
             );
         });
 
@@ -84,14 +84,14 @@ describe('DebitCards', () => {
             const query = { status: [''] };
             const promise = rizeClient.debitCard.getList(query);
             return expect(promise).to.eventually.be.rejectedWith(
-                'Accepted values in the "status" query are: queued | issued | printing_physical_card | printing_physical_card_replacement | card_replacement_shipped | shipped | usable_without_pin | normal | closed | damaged | lost | stolen | administrative_lock | closed_by_administrator | card_replacement_shipment_returned | shipment_returned',
+                'Accepted values in the "status" query are: queued | issued | printing_physical_card | printing_physical_card_replacement | card_replacement_shipped | shipped | usable_without_pin | normal | closed | damaged | lost | stolen | administrative_lock | closed_by_administrator | card_replacement_shipment_returned | shipment_returned'
             );
         });
 
         it('Retrieves the debitCard list without query', async () => {
             const debitCardList = await rizeClient.debitCard.getList();
             return utils.expectRizeList(debitCardList);
-        });
+        }).timeout(10000);
 
         it('Retrieves the debitCard list with query', async () => {
             const query = {
@@ -106,11 +106,10 @@ describe('DebitCards', () => {
 
             utils.expectRizeList(debitCardList);
         });
-
     });
 
-    describe('Physical Card', function() {
-        before(function() {
+    describe('Physical Card', function () {
+        before(function () {
             if (testDebitCard && testDebitCard.type === 'virtual') {
                 this.skip();
             }
@@ -120,76 +119,56 @@ describe('DebitCards', () => {
             it('Throws an error if "customerUid" is empty', () => {
                 const promise = rizeClient.debitCard.create('test', '');
                 return expect(promise).to.eventually.be.rejectedWith(
-                    '"customerUid" is required.',
+                    '"customerUid" is required.'
                 );
             });
 
             it('Throws an error if "poolUid" is empty', () => {
                 const promise = rizeClient.debitCard.create('test', 'test', '');
                 return expect(promise).to.eventually.be.rejectedWith(
-                    '"poolUid" is required.',
+                    '"poolUid" is required.'
                 );
             });
 
             it('Throws an error if "street1" is empty when shippingAddress is supplied', () => {
-                const promise = rizeClient.debitCard.create(
-                    'test',
-                    'test',
-                    'test',
-                    {
-                        street1: '',
-                    },
-                );
+                const promise = rizeClient.debitCard.create('test', 'test', 'test', {
+                    street1: '',
+                });
                 return expect(promise).to.eventually.be.rejectedWith(
-                    '"shippingAddress.street1" is required if "shippingAddress" is supplied.',
+                    '"shippingAddress.street1" is required if "shippingAddress" is supplied.'
                 );
             });
 
             it('Throws an error if "city" is empty when shippingAddress is supplied', () => {
-                const promise = rizeClient.debitCard.create(
-                    'test',
-                    'test',
-                    'test',
-                    {
-                        street1: 'test',
-                        city: '',
-                    },
-                );
+                const promise = rizeClient.debitCard.create('test', 'test', 'test', {
+                    street1: 'test',
+                    city: '',
+                });
                 return expect(promise).to.eventually.be.rejectedWith(
-                    '"shippingAddress.city" is required if "shippingAddress" is supplied.',
+                    '"shippingAddress.city" is required if "shippingAddress" is supplied.'
                 );
             });
 
             it('Throws an error if "state" is empty when shippingAddress is supplied', () => {
-                const promise = rizeClient.debitCard.create(
-                    'test',
-                    'test',
-                    'test',
-                    {
-                        street1: 'test',
-                        city: 'test',
-                        state: '',
-                    },
-                );
+                const promise = rizeClient.debitCard.create('test', 'test', 'test', {
+                    street1: 'test',
+                    city: 'test',
+                    state: '',
+                });
                 return expect(promise).to.eventually.be.rejectedWith(
-                    '"shippingAddress.state" is required if "shippingAddress" is supplied.',
+                    '"shippingAddress.state" is required if "shippingAddress" is supplied.'
                 );
             });
 
             it('Throws an error if "postal_code" is empty when shippingAddress is supplied', () => {
-                const promise = rizeClient.debitCard.create(
-                    'test',
-                    'test',
-                    'test',
-                    {
-                        street1: 'test',
-                        city: 'test',
-                        state: 'test',
-                        postal_code: '',
-                    },
-                );
+                const promise = rizeClient.debitCard.create('test', 'test', 'test', {
+                    street1: 'test',
+                    city: 'test',
+                    state: 'test',
+                    postal_code: '',
+                });
                 return expect(promise).to.eventually.be.rejectedWith(
-                    '"shippingAddress.postal_code" is required if "shippingAddress" is supplied.',
+                    '"shippingAddress.postal_code" is required if "shippingAddress" is supplied.'
                 );
             });
 
@@ -198,9 +177,8 @@ describe('DebitCards', () => {
                 const createdDebit = await rizeClient.debitCard.create(
                     externalUid,
                     customerUid,
-                    customerPoolUid,
+                    customerPoolUid
                 );
-
 
                 testDebitCard = createdDebit;
 
@@ -217,68 +195,60 @@ describe('DebitCards', () => {
                     .to.have.property('pool_uid')
                     .that.equals(customerPoolUid);
 
-                expect(createdDebit)
-                    .to.have.property('type')
-                    .that.equals('physical');
-
+                expect(createdDebit).to.have.property('type').that.equals('physical');
             });
         });
 
         describe('Physical Card - Acquiring Card Image', () => {
             let accessToken;
-    
+
             it('Access Token - Throws an error if "uid" is empty', () => {
                 const promise = rizeClient.debitCard.getAccessTokenData('');
                 return expect(promise).to.eventually.be.rejectedWith(
-                    'Debit Card "uid" is required.',
+                    'Debit Card "uid" is required.'
                 );
             });
-    
+
             it('Access Token - Fetches successfully', async () => {
                 const accessTokenResponse =
-              await rizeClient.debitCard.getAccessTokenData(testDebitCard.uid);
-    
+          await rizeClient.debitCard.getAccessTokenData(testDebitCard.uid);
+
                 accessToken = accessTokenResponse;
-    
+
                 expect(accessTokenResponse).to.have.property('token');
                 expect(accessTokenResponse).to.have.property('config_id');
-    
             });
-    
+
             it('Get Virtual Card Image - Throws an error if "configId" is empty', () => {
                 const promise = rizeClient.debitCard.getVirtualCardImage('', 'token');
                 return expect(promise).to.eventually.be.rejectedWith(
-                    '"configId" is required.',
+                    '"configId" is required.'
                 );
             });
-    
+
             it('Get Virtual Card Image - Throws an error if "token" is empty', () => {
                 const promise = rizeClient.debitCard.getVirtualCardImage(
                     'configId',
-                    '',
+                    ''
                 );
                 return expect(promise).to.eventually.be.rejectedWith(
-                    '"token" is required.',
+                    '"token" is required.'
                 );
             });
-    
+
             it('Get Virtual Card Image - Fetches the Image successfully', async () => {
                 const response = await rizeClient.debitCard.getVirtualCardImage(
                     accessToken.config_id,
-                    accessToken.token,
+                    accessToken.token
                 );
-    
+
                 expect(response).to.be.a('string');
             });
         });
-
-
     });
 
-   
-    describe('Virtual Card', function() {
-
-        before(function() {
+    describe('Virtual Card', function () {
+        before(function () {
             if (testDebitCard.type !== 'virtual') {
                 this.skip();
             }
@@ -290,42 +260,41 @@ describe('DebitCards', () => {
             it('Access Token - Throws an error if "uid" is empty', () => {
                 const promise = rizeClient.debitCard.getAccessTokenData('');
                 return expect(promise).to.eventually.be.rejectedWith(
-                    'Debit Card "uid" is required.',
+                    'Debit Card "uid" is required.'
                 );
             });
 
             it('Access Token - Fetches successfully', async () => {
                 const accessTokenResponse =
-              await rizeClient.debitCard.getAccessTokenData(testDebitCard.uid);
+          await rizeClient.debitCard.getAccessTokenData(testDebitCard.uid);
 
                 accessToken = accessTokenResponse;
 
                 expect(accessTokenResponse).to.have.property('token');
                 expect(accessTokenResponse).to.have.property('config_id');
-
             });
 
             it('Get Virtual Card Image - Throws an error if "configId" is empty', () => {
                 const promise = rizeClient.debitCard.getVirtualCardImage('', 'token');
                 return expect(promise).to.eventually.be.rejectedWith(
-                    '"configId" is required.',
+                    '"configId" is required.'
                 );
             });
 
             it('Get Virtual Card Image - Throws an error if "token" is empty', () => {
                 const promise = rizeClient.debitCard.getVirtualCardImage(
                     'configId',
-                    '',
+                    ''
                 );
                 return expect(promise).to.eventually.be.rejectedWith(
-                    '"token" is required.',
+                    '"token" is required.'
                 );
             });
 
             it('Get Virtual Card Image - Fetches the Image successfully', async () => {
                 const response = await rizeClient.debitCard.getVirtualCardImage(
                     accessToken.config_id,
-                    accessToken.token,
+                    accessToken.token
                 );
 
                 expect(response).to.be.a('string');
@@ -334,32 +303,40 @@ describe('DebitCards', () => {
 
         describe('migrateVirtualCard', () => {
             it('Throws an error if "uid" is empty', () => {
-                const promise = rizeClient.debitCard.migrateVirtualCard({uid: '', customerUid: 'customerUid', poolUid: 'poolUid'});
+                const promise = rizeClient.debitCard.migrateVirtualCard({
+                    uid: '',
+                    customerUid: 'customerUid',
+                    poolUid: 'poolUid',
+                });
                 return expect(promise).to.eventually.be.rejectedWith(
-                    'Debit Card "uid" is required.',
+                    'Debit Card "uid" is required.'
                 );
             });
 
             it('Throws an error if "customerUid" is empty', () => {
-                const promise = rizeClient.debitCard.migrateVirtualCard(
-                    {uid: 'uid', customerUid: '', poolUid: 'poolUid'}
-                );
+                const promise = rizeClient.debitCard.migrateVirtualCard({
+                    uid: 'uid',
+                    customerUid: '',
+                    poolUid: 'poolUid',
+                });
                 return expect(promise).to.eventually.be.rejectedWith(
-                    '"customerUid" is required.',
+                    '"customerUid" is required.'
                 );
             });
 
             it('Throws an error if "poolUid" is empty', () => {
-                const promise = rizeClient.debitCard.migrateVirtualCard(
-                    {uid: 'uid', customerUid: 'customerUid', poolUid: ''}
-                );
+                const promise = rizeClient.debitCard.migrateVirtualCard({
+                    uid: 'uid',
+                    customerUid: 'customerUid',
+                    poolUid: '',
+                });
                 return expect(promise).to.eventually.be.rejectedWith(
-                    '"poolUid" is required.',
+                    '"poolUid" is required.'
                 );
             });
 
             it('Migrates virtual card to physical card successfully', async () => {
-                const migratedCard =  await rizeClient.debitCard.migrateVirtualCard({
+                const migratedCard = await rizeClient.debitCard.migrateVirtualCard({
                     uid: testDebitCard.uid,
                     customerUid: testDebitCard.customer_uid,
                     poolUid: testDebitCard.pool_uid,
@@ -374,27 +351,23 @@ describe('DebitCards', () => {
                 await delayAsync(5000);
 
                 const updatedCard = await rizeClient.debitCard.get(migratedCard.uid);
-                expect(updatedCard).to.include({type: 'physical'});
+                expect(updatedCard).to.include({ type: 'physical' });
             }).timeout(10000);
         });
-
-    }); 
-
-
-    
+    });
 
     describe('locking a debit card', () => {
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.debitCard.lock('');
             return expect(promise).to.eventually.be.rejectedWith(
-                'Debit Card "uid" is required.',
+                'Debit Card "uid" is required.'
             );
         });
 
         it('Throws an error if "lockReason" is empty', () => {
             const promise = rizeClient.debitCard.lock('test', '');
             return expect(promise).to.eventually.be.rejectedWith(
-                '"lockReason" is required.',
+                '"lockReason" is required.'
             );
         });
 
@@ -402,7 +375,7 @@ describe('DebitCards', () => {
             const lockReason = 'Fraud detected';
             const updatedDebitCard = await rizeClient.debitCard.lock(
                 testDebitCard.uid,
-                lockReason,
+                lockReason
             );
             expect(updatedDebitCard)
                 .to.have.property('uid')
@@ -418,12 +391,14 @@ describe('DebitCards', () => {
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.debitCard.unlock('');
             return expect(promise).to.eventually.be.rejectedWith(
-                'Debit Card "uid" is required.',
+                'Debit Card "uid" is required.'
             );
         });
 
         it('Unlocks debit card successfully', async () => {
-            const updatedDebitCard = await rizeClient.debitCard.unlock(testDebitCard.uid);
+            const updatedDebitCard = await rizeClient.debitCard.unlock(
+                testDebitCard.uid
+            );
 
             expect(updatedDebitCard)
                 .to.have.property('uid')
@@ -437,7 +412,7 @@ describe('DebitCards', () => {
         it('Throws an error if "uid" is empty', async () => {
             const promise = rizeClient.debitCard.get('');
             return expect(promise).to.eventually.be.rejectedWith(
-                'Debit Card "uid" is required.',
+                'Debit Card "uid" is required.'
             );
         });
 
@@ -447,17 +422,18 @@ describe('DebitCards', () => {
         });
     });
 
-
     describe('getPinChangeToken', () => {
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.debitCard.getPinChangeToken('');
             return expect(promise).to.eventually.be.rejectedWith(
-                'Debit Card "uid" is required.',
+                'Debit Card "uid" is required.'
             );
         });
 
         it('Fetches the Pin Token successfully', async () => {
-            const pin = await rizeClient.debitCard.getPinChangeToken(testDebitCard.uid);
+            const pin = await rizeClient.debitCard.getPinChangeToken(
+                testDebitCard.uid
+            );
             expect(pin).to.have.property('pin_change_token');
         });
     });
@@ -466,28 +442,28 @@ describe('DebitCards', () => {
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.debitCard.reissue('');
             return expect(promise).to.eventually.be.rejectedWith(
-                'Debit Card "uid" is required.',
+                'Debit Card "uid" is required.'
             );
         });
 
         it('Throws an error if "reissueReason" is empty', () => {
             const promise = rizeClient.debitCard.reissue('test', '');
             return expect(promise).to.eventually.be.rejectedWith(
-                '"reissueReason" is required.',
+                '"reissueReason" is required.'
             );
         });
 
         it('Throws an error if "reissueReason" is invalid', () => {
             const promise = rizeClient.debitCard.reissue('test', 'test');
             return expect(promise).to.eventually.be.rejectedWith(
-                'Invalid reissueReason. Accepted values are: damaged | lost | stolen',
+                'Invalid reissueReason. Accepted values are: damaged | lost | stolen'
             );
         });
 
         it('Reissues debit card successfully', () => {
             const updatedDebitCard = rizeClient.debitCard.reissue(
                 testDebitCard.uid,
-                'damaged',
+                'damaged'
             );
             expect(updatedDebitCard)
                 .to.eventually.have.property('uid')
@@ -497,19 +473,3 @@ describe('DebitCards', () => {
         });
     });
 });
-
-    
-   
-
- 
-
-   
-    
-
-   
-
-    
-    
-   
-
-    

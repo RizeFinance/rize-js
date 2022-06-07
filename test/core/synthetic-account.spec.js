@@ -32,17 +32,33 @@ describe('Synthetic Account', () => {
         expect(list).to.have.property('total_count').to.be.a('number');
         expect(list).to.have.property('count').to.be.a('number');
         expect(list).to.have.property('limit').to.be.a('number').that.equals(limit);
-        expect(list).to.have.property('offset').to.be.a('number').that.equals(offset);
+        expect(list)
+            .to.have.property('offset')
+            .to.be.a('number')
+            .that.equals(offset);
         expect(list).to.have.property('data').to.be.an('array');
     };
 
-    const verifyNewSyntheticAccount = (data, name, externalUid, poolUid, syntheticAccountTypeUid, syntheticAccountCategory, accountNumber, routingNumber) => {
+    const verifyNewSyntheticAccount = (
+        data,
+        name,
+        externalUid,
+        poolUid,
+        syntheticAccountTypeUid,
+        syntheticAccountCategory,
+        accountNumber,
+        routingNumber
+    ) => {
         expect(data).to.have.property('uid');
         expect(data).to.have.property('name').that.equals(name);
         expect(data).to.have.property('external_uid').that.equals(externalUid);
         expect(data).to.have.property('pool_uid').that.equals(poolUid);
-        expect(data).to.have.property('synthetic_account_type_uid').that.equals(syntheticAccountTypeUid);
-        expect(data).to.have.property('synthetic_account_category').that.equals(syntheticAccountCategory);
+        expect(data)
+            .to.have.property('synthetic_account_type_uid')
+            .that.equals(syntheticAccountTypeUid);
+        expect(data)
+            .to.have.property('synthetic_account_category')
+            .that.equals(syntheticAccountCategory);
         expect(data).to.have.property('status');
         expect(data).to.have.property('liability');
         expect(data).to.have.property('net_usd_balance');
@@ -52,8 +68,17 @@ describe('Synthetic Account', () => {
 
         if (syntheticAccountCategory === 'external') {
             expect(data).to.have.property('account_number').that.equals(null);
-            expect(data).to.have.property('account_number_last_four').that.equals(accountNumber.substring(accountNumber.length - 4, accountNumber.length));
-            expect(data).to.have.property('routing_number').that.equals(routingNumber);
+            expect(data)
+                .to.have.property('account_number_last_four')
+                .that.equals(
+                    accountNumber.substring(
+                        accountNumber.length - 4,
+                        accountNumber.length
+                    )
+                );
+            expect(data)
+                .to.have.property('routing_number')
+                .that.equals(routingNumber);
         } else {
             expect(data).to.have.property('account_number');
             expect(data).to.have.property('account_number_last_four');
@@ -66,90 +91,116 @@ describe('Synthetic Account', () => {
     describe('getList', async () => {
         it('Throws an error if "query" is invalid', () => {
             const promise = rizeClient.syntheticAccount.getList('');
-            return expect(promise).to.eventually.be.rejectedWith('"query" must be a SyntheticAccountListQuery object.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"query" must be a SyntheticAccountListQuery object.'
+            );
         });
 
         it('Throws an error if "customer_uid" query is not an array', () => {
             const query = { customer_uid: '' };
             const promise = rizeClient.syntheticAccount.getList(query);
-            return expect(promise).to.eventually.be.rejectedWith('"customer_uid" query must be an array of strings.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"customer_uid" query must be an array of strings.'
+            );
         });
 
         it('Throws an error if "customer_uid" query is not an array of strings', () => {
             const query = { customer_uid: ['customer_uid', null] };
             const promise = rizeClient.syntheticAccount.getList(query);
-            return expect(promise).to.eventually.be.rejectedWith('"customer_uid" query must be an array of strings.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"customer_uid" query must be an array of strings.'
+            );
         });
 
         it('Throws an error if "external_uid" query is not a string', () => {
             const query = { external_uid: null };
             const promise = rizeClient.syntheticAccount.getList(query);
-            return expect(promise).to.eventually.be.rejectedWith('"external_uid" query must be a string.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"external_uid" query must be a string.'
+            );
         });
 
         it('Throws an error if "pool_uid" query is not an array', () => {
             const query = { pool_uid: '' };
             const promise = rizeClient.syntheticAccount.getList(query);
-            return expect(promise).to.eventually.be.rejectedWith('"pool_uid" query must be an array of strings.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"pool_uid" query must be an array of strings.'
+            );
         });
 
         it('Throws an error if "pool_uid" query is not an array of strings', () => {
             const query = { pool_uid: ['pool_uid', null] };
             const promise = rizeClient.syntheticAccount.getList(query);
-            return expect(promise).to.eventually.be.rejectedWith('"pool_uid" query must be an array of strings.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"pool_uid" query must be an array of strings.'
+            );
         });
 
         it('Throws an error if "limit" query is not an integer', () => {
             const query = { limit: 1.5 };
             const promise = rizeClient.syntheticAccount.getList(query);
-            return expect(promise).to.eventually.be.rejectedWith('"limit" query must be an integer.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"limit" query must be an integer.'
+            );
         });
 
         it('Throws an error if "offset" query is not an integer', () => {
             const query = { offset: 1.5 };
             const promise = rizeClient.syntheticAccount.getList(query);
-            return expect(promise).to.eventually.be.rejectedWith('"offset" query must be an integer.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"offset" query must be an integer.'
+            );
         });
 
         it('Throws an error if "synthetic_account_type_uid" query is not a string', () => {
             const query = { synthetic_account_type_uid: null };
             const promise = rizeClient.syntheticAccount.getList(query);
-            return expect(promise).to.eventually.be.rejectedWith('"synthetic_account_type_uid" query must be a string.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"synthetic_account_type_uid" query must be a string.'
+            );
         });
 
         it('Throws an error if "synthetic_account_category" query is not on the synthetic_account_category options', () => {
             const query = { synthetic_account_category: 'test' };
             const promise = rizeClient.syntheticAccount.getList(query);
-            return expect(promise).to.eventually.be.rejectedWith('"synthetic_account_category" query must be a string. Accepted values are: general | external | plaid_external');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"synthetic_account_category" query must be a string. Accepted values are: general | external | plaid_external'
+            );
         });
 
         it('Throws an error if "program_uid" query is not a string', () => {
             const query = { program_uid: null };
             const promise = rizeClient.syntheticAccount.getList(query);
-            return expect(promise).to.eventually.be.rejectedWith('"program_uid" query must be a string.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"program_uid" query must be a string.'
+            );
         });
 
         it('Throws an error if "liability" query is not a boolean', () => {
             const query = { liability: null };
             const promise = rizeClient.syntheticAccount.getList(query);
-            return expect(promise).to.eventually.be.rejectedWith('"liability" query must be boolean.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"liability" query must be boolean.'
+            );
         });
 
         it('Throws an error if "sort" query is not on the sort options', () => {
             const query = { sort: null };
             const promise = rizeClient.syntheticAccount.getList(query);
-            return expect(promise).to.eventually.be.rejectedWith('"sort" query must be a string. Accepted values are: name_asc | name_desc | net_usd_balance_asc | net_usd_balance_desc | net_usd_pending_balance_asc | net_usd_pending_balance_desc | net_usd_available_balance_asc | net_usd_available_balance_desc');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"sort" query must be a string. Accepted values are: name_asc | name_desc | net_usd_balance_asc | net_usd_balance_desc | net_usd_pending_balance_asc | net_usd_pending_balance_desc | net_usd_available_balance_asc | net_usd_available_balance_desc'
+            );
         });
 
         it('Retrieves the synthetic account list without query', async () => {
             const syntheticAccountList = await rizeClient.syntheticAccount.getList();
 
             utils.expectRizeList(syntheticAccountList);
-        });
+        }).timeout(10000);
 
         it('Retrieves the synthetic account list with customer_uid query', async () => {
             const syntheticAccountList = await rizeClient.syntheticAccount.getList({
-                customer_uid: [customerUid]
+                customer_uid: [customerUid],
             });
 
             utils.expectRizeList(syntheticAccountList);
@@ -168,9 +219,11 @@ describe('Synthetic Account', () => {
                 synthetic_account_category: 'general',
                 program_uid: 'program_uid',
                 liability: true,
-                sort: 'name_asc'
+                sort: 'name_asc',
             };
-            const syntheticAccountList = await rizeClient.syntheticAccount.getList(query);
+            const syntheticAccountList = await rizeClient.syntheticAccount.getList(
+                query
+            );
             utils.expectRizeList(syntheticAccountList);
         });
     });
@@ -178,17 +231,23 @@ describe('Synthetic Account', () => {
     describe('getTypesList', () => {
         it('Throws an error if "query" is invalid', () => {
             const promise = rizeClient.syntheticAccount.getTypesList('');
-            return expect(promise).to.eventually.be.rejectedWith('"query" must be a SyntheticAccountTypeListQuery object.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"query" must be a SyntheticAccountTypeListQuery object.'
+            );
         });
 
         it('Throws an error if "limit" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({ limit: ' ' });
-            return expect(promise).to.eventually.be.rejectedWith('"limit" query must be an integer.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"limit" query must be an integer.'
+            );
         });
 
         it('Throws an error if "offset" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({ offset: ' ' });
-            return expect(promise).to.eventually.be.rejectedWith('"offset" query must be an integer.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"offset" query must be an integer.'
+            );
         });
 
         it('Retrieves the synthetic account type list with query', async () => {
@@ -196,48 +255,66 @@ describe('Synthetic Account', () => {
                 limit: 10,
                 offset: 0,
             };
-            const syntheticAccountTypes = await rizeClient.syntheticAccount.getTypesList(query);
-            verifySyntheticAccountTypesList(syntheticAccountTypes, query.limit, query.offset);
+            const syntheticAccountTypes =
+        await rizeClient.syntheticAccount.getTypesList(query);
+            verifySyntheticAccountTypesList(
+                syntheticAccountTypes,
+                query.limit,
+                query.offset
+            );
 
-            testGeneralSyntheticAccountTypeUid = syntheticAccountTypes.data
-                .find(x => x.synthetic_account_category === 'general')
-                .uid;
+            testGeneralSyntheticAccountTypeUid = syntheticAccountTypes.data.find(
+                x => x.synthetic_account_category === 'general'
+            ).uid;
 
-            testExternalSyntheticAccountTypeUid = syntheticAccountTypes.data
-                .find(x => x.synthetic_account_category === 'external')
-                .uid;
+            testExternalSyntheticAccountTypeUid = syntheticAccountTypes.data.find(
+                x => x.synthetic_account_category === 'external'
+            ).uid;
 
-            testPlaidExternalSyntheticAccountTypeUid = syntheticAccountTypes.data
-                .find(x => x.synthetic_account_category === 'plaid_external')
-                .uid;
+            testPlaidExternalSyntheticAccountTypeUid =
+        syntheticAccountTypes.data.find(
+            x => x.synthetic_account_category === 'plaid_external'
+        ).uid;
 
-            testOutboundAchSyntheticAccountTypeUid = syntheticAccountTypes.data
-                .find(x => x.synthetic_account_category === 'outbound_ach')
-                .uid;
+            testOutboundAchSyntheticAccountTypeUid = syntheticAccountTypes.data.find(
+                x => x.synthetic_account_category === 'outbound_ach'
+            ).uid;
         });
     });
 
     describe('getType', () => {
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.syntheticAccount.getType(' ');
-            return expect(promise).to.eventually.be.rejectedWith('Synthetic Account Type "uid" is required.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                'Synthetic Account Type "uid" is required.'
+            );
         });
 
         it('Retrieves a synthetic account type', async () => {
-            const syntheticAccountType = await rizeClient.syntheticAccount.getType(testGeneralSyntheticAccountTypeUid);
-            expect(syntheticAccountType).to.have.property('uid').that.equals(testGeneralSyntheticAccountTypeUid);
+            const syntheticAccountType = await rizeClient.syntheticAccount.getType(
+                testGeneralSyntheticAccountTypeUid
+            );
+            expect(syntheticAccountType)
+                .to.have.property('uid')
+                .that.equals(testGeneralSyntheticAccountTypeUid);
         });
     });
 
     describe('get', () => {
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.syntheticAccount.get('');
-            return expect(promise).to.eventually.be.rejectedWith('Synthetic Account "uid" is required.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                'Synthetic Account "uid" is required.'
+            );
         });
 
         it('Retrieves synthetic account info successfully', async () => {
-            const syntheticAccount = await rizeClient.syntheticAccount.get(testGeneralSyntheticAccount.uid);
-            expect(syntheticAccount).to.have.property('uid').that.equals(testGeneralSyntheticAccount.uid);
+            const syntheticAccount = await rizeClient.syntheticAccount.get(
+                testGeneralSyntheticAccount.uid
+            );
+            expect(syntheticAccount)
+                .to.have.property('uid')
+                .that.equals(testGeneralSyntheticAccount.uid);
         });
     });
 
@@ -250,16 +327,18 @@ describe('Synthetic Account', () => {
         const fakeOutboundAchSyntheticAccountExternalUid = faker.datatype.uuid();
 
         it('Throws an error if "external_uid" is empty', () => {
-
             const request = {
                 external_uid: '',
                 pool_uid: testGeneralSyntheticAccount.pool_uid,
                 name: fakeGeneralSyntheticAccountName,
-                synthetic_account_type_uid: testGeneralSyntheticAccount.synthetic_account_type_uid
+                synthetic_account_type_uid:
+          testGeneralSyntheticAccount.synthetic_account_type_uid,
             };
 
             const promise = rizeClient.syntheticAccount.create(request);
-            return expect(promise).to.eventually.be.rejectedWith('Create Synthetic Account "external_uid" is required.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                'Create Synthetic Account "external_uid" is required.'
+            );
         });
 
         it('Throws an error if "pool_uid" is empty', () => {
@@ -267,11 +346,14 @@ describe('Synthetic Account', () => {
                 external_uid: fakeGeneralSyntheticAccountExternalUid,
                 pool_uid: '',
                 name: fakeGeneralSyntheticAccountName,
-                synthetic_account_type_uid: testGeneralSyntheticAccount.synthetic_account_type_uid
+                synthetic_account_type_uid:
+          testGeneralSyntheticAccount.synthetic_account_type_uid,
             };
 
             const promise = rizeClient.syntheticAccount.create(request);
-            return expect(promise).to.eventually.be.rejectedWith('Create Synthetic Account "pool_uid" is required.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                'Create Synthetic Account "pool_uid" is required.'
+            );
         });
 
         it('Throws an error if "name" is empty', () => {
@@ -279,11 +361,14 @@ describe('Synthetic Account', () => {
                 external_uid: fakeGeneralSyntheticAccountExternalUid,
                 pool_uid: testGeneralSyntheticAccount.pool_uid,
                 name: '',
-                synthetic_account_type_uid: testGeneralSyntheticAccount.synthetic_account_type_uid
+                synthetic_account_type_uid:
+          testGeneralSyntheticAccount.synthetic_account_type_uid,
             };
 
             const promise = rizeClient.syntheticAccount.create(request);
-            return expect(promise).to.eventually.be.rejectedWith('Create Synthetic Account "name" is required.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                'Create Synthetic Account "name" is required.'
+            );
         });
 
         it('Throws an error if "synthetic_account_type_uid" is empty', () => {
@@ -291,11 +376,13 @@ describe('Synthetic Account', () => {
                 external_uid: fakeGeneralSyntheticAccountExternalUid,
                 pool_uid: testGeneralSyntheticAccount.pool_uid,
                 name: fakeGeneralSyntheticAccountName,
-                synthetic_account_type_uid: ''
+                synthetic_account_type_uid: '',
             };
 
             const promise = rizeClient.syntheticAccount.create(request);
-            return expect(promise).to.eventually.be.rejectedWith('Create Synthetic Account "synthetic_account_type_uid" is required.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                'Create Synthetic Account "synthetic_account_type_uid" is required.'
+            );
         });
 
         it('Creates a new general synthetic account', async () => {
@@ -303,10 +390,12 @@ describe('Synthetic Account', () => {
                 external_uid: fakeGeneralSyntheticAccountExternalUid,
                 pool_uid: customerPoolUid,
                 name: fakeGeneralSyntheticAccountName,
-                synthetic_account_type_uid: testGeneralSyntheticAccountTypeUid
+                synthetic_account_type_uid: testGeneralSyntheticAccountTypeUid,
             };
 
-            const syntheticAccount = await rizeClient.syntheticAccount.create(request);
+            const syntheticAccount = await rizeClient.syntheticAccount.create(
+                request
+            );
 
             verifyNewSyntheticAccount(
                 syntheticAccount,
@@ -321,8 +410,8 @@ describe('Synthetic Account', () => {
         });
 
         it('Creates a new external synthetic account', async () => {
-            const accountNumber = Math.random().toString().slice(2, 14);
-            const routingNumber = Math.random().toString().slice(2, 11);
+            const accountNumber = faker.finance.account();
+            const routingNumber = faker.finance.account(9);
 
             const request = {
                 external_uid: fakeExternalSyntheticAccountExternalUid,
@@ -330,10 +419,12 @@ describe('Synthetic Account', () => {
                 name: fakeExternalSyntheticAccountName,
                 synthetic_account_type_uid: testExternalSyntheticAccountTypeUid,
                 account_number: accountNumber,
-                routing_number: routingNumber
+                routing_number: routingNumber,
             };
 
-            const syntheticAccount = await rizeClient.syntheticAccount.create(request);
+            const syntheticAccount = await rizeClient.syntheticAccount.create(
+                request
+            );
 
             verifyNewSyntheticAccount(
                 syntheticAccount,
@@ -359,7 +450,9 @@ describe('Synthetic Account', () => {
                 plaid_processor_token: plaidProcessorToken,
             };
 
-            const syntheticAccount = await rizeClient.syntheticAccount.create(request);
+            const syntheticAccount = await rizeClient.syntheticAccount.create(
+                request
+            );
 
             verifyNewSyntheticAccount(
                 syntheticAccount,
@@ -381,10 +474,12 @@ describe('Synthetic Account', () => {
                 name: fakeOutboundAchSyntheticAccountName,
                 synthetic_account_type_uid: testOutboundAchSyntheticAccountTypeUid,
                 account_number: accountNumber,
-                routing_number: routingNumber
+                routing_number: routingNumber,
             };
 
-            const syntheticAccount = await rizeClient.syntheticAccount.create(request);
+            const syntheticAccount = await rizeClient.syntheticAccount.create(
+                request
+            );
 
             verifyNewSyntheticAccount(
                 syntheticAccount,
@@ -402,35 +497,56 @@ describe('Synthetic Account', () => {
     describe('update', () => {
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.syntheticAccount.update(' ', 'name', 'note');
-            return expect(promise).to.eventually.be.rejectedWith('Synthetic Account "uid" is required.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                'Synthetic Account "uid" is required.'
+            );
         });
 
         it('Throws an error if "name" is empty', () => {
             const syntheticAccountUid = testGeneralSyntheticAccount.uid;
-            const promise = rizeClient.syntheticAccount.update(syntheticAccountUid, ' ', 'note');
-            return expect(promise).to.eventually.be.rejectedWith('Synthetic Account "name" is required.');
+            const promise = rizeClient.syntheticAccount.update(
+                syntheticAccountUid,
+                ' ',
+                'note'
+            );
+            return expect(promise).to.eventually.be.rejectedWith(
+                'Synthetic Account "name" is required.'
+            );
         });
 
         it('Update a synthetic account', async () => {
             const syntheticAccountUid = testGeneralSyntheticAccount.uid;
-            const syntheticAccountType = await rizeClient.syntheticAccount.update(syntheticAccountUid, 'new name', 'note');
-            expect(syntheticAccountType).to.have.property('uid').that.equals(syntheticAccountUid);
-            expect(syntheticAccountType).to.have.property('name').that.equals('new name');
+            const syntheticAccountType = await rizeClient.syntheticAccount.update(
+                syntheticAccountUid,
+                'new name',
+                'note'
+            );
+            expect(syntheticAccountType)
+                .to.have.property('uid')
+                .that.equals(syntheticAccountUid);
+            expect(syntheticAccountType)
+                .to.have.property('name')
+                .that.equals('new name');
         });
     });
 
     describe('archive', () => {
         it('Throws an error if "uid" is empty', () => {
             const promise = rizeClient.syntheticAccount.archive('');
-            return expect(promise).to.eventually.be.rejectedWith('Synthetic Account "uid" is required.');
+            return expect(promise).to.eventually.be.rejectedWith(
+                'Synthetic Account "uid" is required.'
+            );
         });
 
         it('Archives the general synthetic account successfully', () => {
-            return expect(rizeClient.syntheticAccount.archive(testGeneralSyntheticAccount.uid)).to.be.fulfilled;
+            return expect(
+                rizeClient.syntheticAccount.archive(testGeneralSyntheticAccount.uid)
+            ).to.be.fulfilled;
         });
     });
 
     after(() => {
-        process.env.TEST_EXTERNAL_SYNTHETIC_ACCOUNT_UID = testExternalSyntheticAccount.uid;
+        process.env.TEST_EXTERNAL_SYNTHETIC_ACCOUNT_UID =
+      testExternalSyntheticAccount.uid;
     });
 });
