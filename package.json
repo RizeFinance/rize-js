@@ -18,7 +18,7 @@
     "@types/jsrsasign": "^10.5.1",
     "@types/stompit": "^0.26.3",
     "@types/validator": "^13.7.3",
-    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
     "@typescript-eslint/parser": "^5.27.0",
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
