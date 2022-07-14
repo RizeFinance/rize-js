@@ -213,7 +213,7 @@ describe('Customer', () => {
             );
         });
 
-        it('Updates unaffiliated customer info successfully', async () => {
+        it('Updates primary customer info successfully', async () => {
             updatedCustomer = await rizeClient.customer.update(
                 customerUid,
                 fakeEmail,
@@ -382,7 +382,7 @@ describe('Customer', () => {
         it('Throws an error if "customer_type" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({ customer_type: 'LLC' });
             return expect(promise).to.eventually.be.rejectedWith(
-                '"customer_type" query must be a string. Accepted values are: unaffiliated | sole_proprietor'
+                '"customer_type" query must be a string. Accepted values are: primary | sole_proprietor'
             );
         });
 
@@ -486,15 +486,15 @@ describe('Customer', () => {
         });
     });
 
-    it('Retrieves unaffiliated customer list with query', async () => {
+    it('Retrieves primary customer list with query', async () => {
         const query = {
-            customer_type: 'unaffiliated',
+            customer_type: 'primary',
         };
 
         const customerList = await rizeClient.customer.getList(query);
         utils.expectRizeList(customerList);
         customerList.data.forEach(customer =>
-            expect(customer).to.have.property('customer_type', 'unaffiliated')
+            expect(customer).to.have.property('customer_type', 'primary')
         );
     }).timeout(10000);
 
