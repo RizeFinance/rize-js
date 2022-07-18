@@ -1,6 +1,6 @@
 {
   "name": "@rizefinance/rize-js",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Rize API wrapper",
   "main": "index.js",
   "typings": "types/index.d.ts",

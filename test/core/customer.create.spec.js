@@ -15,7 +15,7 @@ const { faker } = require('@faker-js/faker');
 const rizeClient = require('../helpers/rizeClient');
 
 describe('Customer', () => {
-    let unaffiliatedCustomer, solePropCustomer;
+    let primaryCustomer, solePropCustomer;
 
     const verifyNewCustomer = (customer, external_uid, email) => {
         expect(customer).to.have.property('uid').that.is.not.empty;
@@ -23,7 +23,7 @@ describe('Customer', () => {
         expect(customer).to.have.property('email').that.equals(email);
         expect(customer).to.have.property('status').that.equals('initiated');
         expect(customer.customer_type).to.be.oneOf([
-            'unaffiliated',
+            'primary',
             'sole_proprietor',
         ]);
     };
@@ -50,10 +50,10 @@ describe('Customer', () => {
             );
         });
 
-        it('Creates a new unaffiliated customer', async () => {
+        it('Creates a new primary customer', async () => {
             const externalUid = uuid();
             const fakeEmail = faker.internet.email('qa+', null, 'rizemoney.com');
-            const customerType = 'unaffiliated';
+            const customerType = 'primary';
 
             const newCustomer = await rizeClient.customer.create(
                 externalUid,
@@ -62,9 +62,9 @@ describe('Customer', () => {
             );
             verifyNewCustomer(newCustomer, externalUid, fakeEmail);
 
-            mlog.log(`New unaffiliated Customer UID: ${newCustomer.uid}`);
+            mlog.log(`New primary Customer UID: ${newCustomer.uid}`);
             // Store the customerUid for next tests
-            unaffiliatedCustomer = newCustomer;
+            primaryCustomer = newCustomer;
         });
 
         it('Creates a new sole proprietor customer', async () => {
@@ -86,7 +86,7 @@ describe('Customer', () => {
     });
 
     after(() => {
-        process.env.TEST_CUSTOMER_UID = unaffiliatedCustomer.uid;
+        process.env.TEST_CUSTOMER_UID = primaryCustomer.uid;
         process.env.TEST_SOLE_PROP_CUSTOMER_UID = solePropCustomer.uid;
     });
 });
