@@ -20,12 +20,16 @@ describe('Customer', () => {
     const fakeFirstName = faker.name.firstName();
     const fakeMiddleName = faker.name.middleName();
     const fakeLastName = faker.name.lastName();
-    const fakeBusinessName = faker.company.companyName();
     const fakeSuffix = faker.name.suffix();
     const fakeEmail = `qa+${fakeFirstName + fakeLastName}@rizemoney.com`;
-    const fakePhone = faker.phone.phoneNumber('##########');
+    const fakePhone = faker.phone.number('##########');
     const fakeSsn = new RandomSSN().value().toFormattedString();
     const fakeDob = '1990-01-31';
+    const fakeSolePropFirstName = faker.name.firstName();
+    const fakeSolePropLastName = faker.name.lastName();
+    const fakeBusinessName = faker.company.companyName();
+    const fakeSolePropEmail = `qa+${fakeSolePropFirstName + fakeSolePropLastName}@rizemoney.com`;
+    const fakeSolePropSsn = new RandomSSN().value().toFormattedString();
     const fakeStreet1 = faker.address.streetAddress();
     const fakeStreet2 = faker.address.streetAddress();
     const fakeCity = faker.address.city();
@@ -125,8 +129,8 @@ describe('Customer', () => {
                 solePropCustomerUid,
                 '',
                 {
-                    first_name: fakeFirstName,
-                    last_name: fakeLastName,
+                    first_name: fakeSolePropFirstName,
+                    last_name: fakeSolePropLastName,
                 },
                 'sole_proprietor'
             );
@@ -213,7 +217,7 @@ describe('Customer', () => {
             );
         });
 
-        it('Updates unaffiliated customer info successfully', async () => {
+        it('Updates primary customer info successfully', async () => {
             updatedCustomer = await rizeClient.customer.update(
                 customerUid,
                 fakeEmail,
@@ -276,14 +280,14 @@ describe('Customer', () => {
     });
 
     it('Updates sole proprietor customer info successfully', async () => {
-        updatedCustomer = await rizeClient.customer.update(customerUid, fakeEmail, {
-            first_name: fakeFirstName,
+        let soleProprietorCustomer = await rizeClient.customer.update(solePropCustomerUid, fakeSolePropEmail, {
+            first_name: fakeSolePropFirstName,
             middle_name: fakeMiddleName,
-            last_name: fakeLastName,
+            last_name: fakeSolePropLastName,
             business_name: fakeBusinessName,
             suffix: fakeSuffix,
             phone: fakePhone,
-            ssn: fakeSsn,
+            ssn: fakeSolePropSsn,
             dob: fakeDob,
             address: {
                 street1: fakeStreet1,
@@ -291,47 +295,46 @@ describe('Customer', () => {
                 city: fakeCity,
                 state: fakeState,
                 postal_code: fakePostalCode,
-            },
-        });
-
-        expect(updatedCustomer).to.have.property('uid').that.equals(customerUid);
-        expect(updatedCustomer)
+            }
+        }, 'sole_proprietor');
+        expect(soleProprietorCustomer).to.have.property('uid').that.equals(solePropCustomerUid);
+        expect(soleProprietorCustomer)
             .to.have.nested.property('details.first_name')
-            .that.equals(fakeFirstName);
-        expect(updatedCustomer)
+            .that.equals(fakeSolePropFirstName);
+        expect(soleProprietorCustomer)
             .to.have.nested.property('details.middle_name')
             .that.equals(fakeMiddleName);
-        expect(updatedCustomer)
+        expect(soleProprietorCustomer)
             .to.have.nested.property('details.last_name')
-            .that.equals(fakeLastName);
-        expect(updatedCustomer)
+            .that.equals(fakeSolePropLastName);
+        expect(soleProprietorCustomer)
             .to.have.nested.property('details.business_name')
             .that.equals(fakeBusinessName);
-        expect(updatedCustomer)
+        expect(soleProprietorCustomer)
             .to.have.nested.property('details.dob')
             .that.equals(fakeDob);
-        expect(updatedCustomer)
+        expect(soleProprietorCustomer)
             .to.have.nested.property('details.phone')
             .that.equals(fakePhone);
-        expect(updatedCustomer)
+        expect(soleProprietorCustomer)
             .to.have.nested.property('details.ssn_last_four')
-            .that.equals(fakeSsn.substring(fakeSsn.length - 4));
-        expect(updatedCustomer)
+            .that.equals(fakeSolePropSsn.substring(fakeSolePropSsn.length - 4));
+        expect(soleProprietorCustomer)
             .to.have.nested.property('details.suffix')
             .that.equals(fakeSuffix);
-        expect(updatedCustomer)
+        expect(soleProprietorCustomer)
             .to.have.nested.property('details.address.street1')
             .that.equals(fakeStreet1);
-        expect(updatedCustomer)
+        expect(soleProprietorCustomer)
             .to.have.nested.property('details.address.street2')
             .that.equals(fakeStreet2);
-        expect(updatedCustomer)
+        expect(soleProprietorCustomer)
             .to.have.nested.property('details.address.city')
             .that.equals(fakeCity);
-        expect(updatedCustomer)
+        expect(soleProprietorCustomer)
             .to.have.nested.property('details.address.state')
             .that.equals(fakeState);
-        expect(updatedCustomer)
+        expect(soleProprietorCustomer)
             .to.have.nested.property('details.address.postal_code')
             .that.equals(fakePostalCode);
     });
@@ -382,7 +385,7 @@ describe('Customer', () => {
         it('Throws an error if "customer_type" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({ customer_type: 'LLC' });
             return expect(promise).to.eventually.be.rejectedWith(
-                '"customer_type" query must be a string. Accepted values are: unaffiliated | sole_proprietor'
+                '"customer_type" query must be a string. Accepted values are: primary | sole_proprietor'
             );
         });
 
@@ -486,15 +489,15 @@ describe('Customer', () => {
         });
     });
 
-    it('Retrieves unaffiliated customer list with query', async () => {
+    it('Retrieves primary customer list with query', async () => {
         const query = {
-            customer_type: 'unaffiliated',
+            customer_type: 'primary',
         };
 
         const customerList = await rizeClient.customer.getList(query);
         utils.expectRizeList(customerList);
         customerList.data.forEach(customer =>
-            expect(customer).to.have.property('customer_type', 'unaffiliated')
+            expect(customer).to.have.property('customer_type', 'primary')
         );
     }).timeout(10000);
 

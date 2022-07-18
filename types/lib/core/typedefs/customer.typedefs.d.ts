@@ -19,9 +19,9 @@ export type Customer = {
      */
     external_uid: string;
     /**
-     * - The type of Customer. Defaults to unaffiliated.
+     * - The type of Customer. Defaults to primary.
      */
-    customer_type: 'unaffiliated' | 'sole_proprietor';
+    customer_type: 'primary' | 'sole_proprietor';
     /**
      * - A uid referring to the program this customer belongs to.
      */

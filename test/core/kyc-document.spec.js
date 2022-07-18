@@ -15,7 +15,9 @@ const delayAsync = require('../helpers/delayAsync');
 
 const fs = require('fs');
 const path = require('path');
-const testFilePath = path.resolve(__dirname, '../test-files/rize-logo.png');
+
+// File size needs to be under 5MB
+const testFilePath = path.resolve(__dirname, '../test-files/test-file.svg');
 
 describe('KYCDocument', () => {
     let evaluationUid;
