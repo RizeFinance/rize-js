@@ -28,6 +28,13 @@ describe('Secondary Customer', () => {
             );
         });
 
+        it('Throws an error if "email" is invalid', () => {
+            const promise = rizeClient.customer.createSecondary('test', primaryCustomerUid, 'bad_email');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"email" is invalid.'
+            );
+        });
+
         it('Throws an error if "details" is invalid', () => {
             const promise = rizeClient.customer.createSecondary('test', primaryCustomerUid);
             return expect(promise).to.eventually.be.rejectedWith(
@@ -37,6 +44,7 @@ describe('Secondary Customer', () => {
 
         it('Creates a new secondary customer', async () => {
             const externalUid = uuid();
+            const fakeEmail = faker.internet.email('qa+', null, 'rizemoney.com');
             const details = {
                 first_name: faker.name.firstName(),
                 last_name: faker.name.lastName(),
@@ -54,6 +62,7 @@ describe('Secondary Customer', () => {
             const newCustomer = await rizeClient.customer.createSecondary(
                 externalUid,
                 primaryCustomerUid,
+                fakeEmail,
                 details
             );
 
