@@ -38,6 +38,20 @@ declare class CustomerService {
    */
     protected _validateUpdateParams(uid: string, email: string, details: CustomerDetails, customer_type?: string): void;
     /**
+* @ignore @protected
+* Validates the parameters for the "secondary customer" method
+* @param {string} uid
+* @param {string} primary_customer_uid
+* @param {CustomerDetails} details
+*/
+    protected _validateSecondaryCustomerParams(uid: string, primary_customer_uid: string, details: CustomerDetails, customer_type: any): void;
+    /**
+   * @ignore @protected
+   * @param {CustomerDetails} details
+   * @param {CustomerDetails} customer_type
+   */
+    protected _validateDetailParams(details: CustomerDetails, customer_type?: CustomerDetails): void;
+    /**
    * @ignore @protected
    * Validates the parameters for the "archive" method
    * @param {string} uid
@@ -96,7 +110,7 @@ declare class CustomerService {
    */
     get(uid: string): Promise<Customer>;
     /**
-   * Create a single Customer
+   * Create a single Primary or Sole Proprietor Customer
    *
    * Creates a new instance of a customer.
    * @param {string} externalUid - A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.
@@ -106,6 +120,17 @@ declare class CustomerService {
    * @example const newCustomer = await rize.customer.post(extenalUid, email, customer_type);
    */
     create(externalUid: string, email: string, customer_type?: 'primary' | 'sole_proprietor'): Promise<Customer>;
+    /**
+* Create a single Secondary Customer
+*
+* Creates a new instance of a customer.
+* @param {string} externalUid - A Customer identifier supplied by the Client, unique among the collection of all Client Customers.
+* @param {string} primary_customer_uid - The UID of the Primary Customer with whom this Secondary Customer will be affiliated
+* @param {CustomerDetails} details - An object containing the supplied identifying information for the Customer
+* @returns {Promise<Customer>} - A promise that returns a Customer if resolved.
+* @example const newSecondaryCustomer = await rize.secondaryCustomer.post(extenalUid, primary_customer_uid, details);
+*/
+    createSecondary(externalUid: string, primary_customer_uid: string, details: CustomerDetails): Promise<Customer>;
     /**
    * Adjusts Customer Data
    *

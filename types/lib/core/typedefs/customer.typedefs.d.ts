@@ -19,9 +19,9 @@ export type Customer = {
      */
     external_uid: string;
     /**
-     * - The type of Customer. Defaults to primary.
+     * - The type of Customer.
      */
-    customer_type: 'primary' | 'sole_proprietor';
+    customer_type: 'primary' | 'secondary' | 'sole_proprietor';
     /**
      * - A uid referring to the program this customer belongs to.
      */
@@ -72,6 +72,15 @@ export type Customer = {
      * - The lock reason provided by the Client, an admin User, or the system at the time the Customer was locked. This field will be null if and only if the locked_at is null.
      */
     lock_reason?: string | null;
+    /**
+     * Secondary type customers associated with the Customer.
+     */
+    secondary_customer_uids: Array<string> | null;
+    profile_responses: Array<CustomerProfileAnswerDetails>;
+    primary_customer_uid: string | null;
+    pii_confirmed_at: Date;
+    kyc_status_reasons: any[] | null;
+    activated_at: Date;
     /**
      * - An object containing the supplied identifying information for the Customer.
      */
