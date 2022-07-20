@@ -69,15 +69,15 @@ describe('Customer', () => {
 
         it('Creates a new sole proprietor customer', async () => {
             const externalUid = uuid();
-            const fakeEmail = faker.internet.email('qa+', null, 'rizemoney.com');
+            const fakeSolePropEmail = faker.internet.email('qa+', null, 'rizemoney.com');
             const customerType = 'sole_proprietor';
 
             const newCustomer = await rizeClient.customer.create(
                 externalUid,
-                fakeEmail,
+                fakeSolePropEmail,
                 customerType
             );
-            verifyNewCustomer(newCustomer, externalUid, fakeEmail);
+            verifyNewCustomer(newCustomer, externalUid, fakeSolePropEmail);
 
             mlog.log(`New Sole Proprietor Customer UID: ${newCustomer.uid}`);
             // Store the customerUid for next tests
