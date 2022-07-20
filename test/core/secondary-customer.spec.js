@@ -49,7 +49,7 @@ describe('Secondary Customer', () => {
                     state: faker.address.stateAbbr(),
                     postal_code: faker.address.zipCode()
                 }
-            }
+            };
 
             const newCustomer = await rizeClient.customer.createSecondary(
                 externalUid,
@@ -76,4 +76,4 @@ describe('Secondary Customer', () => {
     after(() => {
         process.env.TEST_SECONDARY_CUSTOMER_UID = secondaryCustomer.uid;
     });
-})
+});
