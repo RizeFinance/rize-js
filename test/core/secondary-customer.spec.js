@@ -42,12 +42,12 @@ describe('Secondary Customer', () => {
                 last_name: faker.name.lastName(),
                 phone: faker.phone.number('##########'),
                 ssn: new RandomSSN().value().toFormattedString(),
-                dob: '1999-09-09',
+                dob: faker.date.birthdate().toJSON().slice(0, 10),
                 address: {
-                    street1: "1515 N Courthouse Rd",
-                    city: "Arlington",
-                    state: "VA",
-                    postal_code: "22209"
+                    street1: faker.address.streetAddress(),
+                    city: faker.address.cityName(),
+                    state: faker.address.stateAbbr(),
+                    postal_code: faker.address.zipCode()
                 }
             }
 
