@@ -1,6 +1,7 @@
 'use strict';
 
 require('./synthetic-account.spec');
+require('./secondary-customer.spec');
 
 const utils = require('../../lib/test-utils');
 
