@@ -44,12 +44,12 @@ describe('Secondary Customer', () => {
                 ssn: new RandomSSN().value().toFormattedString(),
                 dob: '1999-09-09',
                 address: {
-                    street1: "1515 N Courthouse Rd",
-                    city: "Arlington",
-                    state: "VA",
-                    postal_code: "22209"
+                    street1: '1515 N Courthouse Rd',
+                    city: 'Arlington',
+                    state: 'VA',
+                    postal_code: '22209'
                 }
-            }
+            };
 
             const newCustomer = await rizeClient.customer.createSecondary(
                 externalUid,
@@ -76,4 +76,4 @@ describe('Secondary Customer', () => {
     after(() => {
         process.env.TEST_SECONDARY_CUSTOMER_UID = secondaryCustomer.uid;
     });
-})
+});
