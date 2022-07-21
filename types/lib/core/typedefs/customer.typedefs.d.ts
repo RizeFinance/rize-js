@@ -1,11 +1,28 @@
 export type CustomerDetails = {
     first_name: string;
+    middle_name: string | null;
+    last_name: string;
+    business_name: string | null;
+    suffix: string | null;
+    phone: string;
+    ssn: string | null;
+    dob: string;
+    address: Address;
+};
+export type CustomerDetailsParams = {
+    first_name: string;
     middle_name?: string | null;
     last_name: string;
-    business_name: string;
+    /**
+     * Required for customers of type sole_proprietor; ignored otherwise. 1-256 alphanumeric characters.
+     */
+    business_name?: string;
     suffix?: string | null;
     phone: string;
-    ssn: string;
+    /**
+     * Required for customers of type primary and sole_proprietor; ignored otherwise.
+     */
+    ssn?: string;
     dob: string;
     address: Address;
 };
@@ -33,7 +50,7 @@ export type Customer = {
     /**
      * - Email of the customer
      */
-    email: string;
+    email: string | null;
     /**
      * A value indicating the overall state of this Customer:
      * - ***initiated*** - Rize has created the Customer as a result of a post to the Compliance Workflows endpoint. This status will persist until Rize receives a successful request to perform Identity Verification. The Customer status will move to 'queued' after a successful request to perform Identity Verification.
@@ -158,3 +175,4 @@ export type CustomerListQuery = {
      */
     sort?: 'first_name_asc' | 'first_name_desc' | 'last_name_asc' | 'last_name_desc' | 'email_asc' | 'email_desc';
 };
+export type Address = import('./common.typedefs').Address;
