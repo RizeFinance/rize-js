@@ -29,13 +29,6 @@ describe('Customer', () => {
     };
 
     describe('create', () => {
-        it('Throws an error if "customerExternalUid" is empty', () => {
-            const promise = rizeClient.customer.create(' ', '');
-            return expect(promise).to.eventually.be.rejectedWith(
-                '"externalUid" is required.'
-            );
-        });
-
         it('Throws an error if "email" is empty', () => {
             const promise = rizeClient.customer.create('test', '');
             return expect(promise).to.eventually.be.rejectedWith(

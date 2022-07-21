@@ -612,6 +612,7 @@ const customerList = await rize.customer.getList({
     limit: 50,
     offset: 0,
     sort: 'first_name_asc'
+    business_name: 'Wrestler Workshop'
 });
 ```
 
@@ -643,7 +644,7 @@ Creates a new instance of a customer.
 
 #### Parameters
 
-*   `externalUid` **[string][344]** A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.
+*   `externalUid` **[string][344]** A Customer identifier supplied by the Partner, unique among the collection of all partner Customers. (optional, default `''`)
 *   `email` **[string][344]** Email of the customer
 *   `customer_type` **(`"primary"` | `"sole_proprietor"`)** Type of customer (optional, default `'primary'`)
 
@@ -663,8 +664,9 @@ Creates a new instance of a customer.
 
 #### Parameters
 
-*   `externalUid` **[string][344]** A Customer identifier supplied by the Client, unique among the collection of all Client Customers.
+*   `externalUid` **[string][344]** A Customer identifier supplied by the Client, unique among the collection of all Client Customers - optional (optional, default `''`)
 *   `primary_customer_uid` **[string][344]** The UID of the Primary Customer with whom this Secondary Customer will be affiliated
+*   `email` **[string][344]** Email of the Secondary Customer - optional
 *   `details` **[CustomerDetails][353]** An object containing the supplied identifying information for the Customer
 
 #### Examples
@@ -686,9 +688,9 @@ PII can be edited for a Customer up until a valid request is sent using the veri
 #### Parameters
 
 *   `uid` **[string][344]** Rize-generated unique customer id
-*   `email` **[string][344]** Email of the customer
-*   `details` **[CustomerDetails][353]** An object containing the supplied identifying information for the Customer
-*   `customer_type`  
+*   `email` **([string][344] | null)** Email of the customer (optional, default `null`)
+*   `details` **[CustomerDetails][353]** An object containing the supplied identifying information for the Customer (optional, default `null`)
+*   `customer_type` **(`"primary"` | `"sole_proprietor"` | `"secondary"`)** Type of customer
 
 #### Examples
 
@@ -2118,10 +2120,11 @@ Type: [Object][386]
 *   `locked` **[boolean][391]?** Only return locked Customers if true and only return unlocked Customers if false
 *   `program_uid` **[string][344]?** Only return Customers belonging to the submitted Program.
 *   `external_uid` **[string][344]?** A unique, immutable id provided by Client.
-*   `customer_type` **CustomerType?** Only return Customers with a customer type matching exactly what is submitted.
+*   `customer_type` **(`"primary"` | `"secondary"` | `"sole_proprietor"`)?** Only return Customers with a customer type matching exactly what is submitted.
 *   `pool_uid` **[Array][346]<[string][344]>?** Filter by pool. Multiple values are allowed.
 *   `limit` **[string][344]?** Maximum number of items to retrieve. This filter is automatically applied with the default value if not given. Default: 100
 *   `offset` **[string][344]?** Index of the items to start retrieving from. Default: 0
+*   `business_name` **[string][344]?** Only return Customers with a business name at least partially matching what is submitted. Exact matches will be sorted first
 *   `sort` **(`"first_name_asc"` | `"first_name_desc"` | `"last_name_asc"` | `"last_name_desc"` | `"email_asc"` | `"email_desc"`)?** Sort returned items.
 
 ## DebitCard

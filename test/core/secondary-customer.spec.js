@@ -24,7 +24,7 @@ describe('Secondary Customer', () => {
         it('Throws an error if "primary customer UID" is empty', () => {
             const promise = rizeClient.customer.createSecondary('test', '');
             return expect(promise).to.eventually.be.rejectedWith(
-                'Customer "primary_customer_uid" is required.'
+                'Customer "uid" is required.'
             );
         });
 
@@ -49,7 +49,6 @@ describe('Secondary Customer', () => {
                 first_name: faker.name.firstName(),
                 last_name: faker.name.lastName(),
                 phone: faker.phone.number('##########'),
-                ssn: new RandomSSN().value().toFormattedString(),
                 dob: faker.date.birthdate().toJSON().slice(0, 10),
                 address: {
                     street1: faker.address.streetAddress(),

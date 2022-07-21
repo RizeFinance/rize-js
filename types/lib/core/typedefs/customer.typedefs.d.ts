@@ -136,7 +136,7 @@ export type CustomerListQuery = {
     /**
      * - Only return Customers with a customer type matching exactly what is submitted.
      */
-    customer_type?: CustomerType;
+    customer_type?: 'primary' | 'secondary' | 'sole_proprietor';
     /**
      * - Filter by pool. Multiple values are allowed.
      */
@@ -149,6 +149,10 @@ export type CustomerListQuery = {
      * - Index of the items to start retrieving from. Default: 0
      */
     offset?: string;
+    /**
+     * - Only return Customers with a business name at least partially matching what is submitted. Exact matches will be sorted first
+     */
+    business_name?: string;
     /**
      * - Sort returned items.
      */

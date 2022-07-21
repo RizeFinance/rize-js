@@ -89,17 +89,6 @@ describe('Customer', () => {
             );
         });
 
-        it('Throws an error if "details.ssn" is empty', () => {
-            const promise = rizeClient.customer.update(customerUid, '', {
-                first_name: fakeFirstName,
-                last_name: fakeLastName,
-                phone: fakePhone,
-            });
-            return expect(promise).to.eventually.be.rejectedWith(
-                '"details.ssn" is required.'
-            );
-        });
-
         it('Throws an error if "details.ssn" has invalid format', () => {
             const promise = rizeClient.customer.update(customerUid, '', {
                 first_name: fakeFirstName,
@@ -109,33 +98,6 @@ describe('Customer', () => {
             });
             return expect(promise).to.eventually.be.rejectedWith(
                 '"details.ssn" should be formatted as ###-##-####'
-            );
-        });
-
-        it('Throws an error if "details.dob" is empty', () => {
-            const promise = rizeClient.customer.update(customerUid, '', {
-                first_name: fakeFirstName,
-                last_name: fakeLastName,
-                phone: fakePhone,
-                ssn: fakeSsn,
-            });
-            return expect(promise).to.eventually.be.rejectedWith(
-                '"details.dob" is required.'
-            );
-        });
-
-        it('Throws an error if "details.business_name" is empty', () => {
-            const promise = rizeClient.customer.update(
-                solePropCustomerUid,
-                '',
-                {
-                    first_name: fakeSolePropFirstName,
-                    last_name: fakeSolePropLastName,
-                },
-                'sole_proprietor'
-            );
-            return expect(promise).to.eventually.be.rejectedWith(
-                '"details.business_name" is required.'
             );
         });
 
@@ -296,7 +258,7 @@ describe('Customer', () => {
                 state: fakeState,
                 postal_code: fakePostalCode,
             }
-        }, 'sole_proprietor');
+        });
         expect(soleProprietorCustomer).to.have.property('uid').that.equals(solePropCustomerUid);
         expect(soleProprietorCustomer)
             .to.have.nested.property('details.first_name')
@@ -385,7 +347,7 @@ describe('Customer', () => {
         it('Throws an error if "customer_type" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({ customer_type: 'LLC' });
             return expect(promise).to.eventually.be.rejectedWith(
-                '"customer_type" query must be a string. Accepted values are: primary | sole_proprietor'
+                '"customer_type" query must be a string. Accepted values are: primary | sole_proprietor | secondary'
             );
         });
 
@@ -452,6 +414,13 @@ describe('Customer', () => {
             );
         });
 
+        it('Throws an error if "business_name" query parameter is invalid', () => {
+            const promise = rizeClient.customer.getList({ business_name: null });
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"business_name" query must be a string.'
+            );
+        });
+
         it('Retrieves the customer list', async () => {
             const customerList = await rizeClient.customer.getList();
             utils.expectRizeList(customerList);
@@ -480,12 +449,14 @@ describe('Customer', () => {
     it('Retrieves sole proprietor customer list with query', async () => {
         const query = {
             customer_type: 'sole_proprietor',
+            business_name: fakeBusinessName
         };
 
         const customerList = await rizeClient.customer.getList(query);
         utils.expectRizeList(customerList);
         customerList.data.forEach(customer => {
             expect(customer).to.have.property('customer_type', 'sole_proprietor');
+            expect(customer).to.have.property('business_name', fakeBusinessName);
         });
     });
 
