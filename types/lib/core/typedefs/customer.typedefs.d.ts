@@ -1,11 +1,28 @@
 export type CustomerDetails = {
     first_name: string;
+    middle_name: string | null;
+    last_name: string;
+    business_name: string | null;
+    suffix: string | null;
+    phone: string;
+    ssn: string | null;
+    dob: string;
+    address: Address;
+};
+export type CustomerDetailsParams = {
+    first_name: string;
     middle_name?: string | null;
     last_name: string;
-    business_name: string;
+    /**
+     * Required for customers of type sole_proprietor; ignored otherwise. 1-256 alphanumeric characters.
+     */
+    business_name?: string;
     suffix?: string | null;
     phone: string;
-    ssn: string;
+    /**
+     * Required for customers of type primary and sole_proprietor; ignored otherwise.
+     */
+    ssn?: string;
     dob: string;
     address: Address;
 };
@@ -19,9 +36,9 @@ export type Customer = {
      */
     external_uid: string;
     /**
-     * - The type of Customer. Defaults to primary.
+     * - The type of Customer.
      */
-    customer_type: 'primary' | 'sole_proprietor';
+    customer_type: 'primary' | 'secondary' | 'sole_proprietor';
     /**
      * - A uid referring to the program this customer belongs to.
      */
@@ -33,7 +50,7 @@ export type Customer = {
     /**
      * - Email of the customer
      */
-    email: string;
+    email: string | null;
     /**
      * A value indicating the overall state of this Customer:
      * - ***initiated*** - Rize has created the Customer as a result of a post to the Compliance Workflows endpoint. This status will persist until Rize receives a successful request to perform Identity Verification. The Customer status will move to 'queued' after a successful request to perform Identity Verification.
@@ -72,6 +89,15 @@ export type Customer = {
      * - The lock reason provided by the Client, an admin User, or the system at the time the Customer was locked. This field will be null if and only if the locked_at is null.
      */
     lock_reason?: string | null;
+    /**
+     * Secondary type customers associated with the Customer.
+     */
+    secondary_customer_uids: Array<string> | null;
+    profile_responses: Array<CustomerProfileAnswerDetails>;
+    primary_customer_uid: string | null;
+    pii_confirmed_at: Date;
+    kyc_status_reasons: any[] | null;
+    activated_at: Date;
     /**
      * - An object containing the supplied identifying information for the Customer.
      */
@@ -127,7 +153,7 @@ export type CustomerListQuery = {
     /**
      * - Only return Customers with a customer type matching exactly what is submitted.
      */
-    customer_type?: CustomerType;
+    customer_type?: 'primary' | 'secondary' | 'sole_proprietor';
     /**
      * - Filter by pool. Multiple values are allowed.
      */
@@ -141,7 +167,12 @@ export type CustomerListQuery = {
      */
     offset?: string;
     /**
+     * - Only return Customers with a business name at least partially matching what is submitted. Exact matches will be sorted first
+     */
+    business_name?: string;
+    /**
      * - Sort returned items.
      */
     sort?: 'first_name_asc' | 'first_name_desc' | 'last_name_asc' | 'last_name_desc' | 'email_asc' | 'email_desc';
 };
+export type Address = import('./common.typedefs').Address;

@@ -29,13 +29,6 @@ describe('Customer', () => {
     };
 
     describe('create', () => {
-        it('Throws an error if "customerExternalUid" is empty', () => {
-            const promise = rizeClient.customer.create(' ', '');
-            return expect(promise).to.eventually.be.rejectedWith(
-                '"externalUid" is required.'
-            );
-        });
-
         it('Throws an error if "email" is empty', () => {
             const promise = rizeClient.customer.create('test', '');
             return expect(promise).to.eventually.be.rejectedWith(
@@ -69,15 +62,15 @@ describe('Customer', () => {
 
         it('Creates a new sole proprietor customer', async () => {
             const externalUid = uuid();
-            const fakeEmail = faker.internet.email('qa+', null, 'rizemoney.com');
+            const fakeSolePropEmail = faker.internet.email('qa+', null, 'rizemoney.com');
             const customerType = 'sole_proprietor';
 
             const newCustomer = await rizeClient.customer.create(
                 externalUid,
-                fakeEmail,
+                fakeSolePropEmail,
                 customerType
             );
-            verifyNewCustomer(newCustomer, externalUid, fakeEmail);
+            verifyNewCustomer(newCustomer, externalUid, fakeSolePropEmail);
 
             mlog.log(`New Sole Proprietor Customer UID: ${newCustomer.uid}`);
             // Store the customerUid for next tests

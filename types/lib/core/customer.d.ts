@@ -16,27 +16,30 @@ declare class CustomerService {
    */
     protected _validateGetListQuery(query: CustomerListQuery): void;
     /**
-   * @ignore @protected
-   * Validates the parameters for the "get" method
-   * @param {string} uid
-   */
+     * @ignore @protected
+     * Validates the parameters for the "get" method
+     * @param {string} uid
+     */
     protected _validateGetParams(uid: string): void;
     /**
-   * @ignore @protected
-   * Validates the parameters for the "create" method
-   * @param {string} externalUid
-   * @param {string} email
-   * @param {'primary'|'sole_proprietor'} customer_type
-   */
-    protected _validateCreateParams(externalUid: string, email: string, customer_type: 'primary' | 'sole_proprietor'): void;
+     * @ignore @protected
+     * Validates the parameters for the "create" method
+     * @param {string} email
+     * @param {'primary'|'sole_proprietor'} customer_type
+     */
+    protected _validateCreateParams(email: string, customer_type: 'primary' | 'sole_proprietor'): void;
     /**
    * @ignore @protected
-   * Validates the parameters for the "update" method
    * @param {string} uid
    * @param {string} email
-   * @param {CustomerDetails} details
+   * @param {CustomerDetailsParams} details
    */
-    protected _validateUpdateParams(uid: string, email: string, details: CustomerDetails, customer_type?: string): void;
+    protected _validateUpdateParams(uid: string, email: string, details: CustomerDetailsParams): void;
+    /**
+     * @ignore @protected
+     * @param {CustomerDetailsParams} details
+     */
+    protected _validateDetailParams(details: CustomerDetailsParams): void;
     /**
    * @ignore @protected
    * Validates the parameters for the "archive" method
@@ -83,6 +86,7 @@ declare class CustomerService {
    *     limit: 50,
    *     offset: 0,
    *     sort: 'first_name_asc'
+   *     business_name: 'Wrestler Workshop'
    * });
    */
     getList(query?: CustomerListQuery): Promise<RizeList<Customer>>;
@@ -96,25 +100,42 @@ declare class CustomerService {
    */
     get(uid: string): Promise<Customer>;
     /**
-   * Create a single Customer
+   * Create a single Primary or Sole Proprietor Customer
    *
    * Creates a new instance of a customer.
-   * @param {string} externalUid - A Customer identifier supplied by the Partner, unique among the collection of all partner Customers.
+   * @param {string} [externalUid] - A Customer identifier supplied by the Partner, unique among the collection of all partner Customers
    * @param {string} email - Email of the customer
-   * @param {'primary'|'sole_proprietor'} customer_type - Type of customer
-   * @returns {Promise<Customer>} - A promise that returns a Customer if resolved.
-   * @example const newCustomer = await rize.customer.post(extenalUid, email, customer_type);
+   * @param {'primary'|'sole_proprietor'} [customer_type='primary'] - Type of customer
+   * @returns {Promise<Customer>} - A promise that returns a Customer if resolved
+   * @example const newCustomer = await rize.customer.create(externalUid, email, customer_type);
    */
-    create(externalUid: string, email: string, customer_type?: 'primary' | 'sole_proprietor'): Promise<Customer>;
+    create(externalUid?: string, email: string, customer_type?: 'primary' | 'sole_proprietor'): Promise<Customer>;
+    /**
+   * Create a single Secondary Customer
+   *
+   * Secondary Customers are authorized to spend from the balance of an existing Primary Customer's account. Secondary Customers can request debit cards.
+   * Charges from this card debit the associated Primary Customer's account. Secondary Customers require first name, last name, DOB, and address when they are created.
+   * Secondary Customers require the Customer UID of the Primary Customer they are associated with.
+   *
+   * @param {string} [external_uid] - A Customer identifier supplied by the Client, unique among the collection of all Client Customers
+   * @param {string} primary_customer_uid - The UID of the Primary Customer with whom this Secondary Customer will be affiliated with
+   * @param {string} [email] - Email of the Secondary Customer
+   * @param {CustomerDetailsParams} details - An object containing the supplied identifying information for the Customer
+   * @returns {Promise<Customer>} - A promise that returns a Customer if resolved.
+   * @example const newSecondaryCustomer = await rize.customer.createSecondary(external_uid, primary_customer_uid, details);
+   */
+    createSecondary(external_uid?: string, primary_customer_uid: string, email?: string, details: CustomerDetailsParams): Promise<Customer>;
     /**
    * Adjusts Customer Data
    *
    * This function is used to supply the remaining personally identifiable information (PII) for each Customer after they are created with a new Compliance Workflow.
    * The PII for a Customer must be submitted in full. Rize will not accept your request if any field is incomplete or missing.
    * PII can be edited for a Customer up until a valid request is sent using the verifyIdentity function.
+   *
    * @param {string} uid - Rize-generated unique customer id
-   * @param {string} email - Email of the customer
-   * @param {CustomerDetails} details - An object containing the supplied identifying information for the Customer
+   * @param {string | null} email - Email of the customer
+   * @param {'primary'|'sole_proprietor'|'secondary'} customer_type - Type of customer
+   * @param {CustomerDetailsParams} details - An object containing the supplied identifying information for the Customer
    * @returns {Promise<Customer>} A promise that returns the updated Customer if resolved.
    * @example
    * const updatedCustomer = await rize.customer.update(
@@ -139,7 +160,7 @@ declare class CustomerService {
    *     }
    * );
    */
-    update(uid: string, email: string, details: CustomerDetails, customer_type: any): Promise<Customer>;
+    update(uid: string, email: string | null, details: CustomerDetailsParams, customer_type: 'primary' | 'sole_proprietor' | 'secondary'): Promise<Customer>;
     /**
    * Used to submit a Customer's Profile Responses to Profile Requirements.
    * @param {string} customerUid - A UID referring to the Customer.
@@ -224,10 +245,11 @@ declare class CustomerService {
     unlock(uid: string, unlockReason?: string): Promise<Customer>;
 }
 declare namespace CustomerService {
-    export { CustomerListQuery, CustomerDetails, Customer, CustomerProfileAnswerDetails, RizeList };
+    export { CustomerListQuery, CustomerDetails, CustomerDetailsParams, Customer, CustomerProfileAnswerDetails, RizeList };
 }
 type CustomerListQuery = import('./typedefs/customer.typedefs').CustomerListQuery;
-type CustomerDetails = import('./typedefs/customer.typedefs').CustomerDetails;
+type CustomerDetailsParams = import('./typedefs/customer.typedefs').CustomerDetailsParams;
 type CustomerProfileAnswerDetails = import('./typedefs/customer.typedefs').CustomerProfileAnswerDetails;
 type RizeList<T> = import('./typedefs/common.typedefs').RizeList<T>;
 type Customer = import('./typedefs/customer.typedefs').Customer;
+type CustomerDetails = import('./typedefs/customer.typedefs').CustomerDetails;

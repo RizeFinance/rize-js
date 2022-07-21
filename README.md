@@ -106,7 +106,7 @@ Go to https://developer.rizefs.com/
 ### 1. Create a new Customer.
 
 Create Customer is the first endpoint to start the onboard flow.
-Your first request to create a customer with a external id and the user's email, after a new customer object is returned with a uid.
+Your first request to create a customer with a external id, user's email and a customer type, after a new customer object is returned with a uid.
 
 To create a new Customer ([more info](docs.md#create)):
 
@@ -114,6 +114,7 @@ To create a new Customer ([more info](docs.md#create)):
 const newCustomer = await rize.customer.create(
     'client-generated-external-uid-42',
     'tomas@example.com'
+    'primary'
 );
 
 console.log(newCustomer.uid); // Customer UID
