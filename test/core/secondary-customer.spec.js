@@ -10,6 +10,7 @@ const expect = chai.expect;
 const mlog = require('mocha-logger');
 const uuid = require('uuid').v4;
 const { faker } = require('@faker-js/faker');
+const delayAsync = require('../helpers/delayAsync');
 
 const rizeClient = require('../helpers/rizeClient');
 
@@ -37,7 +38,7 @@ describe('Secondary Customer', () => {
         it('Throws an error if "details" is invalid', () => {
             const promise = rizeClient.customer.createSecondary('test', primaryCustomerUid);
             return expect(promise).to.eventually.be.rejectedWith(
-                '"details" should be a CustomerDetails object'
+                '"details" should be a CustomerDetailsParams object.'
             );
         });
 
@@ -78,6 +79,30 @@ describe('Secondary Customer', () => {
             mlog.log(`New Secondary Customer UID: ${newCustomer.uid}`);
             secondaryCustomer = newCustomer;
         });
+
+        xit('Updates secondary customer info successfully', async () => {
+            await delayAsync(20000);
+            const fakeEmail = faker.internet.email('qa+', null, 'rizemoney.com');
+            const details = {
+                address: {
+                    street1: faker.address.streetAddress(),
+                    city: faker.address.cityName(),
+                    state: faker.address.stateAbbr(),
+                    postal_code: faker.address.zipCode()
+                }
+            }
+            const updatedCustomer = await rizeClient.customer.update(
+                secondaryCustomer.uid,
+                fakeEmail,
+                details)
+
+                expect(updatedCustomer.details).to.have.property('email').that.equals(fakeEmail);
+                expect(updatedCustomer.details.address).to.have.property('street1').that.equals(details.address.street1);
+                expect(updatedCustomer.details.address).to.have.property('city').that.equals(details.address.city);
+                expect(updatedCustomer.details.address).to.have.property('state').that.equals(details.address.state);
+                expect(updatedCustomer.details.address).to.have.property('postal_code').that.equals(details.address.postal_code);
+
+        }).timeout(30000);
     });
 
     after(() => {

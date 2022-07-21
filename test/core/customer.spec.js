@@ -59,12 +59,12 @@ describe('Customer', () => {
         it('Throws an error if "details" is invalid', () => {
             const promise = rizeClient.customer.update(customerUid, '', '');
             return expect(promise).to.eventually.be.rejectedWith(
-                '"details" should be a CustomerDetails object.'
+                '"details" should be a CustomerDetailsParams object.'
             );
         });
 
         it('Throws an error if "details.first_name" is empty', () => {
-            const promise = rizeClient.customer.update(customerUid, '', {});
+            const promise = rizeClient.customer.update(customerUid, '', {first_name: ''});
             return expect(promise).to.eventually.be.rejectedWith(
                 '"details.first_name" is required.'
             );
@@ -73,6 +73,7 @@ describe('Customer', () => {
         it('Throws an error if "details.last_name" is empty', () => {
             const promise = rizeClient.customer.update(customerUid, '', {
                 first_name: fakeFirstName,
+                last_name: ''
             });
             return expect(promise).to.eventually.be.rejectedWith(
                 '"details.last_name" is required.'
@@ -83,6 +84,7 @@ describe('Customer', () => {
             const promise = rizeClient.customer.update(customerUid, '', {
                 first_name: fakeFirstName,
                 last_name: fakeLastName,
+                phone: ''
             });
             return expect(promise).to.eventually.be.rejectedWith(
                 '"details.phone" is required.'
@@ -121,7 +123,9 @@ describe('Customer', () => {
                 phone: fakePhone,
                 ssn: fakeSsn,
                 dob: fakeDob,
-                address: {},
+                address: {
+                    street1: ''
+                },
             });
             return expect(promise).to.eventually.be.rejectedWith(
                 '"details.address.street1" is required.'
@@ -137,6 +141,7 @@ describe('Customer', () => {
                 dob: fakeDob,
                 address: {
                     street1: fakeStreet1,
+                    city: ''
                 },
             });
             return expect(promise).to.eventually.be.rejectedWith(
@@ -154,6 +159,7 @@ describe('Customer', () => {
                 address: {
                     street1: fakeStreet1,
                     city: fakeCity,
+                    state: ''
                 },
             });
             return expect(promise).to.eventually.be.rejectedWith(
@@ -172,6 +178,7 @@ describe('Customer', () => {
                     street1: fakeStreet1,
                     city: fakeCity,
                     state: fakeState,
+                    postal_code: ''
                 },
             });
             return expect(promise).to.eventually.be.rejectedWith(
