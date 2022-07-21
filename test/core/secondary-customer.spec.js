@@ -90,17 +90,17 @@ describe('Secondary Customer', () => {
                     state: faker.address.stateAbbr(),
                     postal_code: faker.address.zipCode()
                 }
-            }
+            };
             const updatedCustomer = await rizeClient.customer.update(
                 secondaryCustomer.uid,
                 fakeEmail,
-                details)
+                details);
 
-                expect(updatedCustomer.details).to.have.property('email').that.equals(fakeEmail);
-                expect(updatedCustomer.details.address).to.have.property('street1').that.equals(details.address.street1);
-                expect(updatedCustomer.details.address).to.have.property('city').that.equals(details.address.city);
-                expect(updatedCustomer.details.address).to.have.property('state').that.equals(details.address.state);
-                expect(updatedCustomer.details.address).to.have.property('postal_code').that.equals(details.address.postal_code);
+            expect(updatedCustomer.details).to.have.property('email').that.equals(fakeEmail);
+            expect(updatedCustomer.details.address).to.have.property('street1').that.equals(details.address.street1);
+            expect(updatedCustomer.details.address).to.have.property('city').that.equals(details.address.city);
+            expect(updatedCustomer.details.address).to.have.property('state').that.equals(details.address.state);
+            expect(updatedCustomer.details.address).to.have.property('postal_code').that.equals(details.address.postal_code);
 
         }).timeout(30000);
     });
