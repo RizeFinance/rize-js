@@ -38,7 +38,7 @@ export type Customer = {
     /**
      * - The type of Customer.
      */
-    customer_type: 'primary' | 'secondary' | 'sole_proprietor';
+    customer_type: 'primary' | 'secondary' | 'sole_proprietor' | 'sub_ledger';
     /**
      * - A uid referring to the program this customer belongs to.
      */
@@ -153,7 +153,7 @@ export type CustomerListQuery = {
     /**
      * - Only return Customers with a customer type matching exactly what is submitted.
      */
-    customer_type?: 'primary' | 'secondary' | 'sole_proprietor';
+    customer_type?: 'primary' | 'secondary' | 'sole_proprietor' | 'sub_ledger';
     /**
      * - Filter by pool. Multiple values are allowed.
      */
