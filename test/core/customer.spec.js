@@ -354,7 +354,7 @@ describe('Customer', () => {
         it('Throws an error if "customer_type" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({ customer_type: 'LLC' });
             return expect(promise).to.eventually.be.rejectedWith(
-                '"customer_type" query must be a string. Accepted values are: primary | sole_proprietor | secondary| sub_ledger'
+                '"customer_type" query must be a string. Accepted values are: primary | sole_proprietor | secondary | sub_ledger'
             );
         });
 
