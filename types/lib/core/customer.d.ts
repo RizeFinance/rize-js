@@ -16,17 +16,17 @@ declare class CustomerService {
    */
     protected _validateGetListQuery(query: CustomerListQuery): void;
     /**
-     * @ignore @protected
-     * Validates the parameters for the "get" method
-     * @param {string} uid
-     */
+   * @ignore @protected
+   * Validates the parameters for the "get" method
+   * @param {string} uid
+   */
     protected _validateGetParams(uid: string): void;
     /**
-     * @ignore @protected
-     * Validates the parameters for the "create" method
-     * @param {string} email
-     * @param {'primary'|'sole_proprietor'} customer_type
-     */
+   * @ignore @protected
+   * Validates the parameters for the "create" method
+   * @param {string} email
+   * @param {'primary'|'sole_proprietor'} customer_type
+   */
     protected _validateCreateParams(email: string, customer_type: 'primary' | 'sole_proprietor'): void;
     /**
    * @ignore @protected
@@ -36,9 +36,9 @@ declare class CustomerService {
    */
     protected _validateUpdateParams(uid: string, email: string, details: CustomerDetailsParams): void;
     /**
-     * @ignore @protected
-     * @param {CustomerDetailsParams} details
-     */
+   * @ignore @protected
+   * @param {CustomerDetailsParams} details
+   */
     protected _validateDetailParams(details: CustomerDetailsParams): void;
     /**
    * @ignore @protected
@@ -129,12 +129,11 @@ declare class CustomerService {
    * Adjusts Customer Data
    *
    * This function is used to supply the remaining personally identifiable information (PII) for each Customer after they are created with a new Compliance Workflow.
-   * The PII for a Customer must be submitted in full. Rize will not accept your request if any field is incomplete or missing.
+   * Please refer to Rize API documentation for when changes can be made to a Customer's PII
    * PII can be edited for a Customer up until a valid request is sent using the verifyIdentity function.
    *
    * @param {string} uid - Rize-generated unique customer id
    * @param {string | null} email - Email of the customer
-   * @param {'primary'|'sole_proprietor'|'secondary'} customer_type - Type of customer
    * @param {CustomerDetailsParams} details - An object containing the supplied identifying information for the Customer
    * @returns {Promise<Customer>} A promise that returns the updated Customer if resolved.
    * @example
@@ -160,7 +159,7 @@ declare class CustomerService {
    *     }
    * );
    */
-    update(uid: string, email: string | null, details: CustomerDetailsParams, customer_type: 'primary' | 'sole_proprietor' | 'secondary'): Promise<Customer>;
+    update(uid: string, email?: string | null, details?: CustomerDetailsParams): Promise<Customer>;
     /**
    * Used to submit a Customer's Profile Responses to Profile Requirements.
    * @param {string} customerUid - A UID referring to the Customer.

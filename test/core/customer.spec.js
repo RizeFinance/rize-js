@@ -354,7 +354,7 @@ describe('Customer', () => {
         it('Throws an error if "customer_type" query parameter is invalid', () => {
             const promise = rizeClient.customer.getList({ customer_type: 'LLC' });
             return expect(promise).to.eventually.be.rejectedWith(
-                '"customer_type" query must be a string. Accepted values are: primary | sole_proprietor | secondary'
+                '"customer_type" query must be a string. Accepted values are: primary | sole_proprietor | secondary | sub_ledger'
             );
         });
 
@@ -464,6 +464,18 @@ describe('Customer', () => {
         customerList.data.forEach(customer => {
             expect(customer).to.have.property('customer_type', 'sole_proprietor');
             expect(customer).to.have.property('business_name', fakeBusinessName);
+        });
+    });
+
+    it('Retrieves sub ledger customer list with query', async () => {
+        const query = {
+            customer_type: 'sub_ledger',
+        };
+
+        const customerList = await rizeClient.customer.getList(query);
+        utils.expectRizeList(customerList);
+        customerList.data.forEach(customer => {
+            expect(customer).to.have.property('customer_type', 'sub_ledger');
         });
     });
 
