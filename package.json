@@ -38,7 +38,7 @@
     "jsrsasign": "^10.5.26",
     "lodash": "^4.17.21",
     "query-string": "^7.1.1",
-    "stompit": "^1.0.0",
+    "stompit": "^0.26.0",
     "validator": "^13.7.0"
   },
   "repository": {
