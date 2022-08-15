@@ -24,10 +24,10 @@ declare class CustomerService {
     /**
    * @ignore @protected
    * Validates the parameters for the "create" method
-   * @param {string} email
-   * @param {'primary'|'sole_proprietor'} customer_type
+   * @param {string|null} email Optional for sub_ledger customer type
+   * @param {'primary'|'sole_proprietor'|'sub_ledger'} customer_type
    */
-    protected _validateCreateParams(email: string, customer_type: 'primary' | 'sole_proprietor'): void;
+    protected _validateCreateParams(email: string | null, customer_type: 'primary' | 'sole_proprietor' | 'sub_ledger'): void;
     /**
    * @ignore @protected
    * @param {string} uid
@@ -105,11 +105,11 @@ declare class CustomerService {
    * Creates a new instance of a customer.
    * @param {string} [externalUid] - A Customer identifier supplied by the Partner, unique among the collection of all partner Customers
    * @param {string} email - Email of the customer
-   * @param {'primary'|'sole_proprietor'} [customer_type='primary'] - Type of customer
+   * @param {'primary'|'sole_proprietor'|'sub_ledger'} [customer_type='primary'] - Type of customer
    * @returns {Promise<Customer>} - A promise that returns a Customer if resolved
    * @example const newCustomer = await rize.customer.create(externalUid, email, customer_type);
    */
-    create(externalUid?: string, email: string, customer_type?: 'primary' | 'sole_proprietor'): Promise<Customer>;
+    create(externalUid?: string, email: string, customer_type?: 'primary' | 'sole_proprietor' | 'sub_ledger'): Promise<Customer>;
     /**
    * Create a single Secondary Customer
    *

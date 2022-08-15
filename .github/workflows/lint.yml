@@ -1,9 +1,6 @@
 name: Lint
 
-on:
-  pull_request_target:
-    branches: 
-      - main
+on: push
 
 jobs:
   lint:

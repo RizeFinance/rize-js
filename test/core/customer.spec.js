@@ -16,7 +16,7 @@ const { RandomSSN } = require('ssn');
 const rizeClient = require('../helpers/rizeClient');
 
 describe('Customer', () => {
-    let customerUid, updatedCustomer, solePropCustomerUid;
+    let customerUid, updatedCustomer, solePropCustomerUid, subLedgerUid;
     const fakeFirstName = faker.name.firstName();
     const fakeMiddleName = faker.name.middleName();
     const fakeLastName = faker.name.lastName();
@@ -39,6 +39,7 @@ describe('Customer', () => {
     before(() => {
         customerUid = process.env.TEST_CUSTOMER_UID;
         solePropCustomerUid = process.env.TEST_SOLE_PROP_CUSTOMER_UID;
+        subLedgerUid = process.env.TEST_SUB_LEDGER_CUSTOMER_UID;
     });
 
     describe('update', () => {
@@ -110,6 +111,7 @@ describe('Customer', () => {
                 phone: fakePhone,
                 ssn: fakeSsn,
                 dob: fakeDob,
+                address: 'fake'
             });
             return expect(promise).to.eventually.be.rejectedWith(
                 '"details.address" should be an Address object.'
@@ -306,6 +308,27 @@ describe('Customer', () => {
         expect(soleProprietorCustomer)
             .to.have.nested.property('details.address.postal_code')
             .that.equals(fakePostalCode);
+    });
+
+    it('Updates sub-ledger customer info successfully', async () => {
+        const fakeFirstName = faker.name.firstName();
+        const fakeLastName = faker.name.lastName();
+
+        let subLedgerCustomer = await rizeClient.customer.update(subLedgerUid, null, {
+            first_name: fakeFirstName,
+            middle_name: null,
+            last_name: fakeLastName,
+        });
+        expect(subLedgerCustomer).to.have.property('uid').that.equals(subLedgerUid);
+        expect(subLedgerCustomer)
+            .to.have.nested.property('details.first_name')
+            .that.equals(fakeFirstName);
+        expect(subLedgerCustomer)
+            .to.have.nested.property('details.middle_name')
+            .that.equals(null);
+        expect(subLedgerCustomer)
+            .to.have.nested.property('details.last_name')
+            .that.equals(fakeLastName);
     });
 
     describe('getList', () => {
