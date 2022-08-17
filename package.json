@@ -19,7 +19,7 @@
     "@types/stompit": "^0.26.3",
     "@types/validator": "^13.7.4",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
-    "@typescript-eslint/parser": "^5.30.6",
+    "@typescript-eslint/parser": "^5.33.1",
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
     "documentation": "^13.2.5",
