@@ -45,9 +45,7 @@ describe('Synthetic Account', () => {
         externalUid,
         poolUid,
         syntheticAccountTypeUid,
-        syntheticAccountCategory,
-        accountNumber,
-        routingNumber
+        syntheticAccountCategory
     ) => {
         expect(data).to.have.property('uid');
         expect(data).to.have.property('name').that.equals(name);
@@ -69,16 +67,9 @@ describe('Synthetic Account', () => {
         if (syntheticAccountCategory === 'external') {
             expect(data).to.have.property('account_number').that.equals(null);
             expect(data)
-                .to.have.property('account_number_last_four')
-                .that.equals(
-                    accountNumber.substring(
-                        accountNumber.length - 4,
-                        accountNumber.length
-                    )
-                );
+                .to.have.property('account_number_last_four');
             expect(data)
-                .to.have.property('routing_number')
-                .that.equals(routingNumber);
+                .to.have.property('routing_number');
         } else {
             expect(data).to.have.property('account_number');
             expect(data).to.have.property('account_number_last_four');
@@ -437,7 +428,7 @@ describe('Synthetic Account', () => {
                 routingNumber
             );
 
-            testExternalSyntheticAccount = syntheticAccount;
+            testExternalSyntheticAccount = syntheticAccount.uid;
         });
 
         xit('Creates a new plaid_external synthetic account', async () => {
@@ -547,6 +538,6 @@ describe('Synthetic Account', () => {
 
     after(() => {
         process.env.TEST_EXTERNAL_SYNTHETIC_ACCOUNT_UID =
-      testExternalSyntheticAccount.uid;
+      testExternalSyntheticAccount;
     });
 });

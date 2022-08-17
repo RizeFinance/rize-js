@@ -15,7 +15,7 @@ const { faker } = require('@faker-js/faker');
 const rizeClient = require('../helpers/rizeClient');
 
 describe('Customer', () => {
-    let primaryCustomer, solePropCustomer;
+    let primaryCustomer, solePropCustomer, subLedger;
 
     const verifyNewCustomer = (customer, external_uid, email) => {
         expect(customer).to.have.property('uid').that.is.not.empty;
@@ -25,6 +25,7 @@ describe('Customer', () => {
         expect(customer.customer_type).to.be.oneOf([
             'primary',
             'sole_proprietor',
+            'sub-ledger'
         ]);
     };
 
@@ -76,10 +77,25 @@ describe('Customer', () => {
             // Store the customerUid for next tests
             solePropCustomer = newCustomer;
         });
+
+        it('Creates a new sub_ledger customer', async () => {
+            const customerType = 'sub_ledger';
+
+            const newCustomer = await rizeClient.customer.create(
+                null,
+                null,
+                customerType
+            );
+
+            mlog.log(`New Sub-Ledger Customer UID: ${newCustomer.uid}`);
+            // Store the customerUid for next tests
+            subLedger = newCustomer;
+        });
     });
 
     after(() => {
         process.env.TEST_CUSTOMER_UID = primaryCustomer.uid;
         process.env.TEST_SOLE_PROP_CUSTOMER_UID = solePropCustomer.uid;
+        process.env.TEST_SUB_LEDGER_CUSTOMER_UID = subLedger.uid;
     });
 });

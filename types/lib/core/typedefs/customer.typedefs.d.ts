@@ -34,7 +34,7 @@ export type Customer = {
     /**
      * - A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
      */
-    external_uid: string;
+    external_uid: string | null;
     /**
      * - The type of Customer.
      */
