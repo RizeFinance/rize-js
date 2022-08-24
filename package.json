@@ -22,7 +22,7 @@
     "@typescript-eslint/parser": "^5.35.0",
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
-    "documentation": "^13.2.5",
+    "documentation": "^14.0.0",
     "dotenv": "^16.0.1",
     "eslint": "^8.22.0",
     "eslint-plugin-chai-friendly": "^0.7.2",
@@ -38,7 +38,7 @@
     "jsrsasign": "^10.5.26",
     "lodash": "^4.17.21",
     "query-string": "^7.1.1",
-    "stompit": "^0.26.0",
+    "stompit": "^1.0.0",
     "validator": "^13.7.0"
   },
   "repository": {
