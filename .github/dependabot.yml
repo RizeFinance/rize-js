@@ -6,6 +6,8 @@ updates:
   schedule:
     interval: weekly
     time: "10:00"
+  allow:
+    - dependency-type: "production"
   reviewers:
   - alyant34
   - KramerJeff
