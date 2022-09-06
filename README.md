@@ -37,6 +37,7 @@ Checkout the changelogs per release [here](https://github.com/RizeFinance/rize-s
 2. Input your GitHub Username.
 3. For the Password, input your [GitHub Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token). Your token should have the following scopes/permissions: `repo`, `read:packages`
 4. Input the email address that you're using in GitHub.
+5. Run `npm config set @rizefinance:registry https://npm.pkg.github.com` to set the scope of the registry.
    
 To confirm you should see the following lines when you run `npm config list`
 
