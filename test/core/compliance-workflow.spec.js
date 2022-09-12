@@ -82,7 +82,7 @@ describe('Compliance Workflow', () => {
             return expect(promise).to.eventually.be.rejectedWith('"query" must be a ComplianceWorkflowListQuery object.');
         });
 
-        it('Throws an error if "custome_uid" query is not an array', () => {
+        it('Throws an error if "customer_uid" query is not an array', () => {
             const promise = rizeClient.complianceWorkflow.getList({ customer_uid: customerUid});
             return expect(promise).to.eventually.be.rejectedWith('"customer_uid" query must be an array.');
         });
@@ -148,7 +148,6 @@ describe('Compliance Workflow', () => {
             const eSignRequiredDoc = workflow
                 .current_step_documents_pending
                 .find(x => x.electronic_signature_required === 'yes');
-
             if (!eSignRequiredDoc) {
                 // Skip this test if we couldn't find a document that requires electronic signing
                 this.skip();
@@ -192,13 +191,30 @@ describe('Compliance Workflow', () => {
             return expect(promise).to.eventually.be.rejectedWith();
         });
 
+        it('Acknowledges multiple compliance documents', async function() {
+            if (workflow.current_step_documents_pending.length < 2) {
+                this.skip();
+            }
+            const pendingDocIds = workflow.current_step_documents_pending.slice(0, 2).map(doc => doc.uid);
+            workflow = await rizeClient.complianceWorkflow.acknowledgeComplianceDocuments(
+                workflow.uid,
+                workflow.customer.uid,
+                pendingDocIds.map(uid => ({
+                    document_uid: uid,
+                    accept: 'yes',
+                    user_name: fakeName,
+                    ip_address: fakeIp
+                }))
+            );
+            const acceptedDocumentUids = workflow.accepted_documents.map(x => x.uid);
+            expect(acceptedDocumentUids).to.include.members(pendingDocIds);
+        });       
+
         it('Acknowledges a single compliance document', async function () {
             if (workflow.current_step_documents_pending.length === 0) {
                 this.skip();
             }
-
-            const document = workflow.current_step_documents_pending[0];
-
+            let document = workflow.current_step_documents_pending[0];
             workflow = await rizeClient.complianceWorkflow.acknowledgeComplianceDocuments(
                 workflow.uid,
                 workflow.customer.uid,
@@ -209,73 +225,21 @@ describe('Compliance Workflow', () => {
                     ip_address: fakeIp
                 }
             );
-
-            const acceptedDocumentUids = workflow.accepted_documents.map(x => x.uid);
-            expect(acceptedDocumentUids).to.include.members([document.uid]);
-        });
-
-        it('Acknowledges a multiple compliance documents', async function () {
-            if (workflow.current_step_documents_pending.length === 0) {
-                this.skip();
-            }
-            let pendingDocIds; 
-            while (workflow.current_step_documents_pending.length > 0) {
-                pendingDocIds = workflow.current_step_documents_pending.map(doc => doc.uid);
-
+            while(workflow.current_step_documents_pending.length > 0) { //finish any remaining documents to get workflow to accepted
+                document = workflow.current_step_documents_pending[0];
                 workflow = await rizeClient.complianceWorkflow.acknowledgeComplianceDocuments(
                     workflow.uid,
                     workflow.customer.uid,
-                    pendingDocIds.map(uid => ({
-                        document_uid: uid,
+                    {
+                        document_uid: document.uid,
                         accept: 'yes',
                         user_name: fakeName,
                         ip_address: fakeIp
-                    }))
+                    }
                 );
             }
-
             const acceptedDocumentUids = workflow.accepted_documents.map(x => x.uid);
-            expect(acceptedDocumentUids).to.include.members(pendingDocIds);
-        });
-    });
-
-    describe('renew', () => {
-        it('Throws an error if customerExternalUid is empty', () => {
-            const promise = rizeClient.complianceWorkflow.renew(' ', '', '');
-            return expect(promise).to.eventually.be.rejectedWith('"customerExternalUid" is required.');
-        });
-
-        it('Throws an error if customerUid is empty', () => {
-            const promise = rizeClient.complianceWorkflow.renew('test', ' ', '');
-            return expect(promise).to.eventually.be.rejectedWith('"customerUid" is required.');
-        });
-
-        it('Throws an error if email is invalid', () => {
-            const promise = rizeClient.complianceWorkflow.renew('test', 'test', ' ');
-            return expect(promise).to.eventually.be.rejectedWith('"email" is invalid.');
-        });
-
-        xit('Renew compliance worflow after latest expired', async function () {
-            const customerUidToTest = process.env.TEST_EXPIRED_CUSTOMER_UID;
-
-            if (customerUidToTest) {
-                // Skip test if no expired customer is passed into tests
-                this.skip();
-            }
-
-            const latestWorkflow = await rizeClient.complianceWorkflow.viewLatest(customerUidToTest);
-            if (latestWorkflow.summary.status !== 'expired') {
-                // Skip test if the customer's latest workflow is not yet expired
-                this.skip();
-            } else {
-                const newWorkflow = await rizeClient.complianceWorkflow.renew(
-                    latestWorkflow.customer.external_uid,
-                    latestWorkflow.customer.uid,
-                    latestWorkflow.customer.email);
-
-                verifyComplianceWorkflow(newWorkflow, customerUid);
-                expect(newWorkflow.summary.status === 'in_progress');
-            }
+            expect(acceptedDocumentUids).to.include.members([document.uid]);
         });
     });
 });

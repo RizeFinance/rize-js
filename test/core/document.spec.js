@@ -82,7 +82,7 @@ describe('Document', () => {
         });
 
         // This hits our timeout, for now
-        xit('Retrieves the document list without query', async () => {
+        it('Retrieves the document list without query', async () => {
             const documentList = await rizeClient.document.getList();
             utils.expectRizeList(documentList);
         });
