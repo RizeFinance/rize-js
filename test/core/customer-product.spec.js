@@ -80,12 +80,9 @@ describe('Product', () => {
 
         it('Creates a new customer product', async () => {
             const customerProduct = await rizeClient.customerProduct.create(customerUid, productUid);
-            
             verifyNewCustomerProduct(customerProduct, customerUid, productUid);
-
             const customer = await rizeClient.customer.get(customerUid);
             customerPoolUid = customer.pool_uids[0];
-
             mlog.log(`New Customer Product UID: ${customerProduct.uid} -- Status: ${customerProduct.status}`);
         });
     });

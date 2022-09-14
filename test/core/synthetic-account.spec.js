@@ -17,7 +17,6 @@ describe('Synthetic Account', () => {
     let customerUid;
     let customerPoolUid;
     let testGeneralSyntheticAccountTypeUid;
-    let testExternalSyntheticAccountTypeUid;
     let testOutboundAchSyntheticAccountTypeUid;
     let testPlaidExternalSyntheticAccountTypeUid;
     let testGeneralSyntheticAccount;
@@ -195,7 +194,6 @@ describe('Synthetic Account', () => {
             });
 
             utils.expectRizeList(syntheticAccountList);
-
             testGeneralSyntheticAccount = syntheticAccountList.data[1];
         });
 
@@ -258,10 +256,6 @@ describe('Synthetic Account', () => {
                 x => x.synthetic_account_category === 'general'
             ).uid;
 
-            testExternalSyntheticAccountTypeUid = syntheticAccountTypes.data.find(
-                x => x.synthetic_account_category === 'external'
-            ).uid;
-
             testPlaidExternalSyntheticAccountTypeUid =
         syntheticAccountTypes.data.find(
             x => x.synthetic_account_category === 'plaid_external'
@@ -312,10 +306,10 @@ describe('Synthetic Account', () => {
     describe('create', () => {
         const fakeGeneralSyntheticAccountName = 'Test General Account';
         const fakeGeneralSyntheticAccountExternalUid = faker.datatype.uuid();
-        const fakeExternalSyntheticAccountName = 'Test External Account';
-        const fakeExternalSyntheticAccountExternalUid = faker.datatype.uuid();
         const fakeOutboundAchSyntheticAccountName = 'Test Outbound ACH Account';
         const fakeOutboundAchSyntheticAccountExternalUid = faker.datatype.uuid();
+        const fakePlaidSyntheticAccountName = 'Test Plaid Account';
+        const fakePlaidSyntheticAccountExternalUid = faker.datatype.uuid();
 
         it('Throws an error if "external_uid" is empty', () => {
             const request = {
@@ -323,7 +317,7 @@ describe('Synthetic Account', () => {
                 pool_uid: testGeneralSyntheticAccount.pool_uid,
                 name: fakeGeneralSyntheticAccountName,
                 synthetic_account_type_uid:
-          testGeneralSyntheticAccount.synthetic_account_type_uid,
+                testGeneralSyntheticAccount.synthetic_account_type_uid,
             };
 
             const promise = rizeClient.syntheticAccount.create(request);
@@ -400,43 +394,43 @@ describe('Synthetic Account', () => {
             testGeneralSyntheticAccount = syntheticAccount;
         });
 
-        it('Creates a new external synthetic account', async () => {
-            const accountNumber = faker.finance.account();
-            const routingNumber = faker.finance.account(9);
+        // it('Creates a new external synthetic account', async () => {
+        //     const accountNumber = faker.finance.account();
+        //     const routingNumber = faker.finance.account(9);
 
-            const request = {
-                external_uid: fakeExternalSyntheticAccountExternalUid,
-                pool_uid: customerPoolUid,
-                name: fakeExternalSyntheticAccountName,
-                synthetic_account_type_uid: testExternalSyntheticAccountTypeUid,
-                account_number: accountNumber,
-                routing_number: routingNumber,
-            };
+        //     const request = {
+        //         external_uid: fakeExternalSyntheticAccountExternalUid,
+        //         pool_uid: customerPoolUid,
+        //         name: fakeExternalSyntheticAccountName,
+        //         synthetic_account_type_uid: testExternalSyntheticAccountTypeUid,
+        //         account_number: accountNumber,
+        //         routing_number: routingNumber,
+        //     };
 
-            const syntheticAccount = await rizeClient.syntheticAccount.create(
-                request
-            );
+        //     const syntheticAccount = await rizeClient.syntheticAccount.create(
+        //         request
+        //     );
 
-            verifyNewSyntheticAccount(
-                syntheticAccount,
-                fakeExternalSyntheticAccountName,
-                fakeExternalSyntheticAccountExternalUid,
-                customerPoolUid,
-                testExternalSyntheticAccountTypeUid,
-                'external',
-                accountNumber,
-                routingNumber
-            );
+        //     verifyNewSyntheticAccount(
+        //         syntheticAccount,
+        //         fakeExternalSyntheticAccountName,
+        //         fakeExternalSyntheticAccountExternalUid,
+        //         customerPoolUid,
+        //         testExternalSyntheticAccountTypeUid,
+        //         'external',
+        //         accountNumber,
+        //         routingNumber
+        //     );
 
-            testExternalSyntheticAccount = syntheticAccount.uid;
-        });
+        //     testExternalSyntheticAccount = syntheticAccount.uid;
+        // });
 
-        xit('Creates a new plaid_external synthetic account', async () => {
+        it('Creates a new plaid_external synthetic account', async () => {
             const plaidProcessorToken = faker.datatype.uuid();
             const request = {
-                external_uid: fakeExternalSyntheticAccountExternalUid,
+                external_uid: fakePlaidSyntheticAccountExternalUid,
                 pool_uid: customerPoolUid,
-                name: fakeExternalSyntheticAccountName,
+                name: fakePlaidSyntheticAccountName,
                 synthetic_account_type_uid: testPlaidExternalSyntheticAccountTypeUid,
                 plaid_processor_token: plaidProcessorToken,
             };
@@ -447,12 +441,13 @@ describe('Synthetic Account', () => {
 
             verifyNewSyntheticAccount(
                 syntheticAccount,
-                fakeExternalSyntheticAccountName,
-                fakeExternalSyntheticAccountExternalUid,
+                fakePlaidSyntheticAccountName,
+                fakePlaidSyntheticAccountExternalUid,
                 customerPoolUid,
                 testPlaidExternalSyntheticAccountTypeUid,
                 'plaid_external'
             );
+            testExternalSyntheticAccount = syntheticAccount.uid;
         });
 
         it('Creates a new outbound_ach synthetic account', async () => {
