@@ -17,7 +17,6 @@ describe('Synthetic Account', () => {
     let customerUid;
     let customerPoolUid;
     let testGeneralSyntheticAccountTypeUid;
-    let testExternalSyntheticAccountTypeUid;
     let testOutboundAchSyntheticAccountTypeUid;
     let testPlaidExternalSyntheticAccountTypeUid;
     let testGeneralSyntheticAccount;
@@ -257,10 +256,6 @@ describe('Synthetic Account', () => {
                 x => x.synthetic_account_category === 'general'
             ).uid;
 
-            testExternalSyntheticAccountTypeUid = syntheticAccountTypes.data.find(
-                x => x.synthetic_account_category === 'external'
-            ).uid;
-
             testPlaidExternalSyntheticAccountTypeUid =
         syntheticAccountTypes.data.find(
             x => x.synthetic_account_category === 'plaid_external'
@@ -311,8 +306,6 @@ describe('Synthetic Account', () => {
     describe('create', () => {
         const fakeGeneralSyntheticAccountName = 'Test General Account';
         const fakeGeneralSyntheticAccountExternalUid = faker.datatype.uuid();
-        const fakeExternalSyntheticAccountName = 'Test External Account';
-        const fakeExternalSyntheticAccountExternalUid = faker.datatype.uuid();
         const fakeOutboundAchSyntheticAccountName = 'Test Outbound ACH Account';
         const fakeOutboundAchSyntheticAccountExternalUid = faker.datatype.uuid();
         const fakePlaidSyntheticAccountName = 'Test Plaid Account';

@@ -79,17 +79,11 @@ describe('Product', () => {
         });
 
         it('Creates a new customer product', async () => {
-            try {
-                const customerProduct = await rizeClient.customerProduct.create(customerUid, productUid);
-                verifyNewCustomerProduct(customerProduct, customerUid, productUid);
-
-                const customer = await rizeClient.customer.get(customerUid);
-                customerPoolUid = customer.pool_uids[0];
-    
-                mlog.log(`New Customer Product UID: ${customerProduct.uid} -- Status: ${customerProduct.status}`);
-            } catch(err) {
-                console.log(err, err.data.errors);
-            }
+            const customerProduct = await rizeClient.customerProduct.create(customerUid, productUid);
+            verifyNewCustomerProduct(customerProduct, customerUid, productUid);
+            const customer = await rizeClient.customer.get(customerUid);
+            customerPoolUid = customer.pool_uids[0];
+            mlog.log(`New Customer Product UID: ${customerProduct.uid} -- Status: ${customerProduct.status}`);
         });
     });
 
