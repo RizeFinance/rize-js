@@ -591,6 +591,13 @@ describe('Customer', () => {
             );
         });
 
+        it('Throws an error if "unlock_all_secondary" is invalid', () => {
+            const promise = rizeClient.customer.unlock(customerUid, unlockReason, 'invalid');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"unlock_all_secondary" can only be true, false or null.'
+            );
+        });
+
         it('Unlocks the customer account without unlock_reason', async () => {
             await rizeClient.customer.lock(customerUid, unlockReason);
             const unlockedCustomer = await rizeClient.customer.unlock(customerUid);
@@ -603,6 +610,28 @@ describe('Customer', () => {
             const unlockedCustomer = await rizeClient.customer.unlock(
                 customerUid,
                 unlockReason
+            );
+            expect(unlockedCustomer.lock_reason).equals(null);
+            expect(unlockedCustomer.locked_at).equals(null);
+        });
+
+        it('Unlocks the customer account with unlock_all_customers as false', async () => {
+            await rizeClient.customer.lock(customerUid, unlockReason);
+            const unlockedCustomer = await rizeClient.customer.unlock(
+                customerUid,
+                unlockReason,
+                'false'
+            );
+            expect(unlockedCustomer.lock_reason).equals(null);
+            expect(unlockedCustomer.locked_at).equals(null);
+        });
+
+        it('Unlocks the customer account with unlock_all_customers as true', async () => {
+            await rizeClient.customer.lock(customerUid, unlockReason);
+            const unlockedCustomer = await rizeClient.customer.unlock(
+                customerUid,
+                unlockReason,
+                'true'
             );
             expect(unlockedCustomer.lock_reason).equals(null);
             expect(unlockedCustomer.locked_at).equals(null);
