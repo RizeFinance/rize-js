@@ -620,7 +620,7 @@ describe('Customer', () => {
             const unlockedCustomer = await rizeClient.customer.unlock(
                 customerUid,
                 unlockReason,
-                'false'
+                false
             );
             expect(unlockedCustomer.lock_reason).equals(null);
             expect(unlockedCustomer.locked_at).equals(null);
@@ -631,7 +631,7 @@ describe('Customer', () => {
             const unlockedCustomer = await rizeClient.customer.unlock(
                 customerUid,
                 unlockReason,
-                'true'
+                true
             );
             expect(unlockedCustomer.lock_reason).equals(null);
             expect(unlockedCustomer.locked_at).equals(null);
