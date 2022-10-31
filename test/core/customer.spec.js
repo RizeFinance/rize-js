@@ -598,6 +598,20 @@ describe('Customer', () => {
             );
         });
 
+        it('Throws an error if "unlock_all_secondary" is 0', () => {
+            const promise = rizeClient.customer.unlock(customerUid, unlockReason, 0);
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"unlock_all_secondary" can only be true, false or null.'
+            );
+        });
+
+        it('Throws an error if "unlock_all_secondary" is 1', () => {
+            const promise = rizeClient.customer.unlock(customerUid, unlockReason, 1);
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"unlock_all_secondary" can only be true, false or null.'
+            );
+        });
+
         it('Unlocks the customer account without unlock_reason', async () => {
             await rizeClient.customer.lock(customerUid, unlockReason);
             const unlockedCustomer = await rizeClient.customer.unlock(customerUid);
