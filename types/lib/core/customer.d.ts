@@ -238,10 +238,11 @@ declare class CustomerService {
    * the unlock can be performed by the Custodial Partner, the Client, or Rize.
    * @param {string} uid - Rize-generated unique customer id
    * @param {string} unlockReason - The reason that the Customer is being unlocked.
+   * @param {true|false} unlock_all_secondary - allows the requestor to specify whether all secondary customers should be unlocked
    * @returns {Promise<Customer>} A promise that returns the unlocked Customer if resolved.
    * @example const customer = await rize.customer.unlock(customerUid, unlockReason);
    */
-    unlock(uid: string, unlockReason?: string): Promise<Customer>;
+    unlock(uid: string, unlockReason?: string, unlock_all_secondary?: boolean): Promise<Customer>;
 }
 declare namespace CustomerService {
     export { CustomerListQuery, CustomerDetails, CustomerDetailsParams, Customer, CustomerProfileAnswerDetails, RizeList };
