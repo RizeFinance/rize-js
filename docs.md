@@ -2504,13 +2504,14 @@ Type: [Object][373]
     *   ***settled*** - The Transaction is complete. All of the related Transaction Events are settled.
     *   ***failed*** - The Transaction has failed. This state indicates that one of the related Transaction Events could not be settled. A failed Transaction may require the reversal of a related Synthetic Line Item and/or Custodial Line Item.
 *   `us_dollar_amount` **[string][371]** The amount will never be negative
-*   `type` **(`"atm_withdrawal"` | `"card_purchase"` | `"card_refund"` | `"dispute"` | `"external_transfer"` | `"fee"` | `"internal_transfer"` | `"other"` | `"reversed_transfer"` | `"third_party_transfer"`)** ***atm\_withdrawal*** - Cash is withdrawn at an ATM using a Debit Card.*   ***card\_purchase*** - A purchase is made using a Debit Card.
+*   `type` **(`"atm_withdrawal"` | `"card_purchase"` | `"card_refund"` | `"dispute"` | `"external_transfer"` | `"fee"` | `"internal_transfer"` | `"other"` | `"peer_to_peer_transfer"` | `"reversed_transfer"` | `"third_party_transfer"`)** ***atm\_withdrawal*** - Cash is withdrawn at an ATM using a Debit Card.*   ***card\_purchase*** - A purchase is made using a Debit Card.
     *   ***card\_refund*** - A previous Debit Card Transaction is refunded.
     *   ***dispute*** - If a Customer claims that a Transaction was created in error, one or more Transactions will be created with this type to credit or debit based on the dispute outcome.
     *   ***external\_transfer*** - This Transaction originates from a Transfer to or from an external Synthetic Account.
     *   ***fee*** - A fee charged to the account. This includes ACH reversals and Debit Card ATM fees.
     *   ***internal\_transfer*** - The Transaction originates from a Transfer between two Synthetic Accounts that are not of type external.
     *   ***other*** - Miscellaneous Transactions, such as write-offs.
+    *   ***peer_to_peer_transfer*** - The Transaction originates from a Transfer between two non-external Synthetic Accounts each owned by a different Customer.
     *   ***reversed\_transfer*** - A previous Transfer is reversed; when a Transfer is reversed, the type of the original Transaction will be `external_transfer`, `internal_transfer`, or `third_party_transfer`.
     *   ***third\_party\_transfer*** - The Transaction was initiated from an external source. This will likely be an RDFI ACH, where an external source initiates a withdrawal from or deposit to the account.
 *   `net_asset` **(`"positive"` | `"negative"` | `"neutral"`)** Indicates whether the Customer's asset has gone up (`positive`), gone down (`negative`) or stayed the same (`neutral`) as a result of this Transaction.

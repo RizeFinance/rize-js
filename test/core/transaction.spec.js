@@ -60,7 +60,7 @@ describe('Transaction', () => {
             const query = { type: '' };
             const promise = rizeClient.transaction.getList(query);
             return expect(promise).to.eventually.be.rejectedWith(
-                '"type" query must be an array. Accepted values inside the array are: atm_withdrawal | card_purchase | card_refund | dispute | external_transfer | fee | internal_transfer | other | reversed_transfer | third_party_transfer'
+                '"type" query must be an array. Accepted values inside the array are: atm_withdrawal | card_purchase | card_refund | dispute | external_transfer | fee | internal_transfer | other | peer_to_peer_transfer | reversed_transfer | third_party_transfer'
             );
         });
 
@@ -68,7 +68,7 @@ describe('Transaction', () => {
             const query = { type: [''] };
             const promise = rizeClient.transaction.getList(query);
             return expect(promise).to.eventually.be.rejectedWith(
-                'Accepted values in the "type" query are: atm_withdrawal | card_purchase | card_refund | dispute | external_transfer | fee | internal_transfer | other | reversed_transfer | third_party_transfer'
+                'Accepted values in the "type" query are: atm_withdrawal | card_purchase | card_refund | dispute | external_transfer | fee | internal_transfer | other | peer_to_peer_transfer | reversed_transfer | third_party_transfer'
             );
         });
 

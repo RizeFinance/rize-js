@@ -62,10 +62,11 @@ export type Transaction = {
      * - ***fee*** - A fee charged to the account. This includes ACH reversals and Debit Card ATM fees.
      * - ***internal_transfer*** - The Transaction originates from a Transfer between two Synthetic Accounts that are not of type external.
      * - ***other*** - Miscellaneous Transactions, such as write-offs.
+     * - ***peer_to_peer_transfer*** - The Transaction originates from a Transfer between two non-external Synthetic Accounts each owned by a different Customer.
      * - ***reversed_transfer*** - A previous Transfer is reversed; when a Transfer is reversed, the type of the original Transaction will be `external_transfer`, `internal_transfer`, or `third_party_transfer`.
      * - ***third_party_transfer*** - The Transaction was initiated from an external source. This will likely be an RDFI ACH, where an external source initiates a withdrawal from or deposit to the account.
      */
-    type: 'atm_withdrawal' | 'card_purchase' | 'card_refund' | 'dispute' | 'external_transfer' | 'fee' | 'internal_transfer' | 'other' | 'reversed_transfer' | 'third_party_transfer';
+    type: 'atm_withdrawal' | 'card_purchase' | 'card_refund' | 'dispute' | 'external_transfer' | 'fee' | 'internal_transfer' | 'other' | 'peer_to_peer_transfer' | 'reversed_transfer' | 'third_party_transfer';
     /**
      * - Indicates whether the Customer's asset has gone up (`positive`), gone down (`negative`) or stayed the same (`neutral`) as a result of this Transaction.
      */
