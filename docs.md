@@ -2651,7 +2651,8 @@ Type: [Object][373]
 *   `external_uid` **[string][371]** A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
 *   `source_synthetic_account_uid` **[string][371]** Synthetic Account to pull asset from. Must be an active liability or external-type account. Cannot be equal to `destination_synthetic_account_uid`.
 *   `destination_synthetic_account_uid` **[string][371]** Synthetic Account where the asset should land. Must be an active liability or external-type account. Cannot be equal to `source_synthetic_account_uid`.
-*   `initiating_customer_uid` **[string][371]**&#x20;
+*   `initiating_customer_uid` **[string][371]** The customer connected to the source Synthetic Account.
+*   `destination_customer_uid` **[string][371]** The customer connected to the destination Synthetic Account.
 *   `usd_transfer_amount` **[string][371]** The USD amount to transfer
 *   `status` **(`"queued"` | `"pending"` | `"settled"` | `"failed"`)** A value indicating the overall status of the Transfer:*   ***queued*** - Transfers begin in the Queued status. Queued indicates that Rize has received a valid Transfer request and is preparing the Transfer.
     *   ***pending*** - Transfers move from a status of Queued to a status of Pending. A Pending status indicates that Rize has begun the movement of funds to complete the Transfer.
