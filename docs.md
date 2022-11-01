@@ -1861,8 +1861,9 @@ only Synthetic Accounts allowed in a Transfer request are:
 *   `externalUid` **[string][371]** A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
 *   `sourceSyntheticAccountUid` **[string][371]** Synthetic Account to pull asset from. Must be an active liability or external-type account. Cannot be equal to `destination_synthetic_account_uid`.
 *   `destinationSyntheticAccountUid` **[string][371]** Synthetic Account where the asset should land. Must be an active liability or external-type account. Cannot be equal to `source_synthetic_account_uid`.
-*   `initiatingCustomerUid` **[string][371]**&#x20;
+*   `initiatingCustomerUid` **[string][371]** The uid of the owner of the source Synthetic Account.
 *   `usTransferAmount` **[string][371]** The USD amount to transfer.
+*   `destinationCustomerUid` **[string][371]** The uid of the owner of the destination Synthetic Account. If not provided, it is assumed to be the initiatingCustomerUid.
 
 #### Examples
 
