@@ -868,11 +868,12 @@ the unlock can be performed by the Custodial Partner, the Client, or Rize.
 
 *   `uid` **[string][371]** Rize-generated unique customer id
 *   `unlockReason` **[string][371]** The reason that the Customer is being unlocked. (optional, default `null`)
+*   `unlock_all_secondary` **[boolean][375]** allows the requestor to specify whether all secondary customers should be unlocked (optional, default `null`)
 
 #### Examples
 
 ```javascript
-const customer = await rize.customer.unlock(customerUid, unlockReason);
+const customer = await rize.customer.unlock(customerUid, unlockReason, unlock_all_secondary);
 ```
 
 Returns **[Promise][370]<[Customer][265]>** A promise that returns the unlocked Customer if resolved.
