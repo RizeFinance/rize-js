@@ -70,11 +70,6 @@ describe('Secondary Customer', () => {
             expect(newCustomer).to.have.property('primary_customer_uid').that.equals(primaryCustomerUid);
             expect(newCustomer.details).to.have.property('first_name').that.equals(details.first_name);
             expect(newCustomer.details).to.have.property('last_name').that.equals(details.last_name);
-            expect(newCustomer.details).to.have.property('dob').that.equals(details.dob);
-            expect(newCustomer.details.address).to.have.property('street1').that.equals(details.address.street1);
-            expect(newCustomer.details.address).to.have.property('city').that.equals(details.address.city);
-            expect(newCustomer.details.address).to.have.property('state').that.equals(details.address.state);
-            expect(newCustomer.details.address).to.have.property('postal_code').that.equals(details.address.postal_code);
 
             mlog.log(`New Secondary Customer UID: ${newCustomer.uid}`);
             secondaryCustomer = newCustomer;
