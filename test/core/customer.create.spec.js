@@ -30,10 +30,17 @@ describe('Customer', () => {
     };
 
     describe('create', () => {
-        it('Throws an error if "email" is empty', () => {
-            const promise = rizeClient.customer.create('test', '');
+        it('Throws an error if "customer_type" is invalid', () => {
+            const promise = rizeClient.customer.create(null, null, 'invalid_type');
             return expect(promise).to.eventually.be.rejectedWith(
-                '"email" is required.'
+                '"customer_type" is invalid.'
+            );
+        });
+
+        it('Throws an error if "detail" is not an object', () => {
+            const promise = rizeClient.customer.create(null, null, null, 'bad detail');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"details" should be a CustomerDetailsParams object.'
             );
         });
 
@@ -43,6 +50,14 @@ describe('Customer', () => {
                 '"email" is invalid.'
             );
         });
+
+        it('Throws an error if "primary_customer_uid" is blank for secondary customers', () => {
+            const promise = rizeClient.customer.create(null, null, 'secondary', null, null);
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"primary_customer_uid" is required for secondary customer_type.'
+            );
+        });
+
 
         it('Creates a new primary customer', async () => {
             const externalUid = uuid();
