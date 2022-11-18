@@ -61,7 +61,7 @@ describe('Customer', () => {
 
         it('Creates a new primary customer', async () => {
             const externalUid = uuid();
-            const fakeEmail = faker.internet.email('qa+', null, 'rizemoney.com');
+            const fakeEmail = `qa+${externalUid}@rizemoney.com`;
             const customerType = 'primary';
 
             const newCustomer = await rizeClient.customer.create(
@@ -78,7 +78,7 @@ describe('Customer', () => {
 
         it('Creates a new sole proprietor customer', async () => {
             const externalUid = uuid();
-            const fakeSolePropEmail = faker.internet.email('qa+', null, 'rizemoney.com');
+            const fakeSolePropEmail = `qa+${externalUid}@rizemoney.com`;
             const customerType = 'sole_proprietor';
 
             const newCustomer = await rizeClient.customer.create(
