@@ -23,7 +23,7 @@ Checkout the changelogs per release [here](https://github.com/RizeFinance/rize-s
 
 1. [Log in to GitHub Package Registry](#logging-in-to-the-github-package-registry)
 
-2. Install the `@rizefinance/rize-js` package 
+2. Install the `@rizefinance/rize-js` package
 
    ```sh
    npm install @rizefinance/rize-js
@@ -33,19 +33,19 @@ Checkout the changelogs per release [here](https://github.com/RizeFinance/rize-s
 
 ## Logging in to the GitHub Package Registry
 
-1. Run `npm adduser --scope=@rizefinance --registry=https://npm.pkg.github.com`
+1. Run `npm adduser --scope=@rizefinance --registry=https://npm.pkg.github.com --auth-type=legacy`
 2. Input your GitHub Username.
 3. For the Password, input your [GitHub Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token). Your token should have the following scopes/permissions: `repo`, `read:packages`
 4. Input the email address that you're using in GitHub.
 5. Run `npm config set @rizefinance:registry https://npm.pkg.github.com` to set the scope of the registry.
-   
+
 To confirm you should see the following lines when you run `npm config list`
 
 ```
 @rizefinance:registry = "https://npm.pkg.github.com"
 //npm.pkg.github.com/:_authToken = (protected)
 ```
-   
+
 
 
 ## Usage
@@ -174,8 +174,8 @@ const latestWorkflow = await rize.complianceWorkflow.viewLatest(customerUid);
 console.log(latestWorkflow.all_documents);
 ```
 
-Your application can display or allow users to download the compliance document using the 
-`"compliance_document_url"` value returned with each document in the Compliance Workflows 
+Your application can display or allow users to download the compliance document using the
+`"compliance_document_url"` value returned with each document in the Compliance Workflows
 endpoint response. (see [ComplianceDocument](docs.md#compliancedocument))
 
 
@@ -185,7 +185,7 @@ endpoint response. (see [ComplianceDocument](docs.md#compliancedocument))
 Rize supplies Compliance Documents in Steps. All documents in a Step must be acknowledged
 before the documents in the subsequent Step will be supplied. The documents that are awaiting
 acknowledgement in the current Step are available in the `current_step_documents_pending` array.
-Once Rize receives the acknowledgements for all documents in the current Step, the documents in 
+Once Rize receives the acknowledgements for all documents in the current Step, the documents in
 the next Step will be supplied.
 
 Acknowledgment requirements differ depending on the document content. If a document
