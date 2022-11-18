@@ -10,7 +10,6 @@ const expect = chai.expect;
 
 const mlog = require('mocha-logger');
 const uuid = require('uuid').v4;
-const { faker } = require('@faker-js/faker');
 
 const rizeClient = require('../helpers/rizeClient');
 
