@@ -1861,8 +1861,9 @@ only Synthetic Accounts allowed in a Transfer request are:
 *   `externalUid` **[string][371]** A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
 *   `sourceSyntheticAccountUid` **[string][371]** Synthetic Account to pull asset from. Must be an active liability or external-type account. Cannot be equal to `destination_synthetic_account_uid`.
 *   `destinationSyntheticAccountUid` **[string][371]** Synthetic Account where the asset should land. Must be an active liability or external-type account. Cannot be equal to `source_synthetic_account_uid`.
-*   `initiatingCustomerUid` **[string][371]**&#x20;
+*   `initiatingCustomerUid` **[string][371]** The uid of the owner of the source Synthetic Account.
 *   `usTransferAmount` **[string][371]** The USD amount to transfer.
+*   `destinationCustomerUid` **[string][371]** The uid of the owner of the destination Synthetic Account. If not provided, it is assumed to be the initiatingCustomerUid.
 
 #### Examples
 
@@ -2504,13 +2505,14 @@ Type: [Object][373]
     *   ***settled*** - The Transaction is complete. All of the related Transaction Events are settled.
     *   ***failed*** - The Transaction has failed. This state indicates that one of the related Transaction Events could not be settled. A failed Transaction may require the reversal of a related Synthetic Line Item and/or Custodial Line Item.
 *   `us_dollar_amount` **[string][371]** The amount will never be negative
-*   `type` **(`"atm_withdrawal"` | `"card_purchase"` | `"card_refund"` | `"dispute"` | `"external_transfer"` | `"fee"` | `"internal_transfer"` | `"other"` | `"reversed_transfer"` | `"third_party_transfer"`)** ***atm\_withdrawal*** - Cash is withdrawn at an ATM using a Debit Card.*   ***card\_purchase*** - A purchase is made using a Debit Card.
+*   `type` **(`"atm_withdrawal"` | `"card_purchase"` | `"card_refund"` | `"dispute"` | `"external_transfer"` | `"fee"` | `"internal_transfer"` | `"other"` | `"peer_to_peer_transfer"` | `"reversed_transfer"` | `"third_party_transfer"`)** ***atm\_withdrawal*** - Cash is withdrawn at an ATM using a Debit Card.*   ***card\_purchase*** - A purchase is made using a Debit Card.
     *   ***card\_refund*** - A previous Debit Card Transaction is refunded.
     *   ***dispute*** - If a Customer claims that a Transaction was created in error, one or more Transactions will be created with this type to credit or debit based on the dispute outcome.
     *   ***external\_transfer*** - This Transaction originates from a Transfer to or from an external Synthetic Account.
     *   ***fee*** - A fee charged to the account. This includes ACH reversals and Debit Card ATM fees.
     *   ***internal\_transfer*** - The Transaction originates from a Transfer between two Synthetic Accounts that are not of type external.
     *   ***other*** - Miscellaneous Transactions, such as write-offs.
+    *   ***peer_to_peer_transfer*** - The Transaction originates from a Transfer between two non-external Synthetic Accounts each owned by a different Customer.
     *   ***reversed\_transfer*** - A previous Transfer is reversed; when a Transfer is reversed, the type of the original Transaction will be `external_transfer`, `internal_transfer`, or `third_party_transfer`.
     *   ***third\_party\_transfer*** - The Transaction was initiated from an external source. This will likely be an RDFI ACH, where an external source initiates a withdrawal from or deposit to the account.
 *   `net_asset` **(`"positive"` | `"negative"` | `"neutral"`)** Indicates whether the Customer's asset has gone up (`positive`), gone down (`negative`) or stayed the same (`neutral`) as a result of this Transaction.
@@ -2649,7 +2651,8 @@ Type: [Object][373]
 *   `external_uid` **[string][371]** A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
 *   `source_synthetic_account_uid` **[string][371]** Synthetic Account to pull asset from. Must be an active liability or external-type account. Cannot be equal to `destination_synthetic_account_uid`.
 *   `destination_synthetic_account_uid` **[string][371]** Synthetic Account where the asset should land. Must be an active liability or external-type account. Cannot be equal to `source_synthetic_account_uid`.
-*   `initiating_customer_uid` **[string][371]**&#x20;
+*   `initiating_customer_uid` **[string][371]** The customer connected to the source Synthetic Account.
+*   `destination_customer_uid` **[string][371]** The customer connected to the destination Synthetic Account.
 *   `usd_transfer_amount` **[string][371]** The USD amount to transfer
 *   `status` **(`"queued"` | `"pending"` | `"settled"` | `"failed"`)** A value indicating the overall status of the Transfer:*   ***queued*** - Transfers begin in the Queued status. Queued indicates that Rize has received a valid Transfer request and is preparing the Transfer.
     *   ***pending*** - Transfers move from a status of Queued to a status of Pending. A Pending status indicates that Rize has begun the movement of funds to complete the Transfer.

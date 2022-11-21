@@ -15,7 +15,14 @@ export type Transfer = {
      * - Synthetic Account where the asset should land. Must be an active liability or external-type account. Cannot be equal to `source_synthetic_account_uid`.
      */
     destination_synthetic_account_uid: string;
+    /**
+     * The customer connected to the source Synthetic Account.
+     */
     initiating_customer_uid: string;
+    /**
+     * The customer connected to the destination Synthetic Account.
+     */
+    destination_customer_uid: string;
     /**
      * - The USD amount to transfer
      */

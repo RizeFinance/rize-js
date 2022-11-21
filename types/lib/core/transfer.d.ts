@@ -71,6 +71,7 @@ declare class TransferService {
      * @param {string} destinationSyntheticAccountUid - Synthetic Account where the asset should land. Must be an active liability or external-type account. Cannot be equal to `source_synthetic_account_uid`.
      * @param {string} initiatingCustomerUid
      * @param {string} usTransferAmount - The USD amount to transfer.
+     * @param {string} destinationCustomerUid - The uid of the owner of the destination Synthetic Account. If not provided, it is assumed to be the initiatingCustomerUid.
      * @returns {Promise<Transfer>} A promise that returns a Transfer if resolved.
      * @example
      * const transfer = await rize.transfer.init(
@@ -81,7 +82,7 @@ declare class TransferService {
      *     100
      * );
      */
-    init(externalUid: string, sourceSyntheticAccountUid: string, destinationSyntheticAccountUid: string, initiatingCustomerUid: string, usTransferAmount: string): Promise<Transfer>;
+    init(externalUid: string, sourceSyntheticAccountUid: string, destinationSyntheticAccountUid: string, initiatingCustomerUid: string, usTransferAmount: string, destinationCustomerUid?: string): Promise<Transfer>;
 }
 declare namespace TransferService {
     export { TransferListQuery, Transfer, RizeList };
