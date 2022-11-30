@@ -16,11 +16,11 @@ export type Transfer = {
      */
     destination_synthetic_account_uid: string;
     /**
-     * The customer connected to the source Synthetic Account.
+     * - The customer connected to the source Synthetic Account.
      */
     initiating_customer_uid: string;
     /**
-     * The customer connected to the destination Synthetic Account.
+     * - The customer connected to the destination Synthetic Account.
      */
     destination_customer_uid: string;
     /**

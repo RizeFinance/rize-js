@@ -44,8 +44,10 @@ declare class CustomerService {
    * @ignore @protected
    * Validates the parameters for the "archive" method
    * @param {string} uid
+   * @param {string} [archiveNote]
+   * @param {boolean} canApplyAgain
    */
-    protected _validateArchiveParams(uid: string): void;
+    protected _validateArchiveParams(uid: string, archiveNote?: string, canApplyAgain: boolean): void;
     /**
    * @ignore @protected
    * Validates the parameters for the "updateProfileAnswers" method
@@ -194,11 +196,13 @@ declare class CustomerService {
    * A Customer can not be archived until all associated Synthetic and Custodial Accounts have been closed and retain a zero balance.
    * An archived Customer's records will still be available for historical purposes, but they will not be able to open any new Synthetic or Custodial Accounts.
    * @param {string} uid - Rize-generated unique customer id
+   * @param {string} [archiveNote] - Reason for archiving
+   * @param {boolean} [canApplyAgain=true] - Whether or not the customer can apply to the program again (default is true)
    * @returns {Promise<void>} A promise that returns void if resolved.
    * @example
    * await rize.customer.archive(customerUid);
    */
-    archive(uid: string): Promise<void>;
+    archive(uid: string, archiveNote?: string, canApplyAgain?: boolean): Promise<void>;
     /**
    * Submit a request for Identity Confirmation.
    *
@@ -240,9 +244,9 @@ declare class CustomerService {
    * @param {string} unlockReason - The reason that the Customer is being unlocked.
    * @param {true|false} unlock_all_secondary - allows the requestor to specify whether all secondary customers should be unlocked
    * @returns {Promise<Customer>} A promise that returns the unlocked Customer if resolved.
-   * @example const customer = await rize.customer.unlock(customerUid, unlockReason);
+   * @example const customer = await rize.customer.unlock(customerUid, unlockReason, unlock_all_secondary);
    */
-    unlock(uid: string, unlockReason?: string, unlock_all_secondary?: boolean): Promise<Customer>;
+    unlock(uid: string, unlockReason?: string, unlock_all_secondary?: true | false): Promise<Customer>;
 }
 declare namespace CustomerService {
     export { CustomerListQuery, CustomerDetails, CustomerDetailsParams, Customer, CustomerProfileAnswerDetails, RizeList };
