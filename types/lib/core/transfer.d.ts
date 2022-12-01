@@ -69,7 +69,7 @@ declare class TransferService {
      * @param {string} externalUid - A unique identifier Client supplies. It should be given when creating a new resource and must be unique within the resource type. If the same value is given, no new resource will be created.
      * @param {string} sourceSyntheticAccountUid - Synthetic Account to pull asset from. Must be an active liability or external-type account. Cannot be equal to `destination_synthetic_account_uid`.
      * @param {string} destinationSyntheticAccountUid - Synthetic Account where the asset should land. Must be an active liability or external-type account. Cannot be equal to `source_synthetic_account_uid`.
-     * @param {string} initiatingCustomerUid
+     * @param {string} initiatingCustomerUid -The uid of the owner of the source Synthetic Account.
      * @param {string} usTransferAmount - The USD amount to transfer.
      * @param {string} destinationCustomerUid - The uid of the owner of the destination Synthetic Account. If not provided, it is assumed to be the initiatingCustomerUid.
      * @returns {Promise<Transfer>} A promise that returns a Transfer if resolved.
