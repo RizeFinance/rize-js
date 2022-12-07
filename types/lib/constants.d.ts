@@ -1,4 +1,5 @@
 export namespace DEFAULT_HOST {
+    const local: string;
     const staging: string;
     const release: string;
     const sandbox: string;

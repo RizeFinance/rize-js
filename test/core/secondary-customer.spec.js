@@ -24,7 +24,7 @@ describe('Secondary Customer', () => {
         it('Throws an error if "primary customer UID" is empty', () => {
             const promise = rizeClient.customer.createSecondary('test', '');
             return expect(promise).to.eventually.be.rejectedWith(
-                'Customer "uid" is required.'
+                '"primary_customer_uid" is required for secondary customer_type.'
             );
         });
 
@@ -36,7 +36,7 @@ describe('Secondary Customer', () => {
         });
 
         it('Throws an error if "details" is invalid', () => {
-            const promise = rizeClient.customer.createSecondary('test', primaryCustomerUid);
+            const promise = rizeClient.customer.createSecondary('test', primaryCustomerUid, null, 'blah');
             return expect(promise).to.eventually.be.rejectedWith(
                 '"details" should be a CustomerDetailsParams object.'
             );

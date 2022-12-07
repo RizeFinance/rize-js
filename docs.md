@@ -588,9 +588,11 @@ Returns **[Promise][370]<[RizeList][233]<[CustomerProduct][257]>>** A promise th
 
 ### create
 
-Creates a new instance of a customer product. This will verify that all Product requirements have been met.
+Creates a new instance of a customer product. This will verify that all Product requirements have been met,
+including confirming all the required PII has been provided and necessary compliance workflow, if any,
+has been completed.
 After completion, Rize will automatically kick off the KYC process if it is the customer's first product.
-Upon KYC approval, all required custodial accounts will be created and the customer will be active
+Upon KYC approval, all required custodial accounts will be created and the customer will be active.
 
 #### Parameters
 
@@ -676,9 +678,11 @@ Creates a new instance of a customer.
 
 #### Parameters
 
-*   `externalUid` **[string][371]?** A Customer identifier supplied by the Partner, unique among the collection of all partner Customers (optional, default `null`)
-*   `email` **[string][371]** Email of the customer
-*   `customer_type` **(`"primary"` | `"sole_proprietor"` | `"sub_ledger"`)** Type of customer (optional, default `'primary'`)
+*   `externalUid` **([string][371] | null)?** A Customer identifier supplied by the Partner, unique among the collection of all partner Customers (optional, default `null`)
+*   `email` **([string][371] | null)** Email of the customer (optional, default `null`)
+*   `customer_type` **(`"primary"` | `"secondary"` | `"sole_proprietor"` | `"sub_ledger"`)** Type of customer (optional, default `'primary'`)
+*   `details` **([CustomerDetailsParams][263] | null)** An object containing the supplied identifying information for the Customer (optional, default `null`)
+*   `primary_customer_uid` **([string][371] | null)** UID of the primary Customer. Required and only applicable for secondary type (optional, default `null`)
 
 #### Examples
 
@@ -690,18 +694,12 @@ Returns **[Promise][370]<[Customer][265]>** A promise that returns a Customer if
 
 ### createSecondary
 
-Create a single Secondary Customer
-
-Secondary Customers are authorized to spend from the balance of an existing Primary Customer's account. Secondary Customers can request debit cards.
-Charges from this card debit the associated Primary Customer's account. Secondary Customers require first name, last name, DOB, and address when they are created.
-Secondary Customers require the Customer UID of the Primary Customer they are associated with.
-
 #### Parameters
 
 *   `external_uid` **[string][371]?** A Customer identifier supplied by the Client, unique among the collection of all Client Customers (optional, default `null`)
 *   `primary_customer_uid` **[string][371]** The UID of the Primary Customer with whom this Secondary Customer will be affiliated with
 *   `email` **[string][371]?** Email of the Secondary Customer (optional, default `null`)
-*   `details` **[CustomerDetailsParams][263]** An object containing the supplied identifying information for the Customer
+*   `details` **[CustomerDetailsParams][263]** An object containing the supplied identifying information for the Customer (optional, default `null`)
 
 #### Examples
 
@@ -710,6 +708,16 @@ const newSecondaryCustomer = await rize.customer.createSecondary(external_uid, p
 ```
 
 Returns **[Promise][370]<[Customer][265]>** A promise that returns a Customer if resolved.
+
+**Meta**
+
+*   **deprecated**: Create a single Secondary Customer
+
+    Secondary Customers are authorized to spend from the balance of an existing Primary Customer's account. Secondary Customers can request debit cards.
+    Charges from this card debit the associated Primary Customer's account.
+    Secondary Customers require the Customer UID of the Primary Customer they are associated with.
+
+    This has been deprecated. Please use create() and provide 'secondary' as customer\_type.
 
 ### update
 
@@ -723,7 +731,9 @@ PII can be edited for a Customer up until a valid request is sent using the veri
 
 *   `uid` **[string][371]** Rize-generated unique customer id
 *   `email` **([string][371] | null)** Email of the customer (optional, default `null`)
-*   `details` **[CustomerDetailsParams][263]** An object containing the supplied identifying information for the Customer (optional, default `null`)
+*   `details` **([CustomerDetailsParams][263] | null)** An object containing the supplied identifying information for the Customer (optional, default `null`)
+*   `external_uid`   (optional, default `null`)
+*   `externalUid` **([string][371] | null)?** A Customer identifier supplied by the Partner, unique among the collection of all partner Customers
 
 #### Examples
 
@@ -747,7 +757,8 @@ const updatedCustomer = await rize.customer.update(
             state: 'IL',
             postal_code: '12345',
         }
-    }
+    },
+    externalUid
 );
 ```
 

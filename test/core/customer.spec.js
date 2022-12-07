@@ -64,31 +64,14 @@ describe('Customer', () => {
             );
         });
 
-        it('Throws an error if "details.first_name" is empty', () => {
-            const promise = rizeClient.customer.update(customerUid, '', {first_name: ''});
-            return expect(promise).to.eventually.be.rejectedWith(
-                '"details.first_name" is required.'
-            );
-        });
-
-        it('Throws an error if "details.last_name" is empty', () => {
-            const promise = rizeClient.customer.update(customerUid, '', {
-                first_name: fakeFirstName,
-                last_name: ''
-            });
-            return expect(promise).to.eventually.be.rejectedWith(
-                '"details.last_name" is required.'
-            );
-        });
-
-        it('Throws an error if "details.phone" is empty', () => {
+        it('Throws an error if "details.phone" has invalid format', () => {
             const promise = rizeClient.customer.update(customerUid, '', {
                 first_name: fakeFirstName,
                 last_name: fakeLastName,
-                phone: ''
+                phone: '123-123-1234'
             });
             return expect(promise).to.eventually.be.rejectedWith(
-                '"details.phone" is required.'
+                '"details.phone" should contain exactly 10 digits.'
             );
         });
 
@@ -118,40 +101,7 @@ describe('Customer', () => {
             );
         });
 
-        it('Throws an error if "details.address.street1" is empty', () => {
-            const promise = rizeClient.customer.update(customerUid, '', {
-                first_name: fakeFirstName,
-                last_name: fakeLastName,
-                phone: fakePhone,
-                ssn: fakeSsn,
-                dob: fakeDob,
-                address: {
-                    street1: ''
-                },
-            });
-            return expect(promise).to.eventually.be.rejectedWith(
-                '"details.address.street1" is required.'
-            );
-        });
-
-        it('Throws an error if "details.address.city" is empty', () => {
-            const promise = rizeClient.customer.update(customerUid, '', {
-                first_name: fakeFirstName,
-                last_name: fakeLastName,
-                phone: fakePhone,
-                ssn: fakeSsn,
-                dob: fakeDob,
-                address: {
-                    street1: fakeStreet1,
-                    city: ''
-                },
-            });
-            return expect(promise).to.eventually.be.rejectedWith(
-                '"details.address.city" is required.'
-            );
-        });
-
-        it('Throws an error if "details.address.state" is empty', () => {
+        it('Throws an error if "details.address.state" is invalid', () => {
             const promise = rizeClient.customer.update(customerUid, '', {
                 first_name: fakeFirstName,
                 last_name: fakeLastName,
@@ -161,15 +111,15 @@ describe('Customer', () => {
                 address: {
                     street1: fakeStreet1,
                     city: fakeCity,
-                    state: ''
+                    state: '1234'
                 },
             });
             return expect(promise).to.eventually.be.rejectedWith(
-                '"details.address.state" is required.'
+                '"details.address.state" must be a valid US state abbreviation.'
             );
         });
 
-        it('Throws an error if "details.address.postal_code" is empty', () => {
+        it('Throws an error if "details.address.postal_code" is invalid', () => {
             const promise = rizeClient.customer.update(customerUid, '', {
                 first_name: fakeFirstName,
                 last_name: fakeLastName,
@@ -180,11 +130,11 @@ describe('Customer', () => {
                     street1: fakeStreet1,
                     city: fakeCity,
                     state: fakeState,
-                    postal_code: ''
+                    postal_code: '123'
                 },
             });
             return expect(promise).to.eventually.be.rejectedWith(
-                '"details.address.postal_code" is required.'
+                '"details.address.postal_code" must be a valid ZIP code.'
             );
         });
 

@@ -10,7 +10,6 @@ const expect = chai.expect;
 
 const mlog = require('mocha-logger');
 const uuid = require('uuid').v4;
-const { faker } = require('@faker-js/faker');
 
 const rizeClient = require('../helpers/rizeClient');
 
@@ -30,10 +29,17 @@ describe('Customer', () => {
     };
 
     describe('create', () => {
-        it('Throws an error if "email" is empty', () => {
-            const promise = rizeClient.customer.create('test', '');
+        it('Throws an error if "customer_type" is invalid', () => {
+            const promise = rizeClient.customer.create(null, null, 'invalid_type');
             return expect(promise).to.eventually.be.rejectedWith(
-                '"email" is required.'
+                '"customer_type" is invalid.'
+            );
+        });
+
+        it('Throws an error if "detail" is not an object', () => {
+            const promise = rizeClient.customer.create(null, null, null, 'bad detail');
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"details" should be a CustomerDetailsParams object.'
             );
         });
 
@@ -44,9 +50,17 @@ describe('Customer', () => {
             );
         });
 
+        it('Throws an error if "primary_customer_uid" is blank for secondary customers', () => {
+            const promise = rizeClient.customer.create(null, null, 'secondary', null, null);
+            return expect(promise).to.eventually.be.rejectedWith(
+                '"primary_customer_uid" is required for secondary customer_type.'
+            );
+        });
+
+
         it('Creates a new primary customer', async () => {
             const externalUid = uuid();
-            const fakeEmail = faker.internet.email('qa+', null, 'rizemoney.com');
+            const fakeEmail = `qa+${externalUid}@rizemoney.com`;
             const customerType = 'primary';
 
             const newCustomer = await rizeClient.customer.create(
@@ -63,7 +77,7 @@ describe('Customer', () => {
 
         it('Creates a new sole proprietor customer', async () => {
             const externalUid = uuid();
-            const fakeSolePropEmail = faker.internet.email('qa+', null, 'rizemoney.com');
+            const fakeSolePropEmail = `qa+${externalUid}@rizemoney.com`;
             const customerType = 'sole_proprietor';
 
             const newCustomer = await rizeClient.customer.create(

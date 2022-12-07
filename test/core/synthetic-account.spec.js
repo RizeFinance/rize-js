@@ -7,6 +7,8 @@ const utils = require('../../lib/test-utils');
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const { faker } = require('@faker-js/faker');
+const delayAsync = require('../helpers/delayAsync');
+const mlog = require('mocha-logger');
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
@@ -189,12 +191,21 @@ describe('Synthetic Account', () => {
         }).timeout(10000);
 
         it('Retrieves the synthetic account list with customer_uid query', async () => {
-            const syntheticAccountList = await rizeClient.syntheticAccount.getList({
-                customer_uid: [customerUid],
-            });
+            const retry_max = 5;
+            for (let try_num = 0; try_num < retry_max; try_num++) {
+                const syntheticAccountList = await rizeClient.syntheticAccount.getList({
+                    customer_uid: [customerUid],
+                });
 
-            utils.expectRizeList(syntheticAccountList);
-            testGeneralSyntheticAccount = syntheticAccountList.data[1];
+                utils.expectRizeList(syntheticAccountList);
+                testGeneralSyntheticAccount = syntheticAccountList.data[1];
+                if (testGeneralSyntheticAccount) {
+                    mlog.log(`test general synthetic account UID: ${testGeneralSyntheticAccount.uid}`);
+                    break;
+                } else {
+                    await delayAsync(2000 * (try_num + 1));
+                }
+            }
         });
 
         it('Retrieves the synthetic account list with query', async () => {
