@@ -50,9 +50,6 @@
     *   [create][46]
         *   [Parameters][47]
         *   [Examples][48]
-    *   [createSecondary][49]
-        *   [Parameters][50]
-        *   [Examples][51]
     *   [update][52]
         *   [Parameters][53]
         *   [Examples][54]
@@ -691,33 +688,6 @@ const newCustomer = await rize.customer.create(externalUid, email, customer_type
 ```
 
 Returns **[Promise][370]<[Customer][265]>** A promise that returns a Customer if resolved
-
-### createSecondary
-
-#### Parameters
-
-*   `external_uid` **[string][371]?** A Customer identifier supplied by the Client, unique among the collection of all Client Customers (optional, default `null`)
-*   `primary_customer_uid` **[string][371]** The UID of the Primary Customer with whom this Secondary Customer will be affiliated with
-*   `email` **[string][371]?** Email of the Secondary Customer (optional, default `null`)
-*   `details` **[CustomerDetailsParams][263]** An object containing the supplied identifying information for the Customer (optional, default `null`)
-
-#### Examples
-
-```javascript
-const newSecondaryCustomer = await rize.customer.createSecondary(external_uid, primary_customer_uid, details);
-```
-
-Returns **[Promise][370]<[Customer][265]>** A promise that returns a Customer if resolved.
-
-**Meta**
-
-*   **deprecated**: Create a single Secondary Customer
-
-    Secondary Customers are authorized to spend from the balance of an existing Primary Customer's account. Secondary Customers can request debit cards.
-    Charges from this card debit the associated Primary Customer's account.
-    Secondary Customers require the Customer UID of the Primary Customer they are associated with.
-
-    This has been deprecated. Please use create() and provide 'secondary' as customer\_type.
 
 ### update
 
@@ -3059,8 +3029,6 @@ Type: [Object][374]
 [47]: #parameters-12
 
 [48]: #examples-11
-
-[49]: #createsecondary
 
 [50]: #parameters-13
 
