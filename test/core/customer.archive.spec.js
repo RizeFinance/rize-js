@@ -29,13 +29,6 @@ describe('Customer', () => {
             return expect(promise).to.eventually.be.rejectedWith('Customer "uid" is required.');
         });
 
-        it('Archives the secondary customer', async () => {
-            await delayAsync(60000);
-            await rizeClient.customer.archive(secondaryCustomerUid);
-            const updatedCustomer = await rizeClient.customer.get(secondaryCustomerUid);
-            expect(updatedCustomer.status).equals('archived');
-        }).timeout(100000);
-
         it('Archives the primary customer', async () => {
             await delayAsync(60000);
             await rizeClient.customer.archive(customerUid);
