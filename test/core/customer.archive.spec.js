@@ -15,12 +15,10 @@ const delayAsync = require('../helpers/delayAsync');
 const rizeClient = require('../helpers/rizeClient');
 
 describe('Customer', () => {
-    let customerUid, secondaryCustomerUid;
+    let customerUid;
 
     before(() => {
         customerUid = process.env.TEST_CUSTOMER_UID;
-        secondaryCustomerUid = process.env.TEST_SECONDARY_CUSTOMER_UID;
-
     });
 
     describe('archive', () => {
