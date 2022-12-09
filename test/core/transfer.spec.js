@@ -1,7 +1,6 @@
 'use strict';
 
 require('./synthetic-account.spec');
-require('./secondary-customer.spec');
 
 const utils = require('../../lib/test-utils');
 
@@ -87,7 +86,7 @@ describe('Transfer', () => {
             const promise = rizeClient.transfer.get('');
             return expect(promise).to.eventually.be.rejectedWith('Transfer "uid" is required.');
         });
-    
+
         it('Retrieves transfer data successfully', async () => {
             const transfer = await rizeClient.transfer.get(testTransfer.uid);
             expect(transfer).to.have.property('uid').that.equals(testTransfer.uid);
@@ -109,7 +108,7 @@ describe('Transfer', () => {
             const promise = rizeClient.transfer.init('test', 'test', '');
             return expect(promise).to.eventually.be.rejectedWith('"destinationSyntheticAccountUid" is required.');
         });
-        
+
         it('Throws an error if "initiatingCustomerUid" is empty', () => {
             const promise = rizeClient.transfer.init('test', 'test', 'test', '');
             return expect(promise).to.eventually.be.rejectedWith('"initiatingCustomerUid" is required.');
