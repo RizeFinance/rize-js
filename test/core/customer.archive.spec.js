@@ -15,12 +15,10 @@ const delayAsync = require('../helpers/delayAsync');
 const rizeClient = require('../helpers/rizeClient');
 
 describe('Customer', () => {
-    let customerUid, secondaryCustomerUid;
+    let customerUid;
 
     before(() => {
         customerUid = process.env.TEST_CUSTOMER_UID;
-        secondaryCustomerUid = process.env.TEST_SECONDARY_CUSTOMER_UID;
-
     });
 
     describe('archive', () => {
@@ -28,13 +26,6 @@ describe('Customer', () => {
             const promise = rizeClient.customer.archive(' ');
             return expect(promise).to.eventually.be.rejectedWith('Customer "uid" is required.');
         });
-
-        it('Archives the secondary customer', async () => {
-            await delayAsync(60000);
-            await rizeClient.customer.archive(secondaryCustomerUid);
-            const updatedCustomer = await rizeClient.customer.get(secondaryCustomerUid);
-            expect(updatedCustomer.status).equals('archived');
-        }).timeout(100000);
 
         it('Archives the primary customer', async () => {
             await delayAsync(60000);
