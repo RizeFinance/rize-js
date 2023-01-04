@@ -29,14 +29,14 @@ Checkout the changelogs per release [here](https://github.com/RizeFinance/rize-s
    npm install @rizefinance/rize-js
    ```
 
-
-
 ## Logging in to the GitHub Package Registry
 
-1. Run `npm adduser --scope=@rizefinance --registry=https://npm.pkg.github.com --auth-type=legacy`
+GitHub packages [requires](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#authenticating-to-github-packages) a [GitHub Personal Access Token (classic)](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) for authentication. Your token will need the scopes `public_repo` and `read:packages`.
+
+1. Run `npm login --scope=@rizefinance --registry=https://npm.pkg.github.com --auth-type=legacy`
 2. Input your GitHub Username.
-3. For the Password, input your [GitHub Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token). Your token should have the following scopes/permissions: `repo`, `read:packages`
-4. Input the email address that you're using in GitHub.
+3. For the Password, input your token.
+4. Input a public email address.
 5. Run `npm config set @rizefinance:registry https://npm.pkg.github.com` to set the scope of the registry.
 
 To confirm you should see the following lines when you run `npm config list`
@@ -46,7 +46,11 @@ To confirm you should see the following lines when you run `npm config list`
 //npm.pkg.github.com/:_authToken = (protected)
 ```
 
+You can end the npm session by running
 
+```sh
+npm logout --scope=@rizefinance --registry=https://npm.pkg.github.com
+```
 
 ## Usage
 
